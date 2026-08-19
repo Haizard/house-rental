@@ -5,7 +5,7 @@ import { prisma } from "@/lib/db/prisma";
 import { requireRole } from "@/lib/auth/guards";
 import { ChatComposer } from "@/components/chat/chat-composer";
 
-export default async function StudentChatPage({ params }: PageProps<"/student/chats/[conversationId]">) {
+export default async function StudentChatPage({ params }: { params: Promise<{ conversationId: string }> }) {
   const session = await requireRole("STUDENT");
   const { conversationId } = await params;
   const conversation = await prisma.conversation.findFirst({
