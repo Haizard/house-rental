@@ -1,0 +1,403 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum UserRole {
+  STUDENT
+  AGENT
+  ADMIN
+  OWNER
+}
+
+enum ListingStatus {
+  DRAFT
+  PENDING_REVIEW
+  ACTIVE
+  PAUSED
+  RENTED
+  EXPIRED
+  REJECTED
+}
+
+enum VerificationStatus {
+  UNVERIFIED
+  AGENT_VERIFIED
+  PROPERTY_VERIFIED
+  OWNER_VERIFIED
+  VERIFIED
+}
+
+enum PropertyAgentRole {
+  AGENT
+  OWNER
+  INFORMANT
+}
+
+enum RelationshipStatus {
+  ACTIVE
+  INACTIVE
+  PENDING
+}
+
+enum LeadStatus {
+  NEW
+  CONTACTED
+  VIEWING_REQUESTED
+  VIEWING_CONFIRMED
+  VIEWED
+  NEGOTIATING
+  RENTED
+  CLOSED
+  LOST
+  CANCELLED
+}
+
+enum LeadSource {
+  LISTING
+  AI_SEARCH
+  SEARCH
+  FEATURED_LISTING
+  DIRECT_AGENT
+}
+
+enum BillingStatus {
+  PENDING
+  CHARGED
+  WAIVED
+  FAILED
+  REFUNDED
+}
+
+enum MessageType {
+  TEXT
+  IMAGE
+  FILE
+  SYSTEM
+  VIEWING_REQUEST
+}
+
+enum ViewingStatus {
+  REQUESTED
+  ACCEPTED
+  DECLINED
+  CANCELLED
+  COMPLETED
+  NO_SHOW
+}
+
+enum SubscriptionStatus {
+  ACTIVE
+  PAST_DUE
+  EXPIRED
+  CANCELLED
+}
+
+enum PaymentType {
+  SUBSCRIPTION
+  LEAD_FEE
+  OTHER
+}
+
+enum PaymentStatus {
+  PENDING
+  SUCCEEDED
+  FAILED
+  REFUNDED
+}
+
+model User {
+  id             String   @id @default(uuid()) @db.Uuid
+  email          String?  @unique
+  phone          String?  @unique
+  passwordHash   String?  @map("password_hash")
+  role           UserRole @default(STUDENT)
+  firstName      String   @map("first_name")
+  lastName       String   @map("last_name")
+  avatarUrl      String?  @map("avatar_url")
+  isActive       Boolean  @default(true) @map("is_active")
+  createdAt      DateTime @default(now()) @map("created_at")
+  updatedAt      DateTime @updatedAt @map("updated_at")
+  agentProfile   AgentProfile?
+  studentProfile StudentProfile?
+  sentMessages   Message[] @relation("SentMessages")
+  notifications  Notification[]
+  reports        Report[] @relation("Reporter")
+  @@map("users")
+}
+
+model AgentProfile {
+  id            String             @id @default(uuid()) @db.Uuid
+  userId        String             @unique @map("user_id") @db.Uuid
+  businessName  String             @map("business_name")
+  bio           String?
+  photoUrl      String?            @map("profile_photo_url")
+  verification  VerificationStatus @default(UNVERIFIED) @map("verification_status")
+  rating        Decimal            @default(0) @db.Decimal(3, 2)
+  totalReviews  Int                @default(0) @map("total_reviews")
+  createdAt     DateTime           @default(now()) @map("created_at")
+  updatedAt     DateTime           @updatedAt @map("updated_at")
+  user          User               @relation(fields: [userId], references: [id], onDelete: Cascade)
+  listings      Listing[]
+  properties    PropertyAgent[]
+  leads         Lead[]
+  subscriptions Subscription[]
+  @@map("agent_profiles")
+}
+
+model StudentProfile {
+  id            String      @id @default(uuid()) @db.Uuid
+  userId        String      @unique @map("user_id") @db.Uuid
+  universityId  String?     @map("university_id") @db.Uuid
+  budgetMin     Int?        @map("budget_min")
+  budgetMax     Int?        @map("budget_max")
+  preferredArea String?     @map("preferred_area")
+  moveInDate    DateTime?  @map("move_in_date") @db.Date
+  roomType      String?     @map("room_type")
+  createdAt     DateTime    @default(now()) @map("created_at")
+  updatedAt     DateTime    @updatedAt @map("updated_at")
+  user          User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  university    University? @relation(fields: [universityId], references: [id])
+  leads         Lead[]
+  savedListings SavedListing[]
+  @@map("student_profiles")
+}
+
+model University {
+  id          String           @id @default(uuid()) @db.Uuid
+  name        String
+  slug        String           @unique
+  description String?
+  latitude    Decimal?         @db.Decimal(10, 7)
+  longitude   Decimal?         @db.Decimal(10, 7)
+  city        String           @default("Arusha")
+  isActive    Boolean          @default(true) @map("is_active")
+  createdAt   DateTime         @default(now()) @map("created_at")
+  updatedAt   DateTime         @updatedAt @map("updated_at")
+  students    StudentProfile[]
+  @@map("universities")
+}
+
+model Property {
+  id          String          @id @default(uuid()) @db.Uuid
+  title       String
+  propertyType String         @map("property_type")
+  address     String
+  area        String
+  latitude    Decimal?        @db.Decimal(10, 7)
+  longitude   Decimal?        @db.Decimal(10, 7)
+  description String?
+  createdAt   DateTime        @default(now()) @map("created_at")
+  updatedAt   DateTime        @updatedAt @map("updated_at")
+  agents      PropertyAgent[]
+  listings    Listing[]
+  @@index([area])
+  @@map("properties")
+}
+
+model PropertyAgent {
+  id               String             @id @default(uuid()) @db.Uuid
+  propertyId       String             @map("property_id") @db.Uuid
+  agentId          String             @map("agent_id") @db.Uuid
+  relationshipType PropertyAgentRole  @map("relationship_type")
+  status           RelationshipStatus @default(ACTIVE)
+  createdAt        DateTime           @default(now()) @map("created_at")
+  updatedAt        DateTime           @updatedAt @map("updated_at")
+  property         Property           @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+  agent            AgentProfile       @relation(fields: [agentId], references: [id], onDelete: Cascade)
+  @@unique([propertyId, agentId])
+  @@map("property_agents")
+}
+
+model Listing {
+  id                 String             @id @default(uuid()) @db.Uuid
+  propertyId         String             @map("property_id") @db.Uuid
+  agentId            String             @map("agent_id") @db.Uuid
+  title              String
+  description        String?
+  rentAmount         Int                @map("rent_amount")
+  rentPeriod         String             @default("MONTH") @map("rent_period")
+  propertyType       String             @map("property_type")
+  availabilityDate   DateTime?          @map("availability_date") @db.Date
+  status             ListingStatus      @default(DRAFT)
+  verificationStatus VerificationStatus @default(UNVERIFIED) @map("verification_status")
+  publishedAt        DateTime?          @map("published_at")
+  expiresAt          DateTime?          @map("expires_at")
+  createdAt          DateTime           @default(now()) @map("created_at")
+  updatedAt          DateTime           @updatedAt @map("updated_at")
+  property           Property           @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+  agent              AgentProfile       @relation(fields: [agentId], references: [id], onDelete: Cascade)
+  images             ListingImage[]
+  amenities          ListingAmenity[]
+  leads              Lead[]
+  savedBy            SavedListing[]
+  @@index([status, rentAmount])
+  @@index([propertyId])
+  @@map("listings")
+}
+
+model Amenity {
+  id        String            @id @default(uuid()) @db.Uuid
+  name      String
+  slug      String            @unique
+  category  String
+  listings  ListingAmenity[]
+  @@map("amenities")
+}
+
+model ListingAmenity {
+  id        String  @id @default(uuid()) @db.Uuid
+  listingId String  @map("listing_id") @db.Uuid
+  amenityId String  @map("amenity_id") @db.Uuid
+  value     String?
+  listing   Listing @relation(fields: [listingId], references: [id], onDelete: Cascade)
+  amenity   Amenity @relation(fields: [amenityId], references: [id], onDelete: Cascade)
+  @@unique([listingId, amenityId])
+  @@map("listing_amenities")
+}
+
+model ListingImage {
+  id         String   @id @default(uuid()) @db.Uuid
+  listingId  String   @map("listing_id") @db.Uuid
+  url        String
+  storageKey String   @map("storage_key")
+  sortOrder  Int      @default(0) @map("sort_order")
+  isPrimary  Boolean  @default(false) @map("is_primary")
+  createdAt  DateTime @default(now()) @map("created_at")
+  listing    Listing  @relation(fields: [listingId], references: [id], onDelete: Cascade)
+  @@map("listing_images")
+}
+
+model Lead {
+  id                String        @id @default(uuid()) @db.Uuid
+  studentId         String        @map("student_id") @db.Uuid
+  agentId           String        @map("agent_id") @db.Uuid
+  listingId         String        @map("listing_id") @db.Uuid
+  status            LeadStatus    @default(NEW)
+  source            LeadSource    @default(LISTING)
+  budget            Int?
+  moveInDate        DateTime?     @map("move_in_date") @db.Date
+  requirements      Json?
+  leadChargeAmount  Int           @default(5000) @map("lead_charge_amount")
+  billingStatus     BillingStatus @default(PENDING) @map("billing_status")
+  createdAt         DateTime      @default(now()) @map("created_at")
+  updatedAt         DateTime      @updatedAt @map("updated_at")
+  student           StudentProfile @relation(fields: [studentId], references: [id])
+  agent             AgentProfile  @relation(fields: [agentId], references: [id])
+  listing           Listing       @relation(fields: [listingId], references: [id])
+  conversation      Conversation?
+  viewingRequests   ViewingRequest[]
+  charges           LeadCharge[]
+  @@index([agentId, status])
+  @@index([studentId, createdAt])
+  @@map("leads")
+}
+
+model Conversation {
+  id            String   @id @default(uuid()) @db.Uuid
+  leadId        String   @unique @map("lead_id") @db.Uuid
+  lastMessageAt DateTime? @map("last_message_at")
+  createdAt     DateTime @default(now()) @map("created_at")
+  updatedAt     DateTime @updatedAt @map("updated_at")
+  lead          Lead     @relation(fields: [leadId], references: [id], onDelete: Cascade)
+  messages      Message[]
+  @@map("conversations")
+}
+
+model Message {
+  id             String      @id @default(uuid()) @db.Uuid
+  conversationId String      @map("conversation_id") @db.Uuid
+  senderId       String      @map("sender_id") @db.Uuid
+  messageType    MessageType @default(TEXT) @map("message_type")
+  content        String
+  attachmentUrl  String?     @map("attachment_url")
+  isRead         Boolean     @default(false) @map("is_read")
+  createdAt      DateTime    @default(now()) @map("created_at")
+  conversation   Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  sender         User        @relation("SentMessages", fields: [senderId], references: [id])
+  @@index([conversationId, createdAt])
+  @@map("messages")
+}
+
+model ViewingRequest {
+  id          String        @id @default(uuid()) @db.Uuid
+  leadId      String        @map("lead_id") @db.Uuid
+  listingId   String        @map("listing_id") @db.Uuid
+  requestedAt DateTime      @default(now()) @map("requested_at")
+  scheduledAt DateTime?     @map("scheduled_at")
+  status      ViewingStatus @default(REQUESTED)
+  notes       String?
+  createdAt   DateTime      @default(now()) @map("created_at")
+  updatedAt   DateTime      @updatedAt @map("updated_at")
+  lead        Lead          @relation(fields: [leadId], references: [id], onDelete: Cascade)
+  @@map("viewing_requests")
+}
+
+model Subscription {
+  id         String             @id @default(uuid()) @db.Uuid
+  agentId    String             @map("agent_id") @db.Uuid
+  planName   String             @default("STANDARD") @map("plan_name")
+  status     SubscriptionStatus @default(ACTIVE)
+  startedAt  DateTime           @default(now()) @map("started_at")
+  expiresAt  DateTime           @map("expires_at")
+  autoRenew  Boolean            @default(false) @map("auto_renew")
+  createdAt  DateTime           @default(now()) @map("created_at")
+  updatedAt  DateTime           @updatedAt @map("updated_at")
+  agent      AgentProfile       @relation(fields: [agentId], references: [id])
+  @@map("subscriptions")
+}
+
+model LeadCharge {
+  id        String        @id @default(uuid()) @db.Uuid
+  leadId    String        @map("lead_id") @db.Uuid
+  amount    Int           @default(5000)
+  currency  String        @default("TZS")
+  status    PaymentStatus @default(PENDING)
+  chargedAt DateTime?     @map("charged_at")
+  createdAt DateTime      @default(now()) @map("created_at")
+  lead      Lead          @relation(fields: [leadId], references: [id], onDelete: Cascade)
+  @@map("lead_charges")
+}
+
+model SavedListing {
+  id        String         @id @default(uuid()) @db.Uuid
+  studentId String         @map("student_id") @db.Uuid
+  listingId String         @map("listing_id") @db.Uuid
+  createdAt DateTime       @default(now()) @map("created_at")
+  student   StudentProfile @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  listing   Listing        @relation(fields: [listingId], references: [id], onDelete: Cascade)
+  @@unique([studentId, listingId])
+  @@map("saved_listings")
+}
+
+model Notification {
+  id        String   @id @default(uuid()) @db.Uuid
+  userId    String   @map("user_id") @db.Uuid
+  type      String
+  title     String
+  message   String
+  data      Json?
+  readAt    DateTime? @map("read_at")
+  createdAt DateTime @default(now()) @map("created_at")
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  @@map("notifications")
+}
+
+model Report {
+  id          String   @id @default(uuid()) @db.Uuid
+  reporterId  String   @map("reporter_id") @db.Uuid
+  targetType  String   @map("target_type")
+  targetId    String   @map("target_id")
+  reason      String
+  description String?
+  status      String   @default("OPEN")
+  resolution  String?
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+  reporter    User     @relation("Reporter", fields: [reporterId], references: [id])
+  @@map("reports")
+}

@@ -1,0 +1,13 @@
+import { PrismaPg } from "@prisma/adapter-pg";
+import { PrismaClient } from "@/generated/prisma/client";
+
+const globalForPrisma = globalThis as unknown as { prisma?: PrismaClient };
+const connectionString = process.env.supabase_session_pooler;
+
+if (!connectionString) throw new Error("supabase_session_pooler must be set before using Prisma.");
+
+export const prisma = globalForPrisma.prisma ?? new PrismaClient({
+  adapter: new PrismaPg({ connectionString, connectionTimeoutMillis: 5_000 }),
+});
+
+if (process.env.NODE_ENV !== "production") globalForPrisma.prisma = prisma;
