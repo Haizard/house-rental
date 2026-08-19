@@ -16,25 +16,30 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Enter a valid name, email, and password." }, { status: 400 });
   }
 
-  const existingUser = await prisma.user.findFirst({
-    where: { email: parsed.data.email },
-    select: { id: true },
-  });
-  if (existingUser) {
-    return NextResponse.json({ error: "An account with that email already exists." }, { status: 409 });
+  try {
+    const existingUser = await prisma.user.findFirst({
+      where: { email: parsed.data.email },
+      select: { id: true },
+    });
+    if (existingUser) {
+      return NextResponse.json({ error: "An account with that email already exists." }, { status: 409 });
+    }
+
+    const user = await prisma.user.create({
+      data: {
+        email: parsed.data.email,
+        passwordHash: await hash(parsed.data.password, 12),
+        firstName: parsed.data.firstName,
+        lastName: parsed.data.lastName,
+        role: "STUDENT",
+        studentProfile: { create: {} },
+      },
+      select: { id: true, email: true },
+    });
+
+    return NextResponse.json({ data: user }, { status: 201 });
+  } catch (error) {
+    console.error("Registration database request failed.", error);
+    return NextResponse.json({ error: "Account creation is temporarily unavailable. Check the database connection and try again." }, { status: 503 });
   }
-
-  const user = await prisma.user.create({
-    data: {
-      email: parsed.data.email,
-      passwordHash: await hash(parsed.data.password, 12),
-      firstName: parsed.data.firstName,
-      lastName: parsed.data.lastName,
-      role: "STUDENT",
-      studentProfile: { create: {} },
-    },
-    select: { id: true, email: true },
-  });
-
-  return NextResponse.json({ data: user }, { status: 201 });
 }
