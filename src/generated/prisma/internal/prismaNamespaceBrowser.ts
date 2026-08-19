@@ -69,7 +69,8 @@ export const ModelName = {
   LeadCharge: 'LeadCharge',
   SavedListing: 'SavedListing',
   Notification: 'Notification',
-  Report: 'Report'
+  Report: 'Report',
+  VerificationRecord: 'VerificationRecord'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -361,6 +362,22 @@ export const ReportScalarFieldEnum = {
 } as const
 
 export type ReportScalarFieldEnum = (typeof ReportScalarFieldEnum)[keyof typeof ReportScalarFieldEnum]
+
+
+export const VerificationRecordScalarFieldEnum = {
+  id: 'id',
+  targetType: 'targetType',
+  targetId: 'targetId',
+  verificationType: 'verificationType',
+  status: 'status',
+  evidence: 'evidence',
+  notes: 'notes',
+  verifiedBy: 'verifiedBy',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type VerificationRecordScalarFieldEnum = (typeof VerificationRecordScalarFieldEnum)[keyof typeof VerificationRecordScalarFieldEnum]
 
 
 export const SortOrder = {

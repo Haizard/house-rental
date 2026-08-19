@@ -136,3 +136,8 @@ export type Notification = Prisma.NotificationModel
  * 
  */
 export type Report = Prisma.ReportModel
+/**
+ * Model VerificationRecord
+ * 
+ */
+export type VerificationRecord = Prisma.VerificationRecordModel

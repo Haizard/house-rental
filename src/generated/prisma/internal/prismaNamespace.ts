@@ -415,7 +415,8 @@ export const ModelName = {
   LeadCharge: 'LeadCharge',
   SavedListing: 'SavedListing',
   Notification: 'Notification',
-  Report: 'Report'
+  Report: 'Report',
+  VerificationRecord: 'VerificationRecord'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -431,7 +432,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "agentProfile" | "studentProfile" | "university" | "property" | "propertyAgent" | "listing" | "amenity" | "listingAmenity" | "listingImage" | "lead" | "conversation" | "message" | "viewingRequest" | "subscription" | "leadCharge" | "savedListing" | "notification" | "report"
+    modelProps: "user" | "agentProfile" | "studentProfile" | "university" | "property" | "propertyAgent" | "listing" | "amenity" | "listingAmenity" | "listingImage" | "lead" | "conversation" | "message" | "viewingRequest" | "subscription" | "leadCharge" | "savedListing" | "notification" | "report" | "verificationRecord"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1841,6 +1842,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    VerificationRecord: {
+      payload: Prisma.$VerificationRecordPayload<ExtArgs>
+      fields: Prisma.VerificationRecordFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.VerificationRecordFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VerificationRecordPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.VerificationRecordFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VerificationRecordPayload>
+        }
+        findFirst: {
+          args: Prisma.VerificationRecordFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VerificationRecordPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.VerificationRecordFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VerificationRecordPayload>
+        }
+        findMany: {
+          args: Prisma.VerificationRecordFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VerificationRecordPayload>[]
+        }
+        create: {
+          args: Prisma.VerificationRecordCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VerificationRecordPayload>
+        }
+        createMany: {
+          args: Prisma.VerificationRecordCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.VerificationRecordCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VerificationRecordPayload>[]
+        }
+        delete: {
+          args: Prisma.VerificationRecordDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VerificationRecordPayload>
+        }
+        update: {
+          args: Prisma.VerificationRecordUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VerificationRecordPayload>
+        }
+        deleteMany: {
+          args: Prisma.VerificationRecordDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.VerificationRecordUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.VerificationRecordUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VerificationRecordPayload>[]
+        }
+        upsert: {
+          args: Prisma.VerificationRecordUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VerificationRecordPayload>
+        }
+        aggregate: {
+          args: Prisma.VerificationRecordAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateVerificationRecord>
+        }
+        groupBy: {
+          args: Prisma.VerificationRecordGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.VerificationRecordGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.VerificationRecordCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.VerificationRecordCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -2155,6 +2230,22 @@ export const ReportScalarFieldEnum = {
 export type ReportScalarFieldEnum = (typeof ReportScalarFieldEnum)[keyof typeof ReportScalarFieldEnum]
 
 
+export const VerificationRecordScalarFieldEnum = {
+  id: 'id',
+  targetType: 'targetType',
+  targetId: 'targetId',
+  verificationType: 'verificationType',
+  status: 'status',
+  evidence: 'evidence',
+  notes: 'notes',
+  verifiedBy: 'verifiedBy',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type VerificationRecordScalarFieldEnum = (typeof VerificationRecordScalarFieldEnum)[keyof typeof VerificationRecordScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -2448,6 +2539,20 @@ export type ListEnumPaymentStatusFieldRefInput<$PrismaModel> = FieldRefInputType
 
 
 /**
+ * Reference to a field of type 'VerificationReviewStatus'
+ */
+export type EnumVerificationReviewStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'VerificationReviewStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'VerificationReviewStatus[]'
+ */
+export type ListEnumVerificationReviewStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'VerificationReviewStatus[]'>
+    
+
+
+/**
  * Reference to a field of type 'Float'
  */
 export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
@@ -2630,6 +2735,7 @@ export type GlobalOmitConfig = {
   savedListing?: Prisma.SavedListingOmit
   notification?: Prisma.NotificationOmit
   report?: Prisma.ReportOmit
+  verificationRecord?: Prisma.VerificationRecordOmit
 }
 
 /* Types for Logging */

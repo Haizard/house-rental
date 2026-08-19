@@ -149,3 +149,12 @@ export const PaymentStatus = {
 } as const
 
 export type PaymentStatus = (typeof PaymentStatus)[keyof typeof PaymentStatus]
+
+
+export const VerificationReviewStatus = {
+  PENDING: 'PENDING',
+  APPROVED: 'APPROVED',
+  REJECTED: 'REJECTED'
+} as const
+
+export type VerificationReviewStatus = (typeof VerificationReviewStatus)[keyof typeof VerificationReviewStatus]

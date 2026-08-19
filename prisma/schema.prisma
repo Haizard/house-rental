@@ -110,6 +110,12 @@ enum PaymentStatus {
   REFUNDED
 }
 
+enum VerificationReviewStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
 model User {
   id             String   @id @default(uuid()) @db.Uuid
   email          String?  @unique
@@ -400,4 +406,19 @@ model Report {
   updatedAt   DateTime @updatedAt @map("updated_at")
   reporter    User     @relation("Reporter", fields: [reporterId], references: [id])
   @@map("reports")
+}
+
+model VerificationRecord {
+  id               String                   @id @default(uuid()) @db.Uuid
+  targetType       String                   @map("target_type")
+  targetId         String                   @map("target_id") @db.Uuid
+  verificationType String                   @map("verification_type")
+  status           VerificationReviewStatus @default(PENDING)
+  evidence         Json?
+  notes            String?
+  verifiedBy       String?                  @map("verified_by") @db.Uuid
+  createdAt        DateTime                 @default(now()) @map("created_at")
+  updatedAt        DateTime                 @updatedAt @map("updated_at")
+  @@index([targetType, status])
+  @@map("verification_records")
 }
