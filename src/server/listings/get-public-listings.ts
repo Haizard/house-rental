@@ -9,10 +9,29 @@ type PublicListingRecord = Prisma.ListingGetPayload<{
   };
 }>;
 
-export async function getPublicListings(): Promise<{ listings: Listing[]; source: "database" | "demo" }> {
+export type PublicListingFilters = {
+  area?: string;
+  type?: string;
+  minPrice?: number;
+  maxPrice?: number;
+};
+
+export async function getPublicListings(filters: PublicListingFilters = {}): Promise<{ listings: Listing[]; source: "database" | "demo" }> {
+  const where: Prisma.ListingWhereInput = {
+    status: "ACTIVE",
+    ...(filters.type ? { propertyType: filters.type } : {}),
+    ...(filters.minPrice !== undefined || filters.maxPrice !== undefined ? {
+      rentAmount: {
+        ...(filters.minPrice !== undefined ? { gte: filters.minPrice } : {}),
+        ...(filters.maxPrice !== undefined ? { lte: filters.maxPrice } : {}),
+      },
+    } : {}),
+    ...(filters.area ? { property: { area: { contains: filters.area, mode: "insensitive" } } } : {}),
+  };
+
   try {
     const records = await withDatabaseTimeout(prisma.listing.findMany({
-      where: { status: "ACTIVE" },
+      where,
       include: {
         property: { select: { area: true } },
         images: { orderBy: { sortOrder: "asc" }, take: 1 },
@@ -21,7 +40,7 @@ export async function getPublicListings(): Promise<{ listings: Listing[]; source
       take: 24,
     }));
 
-    if (records.length === 0) return { listings: demoListings, source: "demo" };
+    if (records.length === 0) return { listings: filterDemoListings(filters), source: "demo" };
 
     return {
       source: "database",
@@ -38,8 +57,19 @@ export async function getPublicListings(): Promise<{ listings: Listing[]; source
     };
   } catch (error) {
     console.warn("Falling back to demo listings because the catalog is unavailable.", error);
-    return { listings: demoListings, source: "demo" };
+    return { listings: filterDemoListings(filters), source: "demo" };
   }
+}
+
+function filterDemoListings(filters: PublicListingFilters) {
+  const area = filters.area?.trim().toLowerCase();
+  return demoListings.filter((listing) => {
+    const matchesArea = !area || `${listing.title} ${listing.area} ${listing.type}`.toLowerCase().includes(area);
+    const matchesType = !filters.type || listing.type === filters.type;
+    const matchesMinPrice = filters.minPrice === undefined || listing.price >= filters.minPrice;
+    const matchesMaxPrice = filters.maxPrice === undefined || listing.price <= filters.maxPrice;
+    return matchesArea && matchesType && matchesMinPrice && matchesMaxPrice;
+  });
 }
 
 export async function getPublicListingById(id: string): Promise<Listing | null> {

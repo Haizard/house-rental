@@ -15,7 +15,8 @@ This is one Next.js application and one Vercel deployment. The frontend lives in
 1. Copy `.env.example` values into `.env` or Vercel Project Settings.
 2. Generate the database client: `npx prisma generate`.
 3. When ready to create the initial Supabase tables, run `npx prisma migrate dev --name init` locally. This is intentionally not run automatically because it changes the remote database.
-4. Run locally with `npm run dev`.
+4. Populate development catalog data with `npm run db:seed` after the tables exist.
+5. Run locally with `npm run dev`.
 
 ## Vercel deployment
 
@@ -36,6 +37,7 @@ The `supabase_service_role_secret` must never be prefixed with `NEXT_PUBLIC_` or
 - Responsive public home, search, listing discovery, and listing-detail surfaces
 - Glass design tokens and reusable listing card
 - Demo listing API at `/api/listings`
+- Repeatable Prisma seed command for a demo agent, university, properties, and listings
 - Prisma schema for users, agents, students, universities, properties, listings, leads, chats, viewings, subscriptions, charges, notifications, and reports
 - Supabase-compatible Prisma client configuration
 
