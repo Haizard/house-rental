@@ -28,21 +28,38 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Agent profile already exists." }, { status: 409 });
   }
 
-  // Update user role to AGENT and create profile
-  await prisma.$transaction(async (tx) => {
-    await tx.user.update({
-      where: { id: session.user.id },
-      data: { role: "AGENT" },
-    });
-
-    await tx.agentProfile.create({
-      data: {
-        userId: session.user.id,
-        businessName: parsed.data.businessName,
-        bio: parsed.data.bio ?? null,
-      },
-    });
+  // Update user role to AGENT
+  await prisma.user.update({
+    where: { id: session.user.id },
+    data: { role: "AGENT" },
   });
+
+  // Create agent profile using raw SQL to avoid tier column issues
+  // until the migration is applied
+  try {
+    // Try with tier column first
+    await prisma.$executeRaw`
+      INSERT INTO agent_profiles (id, user_id, business_name, bio, verification_status, rating, total_reviews, tier, created_at, updated_at)
+      VALUES (gen_random_uuid(), ${session.user.id}::uuid, ${parsed.data.businessName}, ${parsed.data.bio ?? null}, 'UNVERIFIED', 0, 0, 'FREE', NOW(), NOW())
+    `;
+  } catch {
+    // Fall back without tier column (migration not applied yet)
+    try {
+      await prisma.$executeRaw`
+        INSERT INTO agent_profiles (id, user_id, business_name, bio, verification_status, rating, total_reviews, created_at, updated_at)
+        VALUES (gen_random_uuid(), ${session.user.id}::uuid, ${parsed.data.businessName}, ${parsed.data.bio ?? null}, 'UNVERIFIED', 0, 0, NOW(), NOW())
+      `;
+    } catch {
+      // Last resort: Prisma (works if column exists but other constraints differ)
+      await prisma.agentProfile.create({
+        data: {
+          userId: session.user.id,
+          businessName: parsed.data.businessName,
+          bio: parsed.data.bio ?? null,
+        },
+      });
+    }
+  }
 
   return NextResponse.json({ ok: true }, { status: 201 });
 }

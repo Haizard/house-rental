@@ -6,9 +6,16 @@ export default async function AgentStatusesPage() {
   const session = await requireRole("AGENT");
   const agent = await prisma.agentProfile.findUnique({
     where: { userId: session.user.id },
-    select: { id: true, tier: true },
+    select: { id: true },
   });
   if (!agent) return null;
+
+  // Check tier via raw SQL (column may not exist yet)
+  let tier: string = "FREE";
+  try {
+    const rows = await prisma.$queryRaw<{ tier?: string }[]>`SELECT tier FROM agent_profiles WHERE id = ${agent.id}::uuid LIMIT 1`;
+    tier = rows[0]?.tier ?? "FREE";
+  } catch { /* tier column missing, default FREE */ }
 
   // Count today's statuses (table may not exist yet)
   let dailyUsed = 0;
@@ -40,8 +47,8 @@ export default async function AgentStatusesPage() {
 
       <StatusPost
         dailyUsed={dailyUsed}
-        dailyLimit={agent.tier === "PRO" ? 999 : 3}
-        tier={agent.tier}
+        dailyLimit={tier === "PRO" ? 999 : 3}
+        tier={tier}
       />
 
       <section className="mt-8">

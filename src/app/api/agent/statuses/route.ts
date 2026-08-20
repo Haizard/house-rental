@@ -48,13 +48,19 @@ export async function POST(request: Request) {
 
   const agent = await prisma.agentProfile.findUnique({
     where: { userId: session.user.id },
-    select: { id: true, tier: true },
+    select: { id: true },
   });
   if (!agent)
     return NextResponse.json({ error: "Agent profile not found." }, { status: 404 });
 
-  // Check daily limit for free tier
-  if (agent.tier === "FREE") {
+  // Check daily limit for free tier (tier column may not exist yet)
+  let isFree = true;
+  try {
+    const row = await prisma.$queryRaw<[{ tier?: string }]>`SELECT tier FROM agent_profiles WHERE id = ${agent.id}::uuid LIMIT 1`;
+    isFree = !row[0]?.tier || row[0].tier === "FREE";
+  } catch { /* tier column doesn't exist yet, treat as FREE */ }
+
+  if (isFree) {
     const todayStart = new Date();
     todayStart.setHours(0, 0, 0, 0);
     const todayCount = await prisma.agentStatus.count({

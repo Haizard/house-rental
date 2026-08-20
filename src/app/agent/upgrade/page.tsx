@@ -7,9 +7,16 @@ export default async function AgentUpgradePage() {
   const session = await requireRole("AGENT");
   const agent = await prisma.agentProfile.findUnique({
     where: { userId: session.user.id },
-    select: { id: true, tier: true, businessName: true },
+    select: { id: true, businessName: true },
   });
   if (!agent) return null;
+
+  // Check tier via raw SQL (column may not exist yet)
+  let isPro = false;
+  try {
+    const rows = await prisma.$queryRaw<{ tier?: string }[]>`SELECT tier FROM agent_profiles WHERE id = ${agent.id}::uuid LIMIT 1`;
+    isPro = rows[0]?.tier === "PRO";
+  } catch { /* tier column missing, default FREE */ }
 
   // Get current usage stats (agentStatus table may not exist yet)
   const now = new Date();
@@ -24,7 +31,7 @@ export default async function AgentUpgradePage() {
     }).catch(() => 0),
   ]);
 
-  const isPro = agent.tier === "PRO";
+
 
   return (
     <div className="mx-auto max-w-3xl">
