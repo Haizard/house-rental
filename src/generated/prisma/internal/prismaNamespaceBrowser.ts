@@ -61,6 +61,7 @@ export const ModelName = {
   Amenity: 'Amenity',
   ListingAmenity: 'ListingAmenity',
   ListingImage: 'ListingImage',
+  ListingVideo: 'ListingVideo',
   Lead: 'Lead',
   Conversation: 'Conversation',
   Message: 'Message',
@@ -241,6 +242,17 @@ export const ListingImageScalarFieldEnum = {
 } as const
 
 export type ListingImageScalarFieldEnum = (typeof ListingImageScalarFieldEnum)[keyof typeof ListingImageScalarFieldEnum]
+
+
+export const ListingVideoScalarFieldEnum = {
+  id: 'id',
+  listingId: 'listingId',
+  url: 'url',
+  storageKey: 'storageKey',
+  createdAt: 'createdAt'
+} as const
+
+export type ListingVideoScalarFieldEnum = (typeof ListingVideoScalarFieldEnum)[keyof typeof ListingVideoScalarFieldEnum]
 
 
 export const LeadScalarFieldEnum = {

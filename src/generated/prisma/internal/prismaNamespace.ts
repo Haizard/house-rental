@@ -407,6 +407,7 @@ export const ModelName = {
   Amenity: 'Amenity',
   ListingAmenity: 'ListingAmenity',
   ListingImage: 'ListingImage',
+  ListingVideo: 'ListingVideo',
   Lead: 'Lead',
   Conversation: 'Conversation',
   Message: 'Message',
@@ -437,7 +438,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "agentProfile" | "studentProfile" | "university" | "property" | "propertyAgent" | "listing" | "amenity" | "listingAmenity" | "listingImage" | "lead" | "conversation" | "message" | "viewingRequest" | "subscription" | "leadCharge" | "savedListing" | "notification" | "report" | "verificationRecord" | "agentStatus" | "statusView" | "review" | "payment" | "aIInteraction"
+    modelProps: "user" | "agentProfile" | "studentProfile" | "university" | "property" | "propertyAgent" | "listing" | "amenity" | "listingAmenity" | "listingImage" | "listingVideo" | "lead" | "conversation" | "message" | "viewingRequest" | "subscription" | "leadCharge" | "savedListing" | "notification" | "report" | "verificationRecord" | "agentStatus" | "statusView" | "review" | "payment" | "aIInteraction"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1178,6 +1179,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.ListingImageCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.ListingImageCountAggregateOutputType> | number
+        }
+      }
+    }
+    ListingVideo: {
+      payload: Prisma.$ListingVideoPayload<ExtArgs>
+      fields: Prisma.ListingVideoFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ListingVideoFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ListingVideoPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ListingVideoFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ListingVideoPayload>
+        }
+        findFirst: {
+          args: Prisma.ListingVideoFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ListingVideoPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ListingVideoFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ListingVideoPayload>
+        }
+        findMany: {
+          args: Prisma.ListingVideoFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ListingVideoPayload>[]
+        }
+        create: {
+          args: Prisma.ListingVideoCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ListingVideoPayload>
+        }
+        createMany: {
+          args: Prisma.ListingVideoCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ListingVideoCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ListingVideoPayload>[]
+        }
+        delete: {
+          args: Prisma.ListingVideoDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ListingVideoPayload>
+        }
+        update: {
+          args: Prisma.ListingVideoUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ListingVideoPayload>
+        }
+        deleteMany: {
+          args: Prisma.ListingVideoDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ListingVideoUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ListingVideoUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ListingVideoPayload>[]
+        }
+        upsert: {
+          args: Prisma.ListingVideoUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ListingVideoPayload>
+        }
+        aggregate: {
+          args: Prisma.ListingVideoAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateListingVideo>
+        }
+        groupBy: {
+          args: Prisma.ListingVideoGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ListingVideoGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ListingVideoCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ListingVideoCountAggregateOutputType> | number
         }
       }
     }
@@ -2479,6 +2554,17 @@ export const ListingImageScalarFieldEnum = {
 export type ListingImageScalarFieldEnum = (typeof ListingImageScalarFieldEnum)[keyof typeof ListingImageScalarFieldEnum]
 
 
+export const ListingVideoScalarFieldEnum = {
+  id: 'id',
+  listingId: 'listingId',
+  url: 'url',
+  storageKey: 'storageKey',
+  createdAt: 'createdAt'
+} as const
+
+export type ListingVideoScalarFieldEnum = (typeof ListingVideoScalarFieldEnum)[keyof typeof ListingVideoScalarFieldEnum]
+
+
 export const LeadScalarFieldEnum = {
   id: 'id',
   studentId: 'studentId',
@@ -3221,6 +3307,7 @@ export type GlobalOmitConfig = {
   amenity?: Prisma.AmenityOmit
   listingAmenity?: Prisma.ListingAmenityOmit
   listingImage?: Prisma.ListingImageOmit
+  listingVideo?: Prisma.ListingVideoOmit
   lead?: Prisma.LeadOmit
   conversation?: Prisma.ConversationOmit
   message?: Prisma.MessageOmit

@@ -299,6 +299,7 @@ export type ListingWhereInput = {
   property?: Prisma.XOR<Prisma.PropertyScalarRelationFilter, Prisma.PropertyWhereInput>
   agent?: Prisma.XOR<Prisma.AgentProfileScalarRelationFilter, Prisma.AgentProfileWhereInput>
   images?: Prisma.ListingImageListRelationFilter
+  videos?: Prisma.ListingVideoListRelationFilter
   amenities?: Prisma.ListingAmenityListRelationFilter
   leads?: Prisma.LeadListRelationFilter
   savedBy?: Prisma.SavedListingListRelationFilter
@@ -323,6 +324,7 @@ export type ListingOrderByWithRelationInput = {
   property?: Prisma.PropertyOrderByWithRelationInput
   agent?: Prisma.AgentProfileOrderByWithRelationInput
   images?: Prisma.ListingImageOrderByRelationAggregateInput
+  videos?: Prisma.ListingVideoOrderByRelationAggregateInput
   amenities?: Prisma.ListingAmenityOrderByRelationAggregateInput
   leads?: Prisma.LeadOrderByRelationAggregateInput
   savedBy?: Prisma.SavedListingOrderByRelationAggregateInput
@@ -350,6 +352,7 @@ export type ListingWhereUniqueInput = Prisma.AtLeast<{
   property?: Prisma.XOR<Prisma.PropertyScalarRelationFilter, Prisma.PropertyWhereInput>
   agent?: Prisma.XOR<Prisma.AgentProfileScalarRelationFilter, Prisma.AgentProfileWhereInput>
   images?: Prisma.ListingImageListRelationFilter
+  videos?: Prisma.ListingVideoListRelationFilter
   amenities?: Prisma.ListingAmenityListRelationFilter
   leads?: Prisma.LeadListRelationFilter
   savedBy?: Prisma.SavedListingListRelationFilter
@@ -416,6 +419,7 @@ export type ListingCreateInput = {
   property: Prisma.PropertyCreateNestedOneWithoutListingsInput
   agent: Prisma.AgentProfileCreateNestedOneWithoutListingsInput
   images?: Prisma.ListingImageCreateNestedManyWithoutListingInput
+  videos?: Prisma.ListingVideoCreateNestedManyWithoutListingInput
   amenities?: Prisma.ListingAmenityCreateNestedManyWithoutListingInput
   leads?: Prisma.LeadCreateNestedManyWithoutListingInput
   savedBy?: Prisma.SavedListingCreateNestedManyWithoutListingInput
@@ -438,6 +442,7 @@ export type ListingUncheckedCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   images?: Prisma.ListingImageUncheckedCreateNestedManyWithoutListingInput
+  videos?: Prisma.ListingVideoUncheckedCreateNestedManyWithoutListingInput
   amenities?: Prisma.ListingAmenityUncheckedCreateNestedManyWithoutListingInput
   leads?: Prisma.LeadUncheckedCreateNestedManyWithoutListingInput
   savedBy?: Prisma.SavedListingUncheckedCreateNestedManyWithoutListingInput
@@ -460,6 +465,7 @@ export type ListingUpdateInput = {
   property?: Prisma.PropertyUpdateOneRequiredWithoutListingsNestedInput
   agent?: Prisma.AgentProfileUpdateOneRequiredWithoutListingsNestedInput
   images?: Prisma.ListingImageUpdateManyWithoutListingNestedInput
+  videos?: Prisma.ListingVideoUpdateManyWithoutListingNestedInput
   amenities?: Prisma.ListingAmenityUpdateManyWithoutListingNestedInput
   leads?: Prisma.LeadUpdateManyWithoutListingNestedInput
   savedBy?: Prisma.SavedListingUpdateManyWithoutListingNestedInput
@@ -482,6 +488,7 @@ export type ListingUncheckedUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   images?: Prisma.ListingImageUncheckedUpdateManyWithoutListingNestedInput
+  videos?: Prisma.ListingVideoUncheckedUpdateManyWithoutListingNestedInput
   amenities?: Prisma.ListingAmenityUncheckedUpdateManyWithoutListingNestedInput
   leads?: Prisma.LeadUncheckedUpdateManyWithoutListingNestedInput
   savedBy?: Prisma.SavedListingUncheckedUpdateManyWithoutListingNestedInput
@@ -732,6 +739,20 @@ export type ListingUpdateOneRequiredWithoutImagesNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.ListingUpdateToOneWithWhereWithoutImagesInput, Prisma.ListingUpdateWithoutImagesInput>, Prisma.ListingUncheckedUpdateWithoutImagesInput>
 }
 
+export type ListingCreateNestedOneWithoutVideosInput = {
+  create?: Prisma.XOR<Prisma.ListingCreateWithoutVideosInput, Prisma.ListingUncheckedCreateWithoutVideosInput>
+  connectOrCreate?: Prisma.ListingCreateOrConnectWithoutVideosInput
+  connect?: Prisma.ListingWhereUniqueInput
+}
+
+export type ListingUpdateOneRequiredWithoutVideosNestedInput = {
+  create?: Prisma.XOR<Prisma.ListingCreateWithoutVideosInput, Prisma.ListingUncheckedCreateWithoutVideosInput>
+  connectOrCreate?: Prisma.ListingCreateOrConnectWithoutVideosInput
+  upsert?: Prisma.ListingUpsertWithoutVideosInput
+  connect?: Prisma.ListingWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ListingUpdateToOneWithWhereWithoutVideosInput, Prisma.ListingUpdateWithoutVideosInput>, Prisma.ListingUncheckedUpdateWithoutVideosInput>
+}
+
 export type ListingCreateNestedOneWithoutLeadsInput = {
   create?: Prisma.XOR<Prisma.ListingCreateWithoutLeadsInput, Prisma.ListingUncheckedCreateWithoutLeadsInput>
   connectOrCreate?: Prisma.ListingCreateOrConnectWithoutLeadsInput
@@ -776,6 +797,7 @@ export type ListingCreateWithoutAgentInput = {
   updatedAt?: Date | string
   property: Prisma.PropertyCreateNestedOneWithoutListingsInput
   images?: Prisma.ListingImageCreateNestedManyWithoutListingInput
+  videos?: Prisma.ListingVideoCreateNestedManyWithoutListingInput
   amenities?: Prisma.ListingAmenityCreateNestedManyWithoutListingInput
   leads?: Prisma.LeadCreateNestedManyWithoutListingInput
   savedBy?: Prisma.SavedListingCreateNestedManyWithoutListingInput
@@ -797,6 +819,7 @@ export type ListingUncheckedCreateWithoutAgentInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   images?: Prisma.ListingImageUncheckedCreateNestedManyWithoutListingInput
+  videos?: Prisma.ListingVideoUncheckedCreateNestedManyWithoutListingInput
   amenities?: Prisma.ListingAmenityUncheckedCreateNestedManyWithoutListingInput
   leads?: Prisma.LeadUncheckedCreateNestedManyWithoutListingInput
   savedBy?: Prisma.SavedListingUncheckedCreateNestedManyWithoutListingInput
@@ -865,6 +888,7 @@ export type ListingCreateWithoutPropertyInput = {
   updatedAt?: Date | string
   agent: Prisma.AgentProfileCreateNestedOneWithoutListingsInput
   images?: Prisma.ListingImageCreateNestedManyWithoutListingInput
+  videos?: Prisma.ListingVideoCreateNestedManyWithoutListingInput
   amenities?: Prisma.ListingAmenityCreateNestedManyWithoutListingInput
   leads?: Prisma.LeadCreateNestedManyWithoutListingInput
   savedBy?: Prisma.SavedListingCreateNestedManyWithoutListingInput
@@ -886,6 +910,7 @@ export type ListingUncheckedCreateWithoutPropertyInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   images?: Prisma.ListingImageUncheckedCreateNestedManyWithoutListingInput
+  videos?: Prisma.ListingVideoUncheckedCreateNestedManyWithoutListingInput
   amenities?: Prisma.ListingAmenityUncheckedCreateNestedManyWithoutListingInput
   leads?: Prisma.LeadUncheckedCreateNestedManyWithoutListingInput
   savedBy?: Prisma.SavedListingUncheckedCreateNestedManyWithoutListingInput
@@ -934,6 +959,7 @@ export type ListingCreateWithoutAmenitiesInput = {
   property: Prisma.PropertyCreateNestedOneWithoutListingsInput
   agent: Prisma.AgentProfileCreateNestedOneWithoutListingsInput
   images?: Prisma.ListingImageCreateNestedManyWithoutListingInput
+  videos?: Prisma.ListingVideoCreateNestedManyWithoutListingInput
   leads?: Prisma.LeadCreateNestedManyWithoutListingInput
   savedBy?: Prisma.SavedListingCreateNestedManyWithoutListingInput
 }
@@ -955,6 +981,7 @@ export type ListingUncheckedCreateWithoutAmenitiesInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   images?: Prisma.ListingImageUncheckedCreateNestedManyWithoutListingInput
+  videos?: Prisma.ListingVideoUncheckedCreateNestedManyWithoutListingInput
   leads?: Prisma.LeadUncheckedCreateNestedManyWithoutListingInput
   savedBy?: Prisma.SavedListingUncheckedCreateNestedManyWithoutListingInput
 }
@@ -992,6 +1019,7 @@ export type ListingUpdateWithoutAmenitiesInput = {
   property?: Prisma.PropertyUpdateOneRequiredWithoutListingsNestedInput
   agent?: Prisma.AgentProfileUpdateOneRequiredWithoutListingsNestedInput
   images?: Prisma.ListingImageUpdateManyWithoutListingNestedInput
+  videos?: Prisma.ListingVideoUpdateManyWithoutListingNestedInput
   leads?: Prisma.LeadUpdateManyWithoutListingNestedInput
   savedBy?: Prisma.SavedListingUpdateManyWithoutListingNestedInput
 }
@@ -1013,6 +1041,7 @@ export type ListingUncheckedUpdateWithoutAmenitiesInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   images?: Prisma.ListingImageUncheckedUpdateManyWithoutListingNestedInput
+  videos?: Prisma.ListingVideoUncheckedUpdateManyWithoutListingNestedInput
   leads?: Prisma.LeadUncheckedUpdateManyWithoutListingNestedInput
   savedBy?: Prisma.SavedListingUncheckedUpdateManyWithoutListingNestedInput
 }
@@ -1033,6 +1062,7 @@ export type ListingCreateWithoutImagesInput = {
   updatedAt?: Date | string
   property: Prisma.PropertyCreateNestedOneWithoutListingsInput
   agent: Prisma.AgentProfileCreateNestedOneWithoutListingsInput
+  videos?: Prisma.ListingVideoCreateNestedManyWithoutListingInput
   amenities?: Prisma.ListingAmenityCreateNestedManyWithoutListingInput
   leads?: Prisma.LeadCreateNestedManyWithoutListingInput
   savedBy?: Prisma.SavedListingCreateNestedManyWithoutListingInput
@@ -1054,6 +1084,7 @@ export type ListingUncheckedCreateWithoutImagesInput = {
   expiresAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  videos?: Prisma.ListingVideoUncheckedCreateNestedManyWithoutListingInput
   amenities?: Prisma.ListingAmenityUncheckedCreateNestedManyWithoutListingInput
   leads?: Prisma.LeadUncheckedCreateNestedManyWithoutListingInput
   savedBy?: Prisma.SavedListingUncheckedCreateNestedManyWithoutListingInput
@@ -1091,6 +1122,7 @@ export type ListingUpdateWithoutImagesInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   property?: Prisma.PropertyUpdateOneRequiredWithoutListingsNestedInput
   agent?: Prisma.AgentProfileUpdateOneRequiredWithoutListingsNestedInput
+  videos?: Prisma.ListingVideoUpdateManyWithoutListingNestedInput
   amenities?: Prisma.ListingAmenityUpdateManyWithoutListingNestedInput
   leads?: Prisma.LeadUpdateManyWithoutListingNestedInput
   savedBy?: Prisma.SavedListingUpdateManyWithoutListingNestedInput
@@ -1112,6 +1144,111 @@ export type ListingUncheckedUpdateWithoutImagesInput = {
   expiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  videos?: Prisma.ListingVideoUncheckedUpdateManyWithoutListingNestedInput
+  amenities?: Prisma.ListingAmenityUncheckedUpdateManyWithoutListingNestedInput
+  leads?: Prisma.LeadUncheckedUpdateManyWithoutListingNestedInput
+  savedBy?: Prisma.SavedListingUncheckedUpdateManyWithoutListingNestedInput
+}
+
+export type ListingCreateWithoutVideosInput = {
+  id?: string
+  title: string
+  description?: string | null
+  rentAmount: number
+  rentPeriod?: string
+  propertyType: string
+  availabilityDate?: Date | string | null
+  status?: $Enums.ListingStatus
+  verificationStatus?: $Enums.VerificationStatus
+  publishedAt?: Date | string | null
+  expiresAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  property: Prisma.PropertyCreateNestedOneWithoutListingsInput
+  agent: Prisma.AgentProfileCreateNestedOneWithoutListingsInput
+  images?: Prisma.ListingImageCreateNestedManyWithoutListingInput
+  amenities?: Prisma.ListingAmenityCreateNestedManyWithoutListingInput
+  leads?: Prisma.LeadCreateNestedManyWithoutListingInput
+  savedBy?: Prisma.SavedListingCreateNestedManyWithoutListingInput
+}
+
+export type ListingUncheckedCreateWithoutVideosInput = {
+  id?: string
+  propertyId: string
+  agentId: string
+  title: string
+  description?: string | null
+  rentAmount: number
+  rentPeriod?: string
+  propertyType: string
+  availabilityDate?: Date | string | null
+  status?: $Enums.ListingStatus
+  verificationStatus?: $Enums.VerificationStatus
+  publishedAt?: Date | string | null
+  expiresAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  images?: Prisma.ListingImageUncheckedCreateNestedManyWithoutListingInput
+  amenities?: Prisma.ListingAmenityUncheckedCreateNestedManyWithoutListingInput
+  leads?: Prisma.LeadUncheckedCreateNestedManyWithoutListingInput
+  savedBy?: Prisma.SavedListingUncheckedCreateNestedManyWithoutListingInput
+}
+
+export type ListingCreateOrConnectWithoutVideosInput = {
+  where: Prisma.ListingWhereUniqueInput
+  create: Prisma.XOR<Prisma.ListingCreateWithoutVideosInput, Prisma.ListingUncheckedCreateWithoutVideosInput>
+}
+
+export type ListingUpsertWithoutVideosInput = {
+  update: Prisma.XOR<Prisma.ListingUpdateWithoutVideosInput, Prisma.ListingUncheckedUpdateWithoutVideosInput>
+  create: Prisma.XOR<Prisma.ListingCreateWithoutVideosInput, Prisma.ListingUncheckedCreateWithoutVideosInput>
+  where?: Prisma.ListingWhereInput
+}
+
+export type ListingUpdateToOneWithWhereWithoutVideosInput = {
+  where?: Prisma.ListingWhereInput
+  data: Prisma.XOR<Prisma.ListingUpdateWithoutVideosInput, Prisma.ListingUncheckedUpdateWithoutVideosInput>
+}
+
+export type ListingUpdateWithoutVideosInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rentAmount?: Prisma.IntFieldUpdateOperationsInput | number
+  rentPeriod?: Prisma.StringFieldUpdateOperationsInput | string
+  propertyType?: Prisma.StringFieldUpdateOperationsInput | string
+  availabilityDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  status?: Prisma.EnumListingStatusFieldUpdateOperationsInput | $Enums.ListingStatus
+  verificationStatus?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
+  publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  property?: Prisma.PropertyUpdateOneRequiredWithoutListingsNestedInput
+  agent?: Prisma.AgentProfileUpdateOneRequiredWithoutListingsNestedInput
+  images?: Prisma.ListingImageUpdateManyWithoutListingNestedInput
+  amenities?: Prisma.ListingAmenityUpdateManyWithoutListingNestedInput
+  leads?: Prisma.LeadUpdateManyWithoutListingNestedInput
+  savedBy?: Prisma.SavedListingUpdateManyWithoutListingNestedInput
+}
+
+export type ListingUncheckedUpdateWithoutVideosInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  propertyId?: Prisma.StringFieldUpdateOperationsInput | string
+  agentId?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rentAmount?: Prisma.IntFieldUpdateOperationsInput | number
+  rentPeriod?: Prisma.StringFieldUpdateOperationsInput | string
+  propertyType?: Prisma.StringFieldUpdateOperationsInput | string
+  availabilityDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  status?: Prisma.EnumListingStatusFieldUpdateOperationsInput | $Enums.ListingStatus
+  verificationStatus?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
+  publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  images?: Prisma.ListingImageUncheckedUpdateManyWithoutListingNestedInput
   amenities?: Prisma.ListingAmenityUncheckedUpdateManyWithoutListingNestedInput
   leads?: Prisma.LeadUncheckedUpdateManyWithoutListingNestedInput
   savedBy?: Prisma.SavedListingUncheckedUpdateManyWithoutListingNestedInput
@@ -1134,6 +1271,7 @@ export type ListingCreateWithoutLeadsInput = {
   property: Prisma.PropertyCreateNestedOneWithoutListingsInput
   agent: Prisma.AgentProfileCreateNestedOneWithoutListingsInput
   images?: Prisma.ListingImageCreateNestedManyWithoutListingInput
+  videos?: Prisma.ListingVideoCreateNestedManyWithoutListingInput
   amenities?: Prisma.ListingAmenityCreateNestedManyWithoutListingInput
   savedBy?: Prisma.SavedListingCreateNestedManyWithoutListingInput
 }
@@ -1155,6 +1293,7 @@ export type ListingUncheckedCreateWithoutLeadsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   images?: Prisma.ListingImageUncheckedCreateNestedManyWithoutListingInput
+  videos?: Prisma.ListingVideoUncheckedCreateNestedManyWithoutListingInput
   amenities?: Prisma.ListingAmenityUncheckedCreateNestedManyWithoutListingInput
   savedBy?: Prisma.SavedListingUncheckedCreateNestedManyWithoutListingInput
 }
@@ -1192,6 +1331,7 @@ export type ListingUpdateWithoutLeadsInput = {
   property?: Prisma.PropertyUpdateOneRequiredWithoutListingsNestedInput
   agent?: Prisma.AgentProfileUpdateOneRequiredWithoutListingsNestedInput
   images?: Prisma.ListingImageUpdateManyWithoutListingNestedInput
+  videos?: Prisma.ListingVideoUpdateManyWithoutListingNestedInput
   amenities?: Prisma.ListingAmenityUpdateManyWithoutListingNestedInput
   savedBy?: Prisma.SavedListingUpdateManyWithoutListingNestedInput
 }
@@ -1213,6 +1353,7 @@ export type ListingUncheckedUpdateWithoutLeadsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   images?: Prisma.ListingImageUncheckedUpdateManyWithoutListingNestedInput
+  videos?: Prisma.ListingVideoUncheckedUpdateManyWithoutListingNestedInput
   amenities?: Prisma.ListingAmenityUncheckedUpdateManyWithoutListingNestedInput
   savedBy?: Prisma.SavedListingUncheckedUpdateManyWithoutListingNestedInput
 }
@@ -1234,6 +1375,7 @@ export type ListingCreateWithoutSavedByInput = {
   property: Prisma.PropertyCreateNestedOneWithoutListingsInput
   agent: Prisma.AgentProfileCreateNestedOneWithoutListingsInput
   images?: Prisma.ListingImageCreateNestedManyWithoutListingInput
+  videos?: Prisma.ListingVideoCreateNestedManyWithoutListingInput
   amenities?: Prisma.ListingAmenityCreateNestedManyWithoutListingInput
   leads?: Prisma.LeadCreateNestedManyWithoutListingInput
 }
@@ -1255,6 +1397,7 @@ export type ListingUncheckedCreateWithoutSavedByInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   images?: Prisma.ListingImageUncheckedCreateNestedManyWithoutListingInput
+  videos?: Prisma.ListingVideoUncheckedCreateNestedManyWithoutListingInput
   amenities?: Prisma.ListingAmenityUncheckedCreateNestedManyWithoutListingInput
   leads?: Prisma.LeadUncheckedCreateNestedManyWithoutListingInput
 }
@@ -1292,6 +1435,7 @@ export type ListingUpdateWithoutSavedByInput = {
   property?: Prisma.PropertyUpdateOneRequiredWithoutListingsNestedInput
   agent?: Prisma.AgentProfileUpdateOneRequiredWithoutListingsNestedInput
   images?: Prisma.ListingImageUpdateManyWithoutListingNestedInput
+  videos?: Prisma.ListingVideoUpdateManyWithoutListingNestedInput
   amenities?: Prisma.ListingAmenityUpdateManyWithoutListingNestedInput
   leads?: Prisma.LeadUpdateManyWithoutListingNestedInput
 }
@@ -1313,6 +1457,7 @@ export type ListingUncheckedUpdateWithoutSavedByInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   images?: Prisma.ListingImageUncheckedUpdateManyWithoutListingNestedInput
+  videos?: Prisma.ListingVideoUncheckedUpdateManyWithoutListingNestedInput
   amenities?: Prisma.ListingAmenityUncheckedUpdateManyWithoutListingNestedInput
   leads?: Prisma.LeadUncheckedUpdateManyWithoutListingNestedInput
 }
@@ -1350,6 +1495,7 @@ export type ListingUpdateWithoutAgentInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   property?: Prisma.PropertyUpdateOneRequiredWithoutListingsNestedInput
   images?: Prisma.ListingImageUpdateManyWithoutListingNestedInput
+  videos?: Prisma.ListingVideoUpdateManyWithoutListingNestedInput
   amenities?: Prisma.ListingAmenityUpdateManyWithoutListingNestedInput
   leads?: Prisma.LeadUpdateManyWithoutListingNestedInput
   savedBy?: Prisma.SavedListingUpdateManyWithoutListingNestedInput
@@ -1371,6 +1517,7 @@ export type ListingUncheckedUpdateWithoutAgentInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   images?: Prisma.ListingImageUncheckedUpdateManyWithoutListingNestedInput
+  videos?: Prisma.ListingVideoUncheckedUpdateManyWithoutListingNestedInput
   amenities?: Prisma.ListingAmenityUncheckedUpdateManyWithoutListingNestedInput
   leads?: Prisma.LeadUncheckedUpdateManyWithoutListingNestedInput
   savedBy?: Prisma.SavedListingUncheckedUpdateManyWithoutListingNestedInput
@@ -1426,6 +1573,7 @@ export type ListingUpdateWithoutPropertyInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   agent?: Prisma.AgentProfileUpdateOneRequiredWithoutListingsNestedInput
   images?: Prisma.ListingImageUpdateManyWithoutListingNestedInput
+  videos?: Prisma.ListingVideoUpdateManyWithoutListingNestedInput
   amenities?: Prisma.ListingAmenityUpdateManyWithoutListingNestedInput
   leads?: Prisma.LeadUpdateManyWithoutListingNestedInput
   savedBy?: Prisma.SavedListingUpdateManyWithoutListingNestedInput
@@ -1447,6 +1595,7 @@ export type ListingUncheckedUpdateWithoutPropertyInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   images?: Prisma.ListingImageUncheckedUpdateManyWithoutListingNestedInput
+  videos?: Prisma.ListingVideoUncheckedUpdateManyWithoutListingNestedInput
   amenities?: Prisma.ListingAmenityUncheckedUpdateManyWithoutListingNestedInput
   leads?: Prisma.LeadUncheckedUpdateManyWithoutListingNestedInput
   savedBy?: Prisma.SavedListingUncheckedUpdateManyWithoutListingNestedInput
@@ -1476,6 +1625,7 @@ export type ListingUncheckedUpdateManyWithoutPropertyInput = {
 
 export type ListingCountOutputType = {
   images: number
+  videos: number
   amenities: number
   leads: number
   savedBy: number
@@ -1483,6 +1633,7 @@ export type ListingCountOutputType = {
 
 export type ListingCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   images?: boolean | ListingCountOutputTypeCountImagesArgs
+  videos?: boolean | ListingCountOutputTypeCountVideosArgs
   amenities?: boolean | ListingCountOutputTypeCountAmenitiesArgs
   leads?: boolean | ListingCountOutputTypeCountLeadsArgs
   savedBy?: boolean | ListingCountOutputTypeCountSavedByArgs
@@ -1503,6 +1654,13 @@ export type ListingCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Exte
  */
 export type ListingCountOutputTypeCountImagesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.ListingImageWhereInput
+}
+
+/**
+ * ListingCountOutputType without action
+ */
+export type ListingCountOutputTypeCountVideosArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ListingVideoWhereInput
 }
 
 /**
@@ -1546,6 +1704,7 @@ export type ListingSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   property?: boolean | Prisma.PropertyDefaultArgs<ExtArgs>
   agent?: boolean | Prisma.AgentProfileDefaultArgs<ExtArgs>
   images?: boolean | Prisma.Listing$imagesArgs<ExtArgs>
+  videos?: boolean | Prisma.Listing$videosArgs<ExtArgs>
   amenities?: boolean | Prisma.Listing$amenitiesArgs<ExtArgs>
   leads?: boolean | Prisma.Listing$leadsArgs<ExtArgs>
   savedBy?: boolean | Prisma.Listing$savedByArgs<ExtArgs>
@@ -1615,6 +1774,7 @@ export type ListingInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs
   property?: boolean | Prisma.PropertyDefaultArgs<ExtArgs>
   agent?: boolean | Prisma.AgentProfileDefaultArgs<ExtArgs>
   images?: boolean | Prisma.Listing$imagesArgs<ExtArgs>
+  videos?: boolean | Prisma.Listing$videosArgs<ExtArgs>
   amenities?: boolean | Prisma.Listing$amenitiesArgs<ExtArgs>
   leads?: boolean | Prisma.Listing$leadsArgs<ExtArgs>
   savedBy?: boolean | Prisma.Listing$savedByArgs<ExtArgs>
@@ -1635,6 +1795,7 @@ export type $ListingPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     property: Prisma.$PropertyPayload<ExtArgs>
     agent: Prisma.$AgentProfilePayload<ExtArgs>
     images: Prisma.$ListingImagePayload<ExtArgs>[]
+    videos: Prisma.$ListingVideoPayload<ExtArgs>[]
     amenities: Prisma.$ListingAmenityPayload<ExtArgs>[]
     leads: Prisma.$LeadPayload<ExtArgs>[]
     savedBy: Prisma.$SavedListingPayload<ExtArgs>[]
@@ -2052,6 +2213,7 @@ export interface Prisma__ListingClient<T, Null = never, ExtArgs extends runtime.
   property<T extends Prisma.PropertyDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PropertyDefaultArgs<ExtArgs>>): Prisma.Prisma__PropertyClient<runtime.Types.Result.GetResult<Prisma.$PropertyPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   agent<T extends Prisma.AgentProfileDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AgentProfileDefaultArgs<ExtArgs>>): Prisma.Prisma__AgentProfileClient<runtime.Types.Result.GetResult<Prisma.$AgentProfilePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   images<T extends Prisma.Listing$imagesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Listing$imagesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ListingImagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  videos<T extends Prisma.Listing$videosArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Listing$videosArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ListingVideoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   amenities<T extends Prisma.Listing$amenitiesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Listing$amenitiesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ListingAmenityPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   leads<T extends Prisma.Listing$leadsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Listing$leadsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   savedBy<T extends Prisma.Listing$savedByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Listing$savedByArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SavedListingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -2521,6 +2683,30 @@ export type Listing$imagesArgs<ExtArgs extends runtime.Types.Extensions.Internal
   take?: number
   skip?: number
   distinct?: Prisma.ListingImageScalarFieldEnum | Prisma.ListingImageScalarFieldEnum[]
+}
+
+/**
+ * Listing.videos
+ */
+export type Listing$videosArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ListingVideo
+   */
+  select?: Prisma.ListingVideoSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ListingVideo
+   */
+  omit?: Prisma.ListingVideoOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ListingVideoInclude<ExtArgs> | null
+  where?: Prisma.ListingVideoWhereInput
+  orderBy?: Prisma.ListingVideoOrderByWithRelationInput | Prisma.ListingVideoOrderByWithRelationInput[]
+  cursor?: Prisma.ListingVideoWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ListingVideoScalarFieldEnum | Prisma.ListingVideoScalarFieldEnum[]
 }
 
 /**

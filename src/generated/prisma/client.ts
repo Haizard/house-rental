@@ -92,6 +92,11 @@ export type ListingAmenity = Prisma.ListingAmenityModel
  */
 export type ListingImage = Prisma.ListingImageModel
 /**
+ * Model ListingVideo
+ * 
+ */
+export type ListingVideo = Prisma.ListingVideoModel
+/**
  * Model Lead
  * 
  */
