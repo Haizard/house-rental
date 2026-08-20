@@ -30,13 +30,18 @@ export async function GET() {
   if (!agent)
     return NextResponse.json({ error: "Agent profile not found." }, { status: 404 });
 
-  const statuses = await prisma.agentStatus.findMany({
-    where: { agentId: agent.id, expiresAt: { gt: new Date() } },
-    orderBy: { createdAt: "desc" },
-    include: { _count: { select: { views: true } } },
-  });
-
-  return NextResponse.json({ data: statuses });
+  // The agent_statuses table may not exist yet (migration pending).
+  try {
+    const statuses = await prisma.agentStatus.findMany({
+      where: { agentId: agent.id, expiresAt: { gt: new Date() } },
+      orderBy: { createdAt: "desc" },
+      include: { _count: { select: { views: true } } },
+    });
+    return NextResponse.json({ data: statuses });
+  } catch (error) {
+    console.warn("agent_statuses table unavailable for GET.", error);
+    return NextResponse.json({ data: [] });
+  }
 }
 
 export async function POST(request: Request) {
@@ -61,19 +66,23 @@ export async function POST(request: Request) {
   } catch { /* tier column doesn't exist yet, treat as FREE */ }
 
   if (isFree) {
-    const todayStart = new Date();
-    todayStart.setHours(0, 0, 0, 0);
-    const todayCount = await prisma.agentStatus.count({
-      where: { agentId: agent.id, createdAt: { gte: todayStart } },
-    });
-    if (todayCount >= FREE_DAILY_LIMIT) {
-      return NextResponse.json(
-        {
-          error: `Free agents can post ${FREE_DAILY_LIMIT} statuses per day. Upgrade to Pro for unlimited.`,
-          limitReached: true,
-        },
-        { status: 429 },
-      );
+    try {
+      const todayStart = new Date();
+      todayStart.setHours(0, 0, 0, 0);
+      const todayCount = await prisma.agentStatus.count({
+        where: { agentId: agent.id, createdAt: { gte: todayStart } },
+      });
+      if (todayCount >= FREE_DAILY_LIMIT) {
+        return NextResponse.json(
+          {
+            error: `Free agents can post ${FREE_DAILY_LIMIT} statuses per day. Upgrade to Pro for unlimited.`,
+            limitReached: true,
+          },
+          { status: 429 },
+        );
+      }
+    } catch {
+      // agent_statuses table missing — skip the limit check below
     }
   }
 
@@ -87,20 +96,31 @@ export async function POST(request: Request) {
   const expiresAt = new Date();
   expiresAt.setHours(expiresAt.getHours() + 24);
 
-  const status = await prisma.agentStatus.create({
-    data: {
-      agentId: agent.id,
-      type: d.type,
-      content: d.content,
-      title: d.title ?? null,
-      area: d.area ?? null,
-      propertyType: d.propertyType ?? null,
-      rentAmount: d.rentAmount ?? null,
-      linkedListingId: d.linkedListingId ?? null,
-      expiresAt,
-    },
-    select: { id: true, expiresAt: true },
-  });
+  try {
+    const status = await prisma.agentStatus.create({
+      data: {
+        agentId: agent.id,
+        type: d.type,
+        content: d.content,
+        title: d.title ?? null,
+        area: d.area ?? null,
+        propertyType: d.propertyType ?? null,
+        rentAmount: d.rentAmount ?? null,
+        linkedListingId: d.linkedListingId ?? null,
+        expiresAt,
+      },
+      select: { id: true, expiresAt: true },
+    });
 
-  return NextResponse.json({ data: status }, { status: 201 });
+    return NextResponse.json({ data: status }, { status: 201 });
+  } catch (error) {
+    console.warn("Failed to create status — agent_statuses table may not be migrated.", error);
+    return NextResponse.json(
+      {
+        error:
+          "Status posting isn't available yet — the statuses table hasn't been migrated. Please run the database migration, then try again.",
+      },
+      { status: 503 },
+    );
+  }
 }
