@@ -3,7 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { prisma } from "@/lib/db/prisma";
 import { requireRole } from "@/lib/auth/guards";
-import { ChatComposer } from "@/components/chat/chat-composer";
+import { ChatThread, type ChatMessage } from "@/components/chat/chat-thread";
 
 export default async function StudentChatPage({
   params,
@@ -29,6 +29,15 @@ export default async function StudentChatPage({
   });
   if (!conversation) notFound();
 
+  const initialMessages: ChatMessage[] = conversation.messages.map((message) => ({
+    id: message.id,
+    senderId: message.senderId,
+    messageType: message.messageType,
+    content: message.content,
+    attachmentUrl: message.attachmentUrl,
+    createdAt: message.createdAt.toISOString(),
+  }));
+
   return (
     <div className="mx-auto flex min-h-[calc(100vh-2rem)] max-w-3xl flex-col">
       <header className="glass-nav flex items-center gap-3 px-4 py-3">
@@ -49,32 +58,11 @@ export default async function StudentChatPage({
         </div>
       </header>
 
-      <section className="flex-1 space-y-3 py-6">
-        {conversation.messages.map((message) => (
-          <div
-            className={`flex ${
-              message.senderId === session.user.id
-                ? "justify-end"
-                : "justify-start"
-            }`}
-            key={message.id}
-          >
-            <p
-              className={`max-w-[82%] rounded-[18px] px-4 py-3 text-sm leading-5 ${
-                message.messageType === "SYSTEM"
-                  ? "bg-[var(--accent-soft)] text-[var(--text-secondary)]"
-                  : message.senderId === session.user.id
-                    ? "bg-[var(--accent)] text-white"
-                    : "glass-surface"
-              }`}
-            >
-              {message.content}
-            </p>
-          </div>
-        ))}
-      </section>
-
-      <ChatComposer conversationId={conversationId} />
+      <ChatThread
+        conversationId={conversationId}
+        initialMessages={initialMessages}
+        currentUserId={session.user.id}
+      />
     </div>
   );
 }
