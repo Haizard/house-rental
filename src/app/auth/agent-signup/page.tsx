@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { Building2, ShieldCheck } from "lucide-react";
 import { FormEvent, useState } from "react";
@@ -9,7 +10,7 @@ export default function AgentSignupPage() {
   const router = useRouter();
   const [error, setError] = useState("");
   const [pending, setPending] = useState(false);
-  const [step, setStep] = useState(0); // 0 = account, 1 = business
+  const [step, setStep] = useState(0);
 
   async function handleAccountSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -17,12 +18,16 @@ export default function AgentSignupPage() {
     setError("");
 
     const form = new FormData(e.currentTarget);
+    const email = form.get("email") as string;
+    const password = form.get("password") as string;
+
+    // Step 1: Create account
     const res = await fetch("/api/auth/register", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        email: form.get("email"),
-        password: form.get("password"),
+        email,
+        password,
         firstName: form.get("firstName"),
         lastName: form.get("lastName"),
         role: "AGENT",
@@ -33,6 +38,19 @@ export default function AgentSignupPage() {
     if (!res.ok) {
       setError(result?.error ?? "Unable to create account.");
       setPending(false);
+      return;
+    }
+
+    // Step 2: Auto sign-in
+    const signInResult = await signIn("credentials", {
+      email,
+      password,
+      redirect: false,
+    });
+
+    if (signInResult?.error) {
+      // Account created but sign-in failed — redirect to sign-in page
+      router.push("/auth/sign-in");
       return;
     }
 
@@ -62,7 +80,7 @@ export default function AgentSignupPage() {
       return;
     }
 
-    router.push("/auth/sign-in");
+    router.push("/agent/dashboard");
   }
 
   return (
