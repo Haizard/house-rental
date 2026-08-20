@@ -1,3 +1,9 @@
+-- Create StatusType enum for agent statuses
+DO $$ BEGIN
+  CREATE TYPE "StatusType" AS ENUM ('AVAILABLE', 'NEW_ROOM', 'PRICE_DROP', 'URGENT', 'GENERAL');
+EXCEPTION WHEN duplicate_object THEN null;
+END $$;
+
 -- Add tier column to agent_profiles (defaults to FREE)
 ALTER TABLE "agent_profiles" ADD COLUMN "tier" TEXT NOT NULL DEFAULT 'FREE';
 
@@ -5,7 +11,7 @@ ALTER TABLE "agent_profiles" ADD COLUMN "tier" TEXT NOT NULL DEFAULT 'FREE';
 CREATE TABLE "agent_statuses" (
     "id" UUID NOT NULL DEFAULT gen_random_uuid(),
     "agent_id" UUID NOT NULL,
-    "type" TEXT NOT NULL DEFAULT 'GENERAL',
+    "type" "StatusType" NOT NULL DEFAULT 'GENERAL',
     "content" TEXT NOT NULL,
     "title" TEXT,
     "area" TEXT,

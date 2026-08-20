@@ -18,6 +18,18 @@ export default function NewListingPage() {
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     if (step < STEPS.length - 1) {
+      // Validate only the current step's visible required fields
+      const fields = event.currentTarget.querySelectorAll<HTMLElement>(
+        `input[required], select[required], textarea[required]`
+      );
+      for (const field of fields) {
+        if (field.offsetParent === null) continue; // skip hidden fields
+        const f = field as HTMLInputElement;
+        if (!f.checkValidity()) {
+          f.reportValidity();
+          return;
+        }
+      }
       setStep(step + 1);
       return;
     }
@@ -108,7 +120,7 @@ export default function NewListingPage() {
         ))}
       </div>
 
-      <form ref={formRef} className="space-y-6" onSubmit={handleSubmit}>
+      <form ref={formRef} className="space-y-6" onSubmit={handleSubmit} noValidate>
         {/* Step 1: Property details */}
         <div className={step === 0 ? "" : "hidden"}>
           {/* AI extraction option */}
