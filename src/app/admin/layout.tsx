@@ -3,6 +3,7 @@ import Link from "next/link";
 import {
   Building2,
   ClipboardList,
+  CreditCard,
   Flag,
   Home,
   LayoutDashboard,
@@ -22,6 +23,7 @@ const navItems = [
   { href: "/admin/listings", label: "Listings", icon: Home },
   { href: "/admin/verification", label: "Verification", icon: ClipboardList },
   { href: "/admin/reports", label: "Reports", icon: Flag },
+  { href: "/admin/payments", label: "Payments", icon: CreditCard },
 ];
 
 export default async function AdminLayout({
