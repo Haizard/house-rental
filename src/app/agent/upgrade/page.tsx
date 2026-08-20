@@ -11,21 +11,17 @@ export default async function AgentUpgradePage() {
   });
   if (!agent) return null;
 
-  // Get current usage stats
+  // Get current usage stats (agentStatus table may not exist yet)
+  const now = new Date();
+  const monthStart = new Date(now.getFullYear(), now.getMonth(), 1);
   const [activeListings, monthlyLeads, monthlyStatuses] = await Promise.all([
     prisma.listing.count({ where: { agentId: agent.id, status: "ACTIVE" } }),
     prisma.lead.count({
-      where: {
-        agentId: agent.id,
-        createdAt: { gte: new Date(new Date().getFullYear(), new Date().getMonth(), 1) },
-      },
+      where: { agentId: agent.id, createdAt: { gte: monthStart } },
     }),
     prisma.agentStatus.count({
-      where: {
-        agentId: agent.id,
-        createdAt: { gte: new Date(new Date().getFullYear(), new Date().getMonth(), 1) },
-      },
-    }),
+      where: { agentId: agent.id, createdAt: { gte: monthStart } },
+    }).catch(() => 0),
   ]);
 
   const isPro = agent.tier === "PRO";

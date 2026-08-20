@@ -10,19 +10,23 @@ export default async function AgentStatusesPage() {
   });
   if (!agent) return null;
 
-  // Count today's statuses
-  const todayStart = new Date();
-  todayStart.setHours(0, 0, 0, 0);
-  const dailyUsed = await prisma.agentStatus.count({
-    where: { agentId: agent.id, createdAt: { gte: todayStart } },
-  });
-
-  // Get active statuses
-  const statuses = await prisma.agentStatus.findMany({
-    where: { agentId: agent.id, expiresAt: { gt: new Date() } },
-    orderBy: { createdAt: "desc" },
-    include: { _count: { select: { views: true } } },
-  });
+  // Count today's statuses (table may not exist yet)
+  let dailyUsed = 0;
+  let statuses: { id: string; content: string; expiresAt: Date; _count: { views: number } }[] = [];
+  try {
+    const todayStart = new Date();
+    todayStart.setHours(0, 0, 0, 0);
+    dailyUsed = await prisma.agentStatus.count({
+      where: { agentId: agent.id, createdAt: { gte: todayStart } },
+    });
+    statuses = await prisma.agentStatus.findMany({
+      where: { agentId: agent.id, expiresAt: { gt: new Date() } },
+      orderBy: { createdAt: "desc" },
+      include: { _count: { select: { views: true } } },
+    });
+  } catch {
+    // agent_statuses table not yet migrated
+  }
 
   return (
     <div className="mx-auto max-w-2xl">

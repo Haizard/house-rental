@@ -2,26 +2,14 @@ import { prisma } from "@/lib/db/prisma";
 import { StatusViewer } from "./status-viewer";
 
 export async function StatusSection() {
-  // Get active statuses from agents
-  const statuses = await prisma.agentStatus.findMany({
-    where: {
-      expiresAt: { gt: new Date() },
-      agent: { user: { isActive: true } },
-    },
-    include: {
-      agent: {
-        select: {
-          id: true,
-          businessName: true,
-          photoUrl: true,
-          verification: true,
-        },
-      },
-      _count: { select: { views: true } },
-    },
-    orderBy: { createdAt: "desc" },
-    take: 30,
-  });
+  let statuses: Awaited<ReturnType<typeof fetchStatuses>> = [];
+
+  try {
+    statuses = await fetchStatuses();
+  } catch {
+    // Table may not exist yet (migration pending) — render nothing
+    return null;
+  }
 
   if (statuses.length === 0) return null;
 
@@ -45,4 +33,26 @@ export async function StatusSection() {
       viewedIds={[]}
     />
   );
+}
+
+async function fetchStatuses() {
+  return prisma.agentStatus.findMany({
+    where: {
+      expiresAt: { gt: new Date() },
+      agent: { user: { isActive: true } },
+    },
+    include: {
+      agent: {
+        select: {
+          id: true,
+          businessName: true,
+          photoUrl: true,
+          verification: true,
+        },
+      },
+      _count: { select: { views: true } },
+    },
+    orderBy: { createdAt: "desc" },
+    take: 30,
+  });
 }
