@@ -130,7 +130,7 @@ function ListingRow({ listing }: { listing: Listing }) {
         </p>
       </div>
       <div className="flex gap-2">
-        {listing.status === "DRAFT" || listing.status === "PAUSED" ? (
+        {(listing.status === "DRAFT" || listing.status === "PAUSED") && (
           <button
             className="button button-primary min-h-10 px-3 text-sm"
             disabled={pending}
@@ -139,16 +139,27 @@ function ListingRow({ listing }: { listing: Listing }) {
           >
             Activate
           </button>
-        ) : listing.status === "ACTIVE" ? (
-          <button
-            className="button button-glass min-h-10 px-3 text-sm"
-            disabled={pending}
-            type="button"
-            onClick={() => updateStatus("PAUSED")}
-          >
-            Pause
-          </button>
-        ) : null}
+        )}
+        {listing.status === "ACTIVE" && (
+          <>
+            <button
+              className="button button-glass min-h-10 px-3 text-sm"
+              disabled={pending}
+              type="button"
+              onClick={() => updateStatus("PAUSED")}
+            >
+              Pause
+            </button>
+            <button
+              className="button min-h-10 px-3 text-sm border border-[var(--danger)] bg-[var(--danger-soft)] text-[var(--danger)]"
+              disabled={pending}
+              type="button"
+              onClick={() => updateStatus("REJECTED")}
+            >
+              Reject
+            </button>
+          </>
+        )}
       </div>
     </article>
   );
