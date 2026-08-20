@@ -21,6 +21,7 @@ type Status = {
   propertyType: string | null;
   rentAmount: number | null;
   linkedListingId: string | null;
+  imageUrl: string | null;
   expiresAt: string | Date;
   createdAt: string | Date;
   _count: { views: number };
@@ -179,6 +180,14 @@ export function StatusViewer({
               <p className="text-lg">{typeEmoji[status.type] ?? "📢"}</p>
               {status.title && (
                 <h3 className="mt-2 text-lg font-bold">{status.title}</h3>
+              )}
+              {status.imageUrl && (
+                <img
+                  src={status.imageUrl}
+                  alt="Status image"
+                  className="mt-3 w-full rounded-xl object-cover"
+                  style={{ maxHeight: 300 }}
+                />
               )}
               <p className="mt-2 whitespace-pre-wrap text-[15px] leading-6">
                 {status.content}

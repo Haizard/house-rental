@@ -1,41 +1,65 @@
 import { NextResponse } from "next/server";
-import { z } from "zod";
 import { prisma } from "@/lib/db/prisma";
 import { auth } from "@/lib/auth/config";
 
-const idSchema = z.string().uuid();
-
-export async function POST(_request: Request, { params }: { params: Promise<{ id: string }> }) {
+export async function POST(
+  _request: Request,
+  { params }: { params: Promise<{ id: string }> },
+) {
   const session = await auth();
-  if (!session?.user) return NextResponse.json({ error: "Sign in to save homes." }, { status: 401 });
-  if (session.user.role !== "STUDENT") return NextResponse.json({ error: "Only students can save homes." }, { status: 403 });
+  if (!session?.user)
+    return NextResponse.json({ error: "Sign in to save listings." }, { status: 401 });
 
-  const { id } = await params;
-  if (!idSchema.safeParse(id).success) return NextResponse.json({ error: "Listing not found." }, { status: 404 });
+  const { id: listingId } = await params;
 
-  const profile = await prisma.studentProfile.findUnique({ where: { userId: session.user.id }, select: { id: true } });
-  const listing = await prisma.listing.findFirst({ where: { id, status: "ACTIVE" }, select: { id: true } });
-  if (!profile || !listing) return NextResponse.json({ error: "Listing not found." }, { status: 404 });
+  // Verify listing exists
+  const listing = await prisma.listing.findUnique({
+    where: { id: listingId },
+    select: { id: true },
+  });
+  if (!listing)
+    return NextResponse.json({ error: "Listing not found." }, { status: 404 });
 
+  // Find student profile
+  const student = await prisma.studentProfile.findUnique({
+    where: { userId: session.user.id },
+    select: { id: true },
+  });
+  if (!student)
+    return NextResponse.json({ error: "Student profile not found." }, { status: 404 });
+
+  // Upsert saved listing (idempotent)
   await prisma.savedListing.upsert({
-    where: { studentId_listingId: { studentId: profile.id, listingId: listing.id } },
-    update: {},
-    create: { studentId: profile.id, listingId: listing.id },
+    where: {
+      studentId_listingId: { studentId: student.id, listingId },
+    },
+    create: { studentId: student.id, listingId },
+    update: {}, // already saved
   });
 
   return NextResponse.json({ saved: true });
 }
 
-export async function DELETE(_request: Request, { params }: { params: Promise<{ id: string }> }) {
+export async function DELETE(
+  _request: Request,
+  { params }: { params: Promise<{ id: string }> },
+) {
   const session = await auth();
-  if (!session?.user) return NextResponse.json({ error: "Sign in to manage saved homes." }, { status: 401 });
-  if (session.user.role !== "STUDENT") return NextResponse.json({ error: "Only students can manage saved homes." }, { status: 403 });
+  if (!session?.user)
+    return NextResponse.json({ error: "Sign in to unsave listings." }, { status: 401 });
 
-  const { id } = await params;
-  if (!idSchema.safeParse(id).success) return NextResponse.json({ error: "Listing not found." }, { status: 404 });
+  const { id: listingId } = await params;
 
-  const profile = await prisma.studentProfile.findUnique({ where: { userId: session.user.id }, select: { id: true } });
-  if (profile) await prisma.savedListing.deleteMany({ where: { studentId: profile.id, listingId: id } });
+  const student = await prisma.studentProfile.findUnique({
+    where: { userId: session.user.id },
+    select: { id: true },
+  });
+  if (!student)
+    return NextResponse.json({ error: "Student profile not found." }, { status: 404 });
+
+  await prisma.savedListing.deleteMany({
+    where: { studentId: student.id, listingId },
+  });
 
   return NextResponse.json({ saved: false });
 }

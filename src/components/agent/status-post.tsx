@@ -1,8 +1,8 @@
 "use client";
 
-import { Sparkles, Zap } from "lucide-react";
+import { Camera, Sparkles, X, Zap } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { FormEvent, useState } from "react";
+import { FormEvent, useRef, useState } from "react";
 
 const statusTypes = [
   { value: "AVAILABLE", label: "🟢 Available now" },
@@ -22,6 +22,7 @@ export function StatusPost({
   tier: string;
 }) {
   const router = useRouter();
+  const fileInputRef = useRef<HTMLInputElement>(null);
   const [content, setContent] = useState("");
   const [type, setType] = useState<string>("GENERAL");
   const [loading, setLoading] = useState(false);
@@ -30,6 +31,45 @@ export function StatusPost({
   const [showAI, setShowAI] = useState(false);
   const [aiText, setAiText] = useState("");
   const [aiLoading, setAiLoading] = useState(false);
+  const [imageUrl, setImageUrl] = useState<string | null>(null);
+  const [uploadingImage, setUploadingImage] = useState(false);
+
+  async function handleImageUpload(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    if (file.size > 5 * 1024 * 1024) {
+      setError("Image must be smaller than 5 MB.");
+      return;
+    }
+
+    setUploadingImage(true);
+    setError("");
+
+    try {
+      const formData = new FormData();
+      formData.append("file", file);
+
+      const res = await fetch("/api/agent/statuses/upload", {
+        method: "POST",
+        body: formData,
+      });
+
+      if (!res.ok) {
+        const data = await res.json().catch(() => null);
+        setError(data?.error ?? "Image upload failed.");
+        return;
+      }
+
+      const data = await res.json();
+      setImageUrl(data.url);
+    } catch {
+      setError("Image upload failed.");
+    } finally {
+      setUploadingImage(false);
+      if (fileInputRef.current) fileInputRef.current.value = "";
+    }
+  }
 
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
@@ -41,7 +81,7 @@ export function StatusPost({
     const res = await fetch("/api/agent/statuses", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ content, type }),
+      body: JSON.stringify({ content, type, imageUrl: imageUrl ?? undefined }),
     });
 
     const result = await res.json().catch(() => null);
@@ -51,6 +91,7 @@ export function StatusPost({
       setSuccess("Status posted! Visible for 24 hours.");
       setContent("");
       setType("GENERAL");
+      setImageUrl(null);
       router.refresh();
     }
     setLoading(false);
@@ -118,15 +159,50 @@ export function StatusPost({
           disabled={remaining === 0 && isFree}
         />
 
-        {/* AI extraction toggle */}
-        <button
-          className="flex items-center gap-2 text-xs font-medium text-[var(--accent)]"
-          type="button"
-          onClick={() => setShowAI(!showAI)}
-        >
-          <Sparkles size={14} aria-hidden="true" />
-          {showAI ? "Hide AI helper" : "Use AI to fill details"}
-        </button>
+        {/* Image preview */}
+        {imageUrl && (
+          <div className="relative">
+            <img
+              src={imageUrl}
+              alt="Status image"
+              className="w-full rounded-xl object-cover"
+              style={{ maxHeight: 200 }}
+            />
+            <button
+              type="button"
+              className="absolute right-2 top-2 flex size-7 items-center justify-center rounded-full bg-black/50 text-white"
+              onClick={() => setImageUrl(null)}
+            >
+              <X size={14} />
+            </button>
+          </div>
+        )}
+
+        {/* Image upload button */}
+        <div className="flex gap-2">
+          <label className="flex cursor-pointer items-center gap-2 rounded-xl border border-dashed border-gray-300 bg-white/20 px-3 py-2 text-xs text-[var(--text-secondary)] transition hover:border-[var(--accent)] hover:bg-white/30">
+            <Camera size={14} />
+            <span>{uploadingImage ? "Uploading..." : "Add photo"}</span>
+            <input
+              ref={fileInputRef}
+              accept="image/*"
+              className="hidden"
+              disabled={uploadingImage}
+              onChange={handleImageUpload}
+              type="file"
+            />
+          </label>
+
+          {/* AI extraction toggle */}
+          <button
+            className="flex items-center gap-2 rounded-xl border border-dashed border-gray-300 bg-white/20 px-3 py-2 text-xs text-[var(--accent)] transition hover:border-[var(--accent)] hover:bg-white/30"
+            type="button"
+            onClick={() => setShowAI(!showAI)}
+          >
+            <Sparkles size={14} aria-hidden="true" />
+            {showAI ? "Hide AI helper" : "AI fill details"}
+          </button>
+        </div>
 
         {showAI && (
           <div className="glass-surface space-y-2 p-3">

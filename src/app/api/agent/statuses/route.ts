@@ -11,6 +11,7 @@ const createSchema = z.object({
   propertyType: z.string().trim().max(50).optional(),
   rentAmount: z.coerce.number().int().positive().optional(),
   linkedListingId: z.string().uuid().optional(),
+  imageUrl: z.string().url().optional(),
 });
 
 // Free tier: 3 statuses/day, Pro tier: unlimited
@@ -107,6 +108,7 @@ export async function POST(request: Request) {
         propertyType: d.propertyType ?? null,
         rentAmount: d.rentAmount ?? null,
         linkedListingId: d.linkedListingId ?? null,
+        imageUrl: d.imageUrl ?? null,
         expiresAt,
       },
       select: { id: true, expiresAt: true },

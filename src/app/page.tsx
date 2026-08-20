@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import { ArrowRight, Building2, MapPin, Search, ShieldCheck } from "lucide-react";
 import { ListingCard } from "@/components/listings/listing-card";
 import { AISearchBar } from "@/components/listings/ai-search";
