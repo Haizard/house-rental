@@ -103,5 +103,5 @@ ALTER TABLE "reviews" ADD CONSTRAINT "reviews_agent_id_fkey" FOREIGN KEY ("agent
 ALTER TABLE "payments" ADD CONSTRAINT "payments_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "users"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 ALTER TABLE "listing_videos" ADD CONSTRAINT "listing_videos_listing_id_fkey" FOREIGN KEY ("listing_id") REFERENCES "listings"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
--- Add composite index for listing search
-CREATE INDEX "listings_status_area_idx" ON "listings"("status", "area");
+-- Note: listings join to properties for area-based search.
+-- Individual indexes exist: listings(status, rent_amount) and properties(area).

@@ -19,5 +19,5 @@ WHERE "latitude" IS NOT NULL AND "longitude" IS NOT NULL AND "geo" IS NULL;
 CREATE INDEX IF NOT EXISTS "properties_geo_idx" ON "properties" USING GIST ("geo");
 CREATE INDEX IF NOT EXISTS "universities_geo_idx" ON "universities" USING GIST ("geo");
 
--- Composite index for the common listings search shape (status + area)
-CREATE INDEX IF NOT EXISTS "listings_status_area_idx" ON "listings" ("status", "area");
+-- Note: listings join to properties for area-based search.
+-- Individual indexes exist: listings(status, rent_amount) and properties(area).
