@@ -117,3 +117,28 @@ export type Report = Prisma.ReportModel
  * 
  */
 export type VerificationRecord = Prisma.VerificationRecordModel
+/**
+ * Model AgentStatus
+ * 
+ */
+export type AgentStatus = Prisma.AgentStatusModel
+/**
+ * Model StatusView
+ * 
+ */
+export type StatusView = Prisma.StatusViewModel
+/**
+ * Model Review
+ * 
+ */
+export type Review = Prisma.ReviewModel
+/**
+ * Model Payment
+ * 
+ */
+export type Payment = Prisma.PaymentModel
+/**
+ * Model AIInteraction
+ * 
+ */
+export type AIInteraction = Prisma.AIInteractionModel

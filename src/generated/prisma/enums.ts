@@ -158,3 +158,22 @@ export const VerificationReviewStatus = {
 } as const
 
 export type VerificationReviewStatus = (typeof VerificationReviewStatus)[keyof typeof VerificationReviewStatus]
+
+
+export const AgentTier = {
+  FREE: 'FREE',
+  PRO: 'PRO'
+} as const
+
+export type AgentTier = (typeof AgentTier)[keyof typeof AgentTier]
+
+
+export const StatusType = {
+  AVAILABLE: 'AVAILABLE',
+  NEW_ROOM: 'NEW_ROOM',
+  PRICE_DROP: 'PRICE_DROP',
+  URGENT: 'URGENT',
+  GENERAL: 'GENERAL'
+} as const
+
+export type StatusType = (typeof StatusType)[keyof typeof StatusType]

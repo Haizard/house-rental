@@ -167,6 +167,13 @@ export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
   _max?: Prisma.NestedDateTimeFilter<$PrismaModel>
 }
 
+export type EnumAgentTierFilter<$PrismaModel = never> = {
+  equals?: $Enums.AgentTier | Prisma.EnumAgentTierFieldRefInput<$PrismaModel>
+  in?: $Enums.AgentTier[] | Prisma.ListEnumAgentTierFieldRefInput<$PrismaModel>
+  notIn?: $Enums.AgentTier[] | Prisma.ListEnumAgentTierFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumAgentTierFilter<$PrismaModel> | $Enums.AgentTier
+}
+
 export type EnumVerificationStatusFilter<$PrismaModel = never> = {
   equals?: $Enums.VerificationStatus | Prisma.EnumVerificationStatusFieldRefInput<$PrismaModel>
   in?: $Enums.VerificationStatus[] | Prisma.ListEnumVerificationStatusFieldRefInput<$PrismaModel>
@@ -194,6 +201,16 @@ export type IntFilter<$PrismaModel = never> = {
   gt?: number | Prisma.IntFieldRefInput<$PrismaModel>
   gte?: number | Prisma.IntFieldRefInput<$PrismaModel>
   not?: Prisma.NestedIntFilter<$PrismaModel> | number
+}
+
+export type EnumAgentTierWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.AgentTier | Prisma.EnumAgentTierFieldRefInput<$PrismaModel>
+  in?: $Enums.AgentTier[] | Prisma.ListEnumAgentTierFieldRefInput<$PrismaModel>
+  notIn?: $Enums.AgentTier[] | Prisma.ListEnumAgentTierFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumAgentTierWithAggregatesFilter<$PrismaModel> | $Enums.AgentTier
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumAgentTierFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumAgentTierFilter<$PrismaModel>
 }
 
 export type EnumVerificationStatusWithAggregatesFilter<$PrismaModel = never> = {
@@ -582,6 +599,40 @@ export type EnumVerificationReviewStatusWithAggregatesFilter<$PrismaModel = neve
   _max?: Prisma.NestedEnumVerificationReviewStatusFilter<$PrismaModel>
 }
 
+export type EnumStatusTypeFilter<$PrismaModel = never> = {
+  equals?: $Enums.StatusType | Prisma.EnumStatusTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.StatusType[] | Prisma.ListEnumStatusTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.StatusType[] | Prisma.ListEnumStatusTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumStatusTypeFilter<$PrismaModel> | $Enums.StatusType
+}
+
+export type EnumStatusTypeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.StatusType | Prisma.EnumStatusTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.StatusType[] | Prisma.ListEnumStatusTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.StatusType[] | Prisma.ListEnumStatusTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumStatusTypeWithAggregatesFilter<$PrismaModel> | $Enums.StatusType
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumStatusTypeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumStatusTypeFilter<$PrismaModel>
+}
+
+export type EnumPaymentTypeFilter<$PrismaModel = never> = {
+  equals?: $Enums.PaymentType | Prisma.EnumPaymentTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.PaymentType[] | Prisma.ListEnumPaymentTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.PaymentType[] | Prisma.ListEnumPaymentTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumPaymentTypeFilter<$PrismaModel> | $Enums.PaymentType
+}
+
+export type EnumPaymentTypeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.PaymentType | Prisma.EnumPaymentTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.PaymentType[] | Prisma.ListEnumPaymentTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.PaymentType[] | Prisma.ListEnumPaymentTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumPaymentTypeWithAggregatesFilter<$PrismaModel> | $Enums.PaymentType
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumPaymentTypeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumPaymentTypeFilter<$PrismaModel>
+}
+
 export type NestedUuidFilter<$PrismaModel = never> = {
   equals?: string | Prisma.StringFieldRefInput<$PrismaModel>
   in?: string[] | Prisma.ListStringFieldRefInput<$PrismaModel>
@@ -746,6 +797,13 @@ export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
   _max?: Prisma.NestedDateTimeFilter<$PrismaModel>
 }
 
+export type NestedEnumAgentTierFilter<$PrismaModel = never> = {
+  equals?: $Enums.AgentTier | Prisma.EnumAgentTierFieldRefInput<$PrismaModel>
+  in?: $Enums.AgentTier[] | Prisma.ListEnumAgentTierFieldRefInput<$PrismaModel>
+  notIn?: $Enums.AgentTier[] | Prisma.ListEnumAgentTierFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumAgentTierFilter<$PrismaModel> | $Enums.AgentTier
+}
+
 export type NestedEnumVerificationStatusFilter<$PrismaModel = never> = {
   equals?: $Enums.VerificationStatus | Prisma.EnumVerificationStatusFieldRefInput<$PrismaModel>
   in?: $Enums.VerificationStatus[] | Prisma.ListEnumVerificationStatusFieldRefInput<$PrismaModel>
@@ -762,6 +820,16 @@ export type NestedDecimalFilter<$PrismaModel = never> = {
   gt?: runtime.Decimal | runtime.DecimalJsLike | number | string | Prisma.DecimalFieldRefInput<$PrismaModel>
   gte?: runtime.Decimal | runtime.DecimalJsLike | number | string | Prisma.DecimalFieldRefInput<$PrismaModel>
   not?: Prisma.NestedDecimalFilter<$PrismaModel> | runtime.Decimal | runtime.DecimalJsLike | number | string
+}
+
+export type NestedEnumAgentTierWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.AgentTier | Prisma.EnumAgentTierFieldRefInput<$PrismaModel>
+  in?: $Enums.AgentTier[] | Prisma.ListEnumAgentTierFieldRefInput<$PrismaModel>
+  notIn?: $Enums.AgentTier[] | Prisma.ListEnumAgentTierFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumAgentTierWithAggregatesFilter<$PrismaModel> | $Enums.AgentTier
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumAgentTierFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumAgentTierFilter<$PrismaModel>
 }
 
 export type NestedEnumVerificationStatusWithAggregatesFilter<$PrismaModel = never> = {
@@ -1130,6 +1198,40 @@ export type NestedEnumVerificationReviewStatusWithAggregatesFilter<$PrismaModel 
   _count?: Prisma.NestedIntFilter<$PrismaModel>
   _min?: Prisma.NestedEnumVerificationReviewStatusFilter<$PrismaModel>
   _max?: Prisma.NestedEnumVerificationReviewStatusFilter<$PrismaModel>
+}
+
+export type NestedEnumStatusTypeFilter<$PrismaModel = never> = {
+  equals?: $Enums.StatusType | Prisma.EnumStatusTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.StatusType[] | Prisma.ListEnumStatusTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.StatusType[] | Prisma.ListEnumStatusTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumStatusTypeFilter<$PrismaModel> | $Enums.StatusType
+}
+
+export type NestedEnumStatusTypeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.StatusType | Prisma.EnumStatusTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.StatusType[] | Prisma.ListEnumStatusTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.StatusType[] | Prisma.ListEnumStatusTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumStatusTypeWithAggregatesFilter<$PrismaModel> | $Enums.StatusType
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumStatusTypeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumStatusTypeFilter<$PrismaModel>
+}
+
+export type NestedEnumPaymentTypeFilter<$PrismaModel = never> = {
+  equals?: $Enums.PaymentType | Prisma.EnumPaymentTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.PaymentType[] | Prisma.ListEnumPaymentTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.PaymentType[] | Prisma.ListEnumPaymentTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumPaymentTypeFilter<$PrismaModel> | $Enums.PaymentType
+}
+
+export type NestedEnumPaymentTypeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.PaymentType | Prisma.EnumPaymentTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.PaymentType[] | Prisma.ListEnumPaymentTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.PaymentType[] | Prisma.ListEnumPaymentTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumPaymentTypeWithAggregatesFilter<$PrismaModel> | $Enums.PaymentType
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumPaymentTypeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumPaymentTypeFilter<$PrismaModel>
 }
 
 

@@ -70,7 +70,12 @@ export const ModelName = {
   SavedListing: 'SavedListing',
   Notification: 'Notification',
   Report: 'Report',
-  VerificationRecord: 'VerificationRecord'
+  VerificationRecord: 'VerificationRecord',
+  AgentStatus: 'AgentStatus',
+  StatusView: 'StatusView',
+  Review: 'Review',
+  Payment: 'Payment',
+  AIInteraction: 'AIInteraction'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -112,6 +117,7 @@ export const AgentProfileScalarFieldEnum = {
   businessName: 'businessName',
   bio: 'bio',
   photoUrl: 'photoUrl',
+  tier: 'tier',
   verification: 'verification',
   rating: 'rating',
   totalReviews: 'totalReviews',
@@ -378,6 +384,83 @@ export const VerificationRecordScalarFieldEnum = {
 } as const
 
 export type VerificationRecordScalarFieldEnum = (typeof VerificationRecordScalarFieldEnum)[keyof typeof VerificationRecordScalarFieldEnum]
+
+
+export const AgentStatusScalarFieldEnum = {
+  id: 'id',
+  agentId: 'agentId',
+  type: 'type',
+  content: 'content',
+  title: 'title',
+  area: 'area',
+  propertyType: 'propertyType',
+  rentAmount: 'rentAmount',
+  imageUrl: 'imageUrl',
+  linkedListingId: 'linkedListingId',
+  expiresAt: 'expiresAt',
+  createdAt: 'createdAt'
+} as const
+
+export type AgentStatusScalarFieldEnum = (typeof AgentStatusScalarFieldEnum)[keyof typeof AgentStatusScalarFieldEnum]
+
+
+export const StatusViewScalarFieldEnum = {
+  id: 'id',
+  statusId: 'statusId',
+  viewerId: 'viewerId',
+  viewedAt: 'viewedAt'
+} as const
+
+export type StatusViewScalarFieldEnum = (typeof StatusViewScalarFieldEnum)[keyof typeof StatusViewScalarFieldEnum]
+
+
+export const ReviewScalarFieldEnum = {
+  id: 'id',
+  studentId: 'studentId',
+  agentId: 'agentId',
+  listingId: 'listingId',
+  rating: 'rating',
+  comment: 'comment',
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ReviewScalarFieldEnum = (typeof ReviewScalarFieldEnum)[keyof typeof ReviewScalarFieldEnum]
+
+
+export const PaymentScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  agentId: 'agentId',
+  type: 'type',
+  amount: 'amount',
+  currency: 'currency',
+  provider: 'provider',
+  providerTransactionId: 'providerTransactionId',
+  status: 'status',
+  metadata: 'metadata',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type PaymentScalarFieldEnum = (typeof PaymentScalarFieldEnum)[keyof typeof PaymentScalarFieldEnum]
+
+
+export const AIInteractionScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  type: 'type',
+  input: 'input',
+  output: 'output',
+  provider: 'provider',
+  model: 'model',
+  tokensUsed: 'tokensUsed',
+  metadata: 'metadata',
+  createdAt: 'createdAt'
+} as const
+
+export type AIInteractionScalarFieldEnum = (typeof AIInteractionScalarFieldEnum)[keyof typeof AIInteractionScalarFieldEnum]
 
 
 export const SortOrder = {

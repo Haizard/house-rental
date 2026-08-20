@@ -264,6 +264,7 @@ export type StudentProfileWhereInput = {
   university?: Prisma.XOR<Prisma.UniversityNullableScalarRelationFilter, Prisma.UniversityWhereInput> | null
   leads?: Prisma.LeadListRelationFilter
   savedListings?: Prisma.SavedListingListRelationFilter
+  reviews?: Prisma.ReviewListRelationFilter
 }
 
 export type StudentProfileOrderByWithRelationInput = {
@@ -281,6 +282,7 @@ export type StudentProfileOrderByWithRelationInput = {
   university?: Prisma.UniversityOrderByWithRelationInput
   leads?: Prisma.LeadOrderByRelationAggregateInput
   savedListings?: Prisma.SavedListingOrderByRelationAggregateInput
+  reviews?: Prisma.ReviewOrderByRelationAggregateInput
 }
 
 export type StudentProfileWhereUniqueInput = Prisma.AtLeast<{
@@ -301,6 +303,7 @@ export type StudentProfileWhereUniqueInput = Prisma.AtLeast<{
   university?: Prisma.XOR<Prisma.UniversityNullableScalarRelationFilter, Prisma.UniversityWhereInput> | null
   leads?: Prisma.LeadListRelationFilter
   savedListings?: Prisma.SavedListingListRelationFilter
+  reviews?: Prisma.ReviewListRelationFilter
 }, "id" | "userId">
 
 export type StudentProfileOrderByWithAggregationInput = {
@@ -350,6 +353,7 @@ export type StudentProfileCreateInput = {
   university?: Prisma.UniversityCreateNestedOneWithoutStudentsInput
   leads?: Prisma.LeadCreateNestedManyWithoutStudentInput
   savedListings?: Prisma.SavedListingCreateNestedManyWithoutStudentInput
+  reviews?: Prisma.ReviewCreateNestedManyWithoutStudentInput
 }
 
 export type StudentProfileUncheckedCreateInput = {
@@ -365,6 +369,7 @@ export type StudentProfileUncheckedCreateInput = {
   updatedAt?: Date | string
   leads?: Prisma.LeadUncheckedCreateNestedManyWithoutStudentInput
   savedListings?: Prisma.SavedListingUncheckedCreateNestedManyWithoutStudentInput
+  reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutStudentInput
 }
 
 export type StudentProfileUpdateInput = {
@@ -380,6 +385,7 @@ export type StudentProfileUpdateInput = {
   university?: Prisma.UniversityUpdateOneWithoutStudentsNestedInput
   leads?: Prisma.LeadUpdateManyWithoutStudentNestedInput
   savedListings?: Prisma.SavedListingUpdateManyWithoutStudentNestedInput
+  reviews?: Prisma.ReviewUpdateManyWithoutStudentNestedInput
 }
 
 export type StudentProfileUncheckedUpdateInput = {
@@ -395,6 +401,7 @@ export type StudentProfileUncheckedUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   leads?: Prisma.LeadUncheckedUpdateManyWithoutStudentNestedInput
   savedListings?: Prisma.SavedListingUncheckedUpdateManyWithoutStudentNestedInput
+  reviews?: Prisma.ReviewUncheckedUpdateManyWithoutStudentNestedInput
 }
 
 export type StudentProfileCreateManyInput = {
@@ -617,6 +624,20 @@ export type StudentProfileUpdateOneRequiredWithoutSavedListingsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.StudentProfileUpdateToOneWithWhereWithoutSavedListingsInput, Prisma.StudentProfileUpdateWithoutSavedListingsInput>, Prisma.StudentProfileUncheckedUpdateWithoutSavedListingsInput>
 }
 
+export type StudentProfileCreateNestedOneWithoutReviewsInput = {
+  create?: Prisma.XOR<Prisma.StudentProfileCreateWithoutReviewsInput, Prisma.StudentProfileUncheckedCreateWithoutReviewsInput>
+  connectOrCreate?: Prisma.StudentProfileCreateOrConnectWithoutReviewsInput
+  connect?: Prisma.StudentProfileWhereUniqueInput
+}
+
+export type StudentProfileUpdateOneRequiredWithoutReviewsNestedInput = {
+  create?: Prisma.XOR<Prisma.StudentProfileCreateWithoutReviewsInput, Prisma.StudentProfileUncheckedCreateWithoutReviewsInput>
+  connectOrCreate?: Prisma.StudentProfileCreateOrConnectWithoutReviewsInput
+  upsert?: Prisma.StudentProfileUpsertWithoutReviewsInput
+  connect?: Prisma.StudentProfileWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.StudentProfileUpdateToOneWithWhereWithoutReviewsInput, Prisma.StudentProfileUpdateWithoutReviewsInput>, Prisma.StudentProfileUncheckedUpdateWithoutReviewsInput>
+}
+
 export type StudentProfileCreateWithoutUserInput = {
   id?: string
   budgetMin?: number | null
@@ -629,6 +650,7 @@ export type StudentProfileCreateWithoutUserInput = {
   university?: Prisma.UniversityCreateNestedOneWithoutStudentsInput
   leads?: Prisma.LeadCreateNestedManyWithoutStudentInput
   savedListings?: Prisma.SavedListingCreateNestedManyWithoutStudentInput
+  reviews?: Prisma.ReviewCreateNestedManyWithoutStudentInput
 }
 
 export type StudentProfileUncheckedCreateWithoutUserInput = {
@@ -643,6 +665,7 @@ export type StudentProfileUncheckedCreateWithoutUserInput = {
   updatedAt?: Date | string
   leads?: Prisma.LeadUncheckedCreateNestedManyWithoutStudentInput
   savedListings?: Prisma.SavedListingUncheckedCreateNestedManyWithoutStudentInput
+  reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutStudentInput
 }
 
 export type StudentProfileCreateOrConnectWithoutUserInput = {
@@ -673,6 +696,7 @@ export type StudentProfileUpdateWithoutUserInput = {
   university?: Prisma.UniversityUpdateOneWithoutStudentsNestedInput
   leads?: Prisma.LeadUpdateManyWithoutStudentNestedInput
   savedListings?: Prisma.SavedListingUpdateManyWithoutStudentNestedInput
+  reviews?: Prisma.ReviewUpdateManyWithoutStudentNestedInput
 }
 
 export type StudentProfileUncheckedUpdateWithoutUserInput = {
@@ -687,6 +711,7 @@ export type StudentProfileUncheckedUpdateWithoutUserInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   leads?: Prisma.LeadUncheckedUpdateManyWithoutStudentNestedInput
   savedListings?: Prisma.SavedListingUncheckedUpdateManyWithoutStudentNestedInput
+  reviews?: Prisma.ReviewUncheckedUpdateManyWithoutStudentNestedInput
 }
 
 export type StudentProfileCreateWithoutUniversityInput = {
@@ -701,6 +726,7 @@ export type StudentProfileCreateWithoutUniversityInput = {
   user: Prisma.UserCreateNestedOneWithoutStudentProfileInput
   leads?: Prisma.LeadCreateNestedManyWithoutStudentInput
   savedListings?: Prisma.SavedListingCreateNestedManyWithoutStudentInput
+  reviews?: Prisma.ReviewCreateNestedManyWithoutStudentInput
 }
 
 export type StudentProfileUncheckedCreateWithoutUniversityInput = {
@@ -715,6 +741,7 @@ export type StudentProfileUncheckedCreateWithoutUniversityInput = {
   updatedAt?: Date | string
   leads?: Prisma.LeadUncheckedCreateNestedManyWithoutStudentInput
   savedListings?: Prisma.SavedListingUncheckedCreateNestedManyWithoutStudentInput
+  reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutStudentInput
 }
 
 export type StudentProfileCreateOrConnectWithoutUniversityInput = {
@@ -771,6 +798,7 @@ export type StudentProfileCreateWithoutLeadsInput = {
   user: Prisma.UserCreateNestedOneWithoutStudentProfileInput
   university?: Prisma.UniversityCreateNestedOneWithoutStudentsInput
   savedListings?: Prisma.SavedListingCreateNestedManyWithoutStudentInput
+  reviews?: Prisma.ReviewCreateNestedManyWithoutStudentInput
 }
 
 export type StudentProfileUncheckedCreateWithoutLeadsInput = {
@@ -785,6 +813,7 @@ export type StudentProfileUncheckedCreateWithoutLeadsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   savedListings?: Prisma.SavedListingUncheckedCreateNestedManyWithoutStudentInput
+  reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutStudentInput
 }
 
 export type StudentProfileCreateOrConnectWithoutLeadsInput = {
@@ -815,6 +844,7 @@ export type StudentProfileUpdateWithoutLeadsInput = {
   user?: Prisma.UserUpdateOneRequiredWithoutStudentProfileNestedInput
   university?: Prisma.UniversityUpdateOneWithoutStudentsNestedInput
   savedListings?: Prisma.SavedListingUpdateManyWithoutStudentNestedInput
+  reviews?: Prisma.ReviewUpdateManyWithoutStudentNestedInput
 }
 
 export type StudentProfileUncheckedUpdateWithoutLeadsInput = {
@@ -829,6 +859,7 @@ export type StudentProfileUncheckedUpdateWithoutLeadsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   savedListings?: Prisma.SavedListingUncheckedUpdateManyWithoutStudentNestedInput
+  reviews?: Prisma.ReviewUncheckedUpdateManyWithoutStudentNestedInput
 }
 
 export type StudentProfileCreateWithoutSavedListingsInput = {
@@ -843,6 +874,7 @@ export type StudentProfileCreateWithoutSavedListingsInput = {
   user: Prisma.UserCreateNestedOneWithoutStudentProfileInput
   university?: Prisma.UniversityCreateNestedOneWithoutStudentsInput
   leads?: Prisma.LeadCreateNestedManyWithoutStudentInput
+  reviews?: Prisma.ReviewCreateNestedManyWithoutStudentInput
 }
 
 export type StudentProfileUncheckedCreateWithoutSavedListingsInput = {
@@ -857,6 +889,7 @@ export type StudentProfileUncheckedCreateWithoutSavedListingsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   leads?: Prisma.LeadUncheckedCreateNestedManyWithoutStudentInput
+  reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutStudentInput
 }
 
 export type StudentProfileCreateOrConnectWithoutSavedListingsInput = {
@@ -887,6 +920,7 @@ export type StudentProfileUpdateWithoutSavedListingsInput = {
   user?: Prisma.UserUpdateOneRequiredWithoutStudentProfileNestedInput
   university?: Prisma.UniversityUpdateOneWithoutStudentsNestedInput
   leads?: Prisma.LeadUpdateManyWithoutStudentNestedInput
+  reviews?: Prisma.ReviewUpdateManyWithoutStudentNestedInput
 }
 
 export type StudentProfileUncheckedUpdateWithoutSavedListingsInput = {
@@ -901,6 +935,83 @@ export type StudentProfileUncheckedUpdateWithoutSavedListingsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   leads?: Prisma.LeadUncheckedUpdateManyWithoutStudentNestedInput
+  reviews?: Prisma.ReviewUncheckedUpdateManyWithoutStudentNestedInput
+}
+
+export type StudentProfileCreateWithoutReviewsInput = {
+  id?: string
+  budgetMin?: number | null
+  budgetMax?: number | null
+  preferredArea?: string | null
+  moveInDate?: Date | string | null
+  roomType?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  user: Prisma.UserCreateNestedOneWithoutStudentProfileInput
+  university?: Prisma.UniversityCreateNestedOneWithoutStudentsInput
+  leads?: Prisma.LeadCreateNestedManyWithoutStudentInput
+  savedListings?: Prisma.SavedListingCreateNestedManyWithoutStudentInput
+}
+
+export type StudentProfileUncheckedCreateWithoutReviewsInput = {
+  id?: string
+  userId: string
+  universityId?: string | null
+  budgetMin?: number | null
+  budgetMax?: number | null
+  preferredArea?: string | null
+  moveInDate?: Date | string | null
+  roomType?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  leads?: Prisma.LeadUncheckedCreateNestedManyWithoutStudentInput
+  savedListings?: Prisma.SavedListingUncheckedCreateNestedManyWithoutStudentInput
+}
+
+export type StudentProfileCreateOrConnectWithoutReviewsInput = {
+  where: Prisma.StudentProfileWhereUniqueInput
+  create: Prisma.XOR<Prisma.StudentProfileCreateWithoutReviewsInput, Prisma.StudentProfileUncheckedCreateWithoutReviewsInput>
+}
+
+export type StudentProfileUpsertWithoutReviewsInput = {
+  update: Prisma.XOR<Prisma.StudentProfileUpdateWithoutReviewsInput, Prisma.StudentProfileUncheckedUpdateWithoutReviewsInput>
+  create: Prisma.XOR<Prisma.StudentProfileCreateWithoutReviewsInput, Prisma.StudentProfileUncheckedCreateWithoutReviewsInput>
+  where?: Prisma.StudentProfileWhereInput
+}
+
+export type StudentProfileUpdateToOneWithWhereWithoutReviewsInput = {
+  where?: Prisma.StudentProfileWhereInput
+  data: Prisma.XOR<Prisma.StudentProfileUpdateWithoutReviewsInput, Prisma.StudentProfileUncheckedUpdateWithoutReviewsInput>
+}
+
+export type StudentProfileUpdateWithoutReviewsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  budgetMin?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  budgetMax?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  preferredArea?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  moveInDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  roomType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  user?: Prisma.UserUpdateOneRequiredWithoutStudentProfileNestedInput
+  university?: Prisma.UniversityUpdateOneWithoutStudentsNestedInput
+  leads?: Prisma.LeadUpdateManyWithoutStudentNestedInput
+  savedListings?: Prisma.SavedListingUpdateManyWithoutStudentNestedInput
+}
+
+export type StudentProfileUncheckedUpdateWithoutReviewsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  universityId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  budgetMin?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  budgetMax?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  preferredArea?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  moveInDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  roomType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  leads?: Prisma.LeadUncheckedUpdateManyWithoutStudentNestedInput
+  savedListings?: Prisma.SavedListingUncheckedUpdateManyWithoutStudentNestedInput
 }
 
 export type StudentProfileCreateManyUniversityInput = {
@@ -927,6 +1038,7 @@ export type StudentProfileUpdateWithoutUniversityInput = {
   user?: Prisma.UserUpdateOneRequiredWithoutStudentProfileNestedInput
   leads?: Prisma.LeadUpdateManyWithoutStudentNestedInput
   savedListings?: Prisma.SavedListingUpdateManyWithoutStudentNestedInput
+  reviews?: Prisma.ReviewUpdateManyWithoutStudentNestedInput
 }
 
 export type StudentProfileUncheckedUpdateWithoutUniversityInput = {
@@ -941,6 +1053,7 @@ export type StudentProfileUncheckedUpdateWithoutUniversityInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   leads?: Prisma.LeadUncheckedUpdateManyWithoutStudentNestedInput
   savedListings?: Prisma.SavedListingUncheckedUpdateManyWithoutStudentNestedInput
+  reviews?: Prisma.ReviewUncheckedUpdateManyWithoutStudentNestedInput
 }
 
 export type StudentProfileUncheckedUpdateManyWithoutUniversityInput = {
@@ -963,11 +1076,13 @@ export type StudentProfileUncheckedUpdateManyWithoutUniversityInput = {
 export type StudentProfileCountOutputType = {
   leads: number
   savedListings: number
+  reviews: number
 }
 
 export type StudentProfileCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   leads?: boolean | StudentProfileCountOutputTypeCountLeadsArgs
   savedListings?: boolean | StudentProfileCountOutputTypeCountSavedListingsArgs
+  reviews?: boolean | StudentProfileCountOutputTypeCountReviewsArgs
 }
 
 /**
@@ -994,6 +1109,13 @@ export type StudentProfileCountOutputTypeCountSavedListingsArgs<ExtArgs extends 
   where?: Prisma.SavedListingWhereInput
 }
 
+/**
+ * StudentProfileCountOutputType without action
+ */
+export type StudentProfileCountOutputTypeCountReviewsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ReviewWhereInput
+}
+
 
 export type StudentProfileSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1010,6 +1132,7 @@ export type StudentProfileSelect<ExtArgs extends runtime.Types.Extensions.Intern
   university?: boolean | Prisma.StudentProfile$universityArgs<ExtArgs>
   leads?: boolean | Prisma.StudentProfile$leadsArgs<ExtArgs>
   savedListings?: boolean | Prisma.StudentProfile$savedListingsArgs<ExtArgs>
+  reviews?: boolean | Prisma.StudentProfile$reviewsArgs<ExtArgs>
   _count?: boolean | Prisma.StudentProfileCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["studentProfile"]>
 
@@ -1062,6 +1185,7 @@ export type StudentProfileInclude<ExtArgs extends runtime.Types.Extensions.Inter
   university?: boolean | Prisma.StudentProfile$universityArgs<ExtArgs>
   leads?: boolean | Prisma.StudentProfile$leadsArgs<ExtArgs>
   savedListings?: boolean | Prisma.StudentProfile$savedListingsArgs<ExtArgs>
+  reviews?: boolean | Prisma.StudentProfile$reviewsArgs<ExtArgs>
   _count?: boolean | Prisma.StudentProfileCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type StudentProfileIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1080,6 +1204,7 @@ export type $StudentProfilePayload<ExtArgs extends runtime.Types.Extensions.Inte
     university: Prisma.$UniversityPayload<ExtArgs> | null
     leads: Prisma.$LeadPayload<ExtArgs>[]
     savedListings: Prisma.$SavedListingPayload<ExtArgs>[]
+    reviews: Prisma.$ReviewPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1490,6 +1615,7 @@ export interface Prisma__StudentProfileClient<T, Null = never, ExtArgs extends r
   university<T extends Prisma.StudentProfile$universityArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.StudentProfile$universityArgs<ExtArgs>>): Prisma.Prisma__UniversityClient<runtime.Types.Result.GetResult<Prisma.$UniversityPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   leads<T extends Prisma.StudentProfile$leadsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.StudentProfile$leadsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   savedListings<T extends Prisma.StudentProfile$savedListingsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.StudentProfile$savedListingsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SavedListingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  reviews<T extends Prisma.StudentProfile$reviewsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.StudentProfile$reviewsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ReviewPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1994,6 +2120,30 @@ export type StudentProfile$savedListingsArgs<ExtArgs extends runtime.Types.Exten
   take?: number
   skip?: number
   distinct?: Prisma.SavedListingScalarFieldEnum | Prisma.SavedListingScalarFieldEnum[]
+}
+
+/**
+ * StudentProfile.reviews
+ */
+export type StudentProfile$reviewsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Review
+   */
+  select?: Prisma.ReviewSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Review
+   */
+  omit?: Prisma.ReviewOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ReviewInclude<ExtArgs> | null
+  where?: Prisma.ReviewWhereInput
+  orderBy?: Prisma.ReviewOrderByWithRelationInput | Prisma.ReviewOrderByWithRelationInput[]
+  cursor?: Prisma.ReviewWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ReviewScalarFieldEnum | Prisma.ReviewScalarFieldEnum[]
 }
 
 /**

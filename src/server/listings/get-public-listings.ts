@@ -5,6 +5,13 @@ import { listings as demoListings, type Listing } from "@/lib/listings";
 type PublicListingRecord = Prisma.ListingGetPayload<{
   include: {
     property: { select: { area: true } };
+    images: { orderBy: { sortOrder: "asc" } };
+  };
+}>;
+
+type PublicListingRecordSingle = Prisma.ListingGetPayload<{
+  include: {
+    property: { select: { area: true } };
     images: { orderBy: { sortOrder: "asc" }; take: 1 };
   };
 }>;
@@ -78,17 +85,17 @@ export async function getPublicListingById(id: string): Promise<Listing | null> 
       where: { id, status: "ACTIVE" },
       include: {
         property: { select: { area: true } },
-        images: { orderBy: { sortOrder: "asc" }, take: 1 },
+        images: { orderBy: { sortOrder: "asc" } },
       },
     }));
-    if (record) return toPublicListing(record);
+    if (record) return toPublicListingDetail(record);
   } catch (error) {
     console.warn("Falling back to demo listing because the catalog is unavailable.", error);
   }
   return demoListings.find((listing) => listing.id === id) ?? null;
 }
 
-function toPublicListing(record: PublicListingRecord) {
+function toPublicListing(record: PublicListingRecordSingle) {
   return {
     id: record.id,
     title: record.title,
@@ -98,6 +105,18 @@ function toPublicListing(record: PublicListingRecord) {
     image: record.images[0]?.url ?? "/listing-placeholder.svg",
     verified: record.verificationStatus === "VERIFIED" || record.verificationStatus === "PROPERTY_VERIFIED" || record.verificationStatus === "OWNER_VERIFIED",
     agentId: record.agentId,
+  } satisfies Listing;
+}
+
+function toPublicListingDetail(record: PublicListingRecord) {
+  return {
+    ...toPublicListing(record as PublicListingRecordSingle),
+    images: record.images.map((img) => ({
+      id: img.id,
+      url: img.url,
+      isPrimary: img.isPrimary,
+      sortOrder: img.sortOrder,
+    })),
   } satisfies Listing;
 }
 

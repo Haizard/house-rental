@@ -1,0 +1,18 @@
+import { BadgeDollarSign, CreditCard, ReceiptText } from "lucide-react";
+import { prisma } from "@/lib/db/prisma";
+import { requireRole } from "@/lib/auth/guards";
+
+export default async function AgentBillingPage() {
+  const session = await requireRole("AGENT");
+  const agent = await prisma.agentProfile.findUnique({
+    where: { userId: session.user.id },
+    include: {
+      subscriptions: { orderBy: { createdAt: "desc" }, take: 1 },
+      leads: { include: { charges: true, listing: { select: { title: true } } }, orderBy: { createdAt: "desc" }, take: 50 },
+    },
+  });
+  const subscription = agent?.subscriptions[0];
+  const charges = agent?.leads.flatMap((lead) => lead.charges.map((charge) => ({ ...charge, listingTitle: lead.listing.title }))) ?? [];
+
+  return <div className="mx-auto max-w-5xl"><header className="pt-10"><p className="eyebrow">Agent workspace</p><h1 className="mt-2 text-3xl font-bold sm:text-4xl">Billing</h1><p className="mt-2 text-[var(--text-secondary)]">Subscription access and qualified-lead charges.</p></header><section className="mt-8 grid gap-4 lg:grid-cols-[1fr_1fr]"><article className="glass-surface p-5"><div className="flex items-center gap-3"><span className="flex size-10 items-center justify-center rounded-full bg-[var(--accent-soft)] text-[var(--accent)]"><CreditCard size={20} aria-hidden="true" /></span><div><h2 className="font-semibold">Agent subscription</h2><p className="text-sm text-[var(--text-secondary)]">STANDARD · TZS 20,000 / month</p></div></div>{subscription ? <div className="mt-6"><p className="text-2xl font-bold">{subscription.status.toLowerCase()}</p><p className="mt-1 text-sm text-[var(--text-secondary)]">Renews or expires {new Intl.DateTimeFormat("en-TZ", { dateStyle: "medium" }).format(subscription.expiresAt)}</p></div> : <div className="mt-6"><p className="text-sm text-[var(--text-secondary)]">No subscription record exists yet.</p><p className="mt-4 flex items-start gap-2 text-sm text-[var(--warning)]"><BadgeDollarSign size={18} className="shrink-0" aria-hidden="true" />Payments are not configured. Connect a Tanzania provider before activating billing.</p></div>}</article><article className="glass-surface p-5"><div className="flex items-center gap-3"><span className="flex size-10 items-center justify-center rounded-full bg-[var(--accent-soft)] text-[var(--accent)]"><ReceiptText size={20} aria-hidden="true" /></span><div><h2 className="font-semibold">Lead charges</h2><p className="text-sm text-[var(--text-secondary)]">One charge per qualified lead</p></div></div><p className="mt-6 text-2xl font-bold">TZS {charges.reduce((total, charge) => total + charge.amount, 0).toLocaleString()}</p><p className="mt-1 text-sm text-[var(--text-secondary)]">Across {charges.length} charge records</p></article></section><section className="mt-10"><h2 className="text-xl font-bold">Charge history</h2><div className="mt-4 space-y-3">{charges.length ? charges.map((charge) => <article className="glass-surface flex items-center justify-between gap-4 p-4" key={charge.id}><div><h3 className="font-semibold">{charge.listingTitle}</h3><p className="mt-1 text-xs text-[var(--text-secondary)]">{new Intl.DateTimeFormat("en-TZ", { dateStyle: "medium" }).format(charge.createdAt)}</p></div><span className="text-right"><strong className="block">TZS {charge.amount.toLocaleString()}</strong><span className="text-xs text-[var(--text-secondary)]">{charge.status.toLowerCase()}</span></span></article>) : <div className="glass-surface p-6 text-sm text-[var(--text-secondary)]">Lead charge records will appear here.</div>}</div></section></div>;
+}

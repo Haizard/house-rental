@@ -42,6 +42,7 @@ export type AgentProfileMinAggregateOutputType = {
   businessName: string | null
   bio: string | null
   photoUrl: string | null
+  tier: $Enums.AgentTier | null
   verification: $Enums.VerificationStatus | null
   rating: runtime.Decimal | null
   totalReviews: number | null
@@ -55,6 +56,7 @@ export type AgentProfileMaxAggregateOutputType = {
   businessName: string | null
   bio: string | null
   photoUrl: string | null
+  tier: $Enums.AgentTier | null
   verification: $Enums.VerificationStatus | null
   rating: runtime.Decimal | null
   totalReviews: number | null
@@ -68,6 +70,7 @@ export type AgentProfileCountAggregateOutputType = {
   businessName: number
   bio: number
   photoUrl: number
+  tier: number
   verification: number
   rating: number
   totalReviews: number
@@ -93,6 +96,7 @@ export type AgentProfileMinAggregateInputType = {
   businessName?: true
   bio?: true
   photoUrl?: true
+  tier?: true
   verification?: true
   rating?: true
   totalReviews?: true
@@ -106,6 +110,7 @@ export type AgentProfileMaxAggregateInputType = {
   businessName?: true
   bio?: true
   photoUrl?: true
+  tier?: true
   verification?: true
   rating?: true
   totalReviews?: true
@@ -119,6 +124,7 @@ export type AgentProfileCountAggregateInputType = {
   businessName?: true
   bio?: true
   photoUrl?: true
+  tier?: true
   verification?: true
   rating?: true
   totalReviews?: true
@@ -219,6 +225,7 @@ export type AgentProfileGroupByOutputType = {
   businessName: string
   bio: string | null
   photoUrl: string | null
+  tier: $Enums.AgentTier
   verification: $Enums.VerificationStatus
   rating: runtime.Decimal
   totalReviews: number
@@ -255,6 +262,7 @@ export type AgentProfileWhereInput = {
   businessName?: Prisma.StringFilter<"AgentProfile"> | string
   bio?: Prisma.StringNullableFilter<"AgentProfile"> | string | null
   photoUrl?: Prisma.StringNullableFilter<"AgentProfile"> | string | null
+  tier?: Prisma.EnumAgentTierFilter<"AgentProfile"> | $Enums.AgentTier
   verification?: Prisma.EnumVerificationStatusFilter<"AgentProfile"> | $Enums.VerificationStatus
   rating?: Prisma.DecimalFilter<"AgentProfile"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalReviews?: Prisma.IntFilter<"AgentProfile"> | number
@@ -265,6 +273,8 @@ export type AgentProfileWhereInput = {
   properties?: Prisma.PropertyAgentListRelationFilter
   leads?: Prisma.LeadListRelationFilter
   subscriptions?: Prisma.SubscriptionListRelationFilter
+  statuses?: Prisma.AgentStatusListRelationFilter
+  reviews?: Prisma.ReviewListRelationFilter
 }
 
 export type AgentProfileOrderByWithRelationInput = {
@@ -273,6 +283,7 @@ export type AgentProfileOrderByWithRelationInput = {
   businessName?: Prisma.SortOrder
   bio?: Prisma.SortOrderInput | Prisma.SortOrder
   photoUrl?: Prisma.SortOrderInput | Prisma.SortOrder
+  tier?: Prisma.SortOrder
   verification?: Prisma.SortOrder
   rating?: Prisma.SortOrder
   totalReviews?: Prisma.SortOrder
@@ -283,6 +294,8 @@ export type AgentProfileOrderByWithRelationInput = {
   properties?: Prisma.PropertyAgentOrderByRelationAggregateInput
   leads?: Prisma.LeadOrderByRelationAggregateInput
   subscriptions?: Prisma.SubscriptionOrderByRelationAggregateInput
+  statuses?: Prisma.AgentStatusOrderByRelationAggregateInput
+  reviews?: Prisma.ReviewOrderByRelationAggregateInput
 }
 
 export type AgentProfileWhereUniqueInput = Prisma.AtLeast<{
@@ -294,6 +307,7 @@ export type AgentProfileWhereUniqueInput = Prisma.AtLeast<{
   businessName?: Prisma.StringFilter<"AgentProfile"> | string
   bio?: Prisma.StringNullableFilter<"AgentProfile"> | string | null
   photoUrl?: Prisma.StringNullableFilter<"AgentProfile"> | string | null
+  tier?: Prisma.EnumAgentTierFilter<"AgentProfile"> | $Enums.AgentTier
   verification?: Prisma.EnumVerificationStatusFilter<"AgentProfile"> | $Enums.VerificationStatus
   rating?: Prisma.DecimalFilter<"AgentProfile"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalReviews?: Prisma.IntFilter<"AgentProfile"> | number
@@ -304,6 +318,8 @@ export type AgentProfileWhereUniqueInput = Prisma.AtLeast<{
   properties?: Prisma.PropertyAgentListRelationFilter
   leads?: Prisma.LeadListRelationFilter
   subscriptions?: Prisma.SubscriptionListRelationFilter
+  statuses?: Prisma.AgentStatusListRelationFilter
+  reviews?: Prisma.ReviewListRelationFilter
 }, "id" | "userId">
 
 export type AgentProfileOrderByWithAggregationInput = {
@@ -312,6 +328,7 @@ export type AgentProfileOrderByWithAggregationInput = {
   businessName?: Prisma.SortOrder
   bio?: Prisma.SortOrderInput | Prisma.SortOrder
   photoUrl?: Prisma.SortOrderInput | Prisma.SortOrder
+  tier?: Prisma.SortOrder
   verification?: Prisma.SortOrder
   rating?: Prisma.SortOrder
   totalReviews?: Prisma.SortOrder
@@ -333,6 +350,7 @@ export type AgentProfileScalarWhereWithAggregatesInput = {
   businessName?: Prisma.StringWithAggregatesFilter<"AgentProfile"> | string
   bio?: Prisma.StringNullableWithAggregatesFilter<"AgentProfile"> | string | null
   photoUrl?: Prisma.StringNullableWithAggregatesFilter<"AgentProfile"> | string | null
+  tier?: Prisma.EnumAgentTierWithAggregatesFilter<"AgentProfile"> | $Enums.AgentTier
   verification?: Prisma.EnumVerificationStatusWithAggregatesFilter<"AgentProfile"> | $Enums.VerificationStatus
   rating?: Prisma.DecimalWithAggregatesFilter<"AgentProfile"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalReviews?: Prisma.IntWithAggregatesFilter<"AgentProfile"> | number
@@ -345,6 +363,7 @@ export type AgentProfileCreateInput = {
   businessName: string
   bio?: string | null
   photoUrl?: string | null
+  tier?: $Enums.AgentTier
   verification?: $Enums.VerificationStatus
   rating?: runtime.Decimal | runtime.DecimalJsLike | number | string
   totalReviews?: number
@@ -355,6 +374,8 @@ export type AgentProfileCreateInput = {
   properties?: Prisma.PropertyAgentCreateNestedManyWithoutAgentInput
   leads?: Prisma.LeadCreateNestedManyWithoutAgentInput
   subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutAgentInput
+  statuses?: Prisma.AgentStatusCreateNestedManyWithoutAgentInput
+  reviews?: Prisma.ReviewCreateNestedManyWithoutAgentInput
 }
 
 export type AgentProfileUncheckedCreateInput = {
@@ -363,6 +384,7 @@ export type AgentProfileUncheckedCreateInput = {
   businessName: string
   bio?: string | null
   photoUrl?: string | null
+  tier?: $Enums.AgentTier
   verification?: $Enums.VerificationStatus
   rating?: runtime.Decimal | runtime.DecimalJsLike | number | string
   totalReviews?: number
@@ -372,6 +394,8 @@ export type AgentProfileUncheckedCreateInput = {
   properties?: Prisma.PropertyAgentUncheckedCreateNestedManyWithoutAgentInput
   leads?: Prisma.LeadUncheckedCreateNestedManyWithoutAgentInput
   subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutAgentInput
+  statuses?: Prisma.AgentStatusUncheckedCreateNestedManyWithoutAgentInput
+  reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutAgentInput
 }
 
 export type AgentProfileUpdateInput = {
@@ -379,6 +403,7 @@ export type AgentProfileUpdateInput = {
   businessName?: Prisma.StringFieldUpdateOperationsInput | string
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   photoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tier?: Prisma.EnumAgentTierFieldUpdateOperationsInput | $Enums.AgentTier
   verification?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
   rating?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalReviews?: Prisma.IntFieldUpdateOperationsInput | number
@@ -389,6 +414,8 @@ export type AgentProfileUpdateInput = {
   properties?: Prisma.PropertyAgentUpdateManyWithoutAgentNestedInput
   leads?: Prisma.LeadUpdateManyWithoutAgentNestedInput
   subscriptions?: Prisma.SubscriptionUpdateManyWithoutAgentNestedInput
+  statuses?: Prisma.AgentStatusUpdateManyWithoutAgentNestedInput
+  reviews?: Prisma.ReviewUpdateManyWithoutAgentNestedInput
 }
 
 export type AgentProfileUncheckedUpdateInput = {
@@ -397,6 +424,7 @@ export type AgentProfileUncheckedUpdateInput = {
   businessName?: Prisma.StringFieldUpdateOperationsInput | string
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   photoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tier?: Prisma.EnumAgentTierFieldUpdateOperationsInput | $Enums.AgentTier
   verification?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
   rating?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalReviews?: Prisma.IntFieldUpdateOperationsInput | number
@@ -406,6 +434,8 @@ export type AgentProfileUncheckedUpdateInput = {
   properties?: Prisma.PropertyAgentUncheckedUpdateManyWithoutAgentNestedInput
   leads?: Prisma.LeadUncheckedUpdateManyWithoutAgentNestedInput
   subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutAgentNestedInput
+  statuses?: Prisma.AgentStatusUncheckedUpdateManyWithoutAgentNestedInput
+  reviews?: Prisma.ReviewUncheckedUpdateManyWithoutAgentNestedInput
 }
 
 export type AgentProfileCreateManyInput = {
@@ -414,6 +444,7 @@ export type AgentProfileCreateManyInput = {
   businessName: string
   bio?: string | null
   photoUrl?: string | null
+  tier?: $Enums.AgentTier
   verification?: $Enums.VerificationStatus
   rating?: runtime.Decimal | runtime.DecimalJsLike | number | string
   totalReviews?: number
@@ -426,6 +457,7 @@ export type AgentProfileUpdateManyMutationInput = {
   businessName?: Prisma.StringFieldUpdateOperationsInput | string
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   photoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tier?: Prisma.EnumAgentTierFieldUpdateOperationsInput | $Enums.AgentTier
   verification?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
   rating?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalReviews?: Prisma.IntFieldUpdateOperationsInput | number
@@ -439,6 +471,7 @@ export type AgentProfileUncheckedUpdateManyInput = {
   businessName?: Prisma.StringFieldUpdateOperationsInput | string
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   photoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tier?: Prisma.EnumAgentTierFieldUpdateOperationsInput | $Enums.AgentTier
   verification?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
   rating?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalReviews?: Prisma.IntFieldUpdateOperationsInput | number
@@ -457,6 +490,7 @@ export type AgentProfileCountOrderByAggregateInput = {
   businessName?: Prisma.SortOrder
   bio?: Prisma.SortOrder
   photoUrl?: Prisma.SortOrder
+  tier?: Prisma.SortOrder
   verification?: Prisma.SortOrder
   rating?: Prisma.SortOrder
   totalReviews?: Prisma.SortOrder
@@ -475,6 +509,7 @@ export type AgentProfileMaxOrderByAggregateInput = {
   businessName?: Prisma.SortOrder
   bio?: Prisma.SortOrder
   photoUrl?: Prisma.SortOrder
+  tier?: Prisma.SortOrder
   verification?: Prisma.SortOrder
   rating?: Prisma.SortOrder
   totalReviews?: Prisma.SortOrder
@@ -488,6 +523,7 @@ export type AgentProfileMinOrderByAggregateInput = {
   businessName?: Prisma.SortOrder
   bio?: Prisma.SortOrder
   photoUrl?: Prisma.SortOrder
+  tier?: Prisma.SortOrder
   verification?: Prisma.SortOrder
   rating?: Prisma.SortOrder
   totalReviews?: Prisma.SortOrder
@@ -535,6 +571,10 @@ export type AgentProfileUncheckedUpdateOneWithoutUserNestedInput = {
   delete?: Prisma.AgentProfileWhereInput | boolean
   connect?: Prisma.AgentProfileWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.AgentProfileUpdateToOneWithWhereWithoutUserInput, Prisma.AgentProfileUpdateWithoutUserInput>, Prisma.AgentProfileUncheckedUpdateWithoutUserInput>
+}
+
+export type EnumAgentTierFieldUpdateOperationsInput = {
+  set?: $Enums.AgentTier
 }
 
 export type EnumVerificationStatusFieldUpdateOperationsInput = {
@@ -613,11 +653,40 @@ export type AgentProfileUpdateOneRequiredWithoutSubscriptionsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.AgentProfileUpdateToOneWithWhereWithoutSubscriptionsInput, Prisma.AgentProfileUpdateWithoutSubscriptionsInput>, Prisma.AgentProfileUncheckedUpdateWithoutSubscriptionsInput>
 }
 
+export type AgentProfileCreateNestedOneWithoutStatusesInput = {
+  create?: Prisma.XOR<Prisma.AgentProfileCreateWithoutStatusesInput, Prisma.AgentProfileUncheckedCreateWithoutStatusesInput>
+  connectOrCreate?: Prisma.AgentProfileCreateOrConnectWithoutStatusesInput
+  connect?: Prisma.AgentProfileWhereUniqueInput
+}
+
+export type AgentProfileUpdateOneRequiredWithoutStatusesNestedInput = {
+  create?: Prisma.XOR<Prisma.AgentProfileCreateWithoutStatusesInput, Prisma.AgentProfileUncheckedCreateWithoutStatusesInput>
+  connectOrCreate?: Prisma.AgentProfileCreateOrConnectWithoutStatusesInput
+  upsert?: Prisma.AgentProfileUpsertWithoutStatusesInput
+  connect?: Prisma.AgentProfileWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.AgentProfileUpdateToOneWithWhereWithoutStatusesInput, Prisma.AgentProfileUpdateWithoutStatusesInput>, Prisma.AgentProfileUncheckedUpdateWithoutStatusesInput>
+}
+
+export type AgentProfileCreateNestedOneWithoutReviewsInput = {
+  create?: Prisma.XOR<Prisma.AgentProfileCreateWithoutReviewsInput, Prisma.AgentProfileUncheckedCreateWithoutReviewsInput>
+  connectOrCreate?: Prisma.AgentProfileCreateOrConnectWithoutReviewsInput
+  connect?: Prisma.AgentProfileWhereUniqueInput
+}
+
+export type AgentProfileUpdateOneRequiredWithoutReviewsNestedInput = {
+  create?: Prisma.XOR<Prisma.AgentProfileCreateWithoutReviewsInput, Prisma.AgentProfileUncheckedCreateWithoutReviewsInput>
+  connectOrCreate?: Prisma.AgentProfileCreateOrConnectWithoutReviewsInput
+  upsert?: Prisma.AgentProfileUpsertWithoutReviewsInput
+  connect?: Prisma.AgentProfileWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.AgentProfileUpdateToOneWithWhereWithoutReviewsInput, Prisma.AgentProfileUpdateWithoutReviewsInput>, Prisma.AgentProfileUncheckedUpdateWithoutReviewsInput>
+}
+
 export type AgentProfileCreateWithoutUserInput = {
   id?: string
   businessName: string
   bio?: string | null
   photoUrl?: string | null
+  tier?: $Enums.AgentTier
   verification?: $Enums.VerificationStatus
   rating?: runtime.Decimal | runtime.DecimalJsLike | number | string
   totalReviews?: number
@@ -627,6 +696,8 @@ export type AgentProfileCreateWithoutUserInput = {
   properties?: Prisma.PropertyAgentCreateNestedManyWithoutAgentInput
   leads?: Prisma.LeadCreateNestedManyWithoutAgentInput
   subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutAgentInput
+  statuses?: Prisma.AgentStatusCreateNestedManyWithoutAgentInput
+  reviews?: Prisma.ReviewCreateNestedManyWithoutAgentInput
 }
 
 export type AgentProfileUncheckedCreateWithoutUserInput = {
@@ -634,6 +705,7 @@ export type AgentProfileUncheckedCreateWithoutUserInput = {
   businessName: string
   bio?: string | null
   photoUrl?: string | null
+  tier?: $Enums.AgentTier
   verification?: $Enums.VerificationStatus
   rating?: runtime.Decimal | runtime.DecimalJsLike | number | string
   totalReviews?: number
@@ -643,6 +715,8 @@ export type AgentProfileUncheckedCreateWithoutUserInput = {
   properties?: Prisma.PropertyAgentUncheckedCreateNestedManyWithoutAgentInput
   leads?: Prisma.LeadUncheckedCreateNestedManyWithoutAgentInput
   subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutAgentInput
+  statuses?: Prisma.AgentStatusUncheckedCreateNestedManyWithoutAgentInput
+  reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutAgentInput
 }
 
 export type AgentProfileCreateOrConnectWithoutUserInput = {
@@ -666,6 +740,7 @@ export type AgentProfileUpdateWithoutUserInput = {
   businessName?: Prisma.StringFieldUpdateOperationsInput | string
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   photoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tier?: Prisma.EnumAgentTierFieldUpdateOperationsInput | $Enums.AgentTier
   verification?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
   rating?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalReviews?: Prisma.IntFieldUpdateOperationsInput | number
@@ -675,6 +750,8 @@ export type AgentProfileUpdateWithoutUserInput = {
   properties?: Prisma.PropertyAgentUpdateManyWithoutAgentNestedInput
   leads?: Prisma.LeadUpdateManyWithoutAgentNestedInput
   subscriptions?: Prisma.SubscriptionUpdateManyWithoutAgentNestedInput
+  statuses?: Prisma.AgentStatusUpdateManyWithoutAgentNestedInput
+  reviews?: Prisma.ReviewUpdateManyWithoutAgentNestedInput
 }
 
 export type AgentProfileUncheckedUpdateWithoutUserInput = {
@@ -682,6 +759,7 @@ export type AgentProfileUncheckedUpdateWithoutUserInput = {
   businessName?: Prisma.StringFieldUpdateOperationsInput | string
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   photoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tier?: Prisma.EnumAgentTierFieldUpdateOperationsInput | $Enums.AgentTier
   verification?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
   rating?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalReviews?: Prisma.IntFieldUpdateOperationsInput | number
@@ -691,6 +769,8 @@ export type AgentProfileUncheckedUpdateWithoutUserInput = {
   properties?: Prisma.PropertyAgentUncheckedUpdateManyWithoutAgentNestedInput
   leads?: Prisma.LeadUncheckedUpdateManyWithoutAgentNestedInput
   subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutAgentNestedInput
+  statuses?: Prisma.AgentStatusUncheckedUpdateManyWithoutAgentNestedInput
+  reviews?: Prisma.ReviewUncheckedUpdateManyWithoutAgentNestedInput
 }
 
 export type AgentProfileCreateWithoutPropertiesInput = {
@@ -698,6 +778,7 @@ export type AgentProfileCreateWithoutPropertiesInput = {
   businessName: string
   bio?: string | null
   photoUrl?: string | null
+  tier?: $Enums.AgentTier
   verification?: $Enums.VerificationStatus
   rating?: runtime.Decimal | runtime.DecimalJsLike | number | string
   totalReviews?: number
@@ -707,6 +788,8 @@ export type AgentProfileCreateWithoutPropertiesInput = {
   listings?: Prisma.ListingCreateNestedManyWithoutAgentInput
   leads?: Prisma.LeadCreateNestedManyWithoutAgentInput
   subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutAgentInput
+  statuses?: Prisma.AgentStatusCreateNestedManyWithoutAgentInput
+  reviews?: Prisma.ReviewCreateNestedManyWithoutAgentInput
 }
 
 export type AgentProfileUncheckedCreateWithoutPropertiesInput = {
@@ -715,6 +798,7 @@ export type AgentProfileUncheckedCreateWithoutPropertiesInput = {
   businessName: string
   bio?: string | null
   photoUrl?: string | null
+  tier?: $Enums.AgentTier
   verification?: $Enums.VerificationStatus
   rating?: runtime.Decimal | runtime.DecimalJsLike | number | string
   totalReviews?: number
@@ -723,6 +807,8 @@ export type AgentProfileUncheckedCreateWithoutPropertiesInput = {
   listings?: Prisma.ListingUncheckedCreateNestedManyWithoutAgentInput
   leads?: Prisma.LeadUncheckedCreateNestedManyWithoutAgentInput
   subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutAgentInput
+  statuses?: Prisma.AgentStatusUncheckedCreateNestedManyWithoutAgentInput
+  reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutAgentInput
 }
 
 export type AgentProfileCreateOrConnectWithoutPropertiesInput = {
@@ -746,6 +832,7 @@ export type AgentProfileUpdateWithoutPropertiesInput = {
   businessName?: Prisma.StringFieldUpdateOperationsInput | string
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   photoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tier?: Prisma.EnumAgentTierFieldUpdateOperationsInput | $Enums.AgentTier
   verification?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
   rating?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalReviews?: Prisma.IntFieldUpdateOperationsInput | number
@@ -755,6 +842,8 @@ export type AgentProfileUpdateWithoutPropertiesInput = {
   listings?: Prisma.ListingUpdateManyWithoutAgentNestedInput
   leads?: Prisma.LeadUpdateManyWithoutAgentNestedInput
   subscriptions?: Prisma.SubscriptionUpdateManyWithoutAgentNestedInput
+  statuses?: Prisma.AgentStatusUpdateManyWithoutAgentNestedInput
+  reviews?: Prisma.ReviewUpdateManyWithoutAgentNestedInput
 }
 
 export type AgentProfileUncheckedUpdateWithoutPropertiesInput = {
@@ -763,6 +852,7 @@ export type AgentProfileUncheckedUpdateWithoutPropertiesInput = {
   businessName?: Prisma.StringFieldUpdateOperationsInput | string
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   photoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tier?: Prisma.EnumAgentTierFieldUpdateOperationsInput | $Enums.AgentTier
   verification?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
   rating?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalReviews?: Prisma.IntFieldUpdateOperationsInput | number
@@ -771,6 +861,8 @@ export type AgentProfileUncheckedUpdateWithoutPropertiesInput = {
   listings?: Prisma.ListingUncheckedUpdateManyWithoutAgentNestedInput
   leads?: Prisma.LeadUncheckedUpdateManyWithoutAgentNestedInput
   subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutAgentNestedInput
+  statuses?: Prisma.AgentStatusUncheckedUpdateManyWithoutAgentNestedInput
+  reviews?: Prisma.ReviewUncheckedUpdateManyWithoutAgentNestedInput
 }
 
 export type AgentProfileCreateWithoutListingsInput = {
@@ -778,6 +870,7 @@ export type AgentProfileCreateWithoutListingsInput = {
   businessName: string
   bio?: string | null
   photoUrl?: string | null
+  tier?: $Enums.AgentTier
   verification?: $Enums.VerificationStatus
   rating?: runtime.Decimal | runtime.DecimalJsLike | number | string
   totalReviews?: number
@@ -787,6 +880,8 @@ export type AgentProfileCreateWithoutListingsInput = {
   properties?: Prisma.PropertyAgentCreateNestedManyWithoutAgentInput
   leads?: Prisma.LeadCreateNestedManyWithoutAgentInput
   subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutAgentInput
+  statuses?: Prisma.AgentStatusCreateNestedManyWithoutAgentInput
+  reviews?: Prisma.ReviewCreateNestedManyWithoutAgentInput
 }
 
 export type AgentProfileUncheckedCreateWithoutListingsInput = {
@@ -795,6 +890,7 @@ export type AgentProfileUncheckedCreateWithoutListingsInput = {
   businessName: string
   bio?: string | null
   photoUrl?: string | null
+  tier?: $Enums.AgentTier
   verification?: $Enums.VerificationStatus
   rating?: runtime.Decimal | runtime.DecimalJsLike | number | string
   totalReviews?: number
@@ -803,6 +899,8 @@ export type AgentProfileUncheckedCreateWithoutListingsInput = {
   properties?: Prisma.PropertyAgentUncheckedCreateNestedManyWithoutAgentInput
   leads?: Prisma.LeadUncheckedCreateNestedManyWithoutAgentInput
   subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutAgentInput
+  statuses?: Prisma.AgentStatusUncheckedCreateNestedManyWithoutAgentInput
+  reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutAgentInput
 }
 
 export type AgentProfileCreateOrConnectWithoutListingsInput = {
@@ -826,6 +924,7 @@ export type AgentProfileUpdateWithoutListingsInput = {
   businessName?: Prisma.StringFieldUpdateOperationsInput | string
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   photoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tier?: Prisma.EnumAgentTierFieldUpdateOperationsInput | $Enums.AgentTier
   verification?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
   rating?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalReviews?: Prisma.IntFieldUpdateOperationsInput | number
@@ -835,6 +934,8 @@ export type AgentProfileUpdateWithoutListingsInput = {
   properties?: Prisma.PropertyAgentUpdateManyWithoutAgentNestedInput
   leads?: Prisma.LeadUpdateManyWithoutAgentNestedInput
   subscriptions?: Prisma.SubscriptionUpdateManyWithoutAgentNestedInput
+  statuses?: Prisma.AgentStatusUpdateManyWithoutAgentNestedInput
+  reviews?: Prisma.ReviewUpdateManyWithoutAgentNestedInput
 }
 
 export type AgentProfileUncheckedUpdateWithoutListingsInput = {
@@ -843,6 +944,7 @@ export type AgentProfileUncheckedUpdateWithoutListingsInput = {
   businessName?: Prisma.StringFieldUpdateOperationsInput | string
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   photoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tier?: Prisma.EnumAgentTierFieldUpdateOperationsInput | $Enums.AgentTier
   verification?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
   rating?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalReviews?: Prisma.IntFieldUpdateOperationsInput | number
@@ -851,6 +953,8 @@ export type AgentProfileUncheckedUpdateWithoutListingsInput = {
   properties?: Prisma.PropertyAgentUncheckedUpdateManyWithoutAgentNestedInput
   leads?: Prisma.LeadUncheckedUpdateManyWithoutAgentNestedInput
   subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutAgentNestedInput
+  statuses?: Prisma.AgentStatusUncheckedUpdateManyWithoutAgentNestedInput
+  reviews?: Prisma.ReviewUncheckedUpdateManyWithoutAgentNestedInput
 }
 
 export type AgentProfileCreateWithoutLeadsInput = {
@@ -858,6 +962,7 @@ export type AgentProfileCreateWithoutLeadsInput = {
   businessName: string
   bio?: string | null
   photoUrl?: string | null
+  tier?: $Enums.AgentTier
   verification?: $Enums.VerificationStatus
   rating?: runtime.Decimal | runtime.DecimalJsLike | number | string
   totalReviews?: number
@@ -867,6 +972,8 @@ export type AgentProfileCreateWithoutLeadsInput = {
   listings?: Prisma.ListingCreateNestedManyWithoutAgentInput
   properties?: Prisma.PropertyAgentCreateNestedManyWithoutAgentInput
   subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutAgentInput
+  statuses?: Prisma.AgentStatusCreateNestedManyWithoutAgentInput
+  reviews?: Prisma.ReviewCreateNestedManyWithoutAgentInput
 }
 
 export type AgentProfileUncheckedCreateWithoutLeadsInput = {
@@ -875,6 +982,7 @@ export type AgentProfileUncheckedCreateWithoutLeadsInput = {
   businessName: string
   bio?: string | null
   photoUrl?: string | null
+  tier?: $Enums.AgentTier
   verification?: $Enums.VerificationStatus
   rating?: runtime.Decimal | runtime.DecimalJsLike | number | string
   totalReviews?: number
@@ -883,6 +991,8 @@ export type AgentProfileUncheckedCreateWithoutLeadsInput = {
   listings?: Prisma.ListingUncheckedCreateNestedManyWithoutAgentInput
   properties?: Prisma.PropertyAgentUncheckedCreateNestedManyWithoutAgentInput
   subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutAgentInput
+  statuses?: Prisma.AgentStatusUncheckedCreateNestedManyWithoutAgentInput
+  reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutAgentInput
 }
 
 export type AgentProfileCreateOrConnectWithoutLeadsInput = {
@@ -906,6 +1016,7 @@ export type AgentProfileUpdateWithoutLeadsInput = {
   businessName?: Prisma.StringFieldUpdateOperationsInput | string
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   photoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tier?: Prisma.EnumAgentTierFieldUpdateOperationsInput | $Enums.AgentTier
   verification?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
   rating?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalReviews?: Prisma.IntFieldUpdateOperationsInput | number
@@ -915,6 +1026,8 @@ export type AgentProfileUpdateWithoutLeadsInput = {
   listings?: Prisma.ListingUpdateManyWithoutAgentNestedInput
   properties?: Prisma.PropertyAgentUpdateManyWithoutAgentNestedInput
   subscriptions?: Prisma.SubscriptionUpdateManyWithoutAgentNestedInput
+  statuses?: Prisma.AgentStatusUpdateManyWithoutAgentNestedInput
+  reviews?: Prisma.ReviewUpdateManyWithoutAgentNestedInput
 }
 
 export type AgentProfileUncheckedUpdateWithoutLeadsInput = {
@@ -923,6 +1036,7 @@ export type AgentProfileUncheckedUpdateWithoutLeadsInput = {
   businessName?: Prisma.StringFieldUpdateOperationsInput | string
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   photoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tier?: Prisma.EnumAgentTierFieldUpdateOperationsInput | $Enums.AgentTier
   verification?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
   rating?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalReviews?: Prisma.IntFieldUpdateOperationsInput | number
@@ -931,6 +1045,8 @@ export type AgentProfileUncheckedUpdateWithoutLeadsInput = {
   listings?: Prisma.ListingUncheckedUpdateManyWithoutAgentNestedInput
   properties?: Prisma.PropertyAgentUncheckedUpdateManyWithoutAgentNestedInput
   subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutAgentNestedInput
+  statuses?: Prisma.AgentStatusUncheckedUpdateManyWithoutAgentNestedInput
+  reviews?: Prisma.ReviewUncheckedUpdateManyWithoutAgentNestedInput
 }
 
 export type AgentProfileCreateWithoutSubscriptionsInput = {
@@ -938,6 +1054,7 @@ export type AgentProfileCreateWithoutSubscriptionsInput = {
   businessName: string
   bio?: string | null
   photoUrl?: string | null
+  tier?: $Enums.AgentTier
   verification?: $Enums.VerificationStatus
   rating?: runtime.Decimal | runtime.DecimalJsLike | number | string
   totalReviews?: number
@@ -947,6 +1064,8 @@ export type AgentProfileCreateWithoutSubscriptionsInput = {
   listings?: Prisma.ListingCreateNestedManyWithoutAgentInput
   properties?: Prisma.PropertyAgentCreateNestedManyWithoutAgentInput
   leads?: Prisma.LeadCreateNestedManyWithoutAgentInput
+  statuses?: Prisma.AgentStatusCreateNestedManyWithoutAgentInput
+  reviews?: Prisma.ReviewCreateNestedManyWithoutAgentInput
 }
 
 export type AgentProfileUncheckedCreateWithoutSubscriptionsInput = {
@@ -955,6 +1074,7 @@ export type AgentProfileUncheckedCreateWithoutSubscriptionsInput = {
   businessName: string
   bio?: string | null
   photoUrl?: string | null
+  tier?: $Enums.AgentTier
   verification?: $Enums.VerificationStatus
   rating?: runtime.Decimal | runtime.DecimalJsLike | number | string
   totalReviews?: number
@@ -963,6 +1083,8 @@ export type AgentProfileUncheckedCreateWithoutSubscriptionsInput = {
   listings?: Prisma.ListingUncheckedCreateNestedManyWithoutAgentInput
   properties?: Prisma.PropertyAgentUncheckedCreateNestedManyWithoutAgentInput
   leads?: Prisma.LeadUncheckedCreateNestedManyWithoutAgentInput
+  statuses?: Prisma.AgentStatusUncheckedCreateNestedManyWithoutAgentInput
+  reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutAgentInput
 }
 
 export type AgentProfileCreateOrConnectWithoutSubscriptionsInput = {
@@ -986,6 +1108,7 @@ export type AgentProfileUpdateWithoutSubscriptionsInput = {
   businessName?: Prisma.StringFieldUpdateOperationsInput | string
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   photoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tier?: Prisma.EnumAgentTierFieldUpdateOperationsInput | $Enums.AgentTier
   verification?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
   rating?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalReviews?: Prisma.IntFieldUpdateOperationsInput | number
@@ -995,6 +1118,8 @@ export type AgentProfileUpdateWithoutSubscriptionsInput = {
   listings?: Prisma.ListingUpdateManyWithoutAgentNestedInput
   properties?: Prisma.PropertyAgentUpdateManyWithoutAgentNestedInput
   leads?: Prisma.LeadUpdateManyWithoutAgentNestedInput
+  statuses?: Prisma.AgentStatusUpdateManyWithoutAgentNestedInput
+  reviews?: Prisma.ReviewUpdateManyWithoutAgentNestedInput
 }
 
 export type AgentProfileUncheckedUpdateWithoutSubscriptionsInput = {
@@ -1003,6 +1128,7 @@ export type AgentProfileUncheckedUpdateWithoutSubscriptionsInput = {
   businessName?: Prisma.StringFieldUpdateOperationsInput | string
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   photoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tier?: Prisma.EnumAgentTierFieldUpdateOperationsInput | $Enums.AgentTier
   verification?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
   rating?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalReviews?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1011,6 +1137,192 @@ export type AgentProfileUncheckedUpdateWithoutSubscriptionsInput = {
   listings?: Prisma.ListingUncheckedUpdateManyWithoutAgentNestedInput
   properties?: Prisma.PropertyAgentUncheckedUpdateManyWithoutAgentNestedInput
   leads?: Prisma.LeadUncheckedUpdateManyWithoutAgentNestedInput
+  statuses?: Prisma.AgentStatusUncheckedUpdateManyWithoutAgentNestedInput
+  reviews?: Prisma.ReviewUncheckedUpdateManyWithoutAgentNestedInput
+}
+
+export type AgentProfileCreateWithoutStatusesInput = {
+  id?: string
+  businessName: string
+  bio?: string | null
+  photoUrl?: string | null
+  tier?: $Enums.AgentTier
+  verification?: $Enums.VerificationStatus
+  rating?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalReviews?: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  user: Prisma.UserCreateNestedOneWithoutAgentProfileInput
+  listings?: Prisma.ListingCreateNestedManyWithoutAgentInput
+  properties?: Prisma.PropertyAgentCreateNestedManyWithoutAgentInput
+  leads?: Prisma.LeadCreateNestedManyWithoutAgentInput
+  subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutAgentInput
+  reviews?: Prisma.ReviewCreateNestedManyWithoutAgentInput
+}
+
+export type AgentProfileUncheckedCreateWithoutStatusesInput = {
+  id?: string
+  userId: string
+  businessName: string
+  bio?: string | null
+  photoUrl?: string | null
+  tier?: $Enums.AgentTier
+  verification?: $Enums.VerificationStatus
+  rating?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalReviews?: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  listings?: Prisma.ListingUncheckedCreateNestedManyWithoutAgentInput
+  properties?: Prisma.PropertyAgentUncheckedCreateNestedManyWithoutAgentInput
+  leads?: Prisma.LeadUncheckedCreateNestedManyWithoutAgentInput
+  subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutAgentInput
+  reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutAgentInput
+}
+
+export type AgentProfileCreateOrConnectWithoutStatusesInput = {
+  where: Prisma.AgentProfileWhereUniqueInput
+  create: Prisma.XOR<Prisma.AgentProfileCreateWithoutStatusesInput, Prisma.AgentProfileUncheckedCreateWithoutStatusesInput>
+}
+
+export type AgentProfileUpsertWithoutStatusesInput = {
+  update: Prisma.XOR<Prisma.AgentProfileUpdateWithoutStatusesInput, Prisma.AgentProfileUncheckedUpdateWithoutStatusesInput>
+  create: Prisma.XOR<Prisma.AgentProfileCreateWithoutStatusesInput, Prisma.AgentProfileUncheckedCreateWithoutStatusesInput>
+  where?: Prisma.AgentProfileWhereInput
+}
+
+export type AgentProfileUpdateToOneWithWhereWithoutStatusesInput = {
+  where?: Prisma.AgentProfileWhereInput
+  data: Prisma.XOR<Prisma.AgentProfileUpdateWithoutStatusesInput, Prisma.AgentProfileUncheckedUpdateWithoutStatusesInput>
+}
+
+export type AgentProfileUpdateWithoutStatusesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  businessName?: Prisma.StringFieldUpdateOperationsInput | string
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  photoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tier?: Prisma.EnumAgentTierFieldUpdateOperationsInput | $Enums.AgentTier
+  verification?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
+  rating?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalReviews?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  user?: Prisma.UserUpdateOneRequiredWithoutAgentProfileNestedInput
+  listings?: Prisma.ListingUpdateManyWithoutAgentNestedInput
+  properties?: Prisma.PropertyAgentUpdateManyWithoutAgentNestedInput
+  leads?: Prisma.LeadUpdateManyWithoutAgentNestedInput
+  subscriptions?: Prisma.SubscriptionUpdateManyWithoutAgentNestedInput
+  reviews?: Prisma.ReviewUpdateManyWithoutAgentNestedInput
+}
+
+export type AgentProfileUncheckedUpdateWithoutStatusesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  businessName?: Prisma.StringFieldUpdateOperationsInput | string
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  photoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tier?: Prisma.EnumAgentTierFieldUpdateOperationsInput | $Enums.AgentTier
+  verification?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
+  rating?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalReviews?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  listings?: Prisma.ListingUncheckedUpdateManyWithoutAgentNestedInput
+  properties?: Prisma.PropertyAgentUncheckedUpdateManyWithoutAgentNestedInput
+  leads?: Prisma.LeadUncheckedUpdateManyWithoutAgentNestedInput
+  subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutAgentNestedInput
+  reviews?: Prisma.ReviewUncheckedUpdateManyWithoutAgentNestedInput
+}
+
+export type AgentProfileCreateWithoutReviewsInput = {
+  id?: string
+  businessName: string
+  bio?: string | null
+  photoUrl?: string | null
+  tier?: $Enums.AgentTier
+  verification?: $Enums.VerificationStatus
+  rating?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalReviews?: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  user: Prisma.UserCreateNestedOneWithoutAgentProfileInput
+  listings?: Prisma.ListingCreateNestedManyWithoutAgentInput
+  properties?: Prisma.PropertyAgentCreateNestedManyWithoutAgentInput
+  leads?: Prisma.LeadCreateNestedManyWithoutAgentInput
+  subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutAgentInput
+  statuses?: Prisma.AgentStatusCreateNestedManyWithoutAgentInput
+}
+
+export type AgentProfileUncheckedCreateWithoutReviewsInput = {
+  id?: string
+  userId: string
+  businessName: string
+  bio?: string | null
+  photoUrl?: string | null
+  tier?: $Enums.AgentTier
+  verification?: $Enums.VerificationStatus
+  rating?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalReviews?: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  listings?: Prisma.ListingUncheckedCreateNestedManyWithoutAgentInput
+  properties?: Prisma.PropertyAgentUncheckedCreateNestedManyWithoutAgentInput
+  leads?: Prisma.LeadUncheckedCreateNestedManyWithoutAgentInput
+  subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutAgentInput
+  statuses?: Prisma.AgentStatusUncheckedCreateNestedManyWithoutAgentInput
+}
+
+export type AgentProfileCreateOrConnectWithoutReviewsInput = {
+  where: Prisma.AgentProfileWhereUniqueInput
+  create: Prisma.XOR<Prisma.AgentProfileCreateWithoutReviewsInput, Prisma.AgentProfileUncheckedCreateWithoutReviewsInput>
+}
+
+export type AgentProfileUpsertWithoutReviewsInput = {
+  update: Prisma.XOR<Prisma.AgentProfileUpdateWithoutReviewsInput, Prisma.AgentProfileUncheckedUpdateWithoutReviewsInput>
+  create: Prisma.XOR<Prisma.AgentProfileCreateWithoutReviewsInput, Prisma.AgentProfileUncheckedCreateWithoutReviewsInput>
+  where?: Prisma.AgentProfileWhereInput
+}
+
+export type AgentProfileUpdateToOneWithWhereWithoutReviewsInput = {
+  where?: Prisma.AgentProfileWhereInput
+  data: Prisma.XOR<Prisma.AgentProfileUpdateWithoutReviewsInput, Prisma.AgentProfileUncheckedUpdateWithoutReviewsInput>
+}
+
+export type AgentProfileUpdateWithoutReviewsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  businessName?: Prisma.StringFieldUpdateOperationsInput | string
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  photoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tier?: Prisma.EnumAgentTierFieldUpdateOperationsInput | $Enums.AgentTier
+  verification?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
+  rating?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalReviews?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  user?: Prisma.UserUpdateOneRequiredWithoutAgentProfileNestedInput
+  listings?: Prisma.ListingUpdateManyWithoutAgentNestedInput
+  properties?: Prisma.PropertyAgentUpdateManyWithoutAgentNestedInput
+  leads?: Prisma.LeadUpdateManyWithoutAgentNestedInput
+  subscriptions?: Prisma.SubscriptionUpdateManyWithoutAgentNestedInput
+  statuses?: Prisma.AgentStatusUpdateManyWithoutAgentNestedInput
+}
+
+export type AgentProfileUncheckedUpdateWithoutReviewsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  businessName?: Prisma.StringFieldUpdateOperationsInput | string
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  photoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tier?: Prisma.EnumAgentTierFieldUpdateOperationsInput | $Enums.AgentTier
+  verification?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
+  rating?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalReviews?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  listings?: Prisma.ListingUncheckedUpdateManyWithoutAgentNestedInput
+  properties?: Prisma.PropertyAgentUncheckedUpdateManyWithoutAgentNestedInput
+  leads?: Prisma.LeadUncheckedUpdateManyWithoutAgentNestedInput
+  subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutAgentNestedInput
+  statuses?: Prisma.AgentStatusUncheckedUpdateManyWithoutAgentNestedInput
 }
 
 
@@ -1023,6 +1335,8 @@ export type AgentProfileCountOutputType = {
   properties: number
   leads: number
   subscriptions: number
+  statuses: number
+  reviews: number
 }
 
 export type AgentProfileCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1030,6 +1344,8 @@ export type AgentProfileCountOutputTypeSelect<ExtArgs extends runtime.Types.Exte
   properties?: boolean | AgentProfileCountOutputTypeCountPropertiesArgs
   leads?: boolean | AgentProfileCountOutputTypeCountLeadsArgs
   subscriptions?: boolean | AgentProfileCountOutputTypeCountSubscriptionsArgs
+  statuses?: boolean | AgentProfileCountOutputTypeCountStatusesArgs
+  reviews?: boolean | AgentProfileCountOutputTypeCountReviewsArgs
 }
 
 /**
@@ -1070,6 +1386,20 @@ export type AgentProfileCountOutputTypeCountSubscriptionsArgs<ExtArgs extends ru
   where?: Prisma.SubscriptionWhereInput
 }
 
+/**
+ * AgentProfileCountOutputType without action
+ */
+export type AgentProfileCountOutputTypeCountStatusesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.AgentStatusWhereInput
+}
+
+/**
+ * AgentProfileCountOutputType without action
+ */
+export type AgentProfileCountOutputTypeCountReviewsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ReviewWhereInput
+}
+
 
 export type AgentProfileSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1077,6 +1407,7 @@ export type AgentProfileSelect<ExtArgs extends runtime.Types.Extensions.Internal
   businessName?: boolean
   bio?: boolean
   photoUrl?: boolean
+  tier?: boolean
   verification?: boolean
   rating?: boolean
   totalReviews?: boolean
@@ -1087,6 +1418,8 @@ export type AgentProfileSelect<ExtArgs extends runtime.Types.Extensions.Internal
   properties?: boolean | Prisma.AgentProfile$propertiesArgs<ExtArgs>
   leads?: boolean | Prisma.AgentProfile$leadsArgs<ExtArgs>
   subscriptions?: boolean | Prisma.AgentProfile$subscriptionsArgs<ExtArgs>
+  statuses?: boolean | Prisma.AgentProfile$statusesArgs<ExtArgs>
+  reviews?: boolean | Prisma.AgentProfile$reviewsArgs<ExtArgs>
   _count?: boolean | Prisma.AgentProfileCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["agentProfile"]>
 
@@ -1096,6 +1429,7 @@ export type AgentProfileSelectCreateManyAndReturn<ExtArgs extends runtime.Types.
   businessName?: boolean
   bio?: boolean
   photoUrl?: boolean
+  tier?: boolean
   verification?: boolean
   rating?: boolean
   totalReviews?: boolean
@@ -1110,6 +1444,7 @@ export type AgentProfileSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.
   businessName?: boolean
   bio?: boolean
   photoUrl?: boolean
+  tier?: boolean
   verification?: boolean
   rating?: boolean
   totalReviews?: boolean
@@ -1124,6 +1459,7 @@ export type AgentProfileSelectScalar = {
   businessName?: boolean
   bio?: boolean
   photoUrl?: boolean
+  tier?: boolean
   verification?: boolean
   rating?: boolean
   totalReviews?: boolean
@@ -1131,13 +1467,15 @@ export type AgentProfileSelectScalar = {
   updatedAt?: boolean
 }
 
-export type AgentProfileOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "businessName" | "bio" | "photoUrl" | "verification" | "rating" | "totalReviews" | "createdAt" | "updatedAt", ExtArgs["result"]["agentProfile"]>
+export type AgentProfileOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "businessName" | "bio" | "photoUrl" | "tier" | "verification" | "rating" | "totalReviews" | "createdAt" | "updatedAt", ExtArgs["result"]["agentProfile"]>
 export type AgentProfileInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   listings?: boolean | Prisma.AgentProfile$listingsArgs<ExtArgs>
   properties?: boolean | Prisma.AgentProfile$propertiesArgs<ExtArgs>
   leads?: boolean | Prisma.AgentProfile$leadsArgs<ExtArgs>
   subscriptions?: boolean | Prisma.AgentProfile$subscriptionsArgs<ExtArgs>
+  statuses?: boolean | Prisma.AgentProfile$statusesArgs<ExtArgs>
+  reviews?: boolean | Prisma.AgentProfile$reviewsArgs<ExtArgs>
   _count?: boolean | Prisma.AgentProfileCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type AgentProfileIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1155,6 +1493,8 @@ export type $AgentProfilePayload<ExtArgs extends runtime.Types.Extensions.Intern
     properties: Prisma.$PropertyAgentPayload<ExtArgs>[]
     leads: Prisma.$LeadPayload<ExtArgs>[]
     subscriptions: Prisma.$SubscriptionPayload<ExtArgs>[]
+    statuses: Prisma.$AgentStatusPayload<ExtArgs>[]
+    reviews: Prisma.$ReviewPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1162,6 +1502,7 @@ export type $AgentProfilePayload<ExtArgs extends runtime.Types.Extensions.Intern
     businessName: string
     bio: string | null
     photoUrl: string | null
+    tier: $Enums.AgentTier
     verification: $Enums.VerificationStatus
     rating: runtime.Decimal
     totalReviews: number
@@ -1566,6 +1907,8 @@ export interface Prisma__AgentProfileClient<T, Null = never, ExtArgs extends run
   properties<T extends Prisma.AgentProfile$propertiesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AgentProfile$propertiesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PropertyAgentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   leads<T extends Prisma.AgentProfile$leadsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AgentProfile$leadsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   subscriptions<T extends Prisma.AgentProfile$subscriptionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AgentProfile$subscriptionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SubscriptionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  statuses<T extends Prisma.AgentProfile$statusesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AgentProfile$statusesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AgentStatusPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  reviews<T extends Prisma.AgentProfile$reviewsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AgentProfile$reviewsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ReviewPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1600,6 +1943,7 @@ export interface AgentProfileFieldRefs {
   readonly businessName: Prisma.FieldRef<"AgentProfile", 'String'>
   readonly bio: Prisma.FieldRef<"AgentProfile", 'String'>
   readonly photoUrl: Prisma.FieldRef<"AgentProfile", 'String'>
+  readonly tier: Prisma.FieldRef<"AgentProfile", 'AgentTier'>
   readonly verification: Prisma.FieldRef<"AgentProfile", 'VerificationStatus'>
   readonly rating: Prisma.FieldRef<"AgentProfile", 'Decimal'>
   readonly totalReviews: Prisma.FieldRef<"AgentProfile", 'Int'>
@@ -2099,6 +2443,54 @@ export type AgentProfile$subscriptionsArgs<ExtArgs extends runtime.Types.Extensi
   take?: number
   skip?: number
   distinct?: Prisma.SubscriptionScalarFieldEnum | Prisma.SubscriptionScalarFieldEnum[]
+}
+
+/**
+ * AgentProfile.statuses
+ */
+export type AgentProfile$statusesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the AgentStatus
+   */
+  select?: Prisma.AgentStatusSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the AgentStatus
+   */
+  omit?: Prisma.AgentStatusOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.AgentStatusInclude<ExtArgs> | null
+  where?: Prisma.AgentStatusWhereInput
+  orderBy?: Prisma.AgentStatusOrderByWithRelationInput | Prisma.AgentStatusOrderByWithRelationInput[]
+  cursor?: Prisma.AgentStatusWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.AgentStatusScalarFieldEnum | Prisma.AgentStatusScalarFieldEnum[]
+}
+
+/**
+ * AgentProfile.reviews
+ */
+export type AgentProfile$reviewsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Review
+   */
+  select?: Prisma.ReviewSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Review
+   */
+  omit?: Prisma.ReviewOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ReviewInclude<ExtArgs> | null
+  where?: Prisma.ReviewWhereInput
+  orderBy?: Prisma.ReviewOrderByWithRelationInput | Prisma.ReviewOrderByWithRelationInput[]
+  cursor?: Prisma.ReviewWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ReviewScalarFieldEnum | Prisma.ReviewScalarFieldEnum[]
 }
 
 /**

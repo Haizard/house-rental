@@ -116,6 +116,19 @@ enum VerificationReviewStatus {
   REJECTED
 }
 
+enum AgentTier {
+  FREE
+  PRO
+}
+
+enum StatusType {
+  AVAILABLE
+  NEW_ROOM
+  PRICE_DROP
+  URGENT
+  GENERAL
+}
+
 model User {
   id             String   @id @default(uuid()) @db.Uuid
   email          String?  @unique
@@ -133,6 +146,8 @@ model User {
   sentMessages   Message[] @relation("SentMessages")
   notifications  Notification[]
   reports        Report[] @relation("Reporter")
+  statusViews    StatusView[]
+  payments       Payment[]
   @@map("users")
 }
 
@@ -142,6 +157,7 @@ model AgentProfile {
   businessName  String             @map("business_name")
   bio           String?
   photoUrl      String?            @map("profile_photo_url")
+  tier          AgentTier          @default(FREE)
   verification  VerificationStatus @default(UNVERIFIED) @map("verification_status")
   rating        Decimal            @default(0) @db.Decimal(3, 2)
   totalReviews  Int                @default(0) @map("total_reviews")
@@ -152,6 +168,8 @@ model AgentProfile {
   properties    PropertyAgent[]
   leads         Lead[]
   subscriptions Subscription[]
+  statuses      AgentStatus[]
+  reviews       Review[]
   @@map("agent_profiles")
 }
 
@@ -170,6 +188,7 @@ model StudentProfile {
   university    University? @relation(fields: [universityId], references: [id])
   leads         Lead[]
   savedListings SavedListing[]
+  reviews       Review[]
   @@map("student_profiles")
 }
 
@@ -421,4 +440,81 @@ model VerificationRecord {
   updatedAt        DateTime                 @updatedAt @map("updated_at")
   @@index([targetType, status])
   @@map("verification_records")
+}
+
+model AgentStatus {
+  id          String     @id @default(uuid()) @db.Uuid
+  agentId     String     @map("agent_id") @db.Uuid
+  type        StatusType @default(GENERAL)
+  content     String
+  title       String?
+  area        String?
+  propertyType String?   @map("property_type")
+  rentAmount  Int?       @map("rent_amount")
+  imageUrl    String?    @map("image_url")
+  linkedListingId String? @map("linked_listing_id") @db.Uuid
+  expiresAt   DateTime   @map("expires_at")
+  createdAt   DateTime   @default(now()) @map("created_at")
+  agent       AgentProfile @relation(fields: [agentId], references: [id], onDelete: Cascade)
+  views       StatusView[]
+  @@index([agentId, createdAt])
+  @@index([expiresAt])
+  @@map("agent_statuses")
+}
+
+model StatusView {
+  id         String      @id @default(uuid()) @db.Uuid
+  statusId   String      @map("status_id") @db.Uuid
+  viewerId   String      @map("viewer_id") @db.Uuid
+  viewedAt   DateTime    @default(now()) @map("viewed_at")
+  status     AgentStatus @relation(fields: [statusId], references: [id], onDelete: Cascade)
+  viewer     User        @relation(fields: [viewerId], references: [id])
+  @@unique([statusId, viewerId])
+  @@map("status_views")
+}
+
+model Review {
+  id        String   @id @default(uuid()) @db.Uuid
+  studentId String   @map("student_id") @db.Uuid
+  agentId   String   @map("agent_id") @db.Uuid
+  listingId String?  @map("listing_id") @db.Uuid
+  rating    Int
+  comment   String?
+  status    String   @default("PUBLISHED")
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+  student   StudentProfile @relation(fields: [studentId], references: [id])
+  agent     AgentProfile   @relation(fields: [agentId], references: [id])
+  @@map("reviews")
+}
+
+model Payment {
+  id              String      @id @default(uuid()) @db.Uuid
+  userId          String      @map("user_id") @db.Uuid
+  agentId         String?     @map("agent_id") @db.Uuid
+  type            PaymentType
+  amount          Int
+  currency        String      @default("TZS")
+  provider        String?
+  providerTransactionId String? @map("provider_transaction_id")
+  status          PaymentStatus @default(PENDING)
+  metadata        Json?
+  createdAt       DateTime    @default(now()) @map("created_at")
+  updatedAt       DateTime    @updatedAt @map("updated_at")
+  user            User        @relation(fields: [userId], references: [id])
+  @@map("payments")
+}
+
+model AIInteraction {
+  id         String   @id @default(uuid()) @db.Uuid
+  userId     String?  @map("user_id") @db.Uuid
+  type       String
+  input      String
+  output     String?
+  provider   String
+  model      String?
+  tokensUsed Int?     @map("tokens_used")
+  metadata   Json?
+  createdAt  DateTime @default(now()) @map("created_at")
+  @@map("ai_interactions")
 }
