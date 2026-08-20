@@ -160,14 +160,6 @@ export const VerificationReviewStatus = {
 export type VerificationReviewStatus = (typeof VerificationReviewStatus)[keyof typeof VerificationReviewStatus]
 
 
-export const AgentTier = {
-  FREE: 'FREE',
-  PRO: 'PRO'
-} as const
-
-export type AgentTier = (typeof AgentTier)[keyof typeof AgentTier]
-
-
 export const StatusType = {
   AVAILABLE: 'AVAILABLE',
   NEW_ROOM: 'NEW_ROOM',

@@ -167,13 +167,6 @@ export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
   _max?: Prisma.NestedDateTimeFilter<$PrismaModel>
 }
 
-export type EnumAgentTierFilter<$PrismaModel = never> = {
-  equals?: $Enums.AgentTier | Prisma.EnumAgentTierFieldRefInput<$PrismaModel>
-  in?: $Enums.AgentTier[] | Prisma.ListEnumAgentTierFieldRefInput<$PrismaModel>
-  notIn?: $Enums.AgentTier[] | Prisma.ListEnumAgentTierFieldRefInput<$PrismaModel>
-  not?: Prisma.NestedEnumAgentTierFilter<$PrismaModel> | $Enums.AgentTier
-}
-
 export type EnumVerificationStatusFilter<$PrismaModel = never> = {
   equals?: $Enums.VerificationStatus | Prisma.EnumVerificationStatusFieldRefInput<$PrismaModel>
   in?: $Enums.VerificationStatus[] | Prisma.ListEnumVerificationStatusFieldRefInput<$PrismaModel>
@@ -201,16 +194,6 @@ export type IntFilter<$PrismaModel = never> = {
   gt?: number | Prisma.IntFieldRefInput<$PrismaModel>
   gte?: number | Prisma.IntFieldRefInput<$PrismaModel>
   not?: Prisma.NestedIntFilter<$PrismaModel> | number
-}
-
-export type EnumAgentTierWithAggregatesFilter<$PrismaModel = never> = {
-  equals?: $Enums.AgentTier | Prisma.EnumAgentTierFieldRefInput<$PrismaModel>
-  in?: $Enums.AgentTier[] | Prisma.ListEnumAgentTierFieldRefInput<$PrismaModel>
-  notIn?: $Enums.AgentTier[] | Prisma.ListEnumAgentTierFieldRefInput<$PrismaModel>
-  not?: Prisma.NestedEnumAgentTierWithAggregatesFilter<$PrismaModel> | $Enums.AgentTier
-  _count?: Prisma.NestedIntFilter<$PrismaModel>
-  _min?: Prisma.NestedEnumAgentTierFilter<$PrismaModel>
-  _max?: Prisma.NestedEnumAgentTierFilter<$PrismaModel>
 }
 
 export type EnumVerificationStatusWithAggregatesFilter<$PrismaModel = never> = {
@@ -797,13 +780,6 @@ export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
   _max?: Prisma.NestedDateTimeFilter<$PrismaModel>
 }
 
-export type NestedEnumAgentTierFilter<$PrismaModel = never> = {
-  equals?: $Enums.AgentTier | Prisma.EnumAgentTierFieldRefInput<$PrismaModel>
-  in?: $Enums.AgentTier[] | Prisma.ListEnumAgentTierFieldRefInput<$PrismaModel>
-  notIn?: $Enums.AgentTier[] | Prisma.ListEnumAgentTierFieldRefInput<$PrismaModel>
-  not?: Prisma.NestedEnumAgentTierFilter<$PrismaModel> | $Enums.AgentTier
-}
-
 export type NestedEnumVerificationStatusFilter<$PrismaModel = never> = {
   equals?: $Enums.VerificationStatus | Prisma.EnumVerificationStatusFieldRefInput<$PrismaModel>
   in?: $Enums.VerificationStatus[] | Prisma.ListEnumVerificationStatusFieldRefInput<$PrismaModel>
@@ -820,16 +796,6 @@ export type NestedDecimalFilter<$PrismaModel = never> = {
   gt?: runtime.Decimal | runtime.DecimalJsLike | number | string | Prisma.DecimalFieldRefInput<$PrismaModel>
   gte?: runtime.Decimal | runtime.DecimalJsLike | number | string | Prisma.DecimalFieldRefInput<$PrismaModel>
   not?: Prisma.NestedDecimalFilter<$PrismaModel> | runtime.Decimal | runtime.DecimalJsLike | number | string
-}
-
-export type NestedEnumAgentTierWithAggregatesFilter<$PrismaModel = never> = {
-  equals?: $Enums.AgentTier | Prisma.EnumAgentTierFieldRefInput<$PrismaModel>
-  in?: $Enums.AgentTier[] | Prisma.ListEnumAgentTierFieldRefInput<$PrismaModel>
-  notIn?: $Enums.AgentTier[] | Prisma.ListEnumAgentTierFieldRefInput<$PrismaModel>
-  not?: Prisma.NestedEnumAgentTierWithAggregatesFilter<$PrismaModel> | $Enums.AgentTier
-  _count?: Prisma.NestedIntFilter<$PrismaModel>
-  _min?: Prisma.NestedEnumAgentTierFilter<$PrismaModel>
-  _max?: Prisma.NestedEnumAgentTierFilter<$PrismaModel>
 }
 
 export type NestedEnumVerificationStatusWithAggregatesFilter<$PrismaModel = never> = {

@@ -72,13 +72,10 @@ export async function POST(request: Request) {
       },
     });
 
-    // Update agent tier (skip if column doesn't exist yet)
+    // Update agent tier via raw SQL (column may not exist yet)
     if (parsed.data.planName === "STANDARD") {
       try {
-        await tx.agentProfile.update({
-          where: { id: agent.id },
-          data: { tier: "PRO" },
-        });
+        await prisma.$executeRaw`UPDATE agent_profiles SET tier = 'PRO' WHERE id = ${agent.id}::uuid`;
       } catch {
         // tier column may not exist yet — migration pending
       }
@@ -119,10 +116,7 @@ export async function PATCH(request: Request) {
     });
 
     try {
-      await tx.agentProfile.update({
-        where: { id: agent.id },
-        data: { tier: "FREE" },
-      });
+      await prisma.$executeRaw`UPDATE agent_profiles SET tier = 'FREE' WHERE id = ${agent.id}::uuid`;
     } catch {
       // tier column may not exist yet — migration pending
     }

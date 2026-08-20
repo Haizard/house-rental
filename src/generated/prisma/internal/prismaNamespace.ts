@@ -2428,7 +2428,6 @@ export const AgentProfileScalarFieldEnum = {
   businessName: 'businessName',
   bio: 'bio',
   photoUrl: 'photoUrl',
-  tier: 'tier',
   verification: 'verification',
   rating: 'rating',
   totalReviews: 'totalReviews',
@@ -2878,20 +2877,6 @@ export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel
  * Reference to a field of type 'DateTime[]'
  */
 export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime[]'>
-    
-
-
-/**
- * Reference to a field of type 'AgentTier'
- */
-export type EnumAgentTierFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'AgentTier'>
-    
-
-
-/**
- * Reference to a field of type 'AgentTier[]'
- */
-export type ListEnumAgentTierFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'AgentTier[]'>
     
 
 

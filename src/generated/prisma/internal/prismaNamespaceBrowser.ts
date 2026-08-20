@@ -118,7 +118,6 @@ export const AgentProfileScalarFieldEnum = {
   businessName: 'businessName',
   bio: 'bio',
   photoUrl: 'photoUrl',
-  tier: 'tier',
   verification: 'verification',
   rating: 'rating',
   totalReviews: 'totalReviews',

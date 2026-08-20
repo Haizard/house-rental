@@ -116,11 +116,6 @@ enum VerificationReviewStatus {
   REJECTED
 }
 
-enum AgentTier {
-  FREE
-  PRO
-}
-
 enum StatusType {
   AVAILABLE
   NEW_ROOM
@@ -157,7 +152,6 @@ model AgentProfile {
   businessName  String             @map("business_name")
   bio           String?
   photoUrl      String?            @map("profile_photo_url")
-  tier          AgentTier          @default(FREE)
   verification  VerificationStatus @default(UNVERIFIED) @map("verification_status")
   rating        Decimal            @default(0) @db.Decimal(3, 2)
   totalReviews  Int                @default(0) @map("total_reviews")
