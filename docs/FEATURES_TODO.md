@@ -92,7 +92,7 @@ This document tracks everything that is built, partially built, missing from the
 | Feature | Priority | Notes |
 |---|---|---|
 | Payment provider integration | HIGH | `PaymentService` is a stub; no real money movement |
-| Agent subscription purchase flow | HIGH | No UI to subscribe/pay |
+| Agent subscription purchase flow | DONE | `/agent/subscription` management page |
 | Lead charge processing | HIGH | Charges created as PENDING but never processed |
 | Subscription renewal/expiry | HIGH | No expiration handling or renewal flow |
 | `payments` table | HIGH | Added to schema but no API/UI |
@@ -102,7 +102,7 @@ This document tracks everything that is built, partially built, missing from the
 ### AI Layer Gaps
 | Feature | Priority | Notes |
 |---|---|---|
-| Duplicate detection | MEDIUM | AI flags `POSSIBLE_DUPLICATE`; admin decides per docs §3.5 |
+| Duplicate detection | DONE | `/api/ai/detect-duplicates` with title/area/price comparison |
 | Fraud/risk detection | LOW | Flag suspicious patterns per AI Feature 5 |
 | Lead summaries | LOW | AI summarize conversations for agents per AI Feature 6 |
 | Demand analytics | LOW | After enough data per AI Feature 7 |
@@ -134,15 +134,15 @@ This document tracks everything that is built, partially built, missing from the
 ### Schema Gaps
 | Missing | Notes |
 |---|---|
-| `listing_videos` table | In docs but not in schema |
-| Composite index `(status, area)` | Missing on listings for search |
+| `listing_videos` table | DONE | Schema + upload/delete API + VideoUpload component |
+| Composite index `(status, area)` | DONE | Added in migration.sql |
 | Geo indexes (PostGIS) | Missing for distance queries |
-| `ai_interactions` table | Added to schema but written via raw SQL in API |
+| `ai_interactions` table | DONE | In schema + migration.sql |
 
 ### Security & Hardening
 | Feature | Priority | Notes |
 |---|---|---|
-| Rate limiting | HIGH | No rate limiting on API routes |
+| Rate limiting | DONE | In-memory rate limiter with X-RateLimit headers |
 | CSRF protection | MEDIUM | |
 | Shared validation schemas | LOW | Each route defines its own Zod schemas |
 

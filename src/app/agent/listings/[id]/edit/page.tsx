@@ -5,6 +5,7 @@ import { requireRole } from "@/lib/auth/guards";
 import { prisma } from "@/lib/db/prisma";
 import { EditListingForm } from "@/components/agent/edit-listing-form";
 import { ImageUpload } from "@/components/agent/image-upload";
+import { VideoUpload } from "@/components/agent/video-upload";
 
 export default async function EditListingPage({
   params,
@@ -25,6 +26,7 @@ export default async function EditListingPage({
     include: {
       property: { select: { area: true, title: true, address: true } },
       images: { orderBy: { sortOrder: "asc" } },
+      videos: true,
     },
   });
   if (!listing) notFound();
@@ -78,6 +80,24 @@ export default async function EditListingPage({
               url: img.url,
               sortOrder: img.sortOrder,
               isPrimary: img.isPrimary,
+            }))}
+          />
+        </div>
+      </section>
+
+      {/* Videos section */}
+      <section className="mt-10">
+        <h2 className="text-xl font-bold">Videos</h2>
+        <p className="mt-1 text-sm text-[var(--text-secondary)]">
+          Add short videos to showcase the property. Max 3 videos, 50MB each.
+        </p>
+        <div className="mt-4">
+          <VideoUpload
+            listingId={listing.id}
+            existingVideos={listing.videos.map((v) => ({
+              id: v.id,
+              url: v.url,
+              storageKey: v.storageKey,
             }))}
           />
         </div>
