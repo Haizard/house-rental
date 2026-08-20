@@ -110,8 +110,7 @@ export default function NewListingPage() {
 
       <form ref={formRef} className="space-y-6" onSubmit={handleSubmit}>
         {/* Step 1: Property details */}
-        {step === 0 && (
-          <>
+        <div className={step === 0 ? "" : "hidden"}>
           {/* AI extraction option */}
           <AIListingExtract
             onExtracted={(data) => {
@@ -164,11 +163,10 @@ export default function NewListingPage() {
               />
             </GroupedRow>
           </section>
-          </>
-        )}
+        </div>
 
         {/* Step 2: Listing info */}
-        {step === 1 && (
+        <div className={step === 1 ? "" : "hidden"}>
           <section className="glass-surface divide-y divide-black/[.06] overflow-hidden rounded-[22px]">
             <GroupedRow label="Listing title">
               <input
@@ -219,10 +217,10 @@ export default function NewListingPage() {
               />
             </GroupedRow>
           </section>
-        )}
+        </div>
 
         {/* Step 3: Review */}
-        {step === 2 && (
+        <div className={step === 2 ? "" : "hidden"}>
           <section className="glass-surface divide-y divide-black/[.06] overflow-hidden rounded-[22px]">
             <div className="p-5">
               <p className="text-sm font-medium text-[var(--text-secondary)]">
@@ -234,7 +232,7 @@ export default function NewListingPage() {
               </p>
             </div>
           </section>
-        )}
+        </div>
 
         {error && (
           <p className="text-sm text-red-600" role="alert">
