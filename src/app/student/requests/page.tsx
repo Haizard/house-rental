@@ -82,7 +82,7 @@ export default async function StudentRequestsPage() {
                           ? "bg-emerald-100 text-emerald-700"
                           : req.status === "SELECTED"
                             ? "bg-blue-100 text-blue-700"
-                            : "bg-gray-100 text-gray-600"
+                            : "bg-[var(--accent-soft)] text-[var(--accent)]"
                       }`}
                     >
                       {req.status}

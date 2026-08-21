@@ -180,7 +180,7 @@ export function StatusPost({
 
         {/* Image upload button */}
         <div className="flex gap-2">
-          <label className="flex cursor-pointer items-center gap-2 rounded-xl border border-dashed border-gray-300 bg-white/20 px-3 py-2 text-xs text-[var(--text-secondary)] transition hover:border-[var(--accent)] hover:bg-white/30">
+          <label className="flex cursor-pointer items-center gap-2 rounded-xl border border-dashed border-[var(--glass-border)] bg-[var(--accent-soft)]/50 px-3 py-2 text-xs text-[var(--text-secondary)] transition hover:border-[var(--accent)] hover:bg-[var(--accent-soft)]">
             <Camera size={14} />
             <span>{uploadingImage ? "Uploading..." : "Add photo"}</span>
             <input
@@ -195,7 +195,7 @@ export function StatusPost({
 
           {/* AI extraction toggle */}
           <button
-            className="flex items-center gap-2 rounded-xl border border-dashed border-gray-300 bg-white/20 px-3 py-2 text-xs text-[var(--accent)] transition hover:border-[var(--accent)] hover:bg-white/30"
+            className="flex items-center gap-2 rounded-xl border border-dashed border-[var(--glass-border)] bg-[var(--accent-soft)]/50 px-3 py-2 text-xs text-[var(--accent)] transition hover:border-[var(--accent)] hover:bg-[var(--accent-soft)]"
             type="button"
             onClick={() => setShowAI(!showAI)}
           >

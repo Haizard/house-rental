@@ -122,22 +122,22 @@ export default async function AdminAdAnalyticsPage() {
             <Users size={18} /> Free vs Pro Agents
           </h2>
           <div className="mt-4 grid gap-4 sm:grid-cols-3">
-            <div className="rounded-xl bg-gray-50 p-4 text-center">
-              <p className="text-3xl font-bold text-[var(--text-primary)]">{freeAgentCount}</p>
+            <div className="rounded-xl bg-[var(--accent-soft)] p-4 text-center">
+              <p className="text-3xl font-bold text-[var(--accent)]">{freeAgentCount}</p>
               <p className="mt-1 text-sm text-[var(--text-secondary)]">Free Agents</p>
-              <p className="mt-0.5 text-[11px] text-gray-400">Ads enabled</p>
+              <p className="mt-0.5 text-[11px] text-[var(--text-tertiary)]">Ads enabled</p>
             </div>
             <div className="rounded-xl bg-[var(--accent-soft)] p-4 text-center">
               <p className="text-3xl font-bold text-[var(--accent)]">{proAgentCount}</p>
               <p className="mt-1 text-sm text-[var(--text-secondary)]">Pro Agents</p>
-              <p className="mt-0.5 text-[11px] text-gray-400">TZS 20,000/mo</p>
+              <p className="mt-0.5 text-[11px] text-[var(--text-tertiary)]">TZS 20,000/mo</p>
             </div>
             <div className="rounded-xl bg-emerald-50 p-4 text-center">
               <p className="text-3xl font-bold text-emerald-700">
                 {freeAgentCount > 0 ? formatCurrency(overallMetrics.estimatedRevenue / freeAgentCount) : "$0.00"}
               </p>
               <p className="mt-1 text-sm text-[var(--text-secondary)]">Est. Revenue / Free Agent</p>
-              <p className="mt-0.5 text-[11px] text-gray-400">
+              <p className="mt-0.5 text-[11px] text-[var(--text-tertiary)]">
                 vs TZS 20,000 ({proAgentCount} × Pro)
               </p>
             </div>

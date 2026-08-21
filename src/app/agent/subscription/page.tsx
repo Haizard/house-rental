@@ -76,7 +76,7 @@ export default async function AgentSubscriptionPage() {
                   <Crown size={20} />
                 </span>
               ) : (
-                <span className="flex size-10 items-center justify-center rounded-full bg-gray-100 text-gray-500">
+                <span className="flex size-10 items-center justify-center rounded-full bg-[var(--accent-soft)] text-[var(--accent)]">
                   <Zap size={20} />
                 </span>
               )}
@@ -110,7 +110,7 @@ export default async function AgentSubscriptionPage() {
           )}
 
           {/* Usage stats */}
-          <div className="mt-5 grid grid-cols-3 gap-4 border-t border-gray-200/50 pt-5">
+          <div className="mt-5 grid grid-cols-3 gap-4 border-t border-[var(--glass-border)] pt-5">
             <div className="text-center">
               <p className="text-2xl font-bold">{activeListings}</p>
               <p className="text-xs text-[var(--text-secondary)]">

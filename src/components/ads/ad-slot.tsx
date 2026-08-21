@@ -82,17 +82,17 @@ export function AdSlot({ placement, eligible, className = "" }: AdSlotProps) {
   return (
     <div
       ref={containerRef}
-      className={`ad-slot my-6 overflow-hidden rounded-xl border border-dashed border-gray-300 bg-gray-50 ${className}`}
+      className={`ad-slot my-6 overflow-hidden rounded-xl border border-dashed border-[var(--glass-border)] bg-[var(--accent-soft)] ${className}`}
       data-placement={placement}
     >
       <div className="flex flex-col items-center justify-center px-4 py-8 text-center">
-        <div className="mb-2 rounded-full bg-gray-200 px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-gray-500">
+        <div className="mb-2 rounded-full bg-[var(--accent-soft)] px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-[var(--accent)]">
           Ad Placeholder
         </div>
-        <p className="text-xs text-gray-400">
+        <p className="text-xs text-[var(--text-secondary)]">
           {placement.replace(/_/g, " ")}
         </p>
-        <p className="mt-1 text-[10px] text-gray-300">
+        <p className="mt-1 text-[10px] text-[var(--text-tertiary)]">
           Format: {adsProvider.getAdFormat(placement)} · Slot: {adsProvider.getSlotId(placement)}
         </p>
       </div>
