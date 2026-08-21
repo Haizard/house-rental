@@ -43,7 +43,27 @@ export default async function EditListingPage({
     propertyTitle: listing.property.title,
     propertyArea: listing.property.area,
     propertyAddress: listing.property.address,
+    // New fields
+    roomSize: listing.roomSize,
+    numberOfRooms: listing.numberOfRooms,
+    furnished: listing.furnished,
+    floorLevel: listing.floorLevel,
+    genderPreference: listing.genderPreference,
+    petsAllowed: listing.petsAllowed,
+    smokingAllowed: listing.smokingAllowed,
+    maxTenants: listing.maxTenants,
+    depositAmount: listing.depositAmount,
+    utilitiesIncluded: listing.utilitiesIncluded,
+    leaseDuration: listing.leaseDuration,
+    amenities: [] as string[],
   };
+
+  // Fetch amenities for this listing
+  const amenities = await prisma.listingAmenity.findMany({
+    where: { listingId: listing.id },
+    include: { amenity: { select: { slug: true } } },
+  });
+  listingData.amenities = amenities.map((a) => a.amenity.slug);
 
   return (
     <div className="mx-auto max-w-2xl">

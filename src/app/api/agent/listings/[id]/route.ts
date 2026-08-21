@@ -11,6 +11,22 @@ const updateSchema = z.object({
   propertyType: z.string().trim().min(1).optional(),
   availabilityDate: z.string().date().optional().nullable(),
   status: z.enum(["DRAFT", "ACTIVE", "PAUSED"]).optional(),
+  // Room details
+  roomSize: z.coerce.number().int().positive().optional().nullable(),
+  numberOfRooms: z.coerce.number().int().positive().optional().nullable(),
+  furnished: z.boolean().optional(),
+  floorLevel: z.coerce.number().int().min(0).optional().nullable(),
+  // Rules & preferences
+  genderPreference: z.enum(["ANY", "MALE", "FEMALE"]).optional(),
+  petsAllowed: z.boolean().optional(),
+  smokingAllowed: z.boolean().optional(),
+  maxTenants: z.coerce.number().int().positive().optional().nullable(),
+  // Pricing details
+  depositAmount: z.coerce.number().int().min(0).optional().nullable(),
+  utilitiesIncluded: z.boolean().optional(),
+  leaseDuration: z.string().trim().max(50).optional().nullable(),
+  // Amenities
+  amenities: z.array(z.string()).optional(),
 });
 
 export async function PATCH(
@@ -46,8 +62,11 @@ export async function PATCH(
 
   const d = parsed.data;
 
+  // Separate amenities from listing fields
+  const { amenities, ...listingFields } = parsed.data;
+
   // When transitioning to ACTIVE, set publishedAt
-  const data: Record<string, unknown> = { ...d };
+  const data: Record<string, unknown> = { ...listingFields };
 
   // Convert date-only string to full ISO DateTime for Prisma
   if (data.availabilityDate && typeof data.availabilityDate === "string") {
@@ -58,10 +77,35 @@ export async function PATCH(
     data.verificationStatus = "UNVERIFIED";
   }
 
-  const updated = await prisma.listing.update({
-    where: { id: listing.id },
-    data,
-    select: { id: true, status: true, verificationStatus: true },
+  const updated = await prisma.$transaction(async (tx) => {
+    const result = await tx.listing.update({
+      where: { id: listing.id },
+      data,
+      select: { id: true, status: true, verificationStatus: true },
+    });
+
+    // Update amenities if provided
+    if (amenities !== undefined) {
+      // Remove existing
+      await tx.listingAmenity.deleteMany({ where: { listingId: listing.id } });
+      // Add new
+      if (amenities.length > 0) {
+        const amenityRecords = await tx.amenity.findMany({
+          where: { slug: { in: amenities } },
+          select: { id: true },
+        });
+        if (amenityRecords.length > 0) {
+          await tx.listingAmenity.createMany({
+            data: amenityRecords.map((a) => ({
+              listingId: listing.id,
+              amenityId: a.id,
+            })),
+          });
+        }
+      }
+    }
+
+    return result;
   });
 
   return NextResponse.json({ data: updated });

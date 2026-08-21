@@ -6,6 +6,7 @@ type PublicListingRecord = Prisma.ListingGetPayload<{
   include: {
     property: { select: { area: true } };
     images: { orderBy: { sortOrder: "asc" } };
+    amenities: { include: { amenity: { select: { name: true; slug: true } } } };
   };
 }>;
 
@@ -86,6 +87,7 @@ export async function getPublicListingById(id: string): Promise<Listing | null> 
       include: {
         property: { select: { area: true } },
         images: { orderBy: { sortOrder: "asc" } },
+        amenities: { include: { amenity: { select: { name: true, slug: true } } } },
       },
     }));
     if (record) return toPublicListingDetail(record);
@@ -116,6 +118,22 @@ function toPublicListingDetail(record: PublicListingRecord) {
       url: img.url,
       isPrimary: img.isPrimary,
       sortOrder: img.sortOrder,
+    })),
+    // New fields
+    roomSize: record.roomSize,
+    numberOfRooms: record.numberOfRooms,
+    furnished: record.furnished,
+    floorLevel: record.floorLevel,
+    genderPreference: record.genderPreference,
+    petsAllowed: record.petsAllowed,
+    smokingAllowed: record.smokingAllowed,
+    maxTenants: record.maxTenants,
+    depositAmount: record.depositAmount,
+    utilitiesIncluded: record.utilitiesIncluded,
+    leaseDuration: record.leaseDuration,
+    amenities: record.amenities.map((a) => ({
+      name: a.amenity.name,
+      slug: a.amenity.slug,
     })),
   } satisfies Listing;
 }

@@ -1,4 +1,30 @@
-export type Listing = { id: string; title: string; type: string; area: string; price: number; image: string; verified: boolean; agentId: string; images?: { id: string; url: string; isPrimary: boolean; sortOrder: number }[] };
+export type Listing = {
+  id: string;
+  title: string;
+  type: string;
+  area: string;
+  price: number;
+  image: string;
+  verified: boolean;
+  agentId: string;
+  images?: { id: string; url: string; isPrimary: boolean; sortOrder: number }[];
+  // Room details
+  roomSize?: number | null;
+  numberOfRooms?: number | null;
+  furnished?: boolean;
+  floorLevel?: number | null;
+  // Rules & preferences
+  genderPreference?: string;
+  petsAllowed?: boolean;
+  smokingAllowed?: boolean;
+  maxTenants?: number | null;
+  // Pricing details
+  depositAmount?: number | null;
+  utilitiesIncluded?: boolean;
+  leaseDuration?: string | null;
+  // Amenities
+  amenities?: { name: string; slug: string }[];
+};
 
 export const listings: Listing[] = [
   { id: "njiro-garden-room", title: "Garden studio near Tengeru Road", type: "Self-contained", area: "Njiro", price: 180000, image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=900&q=82", verified: true, agentId: "mwanaisha-homes" },
