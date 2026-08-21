@@ -26,6 +26,7 @@ export function ContactReveal({ conversationId, isAgent }: ContactRevealProps) {
   const [reveal, setReveal] = useState<RevealStatus | null>(null);
   const [loading, setLoading] = useState(true);
   const [paying, setPaying] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     async function check() {
@@ -46,18 +47,21 @@ export function ContactReveal({ conversationId, isAgent }: ContactRevealProps) {
 
   async function handleRequest() {
     setPaying(true);
+    setError(null);
     try {
       const res = await fetch(`/api/chat/${conversationId}/contact-reveal`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ paymentRef: `manual_${Date.now()}` }),
       });
+      const payload = await res.json();
       if (res.ok) {
-        const { data } = await res.json();
-        setReveal(data);
+        setReveal(payload.data);
+      } else {
+        setError(payload.error || "Payment failed. Please try again.");
       }
     } catch {
-      // ignore
+      setError("Network error. Please check your connection.");
     } finally {
       setPaying(false);
     }
@@ -136,6 +140,11 @@ export function ContactReveal({ conversationId, isAgent }: ContactRevealProps) {
             <span className="font-semibold">TZS {reveal.fee.toLocaleString()}</span>{" "}
             to reveal their contact information.
           </p>
+          {error && (
+            <div className="mt-3 rounded-xl bg-red-50 p-3 text-center text-xs font-medium text-red-700">
+              {error}
+            </div>
+          )}
           <button
             className="button button-primary mt-4 w-full"
             onClick={handleRequest}

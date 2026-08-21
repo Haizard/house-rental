@@ -1,6 +1,6 @@
 "use client";
 
-import { Download, X } from "lucide-react";
+import { Download, X, Share } from "lucide-react";
 import { useEffect, useState } from "react";
 
 interface BeforeInstallPromptEvent extends Event {
@@ -12,9 +12,10 @@ export function InstallButton() {
   const [deferredPrompt, setDeferredPrompt] = useState<BeforeInstallPromptEvent | null>(null);
   const [isInstalled, setIsInstalled] = useState(false);
   const [isDismissed, setIsDismissed] = useState(false);
+  const [showIOSHint, setShowIOSHint] = useState(false);
 
   useEffect(() => {
-    // Check if already dismissed in this session
+    // Check if already dismissed
     if (sessionStorage.getItem("install-dismissed")) {
       setIsDismissed(true);
       return;
@@ -52,23 +53,57 @@ export function InstallButton() {
   }, []);
 
   async function handleInstall() {
-    if (!deferredPrompt) return;
-    deferredPrompt.prompt();
-    const { outcome } = await deferredPrompt.userChoice;
-    if (outcome === "accepted") {
-      setIsInstalled(true);
+    // If browser supports the install prompt
+    if (deferredPrompt) {
+      deferredPrompt.prompt();
+      const { outcome } = await deferredPrompt.userChoice;
+      if (outcome === "accepted") {
+        setIsInstalled(true);
+      }
+      setDeferredPrompt(null);
+      return;
     }
-    setDeferredPrompt(null);
+
+    // iOS Safari — show hint
+    const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+    if (isIOS) {
+      setShowIOSHint(true);
+      return;
+    }
+
+    // Desktop Chrome/Edge — try direct install
+    // Some browsers allow triggering install via the URL bar
   }
 
   function handleDismiss() {
     setIsDismissed(true);
+    setShowIOSHint(false);
     sessionStorage.setItem("install-dismissed", "true");
   }
 
   // Don't show if installed or dismissed
-  if (isInstalled || isDismissed || !deferredPrompt) {
+  if (isInstalled || isDismissed) {
     return null;
+  }
+
+  // iOS hint popup
+  if (showIOSHint) {
+    return (
+      <div className="glass-surface fixed right-4 top-16 z-50 max-w-[260px] rounded-2xl p-4 shadow-lg">
+        <p className="text-sm font-medium text-[var(--text-primary)]">
+          📱 Install Nyumba Nearby
+        </p>
+        <p className="mt-2 text-xs text-[var(--text-secondary)]">
+          Tap the <Share size={12} className="inline" /> <strong>Share</strong> button in Safari, then tap <strong>&quot;Add to Home Screen&quot;</strong>.
+        </p>
+        <button
+          onClick={handleDismiss}
+          className="mt-3 w-full rounded-xl bg-[var(--accent-soft)] px-3 py-2 text-xs font-medium text-[var(--accent)]"
+        >
+          Got it
+        </button>
+      </div>
+    );
   }
 
   return (

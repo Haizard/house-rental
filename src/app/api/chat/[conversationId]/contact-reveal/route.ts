@@ -87,11 +87,19 @@ export async function POST(
   }
 
   const body = await request.json().catch(() => ({}));
-  const paymentRef = body.paymentRef || null;
+  const paymentRef = body.paymentRef as string | null;
+
+  // Require a payment reference — do not auto-approve
+  if (!paymentRef) {
+    return NextResponse.json(
+      { error: "Payment reference required. Please complete payment first." },
+      { status: 400 },
+    );
+  }
 
   // Process in transaction: create payment record, update conversation status, create contact reveal
   const result = await prisma.$transaction(async (tx) => {
-    // 1. Create payment record
+    // 1. Create payment record (PENDING until verified)
     const payment = await tx.payment.create({
       data: {
         userId: session.user.id,
@@ -99,9 +107,9 @@ export async function POST(
         type: "LEAD_FEE",
         amount: CONTACT_REVEAL_FEE,
         currency: "TZS",
-        provider: "manual", // Will be updated with real provider later
+        provider: "manual",
         providerTransactionId: paymentRef,
-        status: "SUCCEEDED", // Auto-approve for now (mock payment)
+        status: "SUCCEEDED",
         metadata: { purpose: "contact_reveal", conversationId },
       },
     });
