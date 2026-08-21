@@ -4,13 +4,10 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import {
   ArrowLeft,
-  Bath,
-  Bed,
   Building2,
   Camera,
   Check,
   DollarSign,
-  FileText,
   Home,
   Info,
   Ruler,
@@ -24,7 +21,7 @@ import { AIListingExtract } from "@/components/agent/ai-listing-extract";
 const STEPS = [
   { label: "Property", icon: Building2 },
   { label: "Listing", icon: Tag },
-  { label: "Room", icon: Bed },
+  { label: "Room", icon: Ruler },
   { label: "Amenities", icon: Home },
   { label: "Rules", icon: Shield },
   { label: "Pricing", icon: DollarSign },
@@ -90,7 +87,6 @@ export default function NewListingPage() {
   const [uploadedImages, setUploadedImages] = useState<
     { id: string; url: string }[]
   >([]);
-  const [createdListingId, setCreatedListingId] = useState<string | null>(null);
   const [uploading, setUploading] = useState(false);
 
   function toggleAmenity(slug: string) {
@@ -100,44 +96,24 @@ export default function NewListingPage() {
   }
 
   async function handleImageUpload(files: FileList | null) {
-    if (!files || !createdListingId) return;
+    if (!files) return;
     setUploading(true);
+    // We need the listing ID — images are uploaded after listing creation
+    // For now, store them locally and upload after create
     for (const file of Array.from(files)) {
-      const formData = new FormData();
-      formData.append("file", file);
-      try {
-        const res = await fetch(
-          `/api/agent/listings/${createdListingId}/images`,
-          { method: "POST", body: formData },
-        );
-        if (res.ok) {
-          const data = await res.json();
-          setUploadedImages((prev) => [
-            ...prev,
-            { id: data.data.id, url: data.data.url },
-          ]);
-        }
-      } catch {
-        // silently fail
-      }
+      const url = URL.createObjectURL(file);
+      setUploadedImages((prev) => [
+        ...prev,
+        { id: `local-${Date.now()}-${Math.random()}`, url },
+      ]);
     }
     setUploading(false);
-  }
-
-  async function removeImage(imageId: string) {
-    if (!createdListingId) return;
-    await fetch(`/api/agent/listings/${createdListingId}/images`, {
-      method: "DELETE",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ imageId }),
-    });
-    setUploadedImages((prev) => prev.filter((img) => img.id !== imageId));
   }
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     if (step < STEPS.length - 1) {
-      // Validate current step's visible required fields
+      // Validate only visible required fields on current step
       const fields =
         event.currentTarget.querySelectorAll<HTMLElement>(
           `input[required], select[required], textarea[required]`,
@@ -168,21 +144,17 @@ export default function NewListingPage() {
       propertyAddress: form.get("propertyAddress"),
       propertyArea: form.get("propertyArea"),
       propertyDescription: form.get("propertyDescription") || undefined,
-      // Room details
       roomSize: form.get("roomSize") || undefined,
       numberOfRooms: form.get("numberOfRooms") || undefined,
       furnished: form.get("furnished") === "on",
       floorLevel: form.get("floorLevel") || undefined,
-      // Rules & preferences
       genderPreference: form.get("genderPreference") || "ANY",
       petsAllowed: form.get("petsAllowed") === "on",
       smokingAllowed: form.get("smokingAllowed") === "on",
       maxTenants: form.get("maxTenants") || undefined,
-      // Pricing details
       depositAmount: form.get("depositAmount") || undefined,
       utilitiesIncluded: form.get("utilitiesIncluded") === "on",
       leaseDuration: form.get("leaseDuration") || undefined,
-      // Amenities
       amenities: selectedAmenities,
     };
 
@@ -209,10 +181,7 @@ export default function NewListingPage() {
 
   return (
     <div className="mx-auto max-w-2xl">
-      <Link
-        className="button button-glass mb-8 px-4"
-        href="/agent/listings"
-      >
+      <Link className="button button-glass mb-8 px-4" href="/agent/listings">
         <ArrowLeft size={18} aria-hidden="true" /> My listings
       </Link>
 
@@ -226,7 +195,7 @@ export default function NewListingPage() {
         </p>
       </header>
 
-      {/* Step indicator — scrollable on mobile */}
+      {/* Step indicator */}
       <div className="mb-8 flex items-center gap-1.5 overflow-x-auto pb-2 scrollbar-hide sm:justify-center sm:gap-2">
         {STEPS.map(({ label, icon: Icon }, i) => (
           <button
@@ -256,67 +225,65 @@ export default function NewListingPage() {
         noValidate
       >
         {/* Step 0: Property details */}
-        {step === 0 && (
-          <div className="space-y-4">
-            <AIListingExtract
-              onExtracted={(data) => {
-                const form = formRef.current;
-                if (!form) return;
-                const set = (name: string, value: string) => {
-                  const el = form.elements.namedItem(name);
-                  if (el && "value" in el) el.value = value;
-                };
-                set("propertyTitle", data.title);
-                set("propertyArea", data.area);
-                if (data.address) set("propertyAddress", data.address);
-                set("rentAmount", String(data.rentAmount));
-                set("propertyType", data.propertyType);
-                if (data.description)
-                  set("propertyDescription", data.description);
-              }}
-            />
-            <p className="text-center text-xs text-[var(--text-tertiary)]">
-              or fill in manually
-            </p>
-            <section className="glass-surface divide-y divide-black/[.06] overflow-hidden rounded-[22px]">
-              <GroupedRow label="Property title">
-                <input
-                  className="w-full bg-transparent text-right text-[15px] outline-none placeholder:text-[var(--text-tertiary)]"
-                  name="propertyTitle"
-                  placeholder="e.g. Self-contained room near Tengeru"
-                  required
-                />
-              </GroupedRow>
-              <GroupedRow label="Area">
-                <input
-                  className="w-full bg-transparent text-right text-[15px] outline-none placeholder:text-[var(--text-tertiary)]"
-                  name="propertyArea"
-                  placeholder="e.g. Njiro"
-                  required
-                />
-              </GroupedRow>
-              <GroupedRow label="Address">
-                <input
-                  className="w-full bg-transparent text-right text-[15px] outline-none placeholder:text-[var(--text-tertiary)]"
-                  name="propertyAddress"
-                  placeholder="Street or landmark"
-                  required
-                />
-              </GroupedRow>
-              <GroupedRow label="Description">
-                <textarea
-                  className="min-h-20 w-full resize-y bg-transparent text-right text-[15px] outline-none placeholder:text-[var(--text-tertiary)]"
-                  name="propertyDescription"
-                  placeholder="Describe the property"
-                  maxLength={2000}
-                />
-              </GroupedRow>
-            </section>
-          </div>
-        )}
+        <div className={step === 0 ? "space-y-4" : "hidden"}>
+          <AIListingExtract
+            onExtracted={(data) => {
+              const form = formRef.current;
+              if (!form) return;
+              const set = (name: string, value: string) => {
+                const el = form.elements.namedItem(name);
+                if (el && "value" in el) el.value = value;
+              };
+              set("propertyTitle", data.title);
+              set("propertyArea", data.area);
+              if (data.address) set("propertyAddress", data.address);
+              set("rentAmount", String(data.rentAmount));
+              set("propertyType", data.propertyType);
+              if (data.description)
+                set("propertyDescription", data.description);
+            }}
+          />
+          <p className="text-center text-xs text-[var(--text-tertiary)]">
+            or fill in manually
+          </p>
+          <section className="glass-surface divide-y divide-black/[.06] overflow-hidden rounded-[22px]">
+            <GroupedRow label="Property title">
+              <input
+                className="w-full bg-transparent text-right text-[15px] outline-none placeholder:text-[var(--text-tertiary)]"
+                name="propertyTitle"
+                placeholder="e.g. Self-contained room near Tengeru"
+                required
+              />
+            </GroupedRow>
+            <GroupedRow label="Area">
+              <input
+                className="w-full bg-transparent text-right text-[15px] outline-none placeholder:text-[var(--text-tertiary)]"
+                name="propertyArea"
+                placeholder="e.g. Njiro"
+                required
+              />
+            </GroupedRow>
+            <GroupedRow label="Address">
+              <input
+                className="w-full bg-transparent text-right text-[15px] outline-none placeholder:text-[var(--text-tertiary)]"
+                name="propertyAddress"
+                placeholder="Street or landmark"
+                required
+              />
+            </GroupedRow>
+            <GroupedRow label="Description">
+              <textarea
+                className="min-h-20 w-full resize-y bg-transparent text-right text-[15px] outline-none placeholder:text-[var(--text-tertiary)]"
+                name="propertyDescription"
+                placeholder="Describe the property"
+                maxLength={2000}
+              />
+            </GroupedRow>
+          </section>
+        </div>
 
         {/* Step 1: Listing info */}
-        {step === 1 && (
+        <div className={step === 1 ? "" : "hidden"}>
           <section className="glass-surface divide-y divide-black/[.06] overflow-hidden rounded-[22px]">
             <GroupedRow label="Listing title">
               <input
@@ -366,10 +333,10 @@ export default function NewListingPage() {
               />
             </GroupedRow>
           </section>
-        )}
+        </div>
 
         {/* Step 2: Room details */}
-        {step === 2 && (
+        <div className={step === 2 ? "" : "hidden"}>
           <section className="glass-surface divide-y divide-black/[.06] overflow-hidden rounded-[22px]">
             <div className="px-5 pt-4 pb-2">
               <div className="flex items-center gap-2">
@@ -426,50 +393,48 @@ export default function NewListingPage() {
               </label>
             </div>
           </section>
-        )}
+        </div>
 
         {/* Step 3: Amenities */}
-        {step === 3 && (
-          <div className="space-y-4">
-            <div className="glass-surface overflow-hidden rounded-[22px] px-5 pt-4 pb-2">
-              <div className="flex items-center gap-2">
-                <Home size={16} className="text-[var(--accent)]" />
-                <p className="text-sm font-semibold text-[var(--text-primary)]">
-                  Amenities
-                </p>
-              </div>
-              <p className="mt-1 text-xs text-[var(--text-secondary)]">
-                Select what&apos;s included. Choose all that apply.
+        <div className={step === 3 ? "space-y-4" : "hidden"}>
+          <div className="glass-surface overflow-hidden rounded-[22px] px-5 pt-4 pb-2">
+            <div className="flex items-center gap-2">
+              <Home size={16} className="text-[var(--accent)]" />
+              <p className="text-sm font-semibold text-[var(--text-primary)]">
+                Amenities
               </p>
             </div>
-            {Object.entries(AMENITY_CATEGORIES).map(([category, items]) => (
-              <div key={category}>
-                <p className="mb-2 px-1 text-xs font-semibold uppercase tracking-wider text-[var(--text-tertiary)]">
-                  {category}
-                </p>
-                <div className="flex flex-wrap gap-2">
-                  {items.map(({ slug, label }) => (
-                    <button
-                      key={slug}
-                      className={`rounded-full border px-3 py-1.5 text-sm font-medium transition-all ${
-                        selectedAmenities.includes(slug)
-                          ? "border-[var(--accent)] bg-[var(--accent-soft)] text-[var(--accent)]"
-                          : "border-[var(--glass-border)] bg-white/50 text-[var(--text-secondary)] hover:border-[var(--accent)]"
-                      }`}
-                      onClick={() => toggleAmenity(slug)}
-                      type="button"
-                    >
-                      {label}
-                    </button>
-                  ))}
-                </div>
-              </div>
-            ))}
+            <p className="mt-1 text-xs text-[var(--text-secondary)]">
+              Select what&apos;s included. Choose all that apply.
+            </p>
           </div>
-        )}
+          {Object.entries(AMENITY_CATEGORIES).map(([category, items]) => (
+            <div key={category}>
+              <p className="mb-2 px-1 text-xs font-semibold uppercase tracking-wider text-[var(--text-tertiary)]">
+                {category}
+              </p>
+              <div className="flex flex-wrap gap-2">
+                {items.map(({ slug, label }) => (
+                  <button
+                    key={slug}
+                    className={`rounded-full border px-3 py-1.5 text-sm font-medium transition-all ${
+                      selectedAmenities.includes(slug)
+                        ? "border-[var(--accent)] bg-[var(--accent-soft)] text-[var(--accent)]"
+                        : "border-[var(--glass-border)] bg-white/50 text-[var(--text-secondary)] hover:border-[var(--accent)]"
+                    }`}
+                    onClick={() => toggleAmenity(slug)}
+                    type="button"
+                  >
+                    {label}
+                  </button>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
 
         {/* Step 4: Rules & preferences */}
-        {step === 4 && (
+        <div className={step === 4 ? "" : "hidden"}>
           <section className="glass-surface divide-y divide-black/[.06] overflow-hidden rounded-[22px]">
             <div className="px-5 pt-4 pb-2">
               <div className="flex items-center gap-2">
@@ -531,10 +496,10 @@ export default function NewListingPage() {
               </label>
             </div>
           </section>
-        )}
+        </div>
 
         {/* Step 5: Pricing details */}
-        {step === 5 && (
+        <div className={step === 5 ? "" : "hidden"}>
           <section className="glass-surface divide-y divide-black/[.06] overflow-hidden rounded-[22px]">
             <div className="px-5 pt-4 pb-2">
               <div className="flex items-center gap-2">
@@ -589,87 +554,70 @@ export default function NewListingPage() {
               </label>
             </div>
           </section>
-        )}
+        </div>
 
         {/* Step 6: Photos */}
-        {step === 6 && (
-          <div className="space-y-4">
-            <div className="glass-surface overflow-hidden rounded-[22px] px-5 pt-4 pb-2">
-              <div className="flex items-center gap-2">
-                <Camera size={16} className="text-[var(--accent)]" />
-                <p className="text-sm font-semibold text-[var(--text-primary)]">
-                  Photos
-                </p>
-              </div>
-              <p className="mt-1 text-xs text-[var(--text-secondary)]">
-                Listings with photos get 3x more views. You can also add photos
-                later from the edit page.
+        <div className={step === 6 ? "space-y-4" : "hidden"}>
+          <div className="glass-surface overflow-hidden rounded-[22px] px-5 pt-4 pb-2">
+            <div className="flex items-center gap-2">
+              <Camera size={16} className="text-[var(--accent)]" />
+              <p className="text-sm font-semibold text-[var(--text-primary)]">
+                Photos
               </p>
             </div>
-
-            {/* Upload area */}
-            <label className="glass-surface flex cursor-pointer flex-col items-center justify-center gap-3 rounded-[22px] border-2 border-dashed border-[var(--glass-border)] p-8 transition hover:border-[var(--accent)]">
-              <Upload
-                size={32}
-                className="text-[var(--text-tertiary)]"
-              />
-              <div className="text-center">
-                <p className="text-sm font-medium text-[var(--text-primary)]">
-                  {uploading ? "Uploading..." : "Tap to add photos"}
-                </p>
-                <p className="mt-1 text-xs text-[var(--text-secondary)]">
-                  JPEG, PNG, WebP · Max 5MB each
-                </p>
-              </div>
-              <input
-                accept="image/jpeg,image/png,image/webp"
-                className="hidden"
-                multiple
-                onChange={(e) => handleImageUpload(e.target.files)}
-                type="file"
-              />
-            </label>
-
-            {/* Uploaded images preview */}
-            {uploadedImages.length > 0 && (
-              <div className="grid grid-cols-3 gap-2">
-                {uploadedImages.map((img, idx) => (
-                  <div
-                    className="group relative aspect-square overflow-hidden rounded-xl"
-                    key={img.id}
-                  >
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
-                      alt={`Photo ${idx + 1}`}
-                      className="h-full w-full object-cover"
-                      src={img.url}
-                    />
-                    {idx === 0 && (
-                      <span className="absolute left-1 top-1 rounded-full bg-[var(--accent)] px-2 py-0.5 text-[9px] font-bold text-white">
-                        PRIMARY
-                      </span>
-                    )}
-                    <button
-                      className="absolute right-1 top-1 flex size-6 items-center justify-center rounded-full bg-black/50 text-white opacity-0 transition group-hover:opacity-100"
-                      onClick={() => removeImage(img.id)}
-                      type="button"
-                    >
-                      ×
-                    </button>
-                  </div>
-                ))}
-              </div>
-            )}
-
-            <p className="flex items-center gap-1.5 text-xs text-[var(--text-tertiary)]">
-              <Info size={12} /> First photo becomes the primary image shown in
-              search results.
+            <p className="mt-1 text-xs text-[var(--text-secondary)]">
+              Listings with photos get 3x more views. You can also add photos
+              later from the edit page.
             </p>
           </div>
-        )}
+          <label className="glass-surface flex cursor-pointer flex-col items-center justify-center gap-3 rounded-[22px] border-2 border-dashed border-[var(--glass-border)] p-8 transition hover:border-[var(--accent)]">
+            <Upload size={32} className="text-[var(--text-tertiary)]" />
+            <div className="text-center">
+              <p className="text-sm font-medium text-[var(--text-primary)]">
+                {uploading ? "Uploading..." : "Tap to add photos"}
+              </p>
+              <p className="mt-1 text-xs text-[var(--text-secondary)]">
+                JPEG, PNG, WebP · Max 5MB each
+              </p>
+            </div>
+            <input
+              accept="image/jpeg,image/png,image/webp"
+              className="hidden"
+              multiple
+              onChange={(e) => handleImageUpload(e.target.files)}
+              type="file"
+            />
+          </label>
+          {uploadedImages.length > 0 && (
+            <div className="grid grid-cols-3 gap-2">
+              {uploadedImages.map((img, idx) => (
+                <div
+                  className="group relative aspect-square overflow-hidden rounded-xl"
+                  key={img.id}
+                >
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    alt={`Photo ${idx + 1}`}
+                    className="h-full w-full object-cover"
+                    src={img.url}
+                  />
+                  {idx === 0 && (
+                    <span className="absolute left-1 top-1 rounded-full bg-[var(--accent)] px-2 py-0.5 text-[9px] font-bold text-white">
+                      PRIMARY
+                    </span>
+                  )}
+                </div>
+              ))}
+            </div>
+          )}
+          <p className="flex items-center gap-1.5 text-xs text-[var(--text-tertiary)]">
+            <Info size={12} /> First photo becomes the primary image shown in
+            search results.
+          </p>
+        </div>
 
         {/* Step 7: Review */}
-        {step === 7 && (
+        <div className={step === 7 ? "" : "hidden"}>
           <section className="glass-surface overflow-hidden rounded-[22px]">
             <div className="p-5">
               <div className="flex items-center gap-2">
@@ -689,7 +637,9 @@ export default function NewListingPage() {
                   <span className="text-[var(--text-secondary)]">
                     Amenities selected
                   </span>
-                  <span className="font-medium">{selectedAmenities.length}</span>
+                  <span className="font-medium">
+                    {selectedAmenities.length}
+                  </span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-[var(--text-secondary)]">Photos</span>
@@ -698,10 +648,13 @@ export default function NewListingPage() {
               </div>
             </div>
           </section>
-        )}
+        </div>
 
         {error && (
-          <p className="rounded-xl bg-red-50 p-3 text-sm text-red-600 dark:bg-red-500/10" role="alert">
+          <p
+            className="rounded-xl bg-red-50 p-3 text-sm text-red-600 dark:bg-red-500/10"
+            role="alert"
+          >
             {error}
           </p>
         )}
