@@ -5,6 +5,7 @@ import { requireRole } from "@/lib/auth/guards";
 import { ViewingStatus } from "@/components/agent/viewing-status";
 import { VerificationForm } from "@/components/agent/verification-form";
 import { AgentAdSlot } from "@/components/ads/agent-ad-slot";
+import { TopBar } from "@/components/layout/top-bar";
 
 export default async function AgentDashboard() {
   const session = await requireRole("AGENT");
@@ -29,7 +30,7 @@ export default async function AgentDashboard() {
   const activeListingCount = agent?.listings.length ?? 0;
   const totalLeads = agent?.leads.length ?? 0;
 
-  return <div className="mx-auto max-w-6xl"><header className="flex items-end justify-between gap-4 pb-8 pt-10"><div><p className="eyebrow">Agent workspace</p><h1 className="mt-2 text-3xl font-bold sm:text-4xl">Good morning, {session.user.name?.split(" ")[0] ?? "agent"}.</h1><p className="mt-2 text-[var(--text-secondary)]">Stay close to every student enquiry.</p></div><Link className="button button-glass hidden px-4 sm:inline-flex" href="/">View marketplace</Link></header>      <section className="grid gap-3 sm:grid-cols-4">
+  return <div className="mx-auto max-w-6xl"><TopBar /><header className="flex items-end justify-between gap-4 pb-8 pt-10"><div><p className="eyebrow">Agent workspace</p><h1 className="mt-2 text-3xl font-bold sm:text-4xl">Good morning, {session.user.name?.split(" ")[0] ?? "agent"}.</h1><p className="mt-2 text-[var(--text-secondary)]">Stay close to every student enquiry.</p></div><Link className="button button-glass hidden px-4 sm:inline-flex" href="/">View marketplace</Link></header>      <section className="grid gap-3 sm:grid-cols-4">
         <Stat icon={<Home size={20} />} value={agent?.listings.length ?? 0} label="Active listings" />
         <Stat icon={<Users size={20} />} value={agent?.leads.length ?? 0} label="Recent leads" />
         <Stat icon={<CalendarDays size={20} />} value={agent?.leads.filter((lead) => lead.viewingRequests[0]?.status === "REQUESTED").length ?? 0} label="Pending viewings" />

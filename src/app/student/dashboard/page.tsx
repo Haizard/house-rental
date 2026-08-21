@@ -3,6 +3,7 @@ import Link from "next/link";
 import { prisma } from "@/lib/db/prisma";
 import { requireRole } from "@/lib/auth/guards";
 import { StatusPill } from "@/components/ui/status-pill";
+import { TopBar } from "@/components/layout/top-bar";
 
 export default async function StudentDashboard() {
   const session = await requireRole("STUDENT");
@@ -24,6 +25,7 @@ export default async function StudentDashboard() {
 
   return (
     <div className="mx-auto max-w-5xl">
+      <TopBar />
       <header className="pb-8 pt-10">
         <p className="eyebrow">Student dashboard</p>
         <h1 className="mt-2 text-3xl font-bold sm:text-4xl">

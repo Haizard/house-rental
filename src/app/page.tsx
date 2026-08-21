@@ -4,6 +4,7 @@ import { ArrowRight, Building2, MapPin, Search, ShieldCheck } from "lucide-react
 import { ListingCard } from "@/components/listings/listing-card";
 import { AISearchBar } from "@/components/listings/ai-search";
 import { StatusSection } from "@/components/statuses/status-section";
+import { TopBar } from "@/components/layout/top-bar";
 import { getPublicListings } from "@/server/listings/get-public-listings";
 
 const areas = ["Njiro", "Olorien", "Sakina", "Usa River"];
@@ -17,6 +18,7 @@ export default async function Home() {
   const { listings } = await getPublicListings();
   return (
     <main className="min-h-screen px-4 pb-12 pt-4 sm:px-8 lg:px-12">
+      <TopBar />
       <nav className="glass-nav mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-5">
         <a className="flex items-center gap-2 font-semibold text-[var(--text-primary)]" href="#top"><span className="flex size-9 items-center justify-center rounded-[12px] bg-[var(--accent)] text-white"><Building2 size={19} aria-hidden="true" /></span><span>Nyumba Nearby</span></a>
         <div className="hidden items-center gap-5 text-sm text-[var(--text-secondary)] sm:flex"><a className="transition hover:text-[var(--accent)]" href="#listings">Find a home</a><a className="transition hover:text-[var(--accent)]" href="#agents">For agents</a><a className="button button-primary h-10 px-4" href="/auth/register">Get started</a></div>
