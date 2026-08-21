@@ -88,9 +88,9 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Agent profile not found." }, { status: 404 });
 
   const raw = await request.json().catch(() => null);
-  // Strip null values — Zod optional() rejects null but accepts undefined
+  // Strip null and empty-string values — Zod optional() rejects null but accepts undefined
   const cleaned = raw && typeof raw === "object"
-    ? Object.fromEntries(Object.entries(raw).filter(([, v]) => v !== null))
+    ? Object.fromEntries(Object.entries(raw).filter(([, v]) => v !== null && v !== ""))
     : raw;
   const parsed = createListingSchema.safeParse(cleaned);
   if (!parsed.success) {

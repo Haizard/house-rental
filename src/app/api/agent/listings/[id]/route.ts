@@ -55,9 +55,9 @@ export async function PATCH(
     return NextResponse.json({ error: "Listing not found." }, { status: 404 });
 
   const raw = await request.json().catch(() => null);
-  // Strip null values — Zod optional() rejects null but accepts undefined
+  // Strip null and empty-string values — Zod optional() rejects null but accepts undefined
   const cleaned = raw && typeof raw === "object"
-    ? Object.fromEntries(Object.entries(raw).filter(([, v]) => v !== null))
+    ? Object.fromEntries(Object.entries(raw).filter(([, v]) => v !== null && v !== ""))
     : raw;
   const parsed = updateSchema.safeParse(cleaned);
   if (!parsed.success) {

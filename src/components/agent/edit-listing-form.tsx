@@ -117,7 +117,7 @@ export function EditListingForm({ listing }: { listing: ListingData }) {
     setSuccess("");
 
     const form = new FormData(event.currentTarget);
-    const v = (name: string) => form.get(name) ?? undefined;
+    const v = (name: string) => { const val = form.get(name); return val === null || val === "" ? undefined : val; };
     const body = {
       title: v("title") ?? listing.title,
       description: v("description"),
