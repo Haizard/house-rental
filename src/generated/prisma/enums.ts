@@ -88,6 +88,26 @@ export const LeadSource = {
 export type LeadSource = (typeof LeadSource)[keyof typeof LeadSource]
 
 
+export const RoomRequestStatus = {
+  OPEN: 'OPEN',
+  SELECTED: 'SELECTED',
+  CLOSED: 'CLOSED',
+  EXPIRED: 'EXPIRED'
+} as const
+
+export type RoomRequestStatus = (typeof RoomRequestStatus)[keyof typeof RoomRequestStatus]
+
+
+export const ResponseStatus = {
+  PENDING: 'PENDING',
+  SHORTLISTED: 'SHORTLISTED',
+  SELECTED: 'SELECTED',
+  DECLINED: 'DECLINED'
+} as const
+
+export type ResponseStatus = (typeof ResponseStatus)[keyof typeof ResponseStatus]
+
+
 export const BillingStatus = {
   PENDING: 'PENDING',
   CHARGED: 'CHARGED',

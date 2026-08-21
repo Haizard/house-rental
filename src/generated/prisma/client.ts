@@ -167,6 +167,16 @@ export type Review = Prisma.ReviewModel
  */
 export type Payment = Prisma.PaymentModel
 /**
+ * Model RoomRequest
+ * 
+ */
+export type RoomRequest = Prisma.RoomRequestModel
+/**
+ * Model RoomRequestResponse
+ * 
+ */
+export type RoomRequestResponse = Prisma.RoomRequestResponseModel
+/**
  * Model ContactReveal
  * 
  */

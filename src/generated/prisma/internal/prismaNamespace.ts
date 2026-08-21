@@ -422,6 +422,8 @@ export const ModelName = {
   StatusView: 'StatusView',
   Review: 'Review',
   Payment: 'Payment',
+  RoomRequest: 'RoomRequest',
+  RoomRequestResponse: 'RoomRequestResponse',
   ContactReveal: 'ContactReveal',
   AIInteraction: 'AIInteraction'
 } as const
@@ -439,7 +441,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "agentProfile" | "studentProfile" | "university" | "property" | "propertyAgent" | "listing" | "amenity" | "listingAmenity" | "listingImage" | "listingVideo" | "lead" | "conversation" | "message" | "viewingRequest" | "subscription" | "leadCharge" | "savedListing" | "notification" | "report" | "verificationRecord" | "agentStatus" | "statusView" | "review" | "payment" | "contactReveal" | "aIInteraction"
+    modelProps: "user" | "agentProfile" | "studentProfile" | "university" | "property" | "propertyAgent" | "listing" | "amenity" | "listingAmenity" | "listingImage" | "listingVideo" | "lead" | "conversation" | "message" | "viewingRequest" | "subscription" | "leadCharge" | "savedListing" | "notification" | "report" | "verificationRecord" | "agentStatus" | "statusView" | "review" | "payment" | "roomRequest" | "roomRequestResponse" | "contactReveal" | "aIInteraction"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -2293,6 +2295,154 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    RoomRequest: {
+      payload: Prisma.$RoomRequestPayload<ExtArgs>
+      fields: Prisma.RoomRequestFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.RoomRequestFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RoomRequestPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.RoomRequestFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RoomRequestPayload>
+        }
+        findFirst: {
+          args: Prisma.RoomRequestFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RoomRequestPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.RoomRequestFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RoomRequestPayload>
+        }
+        findMany: {
+          args: Prisma.RoomRequestFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RoomRequestPayload>[]
+        }
+        create: {
+          args: Prisma.RoomRequestCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RoomRequestPayload>
+        }
+        createMany: {
+          args: Prisma.RoomRequestCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.RoomRequestCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RoomRequestPayload>[]
+        }
+        delete: {
+          args: Prisma.RoomRequestDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RoomRequestPayload>
+        }
+        update: {
+          args: Prisma.RoomRequestUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RoomRequestPayload>
+        }
+        deleteMany: {
+          args: Prisma.RoomRequestDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.RoomRequestUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.RoomRequestUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RoomRequestPayload>[]
+        }
+        upsert: {
+          args: Prisma.RoomRequestUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RoomRequestPayload>
+        }
+        aggregate: {
+          args: Prisma.RoomRequestAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateRoomRequest>
+        }
+        groupBy: {
+          args: Prisma.RoomRequestGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.RoomRequestGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.RoomRequestCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.RoomRequestCountAggregateOutputType> | number
+        }
+      }
+    }
+    RoomRequestResponse: {
+      payload: Prisma.$RoomRequestResponsePayload<ExtArgs>
+      fields: Prisma.RoomRequestResponseFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.RoomRequestResponseFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RoomRequestResponsePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.RoomRequestResponseFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RoomRequestResponsePayload>
+        }
+        findFirst: {
+          args: Prisma.RoomRequestResponseFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RoomRequestResponsePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.RoomRequestResponseFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RoomRequestResponsePayload>
+        }
+        findMany: {
+          args: Prisma.RoomRequestResponseFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RoomRequestResponsePayload>[]
+        }
+        create: {
+          args: Prisma.RoomRequestResponseCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RoomRequestResponsePayload>
+        }
+        createMany: {
+          args: Prisma.RoomRequestResponseCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.RoomRequestResponseCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RoomRequestResponsePayload>[]
+        }
+        delete: {
+          args: Prisma.RoomRequestResponseDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RoomRequestResponsePayload>
+        }
+        update: {
+          args: Prisma.RoomRequestResponseUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RoomRequestResponsePayload>
+        }
+        deleteMany: {
+          args: Prisma.RoomRequestResponseDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.RoomRequestResponseUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.RoomRequestResponseUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RoomRequestResponsePayload>[]
+        }
+        upsert: {
+          args: Prisma.RoomRequestResponseUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RoomRequestResponsePayload>
+        }
+        aggregate: {
+          args: Prisma.RoomRequestResponseAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateRoomRequestResponse>
+        }
+        groupBy: {
+          args: Prisma.RoomRequestResponseGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.RoomRequestResponseGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.RoomRequestResponseCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.RoomRequestResponseCountAggregateOutputType> | number
+        }
+      }
+    }
     ContactReveal: {
       payload: Prisma.$ContactRevealPayload<ExtArgs>
       fields: Prisma.ContactRevealFieldRefs
@@ -2846,6 +2996,43 @@ export const PaymentScalarFieldEnum = {
 export type PaymentScalarFieldEnum = (typeof PaymentScalarFieldEnum)[keyof typeof PaymentScalarFieldEnum]
 
 
+export const RoomRequestScalarFieldEnum = {
+  id: 'id',
+  studentId: 'studentId',
+  title: 'title',
+  description: 'description',
+  area: 'area',
+  propertyType: 'propertyType',
+  rentMin: 'rentMin',
+  rentMax: 'rentMax',
+  roomType: 'roomType',
+  amenities: 'amenities',
+  moveInDate: 'moveInDate',
+  status: 'status',
+  expiresAt: 'expiresAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type RoomRequestScalarFieldEnum = (typeof RoomRequestScalarFieldEnum)[keyof typeof RoomRequestScalarFieldEnum]
+
+
+export const RoomRequestResponseScalarFieldEnum = {
+  id: 'id',
+  roomRequestId: 'roomRequestId',
+  agentId: 'agentId',
+  listingId: 'listingId',
+  message: 'message',
+  proposedRent: 'proposedRent',
+  status: 'status',
+  selectedAt: 'selectedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type RoomRequestResponseScalarFieldEnum = (typeof RoomRequestResponseScalarFieldEnum)[keyof typeof RoomRequestResponseScalarFieldEnum]
+
+
 export const ContactRevealScalarFieldEnum = {
   id: 'id',
   conversationId: 'conversationId',
@@ -3227,6 +3414,34 @@ export type ListEnumPaymentTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$
 
 
 /**
+ * Reference to a field of type 'RoomRequestStatus'
+ */
+export type EnumRoomRequestStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'RoomRequestStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'RoomRequestStatus[]'
+ */
+export type ListEnumRoomRequestStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'RoomRequestStatus[]'>
+    
+
+
+/**
+ * Reference to a field of type 'ResponseStatus'
+ */
+export type EnumResponseStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ResponseStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'ResponseStatus[]'
+ */
+export type ListEnumResponseStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ResponseStatus[]'>
+    
+
+
+/**
  * Reference to a field of type 'Float'
  */
 export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
@@ -3415,6 +3630,8 @@ export type GlobalOmitConfig = {
   statusView?: Prisma.StatusViewOmit
   review?: Prisma.ReviewOmit
   payment?: Prisma.PaymentOmit
+  roomRequest?: Prisma.RoomRequestOmit
+  roomRequestResponse?: Prisma.RoomRequestResponseOmit
   contactReveal?: Prisma.ContactRevealOmit
   aIInteraction?: Prisma.AIInteractionOmit
 }

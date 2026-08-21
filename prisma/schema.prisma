@@ -65,6 +65,20 @@ enum LeadSource {
   DIRECT_AGENT
 }
 
+enum RoomRequestStatus {
+  OPEN
+  SELECTED
+  CLOSED
+  EXPIRED
+}
+
+enum ResponseStatus {
+  PENDING
+  SHORTLISTED
+  SELECTED
+  DECLINED
+}
+
 enum BillingStatus {
   PENDING
   CHARGED
@@ -174,6 +188,7 @@ model AgentProfile {
   statuses      AgentStatus[]
   reviews       Review[]
   contactReveals ContactReveal[]
+  roomRequestResponses RoomRequestResponse[]
   @@map("agent_profiles")
 }
 
@@ -194,6 +209,7 @@ model StudentProfile {
   savedListings SavedListing[]
   reviews       Review[]
   contactReveals ContactReveal[]
+  roomRequests    RoomRequest[]
   @@map("student_profiles")
 }
 
@@ -266,6 +282,7 @@ model Listing {
   amenities          ListingAmenity[]
   leads              Lead[]
   savedBy            SavedListing[]
+  roomRequestResponses RoomRequestResponse[]
   @@index([status, rentAmount])
   @@index([propertyId])
   @@map("listings")
@@ -523,6 +540,47 @@ model Payment {
   updatedAt       DateTime    @updatedAt @map("updated_at")
   user            User        @relation(fields: [userId], references: [id])
   @@map("payments")
+}
+
+model RoomRequest {
+  id          String              @id @default(uuid()) @db.Uuid
+  studentId   String              @map("student_id") @db.Uuid
+  title       String
+  description String?
+  area        String?
+  propertyType String?             @map("property_type")
+  rentMin     Int?                @map("rent_min")
+  rentMax     Int?                @map("rent_max")
+  roomType    String?             @map("room_type")
+  amenities   String[]
+  moveInDate  DateTime?           @map("move_in_date") @db.Date
+  status      RoomRequestStatus   @default(OPEN)
+  expiresAt   DateTime            @map("expires_at")
+  createdAt   DateTime            @default(now()) @map("created_at")
+  updatedAt   DateTime            @updatedAt @map("updated_at")
+  student     StudentProfile      @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  responses   RoomRequestResponse[]
+  @@index([status, createdAt])
+  @@index([area])
+  @@map("room_requests")
+}
+
+model RoomRequestResponse {
+  id              String         @id @default(uuid()) @db.Uuid
+  roomRequestId   String         @map("room_request_id") @db.Uuid
+  agentId         String         @map("agent_id") @db.Uuid
+  listingId       String?        @map("listing_id") @db.Uuid
+  message         String
+  proposedRent    Int?           @map("proposed_rent")
+  status          ResponseStatus @default(PENDING)
+  selectedAt      DateTime?      @map("selected_at")
+  createdAt       DateTime       @default(now()) @map("created_at")
+  updatedAt       DateTime       @updatedAt @map("updated_at")
+  roomRequest     RoomRequest    @relation(fields: [roomRequestId], references: [id], onDelete: Cascade)
+  agent           AgentProfile   @relation(fields: [agentId], references: [id])
+  listing         Listing?       @relation(fields: [listingId], references: [id])
+  @@unique([roomRequestId, agentId])
+  @@map("room_request_responses")
 }
 
 model ContactReveal {

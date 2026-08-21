@@ -76,6 +76,8 @@ export const ModelName = {
   StatusView: 'StatusView',
   Review: 'Review',
   Payment: 'Payment',
+  RoomRequest: 'RoomRequest',
+  RoomRequestResponse: 'RoomRequestResponse',
   ContactReveal: 'ContactReveal',
   AIInteraction: 'AIInteraction'
 } as const
@@ -460,6 +462,43 @@ export const PaymentScalarFieldEnum = {
 } as const
 
 export type PaymentScalarFieldEnum = (typeof PaymentScalarFieldEnum)[keyof typeof PaymentScalarFieldEnum]
+
+
+export const RoomRequestScalarFieldEnum = {
+  id: 'id',
+  studentId: 'studentId',
+  title: 'title',
+  description: 'description',
+  area: 'area',
+  propertyType: 'propertyType',
+  rentMin: 'rentMin',
+  rentMax: 'rentMax',
+  roomType: 'roomType',
+  amenities: 'amenities',
+  moveInDate: 'moveInDate',
+  status: 'status',
+  expiresAt: 'expiresAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type RoomRequestScalarFieldEnum = (typeof RoomRequestScalarFieldEnum)[keyof typeof RoomRequestScalarFieldEnum]
+
+
+export const RoomRequestResponseScalarFieldEnum = {
+  id: 'id',
+  roomRequestId: 'roomRequestId',
+  agentId: 'agentId',
+  listingId: 'listingId',
+  message: 'message',
+  proposedRent: 'proposedRent',
+  status: 'status',
+  selectedAt: 'selectedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type RoomRequestResponseScalarFieldEnum = (typeof RoomRequestResponseScalarFieldEnum)[keyof typeof RoomRequestResponseScalarFieldEnum]
 
 
 export const ContactRevealScalarFieldEnum = {

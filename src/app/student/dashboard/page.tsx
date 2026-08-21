@@ -1,4 +1,4 @@
-import { Bookmark, CalendarDays, ChevronRight, MessageCircle } from "lucide-react";
+import { Bookmark, CalendarDays, ChevronRight, ClipboardList, MessageCircle } from "lucide-react";
 import Link from "next/link";
 import { prisma } from "@/lib/db/prisma";
 import { requireRole } from "@/lib/auth/guards";
@@ -53,6 +53,12 @@ export default async function StudentDashboard() {
           icon={<CalendarDays size={20} />}
           label="Viewings"
           value="Soon"
+        />
+        <DashboardLink
+          href="/student/requests"
+          icon={<ClipboardList size={20} />}
+          label="Room Requests"
+          value="Post"
         />
       </section>
 

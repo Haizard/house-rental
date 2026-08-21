@@ -303,6 +303,7 @@ export type ListingWhereInput = {
   amenities?: Prisma.ListingAmenityListRelationFilter
   leads?: Prisma.LeadListRelationFilter
   savedBy?: Prisma.SavedListingListRelationFilter
+  roomRequestResponses?: Prisma.RoomRequestResponseListRelationFilter
 }
 
 export type ListingOrderByWithRelationInput = {
@@ -328,6 +329,7 @@ export type ListingOrderByWithRelationInput = {
   amenities?: Prisma.ListingAmenityOrderByRelationAggregateInput
   leads?: Prisma.LeadOrderByRelationAggregateInput
   savedBy?: Prisma.SavedListingOrderByRelationAggregateInput
+  roomRequestResponses?: Prisma.RoomRequestResponseOrderByRelationAggregateInput
 }
 
 export type ListingWhereUniqueInput = Prisma.AtLeast<{
@@ -356,6 +358,7 @@ export type ListingWhereUniqueInput = Prisma.AtLeast<{
   amenities?: Prisma.ListingAmenityListRelationFilter
   leads?: Prisma.LeadListRelationFilter
   savedBy?: Prisma.SavedListingListRelationFilter
+  roomRequestResponses?: Prisma.RoomRequestResponseListRelationFilter
 }, "id">
 
 export type ListingOrderByWithAggregationInput = {
@@ -423,6 +426,7 @@ export type ListingCreateInput = {
   amenities?: Prisma.ListingAmenityCreateNestedManyWithoutListingInput
   leads?: Prisma.LeadCreateNestedManyWithoutListingInput
   savedBy?: Prisma.SavedListingCreateNestedManyWithoutListingInput
+  roomRequestResponses?: Prisma.RoomRequestResponseCreateNestedManyWithoutListingInput
 }
 
 export type ListingUncheckedCreateInput = {
@@ -446,6 +450,7 @@ export type ListingUncheckedCreateInput = {
   amenities?: Prisma.ListingAmenityUncheckedCreateNestedManyWithoutListingInput
   leads?: Prisma.LeadUncheckedCreateNestedManyWithoutListingInput
   savedBy?: Prisma.SavedListingUncheckedCreateNestedManyWithoutListingInput
+  roomRequestResponses?: Prisma.RoomRequestResponseUncheckedCreateNestedManyWithoutListingInput
 }
 
 export type ListingUpdateInput = {
@@ -469,6 +474,7 @@ export type ListingUpdateInput = {
   amenities?: Prisma.ListingAmenityUpdateManyWithoutListingNestedInput
   leads?: Prisma.LeadUpdateManyWithoutListingNestedInput
   savedBy?: Prisma.SavedListingUpdateManyWithoutListingNestedInput
+  roomRequestResponses?: Prisma.RoomRequestResponseUpdateManyWithoutListingNestedInput
 }
 
 export type ListingUncheckedUpdateInput = {
@@ -492,6 +498,7 @@ export type ListingUncheckedUpdateInput = {
   amenities?: Prisma.ListingAmenityUncheckedUpdateManyWithoutListingNestedInput
   leads?: Prisma.LeadUncheckedUpdateManyWithoutListingNestedInput
   savedBy?: Prisma.SavedListingUncheckedUpdateManyWithoutListingNestedInput
+  roomRequestResponses?: Prisma.RoomRequestResponseUncheckedUpdateManyWithoutListingNestedInput
 }
 
 export type ListingCreateManyInput = {
@@ -621,6 +628,11 @@ export type ListingSumOrderByAggregateInput = {
 export type ListingScalarRelationFilter = {
   is?: Prisma.ListingWhereInput
   isNot?: Prisma.ListingWhereInput
+}
+
+export type ListingNullableScalarRelationFilter = {
+  is?: Prisma.ListingWhereInput | null
+  isNot?: Prisma.ListingWhereInput | null
 }
 
 export type ListingCreateNestedManyWithoutAgentInput = {
@@ -781,6 +793,22 @@ export type ListingUpdateOneRequiredWithoutSavedByNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.ListingUpdateToOneWithWhereWithoutSavedByInput, Prisma.ListingUpdateWithoutSavedByInput>, Prisma.ListingUncheckedUpdateWithoutSavedByInput>
 }
 
+export type ListingCreateNestedOneWithoutRoomRequestResponsesInput = {
+  create?: Prisma.XOR<Prisma.ListingCreateWithoutRoomRequestResponsesInput, Prisma.ListingUncheckedCreateWithoutRoomRequestResponsesInput>
+  connectOrCreate?: Prisma.ListingCreateOrConnectWithoutRoomRequestResponsesInput
+  connect?: Prisma.ListingWhereUniqueInput
+}
+
+export type ListingUpdateOneWithoutRoomRequestResponsesNestedInput = {
+  create?: Prisma.XOR<Prisma.ListingCreateWithoutRoomRequestResponsesInput, Prisma.ListingUncheckedCreateWithoutRoomRequestResponsesInput>
+  connectOrCreate?: Prisma.ListingCreateOrConnectWithoutRoomRequestResponsesInput
+  upsert?: Prisma.ListingUpsertWithoutRoomRequestResponsesInput
+  disconnect?: Prisma.ListingWhereInput | boolean
+  delete?: Prisma.ListingWhereInput | boolean
+  connect?: Prisma.ListingWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ListingUpdateToOneWithWhereWithoutRoomRequestResponsesInput, Prisma.ListingUpdateWithoutRoomRequestResponsesInput>, Prisma.ListingUncheckedUpdateWithoutRoomRequestResponsesInput>
+}
+
 export type ListingCreateWithoutAgentInput = {
   id?: string
   title: string
@@ -801,6 +829,7 @@ export type ListingCreateWithoutAgentInput = {
   amenities?: Prisma.ListingAmenityCreateNestedManyWithoutListingInput
   leads?: Prisma.LeadCreateNestedManyWithoutListingInput
   savedBy?: Prisma.SavedListingCreateNestedManyWithoutListingInput
+  roomRequestResponses?: Prisma.RoomRequestResponseCreateNestedManyWithoutListingInput
 }
 
 export type ListingUncheckedCreateWithoutAgentInput = {
@@ -823,6 +852,7 @@ export type ListingUncheckedCreateWithoutAgentInput = {
   amenities?: Prisma.ListingAmenityUncheckedCreateNestedManyWithoutListingInput
   leads?: Prisma.LeadUncheckedCreateNestedManyWithoutListingInput
   savedBy?: Prisma.SavedListingUncheckedCreateNestedManyWithoutListingInput
+  roomRequestResponses?: Prisma.RoomRequestResponseUncheckedCreateNestedManyWithoutListingInput
 }
 
 export type ListingCreateOrConnectWithoutAgentInput = {
@@ -892,6 +922,7 @@ export type ListingCreateWithoutPropertyInput = {
   amenities?: Prisma.ListingAmenityCreateNestedManyWithoutListingInput
   leads?: Prisma.LeadCreateNestedManyWithoutListingInput
   savedBy?: Prisma.SavedListingCreateNestedManyWithoutListingInput
+  roomRequestResponses?: Prisma.RoomRequestResponseCreateNestedManyWithoutListingInput
 }
 
 export type ListingUncheckedCreateWithoutPropertyInput = {
@@ -914,6 +945,7 @@ export type ListingUncheckedCreateWithoutPropertyInput = {
   amenities?: Prisma.ListingAmenityUncheckedCreateNestedManyWithoutListingInput
   leads?: Prisma.LeadUncheckedCreateNestedManyWithoutListingInput
   savedBy?: Prisma.SavedListingUncheckedCreateNestedManyWithoutListingInput
+  roomRequestResponses?: Prisma.RoomRequestResponseUncheckedCreateNestedManyWithoutListingInput
 }
 
 export type ListingCreateOrConnectWithoutPropertyInput = {
@@ -962,6 +994,7 @@ export type ListingCreateWithoutAmenitiesInput = {
   videos?: Prisma.ListingVideoCreateNestedManyWithoutListingInput
   leads?: Prisma.LeadCreateNestedManyWithoutListingInput
   savedBy?: Prisma.SavedListingCreateNestedManyWithoutListingInput
+  roomRequestResponses?: Prisma.RoomRequestResponseCreateNestedManyWithoutListingInput
 }
 
 export type ListingUncheckedCreateWithoutAmenitiesInput = {
@@ -984,6 +1017,7 @@ export type ListingUncheckedCreateWithoutAmenitiesInput = {
   videos?: Prisma.ListingVideoUncheckedCreateNestedManyWithoutListingInput
   leads?: Prisma.LeadUncheckedCreateNestedManyWithoutListingInput
   savedBy?: Prisma.SavedListingUncheckedCreateNestedManyWithoutListingInput
+  roomRequestResponses?: Prisma.RoomRequestResponseUncheckedCreateNestedManyWithoutListingInput
 }
 
 export type ListingCreateOrConnectWithoutAmenitiesInput = {
@@ -1022,6 +1056,7 @@ export type ListingUpdateWithoutAmenitiesInput = {
   videos?: Prisma.ListingVideoUpdateManyWithoutListingNestedInput
   leads?: Prisma.LeadUpdateManyWithoutListingNestedInput
   savedBy?: Prisma.SavedListingUpdateManyWithoutListingNestedInput
+  roomRequestResponses?: Prisma.RoomRequestResponseUpdateManyWithoutListingNestedInput
 }
 
 export type ListingUncheckedUpdateWithoutAmenitiesInput = {
@@ -1044,6 +1079,7 @@ export type ListingUncheckedUpdateWithoutAmenitiesInput = {
   videos?: Prisma.ListingVideoUncheckedUpdateManyWithoutListingNestedInput
   leads?: Prisma.LeadUncheckedUpdateManyWithoutListingNestedInput
   savedBy?: Prisma.SavedListingUncheckedUpdateManyWithoutListingNestedInput
+  roomRequestResponses?: Prisma.RoomRequestResponseUncheckedUpdateManyWithoutListingNestedInput
 }
 
 export type ListingCreateWithoutImagesInput = {
@@ -1066,6 +1102,7 @@ export type ListingCreateWithoutImagesInput = {
   amenities?: Prisma.ListingAmenityCreateNestedManyWithoutListingInput
   leads?: Prisma.LeadCreateNestedManyWithoutListingInput
   savedBy?: Prisma.SavedListingCreateNestedManyWithoutListingInput
+  roomRequestResponses?: Prisma.RoomRequestResponseCreateNestedManyWithoutListingInput
 }
 
 export type ListingUncheckedCreateWithoutImagesInput = {
@@ -1088,6 +1125,7 @@ export type ListingUncheckedCreateWithoutImagesInput = {
   amenities?: Prisma.ListingAmenityUncheckedCreateNestedManyWithoutListingInput
   leads?: Prisma.LeadUncheckedCreateNestedManyWithoutListingInput
   savedBy?: Prisma.SavedListingUncheckedCreateNestedManyWithoutListingInput
+  roomRequestResponses?: Prisma.RoomRequestResponseUncheckedCreateNestedManyWithoutListingInput
 }
 
 export type ListingCreateOrConnectWithoutImagesInput = {
@@ -1126,6 +1164,7 @@ export type ListingUpdateWithoutImagesInput = {
   amenities?: Prisma.ListingAmenityUpdateManyWithoutListingNestedInput
   leads?: Prisma.LeadUpdateManyWithoutListingNestedInput
   savedBy?: Prisma.SavedListingUpdateManyWithoutListingNestedInput
+  roomRequestResponses?: Prisma.RoomRequestResponseUpdateManyWithoutListingNestedInput
 }
 
 export type ListingUncheckedUpdateWithoutImagesInput = {
@@ -1148,6 +1187,7 @@ export type ListingUncheckedUpdateWithoutImagesInput = {
   amenities?: Prisma.ListingAmenityUncheckedUpdateManyWithoutListingNestedInput
   leads?: Prisma.LeadUncheckedUpdateManyWithoutListingNestedInput
   savedBy?: Prisma.SavedListingUncheckedUpdateManyWithoutListingNestedInput
+  roomRequestResponses?: Prisma.RoomRequestResponseUncheckedUpdateManyWithoutListingNestedInput
 }
 
 export type ListingCreateWithoutVideosInput = {
@@ -1170,6 +1210,7 @@ export type ListingCreateWithoutVideosInput = {
   amenities?: Prisma.ListingAmenityCreateNestedManyWithoutListingInput
   leads?: Prisma.LeadCreateNestedManyWithoutListingInput
   savedBy?: Prisma.SavedListingCreateNestedManyWithoutListingInput
+  roomRequestResponses?: Prisma.RoomRequestResponseCreateNestedManyWithoutListingInput
 }
 
 export type ListingUncheckedCreateWithoutVideosInput = {
@@ -1192,6 +1233,7 @@ export type ListingUncheckedCreateWithoutVideosInput = {
   amenities?: Prisma.ListingAmenityUncheckedCreateNestedManyWithoutListingInput
   leads?: Prisma.LeadUncheckedCreateNestedManyWithoutListingInput
   savedBy?: Prisma.SavedListingUncheckedCreateNestedManyWithoutListingInput
+  roomRequestResponses?: Prisma.RoomRequestResponseUncheckedCreateNestedManyWithoutListingInput
 }
 
 export type ListingCreateOrConnectWithoutVideosInput = {
@@ -1230,6 +1272,7 @@ export type ListingUpdateWithoutVideosInput = {
   amenities?: Prisma.ListingAmenityUpdateManyWithoutListingNestedInput
   leads?: Prisma.LeadUpdateManyWithoutListingNestedInput
   savedBy?: Prisma.SavedListingUpdateManyWithoutListingNestedInput
+  roomRequestResponses?: Prisma.RoomRequestResponseUpdateManyWithoutListingNestedInput
 }
 
 export type ListingUncheckedUpdateWithoutVideosInput = {
@@ -1252,6 +1295,7 @@ export type ListingUncheckedUpdateWithoutVideosInput = {
   amenities?: Prisma.ListingAmenityUncheckedUpdateManyWithoutListingNestedInput
   leads?: Prisma.LeadUncheckedUpdateManyWithoutListingNestedInput
   savedBy?: Prisma.SavedListingUncheckedUpdateManyWithoutListingNestedInput
+  roomRequestResponses?: Prisma.RoomRequestResponseUncheckedUpdateManyWithoutListingNestedInput
 }
 
 export type ListingCreateWithoutLeadsInput = {
@@ -1274,6 +1318,7 @@ export type ListingCreateWithoutLeadsInput = {
   videos?: Prisma.ListingVideoCreateNestedManyWithoutListingInput
   amenities?: Prisma.ListingAmenityCreateNestedManyWithoutListingInput
   savedBy?: Prisma.SavedListingCreateNestedManyWithoutListingInput
+  roomRequestResponses?: Prisma.RoomRequestResponseCreateNestedManyWithoutListingInput
 }
 
 export type ListingUncheckedCreateWithoutLeadsInput = {
@@ -1296,6 +1341,7 @@ export type ListingUncheckedCreateWithoutLeadsInput = {
   videos?: Prisma.ListingVideoUncheckedCreateNestedManyWithoutListingInput
   amenities?: Prisma.ListingAmenityUncheckedCreateNestedManyWithoutListingInput
   savedBy?: Prisma.SavedListingUncheckedCreateNestedManyWithoutListingInput
+  roomRequestResponses?: Prisma.RoomRequestResponseUncheckedCreateNestedManyWithoutListingInput
 }
 
 export type ListingCreateOrConnectWithoutLeadsInput = {
@@ -1334,6 +1380,7 @@ export type ListingUpdateWithoutLeadsInput = {
   videos?: Prisma.ListingVideoUpdateManyWithoutListingNestedInput
   amenities?: Prisma.ListingAmenityUpdateManyWithoutListingNestedInput
   savedBy?: Prisma.SavedListingUpdateManyWithoutListingNestedInput
+  roomRequestResponses?: Prisma.RoomRequestResponseUpdateManyWithoutListingNestedInput
 }
 
 export type ListingUncheckedUpdateWithoutLeadsInput = {
@@ -1356,6 +1403,7 @@ export type ListingUncheckedUpdateWithoutLeadsInput = {
   videos?: Prisma.ListingVideoUncheckedUpdateManyWithoutListingNestedInput
   amenities?: Prisma.ListingAmenityUncheckedUpdateManyWithoutListingNestedInput
   savedBy?: Prisma.SavedListingUncheckedUpdateManyWithoutListingNestedInput
+  roomRequestResponses?: Prisma.RoomRequestResponseUncheckedUpdateManyWithoutListingNestedInput
 }
 
 export type ListingCreateWithoutSavedByInput = {
@@ -1378,6 +1426,7 @@ export type ListingCreateWithoutSavedByInput = {
   videos?: Prisma.ListingVideoCreateNestedManyWithoutListingInput
   amenities?: Prisma.ListingAmenityCreateNestedManyWithoutListingInput
   leads?: Prisma.LeadCreateNestedManyWithoutListingInput
+  roomRequestResponses?: Prisma.RoomRequestResponseCreateNestedManyWithoutListingInput
 }
 
 export type ListingUncheckedCreateWithoutSavedByInput = {
@@ -1400,6 +1449,7 @@ export type ListingUncheckedCreateWithoutSavedByInput = {
   videos?: Prisma.ListingVideoUncheckedCreateNestedManyWithoutListingInput
   amenities?: Prisma.ListingAmenityUncheckedCreateNestedManyWithoutListingInput
   leads?: Prisma.LeadUncheckedCreateNestedManyWithoutListingInput
+  roomRequestResponses?: Prisma.RoomRequestResponseUncheckedCreateNestedManyWithoutListingInput
 }
 
 export type ListingCreateOrConnectWithoutSavedByInput = {
@@ -1438,6 +1488,7 @@ export type ListingUpdateWithoutSavedByInput = {
   videos?: Prisma.ListingVideoUpdateManyWithoutListingNestedInput
   amenities?: Prisma.ListingAmenityUpdateManyWithoutListingNestedInput
   leads?: Prisma.LeadUpdateManyWithoutListingNestedInput
+  roomRequestResponses?: Prisma.RoomRequestResponseUpdateManyWithoutListingNestedInput
 }
 
 export type ListingUncheckedUpdateWithoutSavedByInput = {
@@ -1460,6 +1511,115 @@ export type ListingUncheckedUpdateWithoutSavedByInput = {
   videos?: Prisma.ListingVideoUncheckedUpdateManyWithoutListingNestedInput
   amenities?: Prisma.ListingAmenityUncheckedUpdateManyWithoutListingNestedInput
   leads?: Prisma.LeadUncheckedUpdateManyWithoutListingNestedInput
+  roomRequestResponses?: Prisma.RoomRequestResponseUncheckedUpdateManyWithoutListingNestedInput
+}
+
+export type ListingCreateWithoutRoomRequestResponsesInput = {
+  id?: string
+  title: string
+  description?: string | null
+  rentAmount: number
+  rentPeriod?: string
+  propertyType: string
+  availabilityDate?: Date | string | null
+  status?: $Enums.ListingStatus
+  verificationStatus?: $Enums.VerificationStatus
+  publishedAt?: Date | string | null
+  expiresAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  property: Prisma.PropertyCreateNestedOneWithoutListingsInput
+  agent: Prisma.AgentProfileCreateNestedOneWithoutListingsInput
+  images?: Prisma.ListingImageCreateNestedManyWithoutListingInput
+  videos?: Prisma.ListingVideoCreateNestedManyWithoutListingInput
+  amenities?: Prisma.ListingAmenityCreateNestedManyWithoutListingInput
+  leads?: Prisma.LeadCreateNestedManyWithoutListingInput
+  savedBy?: Prisma.SavedListingCreateNestedManyWithoutListingInput
+}
+
+export type ListingUncheckedCreateWithoutRoomRequestResponsesInput = {
+  id?: string
+  propertyId: string
+  agentId: string
+  title: string
+  description?: string | null
+  rentAmount: number
+  rentPeriod?: string
+  propertyType: string
+  availabilityDate?: Date | string | null
+  status?: $Enums.ListingStatus
+  verificationStatus?: $Enums.VerificationStatus
+  publishedAt?: Date | string | null
+  expiresAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  images?: Prisma.ListingImageUncheckedCreateNestedManyWithoutListingInput
+  videos?: Prisma.ListingVideoUncheckedCreateNestedManyWithoutListingInput
+  amenities?: Prisma.ListingAmenityUncheckedCreateNestedManyWithoutListingInput
+  leads?: Prisma.LeadUncheckedCreateNestedManyWithoutListingInput
+  savedBy?: Prisma.SavedListingUncheckedCreateNestedManyWithoutListingInput
+}
+
+export type ListingCreateOrConnectWithoutRoomRequestResponsesInput = {
+  where: Prisma.ListingWhereUniqueInput
+  create: Prisma.XOR<Prisma.ListingCreateWithoutRoomRequestResponsesInput, Prisma.ListingUncheckedCreateWithoutRoomRequestResponsesInput>
+}
+
+export type ListingUpsertWithoutRoomRequestResponsesInput = {
+  update: Prisma.XOR<Prisma.ListingUpdateWithoutRoomRequestResponsesInput, Prisma.ListingUncheckedUpdateWithoutRoomRequestResponsesInput>
+  create: Prisma.XOR<Prisma.ListingCreateWithoutRoomRequestResponsesInput, Prisma.ListingUncheckedCreateWithoutRoomRequestResponsesInput>
+  where?: Prisma.ListingWhereInput
+}
+
+export type ListingUpdateToOneWithWhereWithoutRoomRequestResponsesInput = {
+  where?: Prisma.ListingWhereInput
+  data: Prisma.XOR<Prisma.ListingUpdateWithoutRoomRequestResponsesInput, Prisma.ListingUncheckedUpdateWithoutRoomRequestResponsesInput>
+}
+
+export type ListingUpdateWithoutRoomRequestResponsesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rentAmount?: Prisma.IntFieldUpdateOperationsInput | number
+  rentPeriod?: Prisma.StringFieldUpdateOperationsInput | string
+  propertyType?: Prisma.StringFieldUpdateOperationsInput | string
+  availabilityDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  status?: Prisma.EnumListingStatusFieldUpdateOperationsInput | $Enums.ListingStatus
+  verificationStatus?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
+  publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  property?: Prisma.PropertyUpdateOneRequiredWithoutListingsNestedInput
+  agent?: Prisma.AgentProfileUpdateOneRequiredWithoutListingsNestedInput
+  images?: Prisma.ListingImageUpdateManyWithoutListingNestedInput
+  videos?: Prisma.ListingVideoUpdateManyWithoutListingNestedInput
+  amenities?: Prisma.ListingAmenityUpdateManyWithoutListingNestedInput
+  leads?: Prisma.LeadUpdateManyWithoutListingNestedInput
+  savedBy?: Prisma.SavedListingUpdateManyWithoutListingNestedInput
+}
+
+export type ListingUncheckedUpdateWithoutRoomRequestResponsesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  propertyId?: Prisma.StringFieldUpdateOperationsInput | string
+  agentId?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rentAmount?: Prisma.IntFieldUpdateOperationsInput | number
+  rentPeriod?: Prisma.StringFieldUpdateOperationsInput | string
+  propertyType?: Prisma.StringFieldUpdateOperationsInput | string
+  availabilityDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  status?: Prisma.EnumListingStatusFieldUpdateOperationsInput | $Enums.ListingStatus
+  verificationStatus?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
+  publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  images?: Prisma.ListingImageUncheckedUpdateManyWithoutListingNestedInput
+  videos?: Prisma.ListingVideoUncheckedUpdateManyWithoutListingNestedInput
+  amenities?: Prisma.ListingAmenityUncheckedUpdateManyWithoutListingNestedInput
+  leads?: Prisma.LeadUncheckedUpdateManyWithoutListingNestedInput
+  savedBy?: Prisma.SavedListingUncheckedUpdateManyWithoutListingNestedInput
 }
 
 export type ListingCreateManyAgentInput = {
@@ -1499,6 +1659,7 @@ export type ListingUpdateWithoutAgentInput = {
   amenities?: Prisma.ListingAmenityUpdateManyWithoutListingNestedInput
   leads?: Prisma.LeadUpdateManyWithoutListingNestedInput
   savedBy?: Prisma.SavedListingUpdateManyWithoutListingNestedInput
+  roomRequestResponses?: Prisma.RoomRequestResponseUpdateManyWithoutListingNestedInput
 }
 
 export type ListingUncheckedUpdateWithoutAgentInput = {
@@ -1521,6 +1682,7 @@ export type ListingUncheckedUpdateWithoutAgentInput = {
   amenities?: Prisma.ListingAmenityUncheckedUpdateManyWithoutListingNestedInput
   leads?: Prisma.LeadUncheckedUpdateManyWithoutListingNestedInput
   savedBy?: Prisma.SavedListingUncheckedUpdateManyWithoutListingNestedInput
+  roomRequestResponses?: Prisma.RoomRequestResponseUncheckedUpdateManyWithoutListingNestedInput
 }
 
 export type ListingUncheckedUpdateManyWithoutAgentInput = {
@@ -1577,6 +1739,7 @@ export type ListingUpdateWithoutPropertyInput = {
   amenities?: Prisma.ListingAmenityUpdateManyWithoutListingNestedInput
   leads?: Prisma.LeadUpdateManyWithoutListingNestedInput
   savedBy?: Prisma.SavedListingUpdateManyWithoutListingNestedInput
+  roomRequestResponses?: Prisma.RoomRequestResponseUpdateManyWithoutListingNestedInput
 }
 
 export type ListingUncheckedUpdateWithoutPropertyInput = {
@@ -1599,6 +1762,7 @@ export type ListingUncheckedUpdateWithoutPropertyInput = {
   amenities?: Prisma.ListingAmenityUncheckedUpdateManyWithoutListingNestedInput
   leads?: Prisma.LeadUncheckedUpdateManyWithoutListingNestedInput
   savedBy?: Prisma.SavedListingUncheckedUpdateManyWithoutListingNestedInput
+  roomRequestResponses?: Prisma.RoomRequestResponseUncheckedUpdateManyWithoutListingNestedInput
 }
 
 export type ListingUncheckedUpdateManyWithoutPropertyInput = {
@@ -1629,6 +1793,7 @@ export type ListingCountOutputType = {
   amenities: number
   leads: number
   savedBy: number
+  roomRequestResponses: number
 }
 
 export type ListingCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1637,6 +1802,7 @@ export type ListingCountOutputTypeSelect<ExtArgs extends runtime.Types.Extension
   amenities?: boolean | ListingCountOutputTypeCountAmenitiesArgs
   leads?: boolean | ListingCountOutputTypeCountLeadsArgs
   savedBy?: boolean | ListingCountOutputTypeCountSavedByArgs
+  roomRequestResponses?: boolean | ListingCountOutputTypeCountRoomRequestResponsesArgs
 }
 
 /**
@@ -1684,6 +1850,13 @@ export type ListingCountOutputTypeCountSavedByArgs<ExtArgs extends runtime.Types
   where?: Prisma.SavedListingWhereInput
 }
 
+/**
+ * ListingCountOutputType without action
+ */
+export type ListingCountOutputTypeCountRoomRequestResponsesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.RoomRequestResponseWhereInput
+}
+
 
 export type ListingSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1708,6 +1881,7 @@ export type ListingSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   amenities?: boolean | Prisma.Listing$amenitiesArgs<ExtArgs>
   leads?: boolean | Prisma.Listing$leadsArgs<ExtArgs>
   savedBy?: boolean | Prisma.Listing$savedByArgs<ExtArgs>
+  roomRequestResponses?: boolean | Prisma.Listing$roomRequestResponsesArgs<ExtArgs>
   _count?: boolean | Prisma.ListingCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["listing"]>
 
@@ -1778,6 +1952,7 @@ export type ListingInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs
   amenities?: boolean | Prisma.Listing$amenitiesArgs<ExtArgs>
   leads?: boolean | Prisma.Listing$leadsArgs<ExtArgs>
   savedBy?: boolean | Prisma.Listing$savedByArgs<ExtArgs>
+  roomRequestResponses?: boolean | Prisma.Listing$roomRequestResponsesArgs<ExtArgs>
   _count?: boolean | Prisma.ListingCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type ListingIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1799,6 +1974,7 @@ export type $ListingPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     amenities: Prisma.$ListingAmenityPayload<ExtArgs>[]
     leads: Prisma.$LeadPayload<ExtArgs>[]
     savedBy: Prisma.$SavedListingPayload<ExtArgs>[]
+    roomRequestResponses: Prisma.$RoomRequestResponsePayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -2217,6 +2393,7 @@ export interface Prisma__ListingClient<T, Null = never, ExtArgs extends runtime.
   amenities<T extends Prisma.Listing$amenitiesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Listing$amenitiesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ListingAmenityPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   leads<T extends Prisma.Listing$leadsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Listing$leadsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   savedBy<T extends Prisma.Listing$savedByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Listing$savedByArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SavedListingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  roomRequestResponses<T extends Prisma.Listing$roomRequestResponsesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Listing$roomRequestResponsesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RoomRequestResponsePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2779,6 +2956,30 @@ export type Listing$savedByArgs<ExtArgs extends runtime.Types.Extensions.Interna
   take?: number
   skip?: number
   distinct?: Prisma.SavedListingScalarFieldEnum | Prisma.SavedListingScalarFieldEnum[]
+}
+
+/**
+ * Listing.roomRequestResponses
+ */
+export type Listing$roomRequestResponsesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the RoomRequestResponse
+   */
+  select?: Prisma.RoomRequestResponseSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the RoomRequestResponse
+   */
+  omit?: Prisma.RoomRequestResponseOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.RoomRequestResponseInclude<ExtArgs> | null
+  where?: Prisma.RoomRequestResponseWhereInput
+  orderBy?: Prisma.RoomRequestResponseOrderByWithRelationInput | Prisma.RoomRequestResponseOrderByWithRelationInput[]
+  cursor?: Prisma.RoomRequestResponseWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.RoomRequestResponseScalarFieldEnum | Prisma.RoomRequestResponseScalarFieldEnum[]
 }
 
 /**

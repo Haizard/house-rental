@@ -268,6 +268,7 @@ export type AgentProfileWhereInput = {
   statuses?: Prisma.AgentStatusListRelationFilter
   reviews?: Prisma.ReviewListRelationFilter
   contactReveals?: Prisma.ContactRevealListRelationFilter
+  roomRequestResponses?: Prisma.RoomRequestResponseListRelationFilter
 }
 
 export type AgentProfileOrderByWithRelationInput = {
@@ -289,6 +290,7 @@ export type AgentProfileOrderByWithRelationInput = {
   statuses?: Prisma.AgentStatusOrderByRelationAggregateInput
   reviews?: Prisma.ReviewOrderByRelationAggregateInput
   contactReveals?: Prisma.ContactRevealOrderByRelationAggregateInput
+  roomRequestResponses?: Prisma.RoomRequestResponseOrderByRelationAggregateInput
 }
 
 export type AgentProfileWhereUniqueInput = Prisma.AtLeast<{
@@ -313,6 +315,7 @@ export type AgentProfileWhereUniqueInput = Prisma.AtLeast<{
   statuses?: Prisma.AgentStatusListRelationFilter
   reviews?: Prisma.ReviewListRelationFilter
   contactReveals?: Prisma.ContactRevealListRelationFilter
+  roomRequestResponses?: Prisma.RoomRequestResponseListRelationFilter
 }, "id" | "userId">
 
 export type AgentProfileOrderByWithAggregationInput = {
@@ -367,6 +370,7 @@ export type AgentProfileCreateInput = {
   statuses?: Prisma.AgentStatusCreateNestedManyWithoutAgentInput
   reviews?: Prisma.ReviewCreateNestedManyWithoutAgentInput
   contactReveals?: Prisma.ContactRevealCreateNestedManyWithoutAgentInput
+  roomRequestResponses?: Prisma.RoomRequestResponseCreateNestedManyWithoutAgentInput
 }
 
 export type AgentProfileUncheckedCreateInput = {
@@ -387,6 +391,7 @@ export type AgentProfileUncheckedCreateInput = {
   statuses?: Prisma.AgentStatusUncheckedCreateNestedManyWithoutAgentInput
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutAgentInput
   contactReveals?: Prisma.ContactRevealUncheckedCreateNestedManyWithoutAgentInput
+  roomRequestResponses?: Prisma.RoomRequestResponseUncheckedCreateNestedManyWithoutAgentInput
 }
 
 export type AgentProfileUpdateInput = {
@@ -407,6 +412,7 @@ export type AgentProfileUpdateInput = {
   statuses?: Prisma.AgentStatusUpdateManyWithoutAgentNestedInput
   reviews?: Prisma.ReviewUpdateManyWithoutAgentNestedInput
   contactReveals?: Prisma.ContactRevealUpdateManyWithoutAgentNestedInput
+  roomRequestResponses?: Prisma.RoomRequestResponseUpdateManyWithoutAgentNestedInput
 }
 
 export type AgentProfileUncheckedUpdateInput = {
@@ -427,6 +433,7 @@ export type AgentProfileUncheckedUpdateInput = {
   statuses?: Prisma.AgentStatusUncheckedUpdateManyWithoutAgentNestedInput
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutAgentNestedInput
   contactReveals?: Prisma.ContactRevealUncheckedUpdateManyWithoutAgentNestedInput
+  roomRequestResponses?: Prisma.RoomRequestResponseUncheckedUpdateManyWithoutAgentNestedInput
 }
 
 export type AgentProfileCreateManyInput = {
@@ -662,6 +669,20 @@ export type AgentProfileUpdateOneRequiredWithoutReviewsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.AgentProfileUpdateToOneWithWhereWithoutReviewsInput, Prisma.AgentProfileUpdateWithoutReviewsInput>, Prisma.AgentProfileUncheckedUpdateWithoutReviewsInput>
 }
 
+export type AgentProfileCreateNestedOneWithoutRoomRequestResponsesInput = {
+  create?: Prisma.XOR<Prisma.AgentProfileCreateWithoutRoomRequestResponsesInput, Prisma.AgentProfileUncheckedCreateWithoutRoomRequestResponsesInput>
+  connectOrCreate?: Prisma.AgentProfileCreateOrConnectWithoutRoomRequestResponsesInput
+  connect?: Prisma.AgentProfileWhereUniqueInput
+}
+
+export type AgentProfileUpdateOneRequiredWithoutRoomRequestResponsesNestedInput = {
+  create?: Prisma.XOR<Prisma.AgentProfileCreateWithoutRoomRequestResponsesInput, Prisma.AgentProfileUncheckedCreateWithoutRoomRequestResponsesInput>
+  connectOrCreate?: Prisma.AgentProfileCreateOrConnectWithoutRoomRequestResponsesInput
+  upsert?: Prisma.AgentProfileUpsertWithoutRoomRequestResponsesInput
+  connect?: Prisma.AgentProfileWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.AgentProfileUpdateToOneWithWhereWithoutRoomRequestResponsesInput, Prisma.AgentProfileUpdateWithoutRoomRequestResponsesInput>, Prisma.AgentProfileUncheckedUpdateWithoutRoomRequestResponsesInput>
+}
+
 export type AgentProfileCreateNestedOneWithoutContactRevealsInput = {
   create?: Prisma.XOR<Prisma.AgentProfileCreateWithoutContactRevealsInput, Prisma.AgentProfileUncheckedCreateWithoutContactRevealsInput>
   connectOrCreate?: Prisma.AgentProfileCreateOrConnectWithoutContactRevealsInput
@@ -693,6 +714,7 @@ export type AgentProfileCreateWithoutUserInput = {
   statuses?: Prisma.AgentStatusCreateNestedManyWithoutAgentInput
   reviews?: Prisma.ReviewCreateNestedManyWithoutAgentInput
   contactReveals?: Prisma.ContactRevealCreateNestedManyWithoutAgentInput
+  roomRequestResponses?: Prisma.RoomRequestResponseCreateNestedManyWithoutAgentInput
 }
 
 export type AgentProfileUncheckedCreateWithoutUserInput = {
@@ -712,6 +734,7 @@ export type AgentProfileUncheckedCreateWithoutUserInput = {
   statuses?: Prisma.AgentStatusUncheckedCreateNestedManyWithoutAgentInput
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutAgentInput
   contactReveals?: Prisma.ContactRevealUncheckedCreateNestedManyWithoutAgentInput
+  roomRequestResponses?: Prisma.RoomRequestResponseUncheckedCreateNestedManyWithoutAgentInput
 }
 
 export type AgentProfileCreateOrConnectWithoutUserInput = {
@@ -747,6 +770,7 @@ export type AgentProfileUpdateWithoutUserInput = {
   statuses?: Prisma.AgentStatusUpdateManyWithoutAgentNestedInput
   reviews?: Prisma.ReviewUpdateManyWithoutAgentNestedInput
   contactReveals?: Prisma.ContactRevealUpdateManyWithoutAgentNestedInput
+  roomRequestResponses?: Prisma.RoomRequestResponseUpdateManyWithoutAgentNestedInput
 }
 
 export type AgentProfileUncheckedUpdateWithoutUserInput = {
@@ -766,6 +790,7 @@ export type AgentProfileUncheckedUpdateWithoutUserInput = {
   statuses?: Prisma.AgentStatusUncheckedUpdateManyWithoutAgentNestedInput
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutAgentNestedInput
   contactReveals?: Prisma.ContactRevealUncheckedUpdateManyWithoutAgentNestedInput
+  roomRequestResponses?: Prisma.RoomRequestResponseUncheckedUpdateManyWithoutAgentNestedInput
 }
 
 export type AgentProfileCreateWithoutPropertiesInput = {
@@ -785,6 +810,7 @@ export type AgentProfileCreateWithoutPropertiesInput = {
   statuses?: Prisma.AgentStatusCreateNestedManyWithoutAgentInput
   reviews?: Prisma.ReviewCreateNestedManyWithoutAgentInput
   contactReveals?: Prisma.ContactRevealCreateNestedManyWithoutAgentInput
+  roomRequestResponses?: Prisma.RoomRequestResponseCreateNestedManyWithoutAgentInput
 }
 
 export type AgentProfileUncheckedCreateWithoutPropertiesInput = {
@@ -804,6 +830,7 @@ export type AgentProfileUncheckedCreateWithoutPropertiesInput = {
   statuses?: Prisma.AgentStatusUncheckedCreateNestedManyWithoutAgentInput
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutAgentInput
   contactReveals?: Prisma.ContactRevealUncheckedCreateNestedManyWithoutAgentInput
+  roomRequestResponses?: Prisma.RoomRequestResponseUncheckedCreateNestedManyWithoutAgentInput
 }
 
 export type AgentProfileCreateOrConnectWithoutPropertiesInput = {
@@ -839,6 +866,7 @@ export type AgentProfileUpdateWithoutPropertiesInput = {
   statuses?: Prisma.AgentStatusUpdateManyWithoutAgentNestedInput
   reviews?: Prisma.ReviewUpdateManyWithoutAgentNestedInput
   contactReveals?: Prisma.ContactRevealUpdateManyWithoutAgentNestedInput
+  roomRequestResponses?: Prisma.RoomRequestResponseUpdateManyWithoutAgentNestedInput
 }
 
 export type AgentProfileUncheckedUpdateWithoutPropertiesInput = {
@@ -858,6 +886,7 @@ export type AgentProfileUncheckedUpdateWithoutPropertiesInput = {
   statuses?: Prisma.AgentStatusUncheckedUpdateManyWithoutAgentNestedInput
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutAgentNestedInput
   contactReveals?: Prisma.ContactRevealUncheckedUpdateManyWithoutAgentNestedInput
+  roomRequestResponses?: Prisma.RoomRequestResponseUncheckedUpdateManyWithoutAgentNestedInput
 }
 
 export type AgentProfileCreateWithoutListingsInput = {
@@ -877,6 +906,7 @@ export type AgentProfileCreateWithoutListingsInput = {
   statuses?: Prisma.AgentStatusCreateNestedManyWithoutAgentInput
   reviews?: Prisma.ReviewCreateNestedManyWithoutAgentInput
   contactReveals?: Prisma.ContactRevealCreateNestedManyWithoutAgentInput
+  roomRequestResponses?: Prisma.RoomRequestResponseCreateNestedManyWithoutAgentInput
 }
 
 export type AgentProfileUncheckedCreateWithoutListingsInput = {
@@ -896,6 +926,7 @@ export type AgentProfileUncheckedCreateWithoutListingsInput = {
   statuses?: Prisma.AgentStatusUncheckedCreateNestedManyWithoutAgentInput
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutAgentInput
   contactReveals?: Prisma.ContactRevealUncheckedCreateNestedManyWithoutAgentInput
+  roomRequestResponses?: Prisma.RoomRequestResponseUncheckedCreateNestedManyWithoutAgentInput
 }
 
 export type AgentProfileCreateOrConnectWithoutListingsInput = {
@@ -931,6 +962,7 @@ export type AgentProfileUpdateWithoutListingsInput = {
   statuses?: Prisma.AgentStatusUpdateManyWithoutAgentNestedInput
   reviews?: Prisma.ReviewUpdateManyWithoutAgentNestedInput
   contactReveals?: Prisma.ContactRevealUpdateManyWithoutAgentNestedInput
+  roomRequestResponses?: Prisma.RoomRequestResponseUpdateManyWithoutAgentNestedInput
 }
 
 export type AgentProfileUncheckedUpdateWithoutListingsInput = {
@@ -950,6 +982,7 @@ export type AgentProfileUncheckedUpdateWithoutListingsInput = {
   statuses?: Prisma.AgentStatusUncheckedUpdateManyWithoutAgentNestedInput
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutAgentNestedInput
   contactReveals?: Prisma.ContactRevealUncheckedUpdateManyWithoutAgentNestedInput
+  roomRequestResponses?: Prisma.RoomRequestResponseUncheckedUpdateManyWithoutAgentNestedInput
 }
 
 export type AgentProfileCreateWithoutLeadsInput = {
@@ -969,6 +1002,7 @@ export type AgentProfileCreateWithoutLeadsInput = {
   statuses?: Prisma.AgentStatusCreateNestedManyWithoutAgentInput
   reviews?: Prisma.ReviewCreateNestedManyWithoutAgentInput
   contactReveals?: Prisma.ContactRevealCreateNestedManyWithoutAgentInput
+  roomRequestResponses?: Prisma.RoomRequestResponseCreateNestedManyWithoutAgentInput
 }
 
 export type AgentProfileUncheckedCreateWithoutLeadsInput = {
@@ -988,6 +1022,7 @@ export type AgentProfileUncheckedCreateWithoutLeadsInput = {
   statuses?: Prisma.AgentStatusUncheckedCreateNestedManyWithoutAgentInput
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutAgentInput
   contactReveals?: Prisma.ContactRevealUncheckedCreateNestedManyWithoutAgentInput
+  roomRequestResponses?: Prisma.RoomRequestResponseUncheckedCreateNestedManyWithoutAgentInput
 }
 
 export type AgentProfileCreateOrConnectWithoutLeadsInput = {
@@ -1023,6 +1058,7 @@ export type AgentProfileUpdateWithoutLeadsInput = {
   statuses?: Prisma.AgentStatusUpdateManyWithoutAgentNestedInput
   reviews?: Prisma.ReviewUpdateManyWithoutAgentNestedInput
   contactReveals?: Prisma.ContactRevealUpdateManyWithoutAgentNestedInput
+  roomRequestResponses?: Prisma.RoomRequestResponseUpdateManyWithoutAgentNestedInput
 }
 
 export type AgentProfileUncheckedUpdateWithoutLeadsInput = {
@@ -1042,6 +1078,7 @@ export type AgentProfileUncheckedUpdateWithoutLeadsInput = {
   statuses?: Prisma.AgentStatusUncheckedUpdateManyWithoutAgentNestedInput
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutAgentNestedInput
   contactReveals?: Prisma.ContactRevealUncheckedUpdateManyWithoutAgentNestedInput
+  roomRequestResponses?: Prisma.RoomRequestResponseUncheckedUpdateManyWithoutAgentNestedInput
 }
 
 export type AgentProfileCreateWithoutSubscriptionsInput = {
@@ -1061,6 +1098,7 @@ export type AgentProfileCreateWithoutSubscriptionsInput = {
   statuses?: Prisma.AgentStatusCreateNestedManyWithoutAgentInput
   reviews?: Prisma.ReviewCreateNestedManyWithoutAgentInput
   contactReveals?: Prisma.ContactRevealCreateNestedManyWithoutAgentInput
+  roomRequestResponses?: Prisma.RoomRequestResponseCreateNestedManyWithoutAgentInput
 }
 
 export type AgentProfileUncheckedCreateWithoutSubscriptionsInput = {
@@ -1080,6 +1118,7 @@ export type AgentProfileUncheckedCreateWithoutSubscriptionsInput = {
   statuses?: Prisma.AgentStatusUncheckedCreateNestedManyWithoutAgentInput
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutAgentInput
   contactReveals?: Prisma.ContactRevealUncheckedCreateNestedManyWithoutAgentInput
+  roomRequestResponses?: Prisma.RoomRequestResponseUncheckedCreateNestedManyWithoutAgentInput
 }
 
 export type AgentProfileCreateOrConnectWithoutSubscriptionsInput = {
@@ -1115,6 +1154,7 @@ export type AgentProfileUpdateWithoutSubscriptionsInput = {
   statuses?: Prisma.AgentStatusUpdateManyWithoutAgentNestedInput
   reviews?: Prisma.ReviewUpdateManyWithoutAgentNestedInput
   contactReveals?: Prisma.ContactRevealUpdateManyWithoutAgentNestedInput
+  roomRequestResponses?: Prisma.RoomRequestResponseUpdateManyWithoutAgentNestedInput
 }
 
 export type AgentProfileUncheckedUpdateWithoutSubscriptionsInput = {
@@ -1134,6 +1174,7 @@ export type AgentProfileUncheckedUpdateWithoutSubscriptionsInput = {
   statuses?: Prisma.AgentStatusUncheckedUpdateManyWithoutAgentNestedInput
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutAgentNestedInput
   contactReveals?: Prisma.ContactRevealUncheckedUpdateManyWithoutAgentNestedInput
+  roomRequestResponses?: Prisma.RoomRequestResponseUncheckedUpdateManyWithoutAgentNestedInput
 }
 
 export type AgentProfileCreateWithoutStatusesInput = {
@@ -1153,6 +1194,7 @@ export type AgentProfileCreateWithoutStatusesInput = {
   subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutAgentInput
   reviews?: Prisma.ReviewCreateNestedManyWithoutAgentInput
   contactReveals?: Prisma.ContactRevealCreateNestedManyWithoutAgentInput
+  roomRequestResponses?: Prisma.RoomRequestResponseCreateNestedManyWithoutAgentInput
 }
 
 export type AgentProfileUncheckedCreateWithoutStatusesInput = {
@@ -1172,6 +1214,7 @@ export type AgentProfileUncheckedCreateWithoutStatusesInput = {
   subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutAgentInput
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutAgentInput
   contactReveals?: Prisma.ContactRevealUncheckedCreateNestedManyWithoutAgentInput
+  roomRequestResponses?: Prisma.RoomRequestResponseUncheckedCreateNestedManyWithoutAgentInput
 }
 
 export type AgentProfileCreateOrConnectWithoutStatusesInput = {
@@ -1207,6 +1250,7 @@ export type AgentProfileUpdateWithoutStatusesInput = {
   subscriptions?: Prisma.SubscriptionUpdateManyWithoutAgentNestedInput
   reviews?: Prisma.ReviewUpdateManyWithoutAgentNestedInput
   contactReveals?: Prisma.ContactRevealUpdateManyWithoutAgentNestedInput
+  roomRequestResponses?: Prisma.RoomRequestResponseUpdateManyWithoutAgentNestedInput
 }
 
 export type AgentProfileUncheckedUpdateWithoutStatusesInput = {
@@ -1226,6 +1270,7 @@ export type AgentProfileUncheckedUpdateWithoutStatusesInput = {
   subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutAgentNestedInput
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutAgentNestedInput
   contactReveals?: Prisma.ContactRevealUncheckedUpdateManyWithoutAgentNestedInput
+  roomRequestResponses?: Prisma.RoomRequestResponseUncheckedUpdateManyWithoutAgentNestedInput
 }
 
 export type AgentProfileCreateWithoutReviewsInput = {
@@ -1245,6 +1290,7 @@ export type AgentProfileCreateWithoutReviewsInput = {
   subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutAgentInput
   statuses?: Prisma.AgentStatusCreateNestedManyWithoutAgentInput
   contactReveals?: Prisma.ContactRevealCreateNestedManyWithoutAgentInput
+  roomRequestResponses?: Prisma.RoomRequestResponseCreateNestedManyWithoutAgentInput
 }
 
 export type AgentProfileUncheckedCreateWithoutReviewsInput = {
@@ -1264,6 +1310,7 @@ export type AgentProfileUncheckedCreateWithoutReviewsInput = {
   subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutAgentInput
   statuses?: Prisma.AgentStatusUncheckedCreateNestedManyWithoutAgentInput
   contactReveals?: Prisma.ContactRevealUncheckedCreateNestedManyWithoutAgentInput
+  roomRequestResponses?: Prisma.RoomRequestResponseUncheckedCreateNestedManyWithoutAgentInput
 }
 
 export type AgentProfileCreateOrConnectWithoutReviewsInput = {
@@ -1299,6 +1346,7 @@ export type AgentProfileUpdateWithoutReviewsInput = {
   subscriptions?: Prisma.SubscriptionUpdateManyWithoutAgentNestedInput
   statuses?: Prisma.AgentStatusUpdateManyWithoutAgentNestedInput
   contactReveals?: Prisma.ContactRevealUpdateManyWithoutAgentNestedInput
+  roomRequestResponses?: Prisma.RoomRequestResponseUpdateManyWithoutAgentNestedInput
 }
 
 export type AgentProfileUncheckedUpdateWithoutReviewsInput = {
@@ -1317,6 +1365,103 @@ export type AgentProfileUncheckedUpdateWithoutReviewsInput = {
   leads?: Prisma.LeadUncheckedUpdateManyWithoutAgentNestedInput
   subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutAgentNestedInput
   statuses?: Prisma.AgentStatusUncheckedUpdateManyWithoutAgentNestedInput
+  contactReveals?: Prisma.ContactRevealUncheckedUpdateManyWithoutAgentNestedInput
+  roomRequestResponses?: Prisma.RoomRequestResponseUncheckedUpdateManyWithoutAgentNestedInput
+}
+
+export type AgentProfileCreateWithoutRoomRequestResponsesInput = {
+  id?: string
+  businessName: string
+  bio?: string | null
+  photoUrl?: string | null
+  verification?: $Enums.VerificationStatus
+  rating?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalReviews?: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  user: Prisma.UserCreateNestedOneWithoutAgentProfileInput
+  listings?: Prisma.ListingCreateNestedManyWithoutAgentInput
+  properties?: Prisma.PropertyAgentCreateNestedManyWithoutAgentInput
+  leads?: Prisma.LeadCreateNestedManyWithoutAgentInput
+  subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutAgentInput
+  statuses?: Prisma.AgentStatusCreateNestedManyWithoutAgentInput
+  reviews?: Prisma.ReviewCreateNestedManyWithoutAgentInput
+  contactReveals?: Prisma.ContactRevealCreateNestedManyWithoutAgentInput
+}
+
+export type AgentProfileUncheckedCreateWithoutRoomRequestResponsesInput = {
+  id?: string
+  userId: string
+  businessName: string
+  bio?: string | null
+  photoUrl?: string | null
+  verification?: $Enums.VerificationStatus
+  rating?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalReviews?: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  listings?: Prisma.ListingUncheckedCreateNestedManyWithoutAgentInput
+  properties?: Prisma.PropertyAgentUncheckedCreateNestedManyWithoutAgentInput
+  leads?: Prisma.LeadUncheckedCreateNestedManyWithoutAgentInput
+  subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutAgentInput
+  statuses?: Prisma.AgentStatusUncheckedCreateNestedManyWithoutAgentInput
+  reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutAgentInput
+  contactReveals?: Prisma.ContactRevealUncheckedCreateNestedManyWithoutAgentInput
+}
+
+export type AgentProfileCreateOrConnectWithoutRoomRequestResponsesInput = {
+  where: Prisma.AgentProfileWhereUniqueInput
+  create: Prisma.XOR<Prisma.AgentProfileCreateWithoutRoomRequestResponsesInput, Prisma.AgentProfileUncheckedCreateWithoutRoomRequestResponsesInput>
+}
+
+export type AgentProfileUpsertWithoutRoomRequestResponsesInput = {
+  update: Prisma.XOR<Prisma.AgentProfileUpdateWithoutRoomRequestResponsesInput, Prisma.AgentProfileUncheckedUpdateWithoutRoomRequestResponsesInput>
+  create: Prisma.XOR<Prisma.AgentProfileCreateWithoutRoomRequestResponsesInput, Prisma.AgentProfileUncheckedCreateWithoutRoomRequestResponsesInput>
+  where?: Prisma.AgentProfileWhereInput
+}
+
+export type AgentProfileUpdateToOneWithWhereWithoutRoomRequestResponsesInput = {
+  where?: Prisma.AgentProfileWhereInput
+  data: Prisma.XOR<Prisma.AgentProfileUpdateWithoutRoomRequestResponsesInput, Prisma.AgentProfileUncheckedUpdateWithoutRoomRequestResponsesInput>
+}
+
+export type AgentProfileUpdateWithoutRoomRequestResponsesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  businessName?: Prisma.StringFieldUpdateOperationsInput | string
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  photoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  verification?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
+  rating?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalReviews?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  user?: Prisma.UserUpdateOneRequiredWithoutAgentProfileNestedInput
+  listings?: Prisma.ListingUpdateManyWithoutAgentNestedInput
+  properties?: Prisma.PropertyAgentUpdateManyWithoutAgentNestedInput
+  leads?: Prisma.LeadUpdateManyWithoutAgentNestedInput
+  subscriptions?: Prisma.SubscriptionUpdateManyWithoutAgentNestedInput
+  statuses?: Prisma.AgentStatusUpdateManyWithoutAgentNestedInput
+  reviews?: Prisma.ReviewUpdateManyWithoutAgentNestedInput
+  contactReveals?: Prisma.ContactRevealUpdateManyWithoutAgentNestedInput
+}
+
+export type AgentProfileUncheckedUpdateWithoutRoomRequestResponsesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  businessName?: Prisma.StringFieldUpdateOperationsInput | string
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  photoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  verification?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
+  rating?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalReviews?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  listings?: Prisma.ListingUncheckedUpdateManyWithoutAgentNestedInput
+  properties?: Prisma.PropertyAgentUncheckedUpdateManyWithoutAgentNestedInput
+  leads?: Prisma.LeadUncheckedUpdateManyWithoutAgentNestedInput
+  subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutAgentNestedInput
+  statuses?: Prisma.AgentStatusUncheckedUpdateManyWithoutAgentNestedInput
+  reviews?: Prisma.ReviewUncheckedUpdateManyWithoutAgentNestedInput
   contactReveals?: Prisma.ContactRevealUncheckedUpdateManyWithoutAgentNestedInput
 }
 
@@ -1337,6 +1482,7 @@ export type AgentProfileCreateWithoutContactRevealsInput = {
   subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutAgentInput
   statuses?: Prisma.AgentStatusCreateNestedManyWithoutAgentInput
   reviews?: Prisma.ReviewCreateNestedManyWithoutAgentInput
+  roomRequestResponses?: Prisma.RoomRequestResponseCreateNestedManyWithoutAgentInput
 }
 
 export type AgentProfileUncheckedCreateWithoutContactRevealsInput = {
@@ -1356,6 +1502,7 @@ export type AgentProfileUncheckedCreateWithoutContactRevealsInput = {
   subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutAgentInput
   statuses?: Prisma.AgentStatusUncheckedCreateNestedManyWithoutAgentInput
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutAgentInput
+  roomRequestResponses?: Prisma.RoomRequestResponseUncheckedCreateNestedManyWithoutAgentInput
 }
 
 export type AgentProfileCreateOrConnectWithoutContactRevealsInput = {
@@ -1391,6 +1538,7 @@ export type AgentProfileUpdateWithoutContactRevealsInput = {
   subscriptions?: Prisma.SubscriptionUpdateManyWithoutAgentNestedInput
   statuses?: Prisma.AgentStatusUpdateManyWithoutAgentNestedInput
   reviews?: Prisma.ReviewUpdateManyWithoutAgentNestedInput
+  roomRequestResponses?: Prisma.RoomRequestResponseUpdateManyWithoutAgentNestedInput
 }
 
 export type AgentProfileUncheckedUpdateWithoutContactRevealsInput = {
@@ -1410,6 +1558,7 @@ export type AgentProfileUncheckedUpdateWithoutContactRevealsInput = {
   subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutAgentNestedInput
   statuses?: Prisma.AgentStatusUncheckedUpdateManyWithoutAgentNestedInput
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutAgentNestedInput
+  roomRequestResponses?: Prisma.RoomRequestResponseUncheckedUpdateManyWithoutAgentNestedInput
 }
 
 
@@ -1425,6 +1574,7 @@ export type AgentProfileCountOutputType = {
   statuses: number
   reviews: number
   contactReveals: number
+  roomRequestResponses: number
 }
 
 export type AgentProfileCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1435,6 +1585,7 @@ export type AgentProfileCountOutputTypeSelect<ExtArgs extends runtime.Types.Exte
   statuses?: boolean | AgentProfileCountOutputTypeCountStatusesArgs
   reviews?: boolean | AgentProfileCountOutputTypeCountReviewsArgs
   contactReveals?: boolean | AgentProfileCountOutputTypeCountContactRevealsArgs
+  roomRequestResponses?: boolean | AgentProfileCountOutputTypeCountRoomRequestResponsesArgs
 }
 
 /**
@@ -1496,6 +1647,13 @@ export type AgentProfileCountOutputTypeCountContactRevealsArgs<ExtArgs extends r
   where?: Prisma.ContactRevealWhereInput
 }
 
+/**
+ * AgentProfileCountOutputType without action
+ */
+export type AgentProfileCountOutputTypeCountRoomRequestResponsesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.RoomRequestResponseWhereInput
+}
+
 
 export type AgentProfileSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1516,6 +1674,7 @@ export type AgentProfileSelect<ExtArgs extends runtime.Types.Extensions.Internal
   statuses?: boolean | Prisma.AgentProfile$statusesArgs<ExtArgs>
   reviews?: boolean | Prisma.AgentProfile$reviewsArgs<ExtArgs>
   contactReveals?: boolean | Prisma.AgentProfile$contactRevealsArgs<ExtArgs>
+  roomRequestResponses?: boolean | Prisma.AgentProfile$roomRequestResponsesArgs<ExtArgs>
   _count?: boolean | Prisma.AgentProfileCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["agentProfile"]>
 
@@ -1570,6 +1729,7 @@ export type AgentProfileInclude<ExtArgs extends runtime.Types.Extensions.Interna
   statuses?: boolean | Prisma.AgentProfile$statusesArgs<ExtArgs>
   reviews?: boolean | Prisma.AgentProfile$reviewsArgs<ExtArgs>
   contactReveals?: boolean | Prisma.AgentProfile$contactRevealsArgs<ExtArgs>
+  roomRequestResponses?: boolean | Prisma.AgentProfile$roomRequestResponsesArgs<ExtArgs>
   _count?: boolean | Prisma.AgentProfileCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type AgentProfileIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1590,6 +1750,7 @@ export type $AgentProfilePayload<ExtArgs extends runtime.Types.Extensions.Intern
     statuses: Prisma.$AgentStatusPayload<ExtArgs>[]
     reviews: Prisma.$ReviewPayload<ExtArgs>[]
     contactReveals: Prisma.$ContactRevealPayload<ExtArgs>[]
+    roomRequestResponses: Prisma.$RoomRequestResponsePayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -2004,6 +2165,7 @@ export interface Prisma__AgentProfileClient<T, Null = never, ExtArgs extends run
   statuses<T extends Prisma.AgentProfile$statusesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AgentProfile$statusesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AgentStatusPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   reviews<T extends Prisma.AgentProfile$reviewsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AgentProfile$reviewsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ReviewPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   contactReveals<T extends Prisma.AgentProfile$contactRevealsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AgentProfile$contactRevealsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ContactRevealPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  roomRequestResponses<T extends Prisma.AgentProfile$roomRequestResponsesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AgentProfile$roomRequestResponsesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RoomRequestResponsePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2609,6 +2771,30 @@ export type AgentProfile$contactRevealsArgs<ExtArgs extends runtime.Types.Extens
   take?: number
   skip?: number
   distinct?: Prisma.ContactRevealScalarFieldEnum | Prisma.ContactRevealScalarFieldEnum[]
+}
+
+/**
+ * AgentProfile.roomRequestResponses
+ */
+export type AgentProfile$roomRequestResponsesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the RoomRequestResponse
+   */
+  select?: Prisma.RoomRequestResponseSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the RoomRequestResponse
+   */
+  omit?: Prisma.RoomRequestResponseOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.RoomRequestResponseInclude<ExtArgs> | null
+  where?: Prisma.RoomRequestResponseWhereInput
+  orderBy?: Prisma.RoomRequestResponseOrderByWithRelationInput | Prisma.RoomRequestResponseOrderByWithRelationInput[]
+  cursor?: Prisma.RoomRequestResponseWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.RoomRequestResponseScalarFieldEnum | Prisma.RoomRequestResponseScalarFieldEnum[]
 }
 
 /**

@@ -1,4 +1,4 @@
-import { BadgeCheck, CalendarDays, Crown, Home, Users, Zap } from "lucide-react";
+import { BadgeCheck, CalendarDays, ClipboardList, Crown, Home, Users, Zap } from "lucide-react";
 import Link from "next/link";
 import { prisma } from "@/lib/db/prisma";
 import { requireRole } from "@/lib/auth/guards";
@@ -28,7 +28,15 @@ export default async function AgentDashboard() {
   const activeListingCount = agent?.listings.length ?? 0;
   const totalLeads = agent?.leads.length ?? 0;
 
-  return <div className="mx-auto max-w-6xl"><header className="flex items-end justify-between gap-4 pb-8 pt-10"><div><p className="eyebrow">Agent workspace</p><h1 className="mt-2 text-3xl font-bold sm:text-4xl">Good morning, {session.user.name?.split(" ")[0] ?? "agent"}.</h1><p className="mt-2 text-[var(--text-secondary)]">Stay close to every student enquiry.</p></div><Link className="button button-glass hidden px-4 sm:inline-flex" href="/">View marketplace</Link></header><section className="grid gap-3 sm:grid-cols-3"><Stat icon={<Home size={20} />} value={agent?.listings.length ?? 0} label="Active listings" /><Stat icon={<Users size={20} />} value={agent?.leads.length ?? 0} label="Recent leads" /><Stat icon={<CalendarDays size={20} />} value={agent?.leads.filter((lead) => lead.viewingRequests[0]?.status === "REQUESTED").length ?? 0} label="Pending viewings" /></section>
+  return <div className="mx-auto max-w-6xl"><header className="flex items-end justify-between gap-4 pb-8 pt-10"><div><p className="eyebrow">Agent workspace</p><h1 className="mt-2 text-3xl font-bold sm:text-4xl">Good morning, {session.user.name?.split(" ")[0] ?? "agent"}.</h1><p className="mt-2 text-[var(--text-secondary)]">Stay close to every student enquiry.</p></div><Link className="button button-glass hidden px-4 sm:inline-flex" href="/">View marketplace</Link></header>      <section className="grid gap-3 sm:grid-cols-4">
+        <Stat icon={<Home size={20} />} value={agent?.listings.length ?? 0} label="Active listings" />
+        <Stat icon={<Users size={20} />} value={agent?.leads.length ?? 0} label="Recent leads" />
+        <Stat icon={<CalendarDays size={20} />} value={agent?.leads.filter((lead) => lead.viewingRequests[0]?.status === "REQUESTED").length ?? 0} label="Pending viewings" />
+        <Link href="/agent/requests" className="glass-surface flex items-center gap-3 p-4 transition hover:-translate-y-0.5">
+          <span className="flex size-10 items-center justify-center rounded-full bg-[var(--accent-soft)] text-[var(--accent)]"><ClipboardList size={20} /></span>
+          <span><strong className="block text-xl font-bold">Browse</strong><span className="text-sm text-[var(--text-secondary)]">Room requests</span></span>
+        </Link>
+      </section>
       {!isPro && (activeListingCount >= 4 || totalLeads >= 8) && (
         <section className="glass-surface mt-6 border border-[var(--accent)]/20 bg-gradient-to-r from-[var(--accent)]/5 to-transparent p-5">
           <div className="flex items-start gap-4">
