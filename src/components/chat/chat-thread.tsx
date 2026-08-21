@@ -18,52 +18,34 @@ interface Props {
   currentUserId: string;
 }
 
-const POLL_INTERVAL_MS = 2_000;
+const POLL_INTERVAL_MS = 3_000;
 
 export function ChatThread({ conversationId, initialMessages, currentUserId }: Props) {
   const [messages, setMessages] = useState<ChatMessage[]>(initialMessages);
   const [content, setContent] = useState("");
   const [pending, setPending] = useState(false);
   const endRef = useRef<HTMLDivElement>(null);
-  const lastMessageAtRef = useRef<string | undefined>(
-    initialMessages[initialMessages.length - 1]?.createdAt,
-  );
 
-  // Poll for new messages every few seconds
+  // Poll for new messages every 3 seconds
   useEffect(() => {
-    let active = true;
-    let timer: ReturnType<typeof setTimeout>;
-
-    async function poll() {
-      if (!active) return;
-      const after = lastMessageAtRef.current;
+    const interval = setInterval(async () => {
       try {
-        const url = `/api/chat/${conversationId}/messages${after ? `?after=${encodeURIComponent(after)}` : ""}`;
-        const response = await fetch(url, { cache: "no-store" });
-        if (response.ok) {
-          const payload = await response.json();
-          const fresh: ChatMessage[] = payload.data ?? [];
-          if (fresh.length > 0) {
-            lastMessageAtRef.current = fresh[fresh.length - 1].createdAt;
-            setMessages((current) => {
-              const seen = new Set(current.map((message) => message.id));
-              const additions = fresh.filter((message) => !seen.has(message.id));
-              return additions.length > 0 ? [...current, ...additions] : current;
-            });
-          }
-        }
+        const response = await fetch(`/api/chat/${conversationId}/messages`, { cache: "no-store" });
+        if (!response.ok) return;
+        const payload = await response.json();
+        const fresh: ChatMessage[] = payload.data ?? [];
+        if (fresh.length === 0) return;
+        setMessages((current) => {
+          const seen = new Set(current.map((m) => m.id));
+          const additions = fresh.filter((m) => !seen.has(m.id));
+          return additions.length > 0 ? [...current, ...additions] : current;
+        });
       } catch {
-        // ignore transient network errors, retry next tick
-      } finally {
-        timer = setTimeout(poll, POLL_INTERVAL_MS);
+        // ignore transient errors
       }
-    }
+    }, POLL_INTERVAL_MS);
 
-    timer = setTimeout(poll, POLL_INTERVAL_MS);
-    return () => {
-      active = false;
-      clearTimeout(timer);
-    };
+    return () => clearInterval(interval);
   }, [conversationId]);
 
   // Scroll to the newest message
@@ -87,7 +69,6 @@ export function ChatThread({ conversationId, initialMessages, currentUserId }: P
       const payload = await response.json();
       const created: ChatMessage = payload.data;
       // Optimistically append our own message immediately
-      lastMessageAtRef.current = created.createdAt;
       setMessages((current) =>
         current.some((message) => message.id === created.id)
           ? current
