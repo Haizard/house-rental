@@ -1,8 +1,7 @@
-import { BadgeCheck, CalendarDays, ClipboardList, Crown, Home, LogOut, Users } from "lucide-react";
+import { BadgeCheck, CalendarDays, ClipboardList, Crown, Home, Users } from "lucide-react";
 import Link from "next/link";
 import { prisma } from "@/lib/db/prisma";
 import { requireRole } from "@/lib/auth/guards";
-import { signOut } from "@/lib/auth/config";
 import { ViewingStatus } from "@/components/agent/viewing-status";
 import { VerificationForm } from "@/components/agent/verification-form";
 import { AgentAdSlot } from "@/components/ads/agent-ad-slot";
@@ -70,38 +69,8 @@ export default async function AgentDashboard() {
           >
             View marketplace
           </Link>
-          <form
-            action={async () => {
-              "use server";
-              await signOut({ redirectTo: "/" });
-            }}
-          >
-            <button
-              className="button button-glass h-9 px-3 text-[13px]"
-              type="submit"
-            >
-              <LogOut size={15} /> Sign out
-            </button>
-          </form>
         </div>
       </header>
-
-      {/* Mobile sign out */}
-      <div className="mb-4 flex justify-end sm:hidden">
-        <form
-          action={async () => {
-            "use server";
-            await signOut({ redirectTo: "/" });
-          }}
-        >
-          <button
-            className="button button-glass h-9 px-3 text-[13px]"
-            type="submit"
-          >
-            <LogOut size={15} /> Sign out
-          </button>
-        </form>
-      </div>
 
       <section className="grid gap-3 sm:grid-cols-4">
         <Stat

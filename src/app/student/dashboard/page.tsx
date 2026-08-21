@@ -1,8 +1,7 @@
-import { Bookmark, CalendarDays, ChevronRight, ClipboardList, LogOut, MessageCircle } from "lucide-react";
+import { Bookmark, CalendarDays, ChevronRight, ClipboardList, MessageCircle } from "lucide-react";
 import Link from "next/link";
 import { prisma } from "@/lib/db/prisma";
 import { requireRole } from "@/lib/auth/guards";
-import { signOut } from "@/lib/auth/config";
 import { StatusPill } from "@/components/ui/status-pill";
 import { SiteNav } from "@/components/layout/site-nav";
 
@@ -40,40 +39,7 @@ export default async function StudentDashboard() {
           <p className="mt-2 text-[var(--text-secondary)]">
             Keep track of homes you like and conversations you start.
           </p>
-        </div>
-        <div className="hidden sm:block">
-          <form
-            action={async () => {
-              "use server";
-              await signOut({ redirectTo: "/" });
-            }}
-          >
-            <button
-              className="button button-glass h-9 px-3 text-[13px]"
-              type="submit"
-            >
-              <LogOut size={15} /> Sign out
-            </button>
-          </form>
-        </div>
-      </header>
-
-      {/* Mobile sign out */}
-      <div className="mb-4 flex justify-end sm:hidden">
-        <form
-          action={async () => {
-            "use server";
-            await signOut({ redirectTo: "/" });
-          }}
-        >
-          <button
-            className="button button-glass h-9 px-3 text-[13px]"
-            type="submit"
-          >
-            <LogOut size={15} /> Sign out
-          </button>
-        </form>
-      </div>
+        </div>      </header>
 
       {/* Quick stats */}
       <section className="grid gap-3 sm:grid-cols-3">

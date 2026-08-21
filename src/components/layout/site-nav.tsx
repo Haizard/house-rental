@@ -68,8 +68,7 @@ export async function SiteNav() {
                 className="button button-glass h-9 px-3 text-[13px]"
                 type="submit"
               >
-                <LogOut size={15} />{" "}
-                <span className="hidden sm:inline">Sign out</span>
+                <LogOut size={15} /> Sign out
               </button>
             </form>
           </div>

@@ -6,12 +6,10 @@ import {
   CalendarDays,
   Home,
   LayoutDashboard,
-  LogOut,
   MessageCircle,
   UserCircle,
 } from "lucide-react";
 import { requireRole } from "@/lib/auth/guards";
-import { signOut } from "@/lib/auth/config";
 import { prisma } from "@/lib/db/prisma";
 import { NotificationBell } from "@/components/ui/notification-bell";
 
@@ -69,28 +67,15 @@ export default async function StudentLayout({
           </Link>
         ))}
 
-        {/* Home + Sign Out */}
+        {/* Home */}
         <Link
-          className="flex min-h-11 flex-col items-center justify-center gap-1 rounded-[12px] px-3 text-[11px] text-[var(--text-secondary)] transition hover:bg-[var(--accent-soft)] hover:text-[var(--accent)] lg:flex-row lg:justify-start lg:gap-3 lg:text-sm"
+          className="flex size-11 shrink-0 items-center justify-center overflow-hidden rounded-[12px] text-[var(--text-secondary)] transition hover:bg-[var(--accent-soft)] hover:text-[var(--accent)] lg:h-auto lg:w-full lg:min-h-11 lg:flex-row lg:justify-start lg:gap-3 lg:px-3 lg:text-sm"
           href="/"
+          title="Home"
         >
           <Home size={19} aria-hidden="true" />
-          <span className="lg:inline">Home</span>
+          <span className="hidden lg:inline">Home</span>
         </Link>
-        <form
-          action={async () => {
-            "use server";
-            await signOut({ redirectTo: "/" });
-          }}
-        >
-          <button
-            className="flex min-h-11 w-full flex-col items-center justify-center gap-1 rounded-[12px] px-3 text-[11px] text-[var(--text-secondary)] transition hover:bg-red-50 hover:text-red-500 dark:hover:bg-red-500/10 lg:flex-row lg:justify-start lg:gap-3 lg:text-sm"
-            type="submit"
-          >
-            <LogOut size={19} aria-hidden="true" />
-            <span className="lg:inline">Sign out</span>
-          </button>
-        </form>
       </aside>
 
       {/* Main content — offset by sidebar width on desktop, tab bar height on mobile */}
