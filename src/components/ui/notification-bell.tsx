@@ -1,6 +1,16 @@
 "use client";
 
-import { Bell } from "lucide-react";
+import {
+  Bell,
+  Check,
+  CheckCheck,
+  Clock,
+  CreditCard,
+  Home,
+  MessageCircle,
+  UserPlus,
+  X,
+} from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useRef, useState } from "react";
 
@@ -13,6 +23,27 @@ type Notification = {
   createdAt: string;
 };
 
+function getNotificationIcon(type: string) {
+  switch (type) {
+    case "LEAD_NEW":
+    case "LEAD_UPDATE":
+      return <UserPlus size={16} className="text-[var(--accent)]" />;
+    case "MESSAGE":
+      return <MessageCircle size={16} className="text-emerald-500" />;
+    case "LISTING_APPROVED":
+    case "LISTING_REJECTED":
+    case "LISTING_UPDATE":
+      return <Home size={16} className="text-amber-500" />;
+    case "PAYMENT":
+    case "SUBSCRIPTION":
+      return <CreditCard size={16} className="text-purple-500" />;
+    case "VIEWING":
+      return <Clock size={16} className="text-[var(--accent)]" />;
+    default:
+      return <Bell size={16} className="text-[var(--text-secondary)]" />;
+  }
+}
+
 export function NotificationBell({ unreadCount }: { unreadCount: number }) {
   const [open, setOpen] = useState(false);
   const [notifications, setNotifications] = useState<Notification[]>([]);
@@ -23,7 +54,7 @@ export function NotificationBell({ unreadCount }: { unreadCount: number }) {
 
   const fetchNotifications = useCallback(async () => {
     setLoading(true);
-    const res = await fetch("/api/notifications?limit=10");
+    const res = await fetch("/api/notifications?limit=15");
     const data = await res.json().catch(() => ({ data: [] }));
     setNotifications(data.data ?? []);
     setLoading(false);
@@ -48,15 +79,18 @@ export function NotificationBell({ unreadCount }: { unreadCount: number }) {
 
   async function markAsRead(id: string) {
     setNotifications((prev) =>
-      prev.map((n) => (n.id === id ? { ...n, readAt: new Date().toISOString() } : n)),
+      prev.map((n) =>
+        n.id === id ? { ...n, readAt: new Date().toISOString() } : n,
+      ),
     );
     setCount((prev) => Math.max(0, prev - 1));
     await fetch(`/api/notifications/${id}`, { method: "PATCH" });
   }
 
   async function markAllRead() {
-    const unread = notifications.filter((n) => !n.readAt);
-    setNotifications((prev) => prev.map((n) => ({ ...n, readAt: new Date().toISOString() })));
+    setNotifications((prev) =>
+      prev.map((n) => ({ ...n, readAt: new Date().toISOString() })),
+    );
     setCount(0);
     await fetch("/api/notifications/mark-all", { method: "PATCH" });
   }
@@ -64,48 +98,84 @@ export function NotificationBell({ unreadCount }: { unreadCount: number }) {
   return (
     <div className="relative" ref={panelRef}>
       <button
-        className="relative flex size-10 items-center justify-center rounded-full transition-colors hover:bg-[var(--accent-soft)]"
+        className="relative flex size-9 items-center justify-center rounded-full transition-colors hover:bg-[var(--accent-soft)]"
         type="button"
         onClick={toggle}
         aria-label={`Notifications${count > 0 ? ` (${count} unread)` : ""}`}
       >
-        <Bell size={20} className="text-[var(--text-secondary)]" aria-hidden="true" />
+        <Bell
+          size={19}
+          className="text-[var(--text-secondary)]"
+          aria-hidden="true"
+        />
         {count > 0 && (
-          <span className="absolute -right-0.5 -top-0.5 flex size-5 items-center justify-center rounded-full bg-[var(--danger)] text-[10px] font-bold text-white">
+          <span className="absolute -right-0.5 -top-0.5 flex size-4.5 items-center justify-center rounded-full bg-[var(--danger)] px-1 text-[9px] font-bold text-white">
             {count > 9 ? "9+" : count}
           </span>
         )}
       </button>
 
       {open && (
-        <div className="glass-surface absolute right-0 top-full z-50 mt-2 w-80 overflow-hidden rounded-[18px] shadow-lg sm:w-96">
-          <div className="flex items-center justify-between border-b border-black/[.06] px-4 py-3">
-            <h2 className="text-sm font-semibold">Notifications</h2>
-            {count > 0 && (
+        <div className="glass-surface animate-slide-down absolute right-0 top-full z-50 mt-2 w-80 overflow-hidden rounded-[18px] shadow-xl sm:w-96">
+          {/* Header */}
+          <div className="flex items-center justify-between border-b border-[var(--glass-border)] px-4 py-3">
+            <div className="flex items-center gap-2">
+              <h2 className="text-sm font-semibold text-[var(--text-primary)]">
+                Notifications
+              </h2>
+              {count > 0 && (
+                <span className="flex size-5 items-center justify-center rounded-full bg-[var(--accent)] text-[10px] font-bold text-white">
+                  {count}
+                </span>
+              )}
+            </div>
+            <div className="flex items-center gap-1.5">
+              {count > 0 && (
+                <button
+                  className="flex items-center gap-1 rounded-lg px-2 py-1 text-xs font-medium text-[var(--accent)] transition hover:bg-[var(--accent-soft)]"
+                  type="button"
+                  onClick={markAllRead}
+                >
+                  <CheckCheck size={14} />
+                  Read all
+                </button>
+              )}
               <button
-                className="text-xs font-medium text-[var(--accent)]"
+                className="flex size-7 items-center justify-center rounded-lg text-[var(--text-tertiary)] transition hover:bg-black/5 dark:hover:bg-white/5"
                 type="button"
-                onClick={markAllRead}
+                onClick={() => setOpen(false)}
+                aria-label="Close"
               >
-                Mark all read
+                <X size={16} />
               </button>
-            )}
+            </div>
           </div>
 
+          {/* Notification list */}
           <div className="max-h-80 overflow-y-auto">
             {loading ? (
-              <div className="p-6 text-center text-sm text-[var(--text-secondary)]">
+              <div className="flex items-center justify-center gap-2 p-8 text-sm text-[var(--text-secondary)]">
+                <span className="size-4 animate-spin rounded-full border-2 border-[var(--accent)] border-t-transparent" />
                 Loading...
               </div>
             ) : notifications.length === 0 ? (
-              <div className="p-6 text-center text-sm text-[var(--text-secondary)]">
-                No notifications yet.
+              <div className="p-8 text-center">
+                <Bell
+                  size={32}
+                  className="mx-auto text-[var(--text-tertiary)]"
+                />
+                <p className="mt-3 text-sm font-medium text-[var(--text-secondary)]">
+                  No notifications yet
+                </p>
+                <p className="mt-1 text-xs text-[var(--text-tertiary)]">
+                  You&apos;ll see leads, messages, and updates here.
+                </p>
               </div>
             ) : (
               notifications.map((n) => (
                 <button
-                  className={`flex w-full items-start gap-3 px-4 py-3 text-left transition-colors hover:bg-[var(--accent-soft)] ${
-                    !n.readAt ? "bg-[var(--accent-soft)]/30" : ""
+                  className={`flex w-full items-start gap-3 border-b border-[var(--glass-border)] px-4 py-3 text-left transition hover:bg-[var(--accent-soft)]/50 ${
+                    !n.readAt ? "bg-[var(--accent-soft)]/20" : ""
                   }`}
                   key={n.id}
                   type="button"
@@ -114,15 +184,27 @@ export function NotificationBell({ unreadCount }: { unreadCount: number }) {
                     setOpen(false);
                   }}
                 >
-                  {!n.readAt && (
-                    <span className="mt-1.5 size-2 shrink-0 rounded-full bg-[var(--accent)]" />
-                  )}
+                  {/* Icon */}
+                  <div className="mt-0.5 flex size-8 shrink-0 items-center justify-center rounded-full bg-[var(--bg-base-alt)]">
+                    {getNotificationIcon(n.type)}
+                  </div>
+
+                  {/* Content */}
                   <div className="min-w-0 flex-1">
-                    <p className="text-sm font-medium">{n.title}</p>
-                    <p className="mt-0.5 truncate text-xs text-[var(--text-secondary)]">
+                    <div className="flex items-start justify-between gap-2">
+                      <p
+                        className={`text-sm ${!n.readAt ? "font-semibold" : "font-medium"} text-[var(--text-primary)]`}
+                      >
+                        {n.title}
+                      </p>
+                      {!n.readAt && (
+                        <span className="mt-1 size-2 shrink-0 rounded-full bg-[var(--accent)]" />
+                      )}
+                    </div>
+                    <p className="mt-0.5 line-clamp-2 text-xs leading-4 text-[var(--text-secondary)]">
                       {n.message}
                     </p>
-                    <p className="mt-0.5 text-[10px] text-[var(--text-tertiary)]">
+                    <p className="mt-1 text-[10px] text-[var(--text-tertiary)]">
                       {formatRelativeTime(n.createdAt)}
                     </p>
                   </div>
@@ -131,9 +213,10 @@ export function NotificationBell({ unreadCount }: { unreadCount: number }) {
             )}
           </div>
 
-          <div className="border-t border-black/[.06] px-4 py-2.5 text-center">
+          {/* Footer */}
+          <div className="border-t border-[var(--glass-border)] px-4 py-2.5 text-center">
             <button
-              className="text-xs font-medium text-[var(--accent)]"
+              className="text-xs font-medium text-[var(--accent)] transition hover:underline"
               type="button"
               onClick={() => {
                 setOpen(false);

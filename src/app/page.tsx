@@ -106,16 +106,6 @@ export default async function Home() {
           ))}
         </div>
       </section>
-
-      {/* Agent join CTA — compact inline */}
-      <section className="glass-surface mx-auto mt-8 flex items-center justify-between gap-4 overflow-hidden rounded-[14px] p-4 sm:mt-10 sm:rounded-[18px] sm:p-5 lg:mt-12">
-        <p className="text-[13px] font-medium text-[var(--text-secondary)] sm:text-sm">
-          Are you an agent? <span className="text-[var(--text-primary)]">List your rooms for free.</span>
-        </p>
-        <a className="button button-glass shrink-0 px-4 py-2 text-[13px]" href="/auth/agent-signup">
-          Join <ArrowRight size={16} aria-hidden="true" />
-        </a>
-      </section>
     </main>
   );
 }
