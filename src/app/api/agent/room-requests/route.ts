@@ -3,6 +3,23 @@ import { z } from "zod";
 import { auth } from "@/lib/auth/config";
 import { prisma } from "@/lib/db/prisma";
 
+/** Check if agent has Pro subscription (tier column or active subscription) */
+async function isProAgent(agentId: string): Promise<boolean> {
+  try {
+    const rows = await prisma.$queryRaw<{ tier?: string }[]>`SELECT tier FROM agent_profiles WHERE id = ${agentId}::uuid LIMIT 1`;
+    if (rows[0]?.tier === "PRO") return true;
+  } catch { /* tier column missing */ }
+  // Fallback: check subscriptions table
+  try {
+    const sub = await prisma.subscription.findFirst({
+      where: { agentId, status: "ACTIVE", expiresAt: { gt: new Date() } },
+      select: { id: true },
+    });
+    return Boolean(sub);
+  } catch { /* subscription table issue */ }
+  return false;
+}
+
 const respondSchema = z.object({
   roomRequestId: z.string().uuid(),
   listingId: z.string().uuid().optional().nullable(),
@@ -24,6 +41,14 @@ export async function GET() {
   });
   if (!agent)
     return NextResponse.json({ data: [] });
+
+  // Only Pro subscribers can see room requests
+  const hasPro = await isProAgent(agent.id);
+  if (!hasPro) {
+    return NextResponse.json(
+      { data: [], error: "Room requests are available to Pro subscribers only.", requiresUpgrade: true },
+    );
+  }
 
   const requests = await prisma.roomRequest.findMany({
     where: {
@@ -82,6 +107,15 @@ export async function POST(request: Request) {
   });
   if (!agent)
     return NextResponse.json({ error: "Agent profile not found." }, { status: 404 });
+
+  // Only Pro subscribers can respond to room requests
+  const hasPro = await isProAgent(agent.id);
+  if (!hasPro) {
+    return NextResponse.json(
+      { error: "Room requests are available to Pro subscribers only. Please upgrade your plan." },
+      { status: 403 },
+    );
+  }
 
   const parsed = respondSchema.safeParse(await request.json().catch(() => null));
   if (!parsed.success) {

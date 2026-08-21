@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowLeft, Bed, Clock, Loader2, MapPin, Send, Tag } from "lucide-react";
+import { ArrowLeft, Bed, Clock, Crown, Loader2, MapPin, Send, Tag } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
@@ -28,11 +28,15 @@ export default function AgentRequestsPage() {
   const [loading, setLoading] = useState(true);
   const [responding, setResponding] = useState<string | null>(null);
   const [formData, setFormData] = useState<{ message: string; proposedRent: string }>({ message: "", proposedRent: "" });
+  const [requiresUpgrade, setRequiresUpgrade] = useState(false);
 
   useEffect(() => {
     fetch("/api/agent/room-requests")
       .then((r) => r.json())
-      .then((d) => setRequests(d.data ?? []))
+      .then((d) => {
+        setRequests(d.data ?? []);
+        if (d.requiresUpgrade) setRequiresUpgrade(true);
+      })
       .catch(() => {})
       .finally(() => setLoading(false));
   }, []);
@@ -81,6 +85,24 @@ export default function AgentRequestsPage() {
         {loading ? (
           <div className="mt-10 flex justify-center">
             <Loader2 className="animate-spin text-[var(--text-secondary)]" size={24} />
+          </div>
+        ) : requiresUpgrade ? (
+          <div className="glass-surface mt-8 rounded-2xl border border-[var(--accent)]/20 p-8 text-center">
+            <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-[var(--accent-soft)]">
+              <Crown size={28} className="text-[var(--accent)]" />
+            </div>
+            <h2 className="text-xl font-bold text-[var(--text-primary)]">
+              Pro Feature
+            </h2>
+            <p className="mt-2 text-sm text-[var(--text-secondary)] max-w-md mx-auto">
+              Room requests are available exclusively to Pro subscribers. Upgrade to access student room requests and win more deals.
+            </p>
+            <Link className="button button-primary mt-5 px-6" href="/agent/upgrade">
+              <Crown size={16} className="mr-1.5" /> Upgrade to Pro
+            </Link>
+            <Link className="button button-glass mt-3 px-6" href="/agent/dashboard">
+              Back to Dashboard
+            </Link>
           </div>
         ) : requests.length === 0 ? (
           <div className="glass-surface mt-8 rounded-2xl p-10 text-center">
