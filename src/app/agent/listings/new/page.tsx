@@ -84,9 +84,7 @@ export default function NewListingPage() {
   const [pending, setPending] = useState(false);
   const formRef = useRef<HTMLFormElement>(null);
   const [selectedAmenities, setSelectedAmenities] = useState<string[]>([]);
-  const [uploadedImages, setUploadedImages] = useState<
-    { id: string; url: string }[]
-  >([]);
+  const [pendingFiles, setPendingFiles] = useState<File[]>([]);
   const [uploading, setUploading] = useState(false);
 
   function toggleAmenity(slug: string) {
@@ -95,19 +93,28 @@ export default function NewListingPage() {
     );
   }
 
-  async function handleImageUpload(files: FileList | null) {
+  function handleImageSelect(files: FileList | null) {
     if (!files) return;
-    setUploading(true);
-    // We need the listing ID — images are uploaded after listing creation
-    // For now, store them locally and upload after create
-    for (const file of Array.from(files)) {
-      const url = URL.createObjectURL(file);
-      setUploadedImages((prev) => [
-        ...prev,
-        { id: `local-${Date.now()}-${Math.random()}`, url },
-      ]);
+    setPendingFiles((prev) => [...prev, ...Array.from(files)]);
+  }
+
+  function removePendingFile(index: number) {
+    setPendingFiles((prev) => prev.filter((_, i) => i !== index));
+  }
+
+  async function uploadImagesToListing(listingId: string, files: File[]) {
+    for (const file of files) {
+      const formData = new FormData();
+      formData.append("file", file);
+      try {
+        await fetch(`/api/agent/listings/${listingId}/images`, {
+          method: "POST",
+          body: formData,
+        });
+      } catch {
+        // continue with other images
+      }
     }
-    setUploading(false);
   }
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
@@ -174,6 +181,11 @@ export default function NewListingPage() {
       setError(result?.error ?? "Unable to create listing.");
       setPending(false);
       return;
+    }
+
+    // Upload any pending images to the new listing
+    if (pendingFiles.length > 0) {
+      await uploadImagesToListing(result.data.id, pendingFiles);
     }
 
     router.push(`/agent/listings/${result.data.id}/edit`);
@@ -574,7 +586,7 @@ export default function NewListingPage() {
             <Upload size={32} className="text-[var(--text-tertiary)]" />
             <div className="text-center">
               <p className="text-sm font-medium text-[var(--text-primary)]">
-                {uploading ? "Uploading..." : "Tap to add photos"}
+                Tap to add photos
               </p>
               <p className="mt-1 text-xs text-[var(--text-secondary)]">
                 JPEG, PNG, WebP · Max 5MB each
@@ -584,28 +596,35 @@ export default function NewListingPage() {
               accept="image/jpeg,image/png,image/webp"
               className="hidden"
               multiple
-              onChange={(e) => handleImageUpload(e.target.files)}
+              onChange={(e) => handleImageSelect(e.target.files)}
               type="file"
             />
           </label>
-          {uploadedImages.length > 0 && (
+          {pendingFiles.length > 0 && (
             <div className="grid grid-cols-3 gap-2">
-              {uploadedImages.map((img, idx) => (
+              {pendingFiles.map((file, idx) => (
                 <div
                   className="group relative aspect-square overflow-hidden rounded-xl"
-                  key={img.id}
+                  key={`${file.name}-${idx}`}
                 >
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     alt={`Photo ${idx + 1}`}
                     className="h-full w-full object-cover"
-                    src={img.url}
+                    src={URL.createObjectURL(file)}
                   />
                   {idx === 0 && (
                     <span className="absolute left-1 top-1 rounded-full bg-[var(--accent)] px-2 py-0.5 text-[9px] font-bold text-white">
                       PRIMARY
                     </span>
                   )}
+                  <button
+                    className="absolute right-1 top-1 flex size-6 items-center justify-center rounded-full bg-black/60 text-white opacity-100 transition hover:bg-red-500"
+                    onClick={() => removePendingFile(idx)}
+                    type="button"
+                  >
+                    ×
+                  </button>
                 </div>
               ))}
             </div>
@@ -643,7 +662,7 @@ export default function NewListingPage() {
                 </div>
                 <div className="flex justify-between">
                   <span className="text-[var(--text-secondary)]">Photos</span>
-                  <span className="font-medium">{uploadedImages.length}</span>
+                  <span className="font-medium">{pendingFiles.length}</span>
                 </div>
               </div>
             </div>

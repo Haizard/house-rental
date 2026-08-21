@@ -27,5 +27,8 @@
 .save-button { position:absolute; right:6px; top:6px; display:flex; align-items:center; justify-content:center; width:32px; height:32px; border:0; border-radius:50%; background:rgba(255,255,255,.82); color:var(--text-primary); } @media(min-width:640px){ .save-button { width:36px; height:36px; } }
 @media (min-width:768px) { .listing-grid { grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px; }.listing-content { padding:16px; } } @media (min-width:1024px) { .listing-grid { grid-template-columns:repeat(4,minmax(0,1fr)); }.listing-card { border-radius:18px; } } @keyframes slide-down { from { opacity:0; transform:translate(-50%,-16px); } to { opacity:1; transform:translate(-50%,0); } } .animate-slide-down { animation:slide-down .2s ease-out; }
 .scrollbar-hide::-webkit-scrollbar { display:none; } .scrollbar-hide { -ms-overflow-style:none; scrollbar-width:none; }
+/* Fill all Lucide icons platform-wide */
+svg[class*="lucide"] { fill:currentColor !important; stroke:currentColor !important; stroke-width:0 !important; }
+button svg, a svg, nav svg, aside svg, header svg { fill:currentColor !important; stroke:currentColor !important; stroke-width:0 !important; }
 @keyframes shimmer { 0% { background-position:200% 0; } 100% { background-position:-200% 0; } }
 @media (prefers-reduced-motion:reduce) { *,*::before,*::after { scroll-behavior:auto!important; transition-duration:1ms!important; animation-duration:1ms!important; } }
