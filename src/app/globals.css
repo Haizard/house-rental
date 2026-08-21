@@ -27,8 +27,27 @@
 .save-button { position:absolute; right:6px; top:6px; display:flex; align-items:center; justify-content:center; width:32px; height:32px; border:0; border-radius:50%; background:rgba(255,255,255,.82); color:var(--text-primary); } @media(min-width:640px){ .save-button { width:36px; height:36px; } }
 @media (min-width:768px) { .listing-grid { grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px; }.listing-content { padding:16px; } } @media (min-width:1024px) { .listing-grid { grid-template-columns:repeat(4,minmax(0,1fr)); }.listing-card { border-radius:18px; } } @keyframes slide-down { from { opacity:0; transform:translate(-50%,-16px); } to { opacity:1; transform:translate(-50%,0); } } .animate-slide-down { animation:slide-down .2s ease-out; }
 .scrollbar-hide::-webkit-scrollbar { display:none; } .scrollbar-hide { -ms-overflow-style:none; scrollbar-width:none; }
-/* Fill all Lucide icons platform-wide */
-svg[class*="lucide"] { fill:currentColor !important; stroke:currentColor !important; stroke-width:0 !important; }
-button svg, a svg, nav svg, aside svg, header svg { fill:currentColor !important; stroke:currentColor !important; stroke-width:0 !important; }
+/* Filled colorful icons platform-wide */
+svg[class*="lucide"] { fill:var(--accent) !important; stroke:none !important; }
+/* Nav & sidebar icons get the accent color */
+nav svg, aside svg { fill:var(--accent) !important; stroke:none !important; }
+/* Button icons inherit button text color */
+.button svg { fill:currentColor !important; stroke:none !important; }
+/* Stat icon circles get accent on their icon */
+.flex svg.text-\\[var\\(--accent\\)\\] { fill:var(--accent) !important; stroke:none !important; }
+/* Danger icons */
+svg.text-red-500, svg.text-red-600 { fill:#ef4444 !important; stroke:none !important; }
+/* Success icons */
+svg.text-emerald-500, svg.text-emerald-600, svg.text-emerald-700 { fill:#10b981 !important; stroke:none !important; }
+/* Warning icons */
+svg.text-amber-500 { fill:#f59e0b !important; stroke:none !important; }
+/* Purple icons */
+svg.text-purple-500 { fill:#a855f7 !important; stroke:none !important; }
+/* Sidebar nav icon containers — colorful hover */
+aside a:hover svg { fill:var(--accent) !important; }
+/* Stat tile icon circles — accent background */
+.rounded-full.bg-\\[var\\(--accent-soft\\)\\] svg { fill:var(--accent) !important; }
+/* Filled icon on dark buttons */
+.button-primary svg { fill:#fff !important; }
 @keyframes shimmer { 0% { background-position:200% 0; } 100% { background-position:-200% 0; } }
 @media (prefers-reduced-motion:reduce) { *,*::before,*::after { scroll-behavior:auto!important; transition-duration:1ms!important; animation-duration:1ms!important; } }
