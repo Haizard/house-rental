@@ -48,6 +48,11 @@ export async function PATCH(
 
   // When transitioning to ACTIVE, set publishedAt
   const data: Record<string, unknown> = { ...d };
+
+  // Convert date-only string to full ISO DateTime for Prisma
+  if (data.availabilityDate && typeof data.availabilityDate === "string") {
+    data.availabilityDate = new Date(data.availabilityDate as string);
+  }
   if (d.status === "ACTIVE" && listing.status !== "ACTIVE") {
     data.publishedAt = new Date();
     data.verificationStatus = "UNVERIFIED";
