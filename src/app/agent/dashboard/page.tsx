@@ -4,6 +4,7 @@ import { prisma } from "@/lib/db/prisma";
 import { requireRole } from "@/lib/auth/guards";
 import { ViewingStatus } from "@/components/agent/viewing-status";
 import { VerificationForm } from "@/components/agent/verification-form";
+import { AgentAdSlot } from "@/components/ads/agent-ad-slot";
 
 export default async function AgentDashboard() {
   const session = await requireRole("AGENT");
@@ -37,6 +38,7 @@ export default async function AgentDashboard() {
           <span><strong className="block text-xl font-bold">Browse</strong><span className="text-sm text-[var(--text-secondary)]">Room requests</span></span>
         </Link>
       </section>
+      <AgentAdSlot placement="FREE_AGENT_DASHBOARD" isPro={isPro} />
       {!isPro && (activeListingCount >= 4 || totalLeads >= 8) && (
         <section className="glass-surface mt-6 border border-[var(--accent)]/20 bg-gradient-to-r from-[var(--accent)]/5 to-transparent p-5">
           <div className="flex items-start gap-4">

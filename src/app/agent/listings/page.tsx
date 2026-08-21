@@ -4,6 +4,7 @@ import { Home, Plus } from "lucide-react";
 import { requireRole } from "@/lib/auth/guards";
 import { prisma } from "@/lib/db/prisma";
 import { StatusPill } from "@/components/ui/status-pill";
+import { AgentAdSlot } from "@/components/ads/agent-ad-slot";
 
 export default async function AgentListingsPage() {
   const session = await requireRole("AGENT");
@@ -22,6 +23,13 @@ export default async function AgentListingsPage() {
         orderBy: { createdAt: "desc" },
       })
     : [];
+
+  // Check tier for ad eligibility
+  let isPro = false;
+  try {
+    const rows = await prisma.$queryRaw<{ tier?: string }[]>`SELECT tier FROM agent_profiles WHERE id = ${agent?.id ?? ""}::uuid LIMIT 1`;
+    isPro = rows[0]?.tier === "PRO";
+  } catch { /* tier column missing */ }
 
   return (
     <div className="mx-auto max-w-6xl">
@@ -113,6 +121,7 @@ export default async function AgentListingsPage() {
           ))}
         </div>
       )}
+      <AgentAdSlot placement="FREE_AGENT_LISTINGS" isPro={isPro} />
     </div>
   );
 }
