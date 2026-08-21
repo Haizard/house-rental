@@ -50,7 +50,7 @@ export default async function AgentDashboard() {
   const totalLeads = agent?.leads.length ?? 0;
 
   return (
-    <div className="mx-auto max-w-6xl px-4 sm:px-6">
+    <div className="mx-auto max-w-6xl">
       <SiteNav />
 
       <header className="flex items-end justify-between gap-4 pb-8 pt-6">

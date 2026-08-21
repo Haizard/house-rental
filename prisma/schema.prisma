@@ -273,6 +273,20 @@ model Listing {
   verificationStatus VerificationStatus @default(UNVERIFIED) @map("verification_status")
   publishedAt        DateTime?          @map("published_at")
   expiresAt          DateTime?          @map("expires_at")
+  // Room details
+  roomSize           Int?               @map("room_size")
+  numberOfRooms      Int?               @map("number_of_rooms")
+  furnished          Boolean            @default(false)
+  floorLevel         Int?               @map("floor_level")
+  // Rules & preferences
+  genderPreference   String             @default("ANY") @map("gender_preference")
+  petsAllowed        Boolean            @default(false) @map("pets_allowed")
+  smokingAllowed     Boolean            @default(false) @map("smoking_allowed")
+  maxTenants         Int?               @map("max_tenants")
+  // Pricing details
+  depositAmount      Int?               @map("deposit_amount")
+  utilitiesIncluded  Boolean            @default(false) @map("utilities_included")
+  leaseDuration      String?            @map("lease_duration")
   createdAt          DateTime           @default(now()) @map("created_at")
   updatedAt          DateTime           @updatedAt @map("updated_at")
   property           Property           @relation(fields: [propertyId], references: [id], onDelete: Cascade)

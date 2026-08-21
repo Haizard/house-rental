@@ -16,6 +16,22 @@ const createListingSchema = z.object({
   latitude: z.coerce.number().min(-90).max(90).optional(),
   longitude: z.coerce.number().min(-180).max(180).optional(),
   propertyDescription: z.string().trim().max(2000).optional(),
+  // Room details
+  roomSize: z.coerce.number().int().positive().optional(),
+  numberOfRooms: z.coerce.number().int().positive().optional(),
+  furnished: z.boolean().default(false),
+  floorLevel: z.coerce.number().int().min(0).optional(),
+  // Rules & preferences
+  genderPreference: z.enum(["ANY", "MALE", "FEMALE"]).default("ANY"),
+  petsAllowed: z.boolean().default(false),
+  smokingAllowed: z.boolean().default(false),
+  maxTenants: z.coerce.number().int().positive().optional(),
+  // Pricing details
+  depositAmount: z.coerce.number().int().min(0).optional(),
+  utilitiesIncluded: z.boolean().default(false),
+  leaseDuration: z.string().trim().max(50).optional(),
+  // Amenities
+  amenities: z.array(z.string()).default([]),
 });
 
 export async function GET() {
@@ -113,9 +129,39 @@ export async function POST(request: Request) {
         rentPeriod: d.rentPeriod,
         propertyType: d.propertyType,
         availabilityDate: d.availabilityDate ? new Date(d.availabilityDate) : null,
+        // Room details
+        roomSize: d.roomSize ?? null,
+        numberOfRooms: d.numberOfRooms ?? null,
+        furnished: d.furnished,
+        floorLevel: d.floorLevel ?? null,
+        // Rules & preferences
+        genderPreference: d.genderPreference,
+        petsAllowed: d.petsAllowed,
+        smokingAllowed: d.smokingAllowed,
+        maxTenants: d.maxTenants ?? null,
+        // Pricing details
+        depositAmount: d.depositAmount ?? null,
+        utilitiesIncluded: d.utilitiesIncluded,
+        leaseDuration: d.leaseDuration ?? null,
         status: "DRAFT",
       },
     });
+
+    // Create amenity associations
+    if (d.amenities.length > 0) {
+      const amenityRecords = await tx.amenity.findMany({
+        where: { slug: { in: d.amenities } },
+        select: { id: true },
+      });
+      if (amenityRecords.length > 0) {
+        await tx.listingAmenity.createMany({
+          data: amenityRecords.map((a) => ({
+            listingId: listing.id,
+            amenityId: a.id,
+          })),
+        });
+      }
+    }
 
     return listing;
   });

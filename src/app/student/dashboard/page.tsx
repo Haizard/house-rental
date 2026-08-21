@@ -28,7 +28,7 @@ export default async function StudentDashboard() {
   });
 
   return (
-    <div className="mx-auto max-w-5xl px-4 sm:px-6">
+    <div className="mx-auto max-w-5xl">
       <SiteNav />
 
       <header className="flex items-end justify-between gap-4 pb-8 pt-6">
