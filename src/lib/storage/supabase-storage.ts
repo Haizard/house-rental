@@ -10,9 +10,10 @@ class SupabaseStorage implements StorageService {
   private apiKey: string;
 
   constructor() {
-    const url = process.env.SUPABASE_PROJECT_URL ?? process.env.supabase_project_url ?? process.env.NEXT_PUBLIC_SUPABASE_URL;
+    // Accept both lowercase (.env / Vercel) and uppercase variants
+    const url = process.env.supabase_project_url ?? process.env.SUPABASE_PROJECT_URL ?? process.env.NEXT_PUBLIC_SUPABASE_URL;
     const key = process.env.supabase_service_role_secret ?? process.env.SUPABASE_SERVICE_ROLE_SECRET;
-    if (!url) throw new Error("SUPABASE_PROJECT_URL must be set for file uploads.");
+    if (!url) throw new Error("supabase_project_url must be set for file uploads.");
     if (!key) throw new Error("supabase_service_role_secret must be set for file uploads.");
     this.baseUrl = url.replace(/\/$/, "");
     this.apiKey = key;
