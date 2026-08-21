@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { prisma } from "@/lib/db/prisma";
 import { requireRole } from "@/lib/auth/guards";
 import { ChatThread, type ChatMessage } from "@/components/chat/chat-thread";
+import { ContactReveal } from "@/components/chat/contact-reveal";
 
 export default async function StudentChatPage({
   params,
@@ -57,6 +58,8 @@ export default async function StudentChatPage({
           </p>
         </div>
       </header>
+
+      <ContactReveal conversationId={conversationId} isAgent={false} />
 
       <ChatThread
         conversationId={conversationId}

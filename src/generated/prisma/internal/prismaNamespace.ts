@@ -422,6 +422,7 @@ export const ModelName = {
   StatusView: 'StatusView',
   Review: 'Review',
   Payment: 'Payment',
+  ContactReveal: 'ContactReveal',
   AIInteraction: 'AIInteraction'
 } as const
 
@@ -438,7 +439,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "agentProfile" | "studentProfile" | "university" | "property" | "propertyAgent" | "listing" | "amenity" | "listingAmenity" | "listingImage" | "listingVideo" | "lead" | "conversation" | "message" | "viewingRequest" | "subscription" | "leadCharge" | "savedListing" | "notification" | "report" | "verificationRecord" | "agentStatus" | "statusView" | "review" | "payment" | "aIInteraction"
+    modelProps: "user" | "agentProfile" | "studentProfile" | "university" | "property" | "propertyAgent" | "listing" | "amenity" | "listingAmenity" | "listingImage" | "listingVideo" | "lead" | "conversation" | "message" | "viewingRequest" | "subscription" | "leadCharge" | "savedListing" | "notification" | "report" | "verificationRecord" | "agentStatus" | "statusView" | "review" | "payment" | "contactReveal" | "aIInteraction"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -2292,6 +2293,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    ContactReveal: {
+      payload: Prisma.$ContactRevealPayload<ExtArgs>
+      fields: Prisma.ContactRevealFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ContactRevealFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ContactRevealPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ContactRevealFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ContactRevealPayload>
+        }
+        findFirst: {
+          args: Prisma.ContactRevealFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ContactRevealPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ContactRevealFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ContactRevealPayload>
+        }
+        findMany: {
+          args: Prisma.ContactRevealFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ContactRevealPayload>[]
+        }
+        create: {
+          args: Prisma.ContactRevealCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ContactRevealPayload>
+        }
+        createMany: {
+          args: Prisma.ContactRevealCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ContactRevealCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ContactRevealPayload>[]
+        }
+        delete: {
+          args: Prisma.ContactRevealDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ContactRevealPayload>
+        }
+        update: {
+          args: Prisma.ContactRevealUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ContactRevealPayload>
+        }
+        deleteMany: {
+          args: Prisma.ContactRevealDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ContactRevealUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ContactRevealUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ContactRevealPayload>[]
+        }
+        upsert: {
+          args: Prisma.ContactRevealUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ContactRevealPayload>
+        }
+        aggregate: {
+          args: Prisma.ContactRevealAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateContactReveal>
+        }
+        groupBy: {
+          args: Prisma.ContactRevealGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ContactRevealGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ContactRevealCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ContactRevealCountAggregateOutputType> | number
+        }
+      }
+    }
     AIInteraction: {
       payload: Prisma.$AIInteractionPayload<ExtArgs>
       fields: Prisma.AIInteractionFieldRefs
@@ -2586,6 +2661,9 @@ export type LeadScalarFieldEnum = (typeof LeadScalarFieldEnum)[keyof typeof Lead
 export const ConversationScalarFieldEnum = {
   id: 'id',
   leadId: 'leadId',
+  contactRequestStatus: 'contactRequestStatus',
+  contactRequestedAt: 'contactRequestedAt',
+  contactRevealedAt: 'contactRevealedAt',
   lastMessageAt: 'lastMessageAt',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
@@ -2766,6 +2844,22 @@ export const PaymentScalarFieldEnum = {
 } as const
 
 export type PaymentScalarFieldEnum = (typeof PaymentScalarFieldEnum)[keyof typeof PaymentScalarFieldEnum]
+
+
+export const ContactRevealScalarFieldEnum = {
+  id: 'id',
+  conversationId: 'conversationId',
+  agentId: 'agentId',
+  studentId: 'studentId',
+  amount: 'amount',
+  currency: 'currency',
+  paymentStatus: 'paymentStatus',
+  paymentRef: 'paymentRef',
+  revealedAt: 'revealedAt',
+  createdAt: 'createdAt'
+} as const
+
+export type ContactRevealScalarFieldEnum = (typeof ContactRevealScalarFieldEnum)[keyof typeof ContactRevealScalarFieldEnum]
 
 
 export const AIInteractionScalarFieldEnum = {
@@ -3017,6 +3111,20 @@ export type EnumBillingStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$Pr
  * Reference to a field of type 'BillingStatus[]'
  */
 export type ListEnumBillingStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BillingStatus[]'>
+    
+
+
+/**
+ * Reference to a field of type 'ContactRequestStatus'
+ */
+export type EnumContactRequestStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ContactRequestStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'ContactRequestStatus[]'
+ */
+export type ListEnumContactRequestStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ContactRequestStatus[]'>
     
 
 
@@ -3307,6 +3415,7 @@ export type GlobalOmitConfig = {
   statusView?: Prisma.StatusViewOmit
   review?: Prisma.ReviewOmit
   payment?: Prisma.PaymentOmit
+  contactReveal?: Prisma.ContactRevealOmit
   aIInteraction?: Prisma.AIInteractionOmit
 }
 

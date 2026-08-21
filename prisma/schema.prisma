@@ -124,6 +124,15 @@ enum StatusType {
   GENERAL
 }
 
+enum ContactRequestStatus {
+  NONE
+  REQUESTED
+  ACCEPTED
+  DECLINED
+  PAID
+  REVEALED
+}
+
 model User {
   id             String   @id @default(uuid()) @db.Uuid
   email          String?  @unique
@@ -164,6 +173,7 @@ model AgentProfile {
   subscriptions Subscription[]
   statuses      AgentStatus[]
   reviews       Review[]
+  contactReveals ContactReveal[]
   @@map("agent_profiles")
 }
 
@@ -183,6 +193,7 @@ model StudentProfile {
   leads         Lead[]
   savedListings SavedListing[]
   reviews       Review[]
+  contactReveals ContactReveal[]
   @@map("student_profiles")
 }
 
@@ -328,13 +339,17 @@ model Lead {
 }
 
 model Conversation {
-  id            String   @id @default(uuid()) @db.Uuid
-  leadId        String   @unique @map("lead_id") @db.Uuid
-  lastMessageAt DateTime? @map("last_message_at")
-  createdAt     DateTime @default(now()) @map("created_at")
-  updatedAt     DateTime @updatedAt @map("updated_at")
-  lead          Lead     @relation(fields: [leadId], references: [id], onDelete: Cascade)
-  messages      Message[]
+  id                   String               @id @default(uuid()) @db.Uuid
+  leadId               String               @unique @map("lead_id") @db.Uuid
+  contactRequestStatus ContactRequestStatus @default(NONE) @map("contact_request_status")
+  contactRequestedAt   DateTime?            @map("contact_requested_at")
+  contactRevealedAt    DateTime?            @map("contact_revealed_at")
+  lastMessageAt        DateTime?            @map("last_message_at")
+  createdAt            DateTime             @default(now()) @map("created_at")
+  updatedAt            DateTime             @updatedAt @map("updated_at")
+  lead                 Lead                 @relation(fields: [leadId], references: [id], onDelete: Cascade)
+  messages             Message[]
+  contactReveals       ContactReveal[]
   @@map("conversations")
 }
 
@@ -508,6 +523,23 @@ model Payment {
   updatedAt       DateTime    @updatedAt @map("updated_at")
   user            User        @relation(fields: [userId], references: [id])
   @@map("payments")
+}
+
+model ContactReveal {
+  id             String   @id @default(uuid()) @db.Uuid
+  conversationId String   @map("conversation_id") @db.Uuid
+  agentId        String   @map("agent_id") @db.Uuid
+  studentId      String   @map("student_id") @db.Uuid
+  amount         Int      @default(5000)
+  currency       String   @default("TZS")
+  paymentStatus  PaymentStatus @default(PENDING) @map("payment_status")
+  paymentRef     String?  @map("payment_ref")
+  revealedAt     DateTime? @map("revealed_at")
+  createdAt      DateTime @default(now()) @map("created_at")
+  conversation   Conversation @relation(fields: [conversationId], references: [id])
+  agent          AgentProfile @relation(fields: [agentId], references: [id])
+  student        StudentProfile @relation(fields: [studentId], references: [id])
+  @@map("contact_reveals")
 }
 
 model AIInteraction {

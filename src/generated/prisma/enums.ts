@@ -169,3 +169,15 @@ export const StatusType = {
 } as const
 
 export type StatusType = (typeof StatusType)[keyof typeof StatusType]
+
+
+export const ContactRequestStatus = {
+  NONE: 'NONE',
+  REQUESTED: 'REQUESTED',
+  ACCEPTED: 'ACCEPTED',
+  DECLINED: 'DECLINED',
+  PAID: 'PAID',
+  REVEALED: 'REVEALED'
+} as const
+
+export type ContactRequestStatus = (typeof ContactRequestStatus)[keyof typeof ContactRequestStatus]

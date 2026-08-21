@@ -143,6 +143,11 @@ export type Review = Prisma.ReviewModel
  */
 export type Payment = Prisma.PaymentModel
 /**
+ * Model ContactReveal
+ * 
+ */
+export type ContactReveal = Prisma.ContactRevealModel
+/**
  * Model AIInteraction
  * 
  */

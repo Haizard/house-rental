@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { z } from "zod";
 import { auth } from "@/lib/auth/config";
 import { prisma } from "@/lib/db/prisma";
+import { detectContactInfo } from "@/lib/chat/contact-guard";
 
 const messageSchema = z.object({ content: z.string().trim().min(1).max(2000) });
 
@@ -76,10 +77,18 @@ export async function POST(
         ],
       },
     },
-    select: { id: true },
+    select: { id: true, contactRequestStatus: true },
   });
   if (!conversation)
     return NextResponse.json({ error: "Conversation not found." }, { status: 404 });
+
+  // Block contact info unless contact has been revealed
+  if (conversation.contactRequestStatus !== "REVEALED") {
+    const guard = detectContactInfo(parsed.data.content);
+    if (guard.blocked) {
+      return NextResponse.json({ error: guard.reason }, { status: 403 });
+    }
+  }
 
   const message = await prisma.$transaction(async (transaction) => {
     const created = await transaction.message.create({

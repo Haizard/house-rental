@@ -76,6 +76,7 @@ export const ModelName = {
   StatusView: 'StatusView',
   Review: 'Review',
   Payment: 'Payment',
+  ContactReveal: 'ContactReveal',
   AIInteraction: 'AIInteraction'
 } as const
 
@@ -276,6 +277,9 @@ export type LeadScalarFieldEnum = (typeof LeadScalarFieldEnum)[keyof typeof Lead
 export const ConversationScalarFieldEnum = {
   id: 'id',
   leadId: 'leadId',
+  contactRequestStatus: 'contactRequestStatus',
+  contactRequestedAt: 'contactRequestedAt',
+  contactRevealedAt: 'contactRevealedAt',
   lastMessageAt: 'lastMessageAt',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
@@ -456,6 +460,22 @@ export const PaymentScalarFieldEnum = {
 } as const
 
 export type PaymentScalarFieldEnum = (typeof PaymentScalarFieldEnum)[keyof typeof PaymentScalarFieldEnum]
+
+
+export const ContactRevealScalarFieldEnum = {
+  id: 'id',
+  conversationId: 'conversationId',
+  agentId: 'agentId',
+  studentId: 'studentId',
+  amount: 'amount',
+  currency: 'currency',
+  paymentStatus: 'paymentStatus',
+  paymentRef: 'paymentRef',
+  revealedAt: 'revealedAt',
+  createdAt: 'createdAt'
+} as const
+
+export type ContactRevealScalarFieldEnum = (typeof ContactRevealScalarFieldEnum)[keyof typeof ContactRevealScalarFieldEnum]
 
 
 export const AIInteractionScalarFieldEnum = {

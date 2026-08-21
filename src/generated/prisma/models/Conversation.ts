@@ -27,6 +27,9 @@ export type AggregateConversation = {
 export type ConversationMinAggregateOutputType = {
   id: string | null
   leadId: string | null
+  contactRequestStatus: $Enums.ContactRequestStatus | null
+  contactRequestedAt: Date | null
+  contactRevealedAt: Date | null
   lastMessageAt: Date | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -35,6 +38,9 @@ export type ConversationMinAggregateOutputType = {
 export type ConversationMaxAggregateOutputType = {
   id: string | null
   leadId: string | null
+  contactRequestStatus: $Enums.ContactRequestStatus | null
+  contactRequestedAt: Date | null
+  contactRevealedAt: Date | null
   lastMessageAt: Date | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -43,6 +49,9 @@ export type ConversationMaxAggregateOutputType = {
 export type ConversationCountAggregateOutputType = {
   id: number
   leadId: number
+  contactRequestStatus: number
+  contactRequestedAt: number
+  contactRevealedAt: number
   lastMessageAt: number
   createdAt: number
   updatedAt: number
@@ -53,6 +62,9 @@ export type ConversationCountAggregateOutputType = {
 export type ConversationMinAggregateInputType = {
   id?: true
   leadId?: true
+  contactRequestStatus?: true
+  contactRequestedAt?: true
+  contactRevealedAt?: true
   lastMessageAt?: true
   createdAt?: true
   updatedAt?: true
@@ -61,6 +73,9 @@ export type ConversationMinAggregateInputType = {
 export type ConversationMaxAggregateInputType = {
   id?: true
   leadId?: true
+  contactRequestStatus?: true
+  contactRequestedAt?: true
+  contactRevealedAt?: true
   lastMessageAt?: true
   createdAt?: true
   updatedAt?: true
@@ -69,6 +84,9 @@ export type ConversationMaxAggregateInputType = {
 export type ConversationCountAggregateInputType = {
   id?: true
   leadId?: true
+  contactRequestStatus?: true
+  contactRequestedAt?: true
+  contactRevealedAt?: true
   lastMessageAt?: true
   createdAt?: true
   updatedAt?: true
@@ -150,6 +168,9 @@ export type ConversationGroupByArgs<ExtArgs extends runtime.Types.Extensions.Int
 export type ConversationGroupByOutputType = {
   id: string
   leadId: string
+  contactRequestStatus: $Enums.ContactRequestStatus
+  contactRequestedAt: Date | null
+  contactRevealedAt: Date | null
   lastMessageAt: Date | null
   createdAt: Date
   updatedAt: Date
@@ -179,21 +200,29 @@ export type ConversationWhereInput = {
   NOT?: Prisma.ConversationWhereInput | Prisma.ConversationWhereInput[]
   id?: Prisma.UuidFilter<"Conversation"> | string
   leadId?: Prisma.UuidFilter<"Conversation"> | string
+  contactRequestStatus?: Prisma.EnumContactRequestStatusFilter<"Conversation"> | $Enums.ContactRequestStatus
+  contactRequestedAt?: Prisma.DateTimeNullableFilter<"Conversation"> | Date | string | null
+  contactRevealedAt?: Prisma.DateTimeNullableFilter<"Conversation"> | Date | string | null
   lastMessageAt?: Prisma.DateTimeNullableFilter<"Conversation"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"Conversation"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Conversation"> | Date | string
   lead?: Prisma.XOR<Prisma.LeadScalarRelationFilter, Prisma.LeadWhereInput>
   messages?: Prisma.MessageListRelationFilter
+  contactReveals?: Prisma.ContactRevealListRelationFilter
 }
 
 export type ConversationOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   leadId?: Prisma.SortOrder
+  contactRequestStatus?: Prisma.SortOrder
+  contactRequestedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  contactRevealedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   lastMessageAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   lead?: Prisma.LeadOrderByWithRelationInput
   messages?: Prisma.MessageOrderByRelationAggregateInput
+  contactReveals?: Prisma.ContactRevealOrderByRelationAggregateInput
 }
 
 export type ConversationWhereUniqueInput = Prisma.AtLeast<{
@@ -202,16 +231,23 @@ export type ConversationWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.ConversationWhereInput | Prisma.ConversationWhereInput[]
   OR?: Prisma.ConversationWhereInput[]
   NOT?: Prisma.ConversationWhereInput | Prisma.ConversationWhereInput[]
+  contactRequestStatus?: Prisma.EnumContactRequestStatusFilter<"Conversation"> | $Enums.ContactRequestStatus
+  contactRequestedAt?: Prisma.DateTimeNullableFilter<"Conversation"> | Date | string | null
+  contactRevealedAt?: Prisma.DateTimeNullableFilter<"Conversation"> | Date | string | null
   lastMessageAt?: Prisma.DateTimeNullableFilter<"Conversation"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"Conversation"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Conversation"> | Date | string
   lead?: Prisma.XOR<Prisma.LeadScalarRelationFilter, Prisma.LeadWhereInput>
   messages?: Prisma.MessageListRelationFilter
+  contactReveals?: Prisma.ContactRevealListRelationFilter
 }, "id" | "leadId">
 
 export type ConversationOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   leadId?: Prisma.SortOrder
+  contactRequestStatus?: Prisma.SortOrder
+  contactRequestedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  contactRevealedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   lastMessageAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -226,6 +262,9 @@ export type ConversationScalarWhereWithAggregatesInput = {
   NOT?: Prisma.ConversationScalarWhereWithAggregatesInput | Prisma.ConversationScalarWhereWithAggregatesInput[]
   id?: Prisma.UuidWithAggregatesFilter<"Conversation"> | string
   leadId?: Prisma.UuidWithAggregatesFilter<"Conversation"> | string
+  contactRequestStatus?: Prisma.EnumContactRequestStatusWithAggregatesFilter<"Conversation"> | $Enums.ContactRequestStatus
+  contactRequestedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Conversation"> | Date | string | null
+  contactRevealedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Conversation"> | Date | string | null
   lastMessageAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Conversation"> | Date | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Conversation"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Conversation"> | Date | string
@@ -233,43 +272,62 @@ export type ConversationScalarWhereWithAggregatesInput = {
 
 export type ConversationCreateInput = {
   id?: string
+  contactRequestStatus?: $Enums.ContactRequestStatus
+  contactRequestedAt?: Date | string | null
+  contactRevealedAt?: Date | string | null
   lastMessageAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   lead: Prisma.LeadCreateNestedOneWithoutConversationInput
   messages?: Prisma.MessageCreateNestedManyWithoutConversationInput
+  contactReveals?: Prisma.ContactRevealCreateNestedManyWithoutConversationInput
 }
 
 export type ConversationUncheckedCreateInput = {
   id?: string
   leadId: string
+  contactRequestStatus?: $Enums.ContactRequestStatus
+  contactRequestedAt?: Date | string | null
+  contactRevealedAt?: Date | string | null
   lastMessageAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   messages?: Prisma.MessageUncheckedCreateNestedManyWithoutConversationInput
+  contactReveals?: Prisma.ContactRevealUncheckedCreateNestedManyWithoutConversationInput
 }
 
 export type ConversationUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  contactRequestStatus?: Prisma.EnumContactRequestStatusFieldUpdateOperationsInput | $Enums.ContactRequestStatus
+  contactRequestedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  contactRevealedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   lastMessageAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   lead?: Prisma.LeadUpdateOneRequiredWithoutConversationNestedInput
   messages?: Prisma.MessageUpdateManyWithoutConversationNestedInput
+  contactReveals?: Prisma.ContactRevealUpdateManyWithoutConversationNestedInput
 }
 
 export type ConversationUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   leadId?: Prisma.StringFieldUpdateOperationsInput | string
+  contactRequestStatus?: Prisma.EnumContactRequestStatusFieldUpdateOperationsInput | $Enums.ContactRequestStatus
+  contactRequestedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  contactRevealedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   lastMessageAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   messages?: Prisma.MessageUncheckedUpdateManyWithoutConversationNestedInput
+  contactReveals?: Prisma.ContactRevealUncheckedUpdateManyWithoutConversationNestedInput
 }
 
 export type ConversationCreateManyInput = {
   id?: string
   leadId: string
+  contactRequestStatus?: $Enums.ContactRequestStatus
+  contactRequestedAt?: Date | string | null
+  contactRevealedAt?: Date | string | null
   lastMessageAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -277,6 +335,9 @@ export type ConversationCreateManyInput = {
 
 export type ConversationUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  contactRequestStatus?: Prisma.EnumContactRequestStatusFieldUpdateOperationsInput | $Enums.ContactRequestStatus
+  contactRequestedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  contactRevealedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   lastMessageAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -285,6 +346,9 @@ export type ConversationUpdateManyMutationInput = {
 export type ConversationUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   leadId?: Prisma.StringFieldUpdateOperationsInput | string
+  contactRequestStatus?: Prisma.EnumContactRequestStatusFieldUpdateOperationsInput | $Enums.ContactRequestStatus
+  contactRequestedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  contactRevealedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   lastMessageAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -298,6 +362,9 @@ export type ConversationNullableScalarRelationFilter = {
 export type ConversationCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   leadId?: Prisma.SortOrder
+  contactRequestStatus?: Prisma.SortOrder
+  contactRequestedAt?: Prisma.SortOrder
+  contactRevealedAt?: Prisma.SortOrder
   lastMessageAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -306,6 +373,9 @@ export type ConversationCountOrderByAggregateInput = {
 export type ConversationMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   leadId?: Prisma.SortOrder
+  contactRequestStatus?: Prisma.SortOrder
+  contactRequestedAt?: Prisma.SortOrder
+  contactRevealedAt?: Prisma.SortOrder
   lastMessageAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -314,6 +384,9 @@ export type ConversationMaxOrderByAggregateInput = {
 export type ConversationMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   leadId?: Prisma.SortOrder
+  contactRequestStatus?: Prisma.SortOrder
+  contactRequestedAt?: Prisma.SortOrder
+  contactRevealedAt?: Prisma.SortOrder
   lastMessageAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -356,6 +429,10 @@ export type ConversationUncheckedUpdateOneWithoutLeadNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.ConversationUpdateToOneWithWhereWithoutLeadInput, Prisma.ConversationUpdateWithoutLeadInput>, Prisma.ConversationUncheckedUpdateWithoutLeadInput>
 }
 
+export type EnumContactRequestStatusFieldUpdateOperationsInput = {
+  set?: $Enums.ContactRequestStatus
+}
+
 export type ConversationCreateNestedOneWithoutMessagesInput = {
   create?: Prisma.XOR<Prisma.ConversationCreateWithoutMessagesInput, Prisma.ConversationUncheckedCreateWithoutMessagesInput>
   connectOrCreate?: Prisma.ConversationCreateOrConnectWithoutMessagesInput
@@ -370,20 +447,42 @@ export type ConversationUpdateOneRequiredWithoutMessagesNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.ConversationUpdateToOneWithWhereWithoutMessagesInput, Prisma.ConversationUpdateWithoutMessagesInput>, Prisma.ConversationUncheckedUpdateWithoutMessagesInput>
 }
 
+export type ConversationCreateNestedOneWithoutContactRevealsInput = {
+  create?: Prisma.XOR<Prisma.ConversationCreateWithoutContactRevealsInput, Prisma.ConversationUncheckedCreateWithoutContactRevealsInput>
+  connectOrCreate?: Prisma.ConversationCreateOrConnectWithoutContactRevealsInput
+  connect?: Prisma.ConversationWhereUniqueInput
+}
+
+export type ConversationUpdateOneRequiredWithoutContactRevealsNestedInput = {
+  create?: Prisma.XOR<Prisma.ConversationCreateWithoutContactRevealsInput, Prisma.ConversationUncheckedCreateWithoutContactRevealsInput>
+  connectOrCreate?: Prisma.ConversationCreateOrConnectWithoutContactRevealsInput
+  upsert?: Prisma.ConversationUpsertWithoutContactRevealsInput
+  connect?: Prisma.ConversationWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ConversationUpdateToOneWithWhereWithoutContactRevealsInput, Prisma.ConversationUpdateWithoutContactRevealsInput>, Prisma.ConversationUncheckedUpdateWithoutContactRevealsInput>
+}
+
 export type ConversationCreateWithoutLeadInput = {
   id?: string
+  contactRequestStatus?: $Enums.ContactRequestStatus
+  contactRequestedAt?: Date | string | null
+  contactRevealedAt?: Date | string | null
   lastMessageAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   messages?: Prisma.MessageCreateNestedManyWithoutConversationInput
+  contactReveals?: Prisma.ContactRevealCreateNestedManyWithoutConversationInput
 }
 
 export type ConversationUncheckedCreateWithoutLeadInput = {
   id?: string
+  contactRequestStatus?: $Enums.ContactRequestStatus
+  contactRequestedAt?: Date | string | null
+  contactRevealedAt?: Date | string | null
   lastMessageAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   messages?: Prisma.MessageUncheckedCreateNestedManyWithoutConversationInput
+  contactReveals?: Prisma.ContactRevealUncheckedCreateNestedManyWithoutConversationInput
 }
 
 export type ConversationCreateOrConnectWithoutLeadInput = {
@@ -404,34 +503,50 @@ export type ConversationUpdateToOneWithWhereWithoutLeadInput = {
 
 export type ConversationUpdateWithoutLeadInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  contactRequestStatus?: Prisma.EnumContactRequestStatusFieldUpdateOperationsInput | $Enums.ContactRequestStatus
+  contactRequestedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  contactRevealedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   lastMessageAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   messages?: Prisma.MessageUpdateManyWithoutConversationNestedInput
+  contactReveals?: Prisma.ContactRevealUpdateManyWithoutConversationNestedInput
 }
 
 export type ConversationUncheckedUpdateWithoutLeadInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  contactRequestStatus?: Prisma.EnumContactRequestStatusFieldUpdateOperationsInput | $Enums.ContactRequestStatus
+  contactRequestedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  contactRevealedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   lastMessageAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   messages?: Prisma.MessageUncheckedUpdateManyWithoutConversationNestedInput
+  contactReveals?: Prisma.ContactRevealUncheckedUpdateManyWithoutConversationNestedInput
 }
 
 export type ConversationCreateWithoutMessagesInput = {
   id?: string
+  contactRequestStatus?: $Enums.ContactRequestStatus
+  contactRequestedAt?: Date | string | null
+  contactRevealedAt?: Date | string | null
   lastMessageAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   lead: Prisma.LeadCreateNestedOneWithoutConversationInput
+  contactReveals?: Prisma.ContactRevealCreateNestedManyWithoutConversationInput
 }
 
 export type ConversationUncheckedCreateWithoutMessagesInput = {
   id?: string
   leadId: string
+  contactRequestStatus?: $Enums.ContactRequestStatus
+  contactRequestedAt?: Date | string | null
+  contactRevealedAt?: Date | string | null
   lastMessageAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  contactReveals?: Prisma.ContactRevealUncheckedCreateNestedManyWithoutConversationInput
 }
 
 export type ConversationCreateOrConnectWithoutMessagesInput = {
@@ -452,18 +567,90 @@ export type ConversationUpdateToOneWithWhereWithoutMessagesInput = {
 
 export type ConversationUpdateWithoutMessagesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  contactRequestStatus?: Prisma.EnumContactRequestStatusFieldUpdateOperationsInput | $Enums.ContactRequestStatus
+  contactRequestedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  contactRevealedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   lastMessageAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   lead?: Prisma.LeadUpdateOneRequiredWithoutConversationNestedInput
+  contactReveals?: Prisma.ContactRevealUpdateManyWithoutConversationNestedInput
 }
 
 export type ConversationUncheckedUpdateWithoutMessagesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   leadId?: Prisma.StringFieldUpdateOperationsInput | string
+  contactRequestStatus?: Prisma.EnumContactRequestStatusFieldUpdateOperationsInput | $Enums.ContactRequestStatus
+  contactRequestedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  contactRevealedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   lastMessageAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  contactReveals?: Prisma.ContactRevealUncheckedUpdateManyWithoutConversationNestedInput
+}
+
+export type ConversationCreateWithoutContactRevealsInput = {
+  id?: string
+  contactRequestStatus?: $Enums.ContactRequestStatus
+  contactRequestedAt?: Date | string | null
+  contactRevealedAt?: Date | string | null
+  lastMessageAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  lead: Prisma.LeadCreateNestedOneWithoutConversationInput
+  messages?: Prisma.MessageCreateNestedManyWithoutConversationInput
+}
+
+export type ConversationUncheckedCreateWithoutContactRevealsInput = {
+  id?: string
+  leadId: string
+  contactRequestStatus?: $Enums.ContactRequestStatus
+  contactRequestedAt?: Date | string | null
+  contactRevealedAt?: Date | string | null
+  lastMessageAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  messages?: Prisma.MessageUncheckedCreateNestedManyWithoutConversationInput
+}
+
+export type ConversationCreateOrConnectWithoutContactRevealsInput = {
+  where: Prisma.ConversationWhereUniqueInput
+  create: Prisma.XOR<Prisma.ConversationCreateWithoutContactRevealsInput, Prisma.ConversationUncheckedCreateWithoutContactRevealsInput>
+}
+
+export type ConversationUpsertWithoutContactRevealsInput = {
+  update: Prisma.XOR<Prisma.ConversationUpdateWithoutContactRevealsInput, Prisma.ConversationUncheckedUpdateWithoutContactRevealsInput>
+  create: Prisma.XOR<Prisma.ConversationCreateWithoutContactRevealsInput, Prisma.ConversationUncheckedCreateWithoutContactRevealsInput>
+  where?: Prisma.ConversationWhereInput
+}
+
+export type ConversationUpdateToOneWithWhereWithoutContactRevealsInput = {
+  where?: Prisma.ConversationWhereInput
+  data: Prisma.XOR<Prisma.ConversationUpdateWithoutContactRevealsInput, Prisma.ConversationUncheckedUpdateWithoutContactRevealsInput>
+}
+
+export type ConversationUpdateWithoutContactRevealsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  contactRequestStatus?: Prisma.EnumContactRequestStatusFieldUpdateOperationsInput | $Enums.ContactRequestStatus
+  contactRequestedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  contactRevealedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastMessageAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  lead?: Prisma.LeadUpdateOneRequiredWithoutConversationNestedInput
+  messages?: Prisma.MessageUpdateManyWithoutConversationNestedInput
+}
+
+export type ConversationUncheckedUpdateWithoutContactRevealsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  leadId?: Prisma.StringFieldUpdateOperationsInput | string
+  contactRequestStatus?: Prisma.EnumContactRequestStatusFieldUpdateOperationsInput | $Enums.ContactRequestStatus
+  contactRequestedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  contactRevealedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastMessageAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  messages?: Prisma.MessageUncheckedUpdateManyWithoutConversationNestedInput
 }
 
 
@@ -473,10 +660,12 @@ export type ConversationUncheckedUpdateWithoutMessagesInput = {
 
 export type ConversationCountOutputType = {
   messages: number
+  contactReveals: number
 }
 
 export type ConversationCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   messages?: boolean | ConversationCountOutputTypeCountMessagesArgs
+  contactReveals?: boolean | ConversationCountOutputTypeCountContactRevealsArgs
 }
 
 /**
@@ -496,21 +685,35 @@ export type ConversationCountOutputTypeCountMessagesArgs<ExtArgs extends runtime
   where?: Prisma.MessageWhereInput
 }
 
+/**
+ * ConversationCountOutputType without action
+ */
+export type ConversationCountOutputTypeCountContactRevealsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ContactRevealWhereInput
+}
+
 
 export type ConversationSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   leadId?: boolean
+  contactRequestStatus?: boolean
+  contactRequestedAt?: boolean
+  contactRevealedAt?: boolean
   lastMessageAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   lead?: boolean | Prisma.LeadDefaultArgs<ExtArgs>
   messages?: boolean | Prisma.Conversation$messagesArgs<ExtArgs>
+  contactReveals?: boolean | Prisma.Conversation$contactRevealsArgs<ExtArgs>
   _count?: boolean | Prisma.ConversationCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["conversation"]>
 
 export type ConversationSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   leadId?: boolean
+  contactRequestStatus?: boolean
+  contactRequestedAt?: boolean
+  contactRevealedAt?: boolean
   lastMessageAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -520,6 +723,9 @@ export type ConversationSelectCreateManyAndReturn<ExtArgs extends runtime.Types.
 export type ConversationSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   leadId?: boolean
+  contactRequestStatus?: boolean
+  contactRequestedAt?: boolean
+  contactRevealedAt?: boolean
   lastMessageAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -529,15 +735,19 @@ export type ConversationSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.
 export type ConversationSelectScalar = {
   id?: boolean
   leadId?: boolean
+  contactRequestStatus?: boolean
+  contactRequestedAt?: boolean
+  contactRevealedAt?: boolean
   lastMessageAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type ConversationOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "leadId" | "lastMessageAt" | "createdAt" | "updatedAt", ExtArgs["result"]["conversation"]>
+export type ConversationOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "leadId" | "contactRequestStatus" | "contactRequestedAt" | "contactRevealedAt" | "lastMessageAt" | "createdAt" | "updatedAt", ExtArgs["result"]["conversation"]>
 export type ConversationInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   lead?: boolean | Prisma.LeadDefaultArgs<ExtArgs>
   messages?: boolean | Prisma.Conversation$messagesArgs<ExtArgs>
+  contactReveals?: boolean | Prisma.Conversation$contactRevealsArgs<ExtArgs>
   _count?: boolean | Prisma.ConversationCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type ConversationIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -552,10 +762,14 @@ export type $ConversationPayload<ExtArgs extends runtime.Types.Extensions.Intern
   objects: {
     lead: Prisma.$LeadPayload<ExtArgs>
     messages: Prisma.$MessagePayload<ExtArgs>[]
+    contactReveals: Prisma.$ContactRevealPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     leadId: string
+    contactRequestStatus: $Enums.ContactRequestStatus
+    contactRequestedAt: Date | null
+    contactRevealedAt: Date | null
     lastMessageAt: Date | null
     createdAt: Date
     updatedAt: Date
@@ -955,6 +1169,7 @@ export interface Prisma__ConversationClient<T, Null = never, ExtArgs extends run
   readonly [Symbol.toStringTag]: "PrismaPromise"
   lead<T extends Prisma.LeadDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadDefaultArgs<ExtArgs>>): Prisma.Prisma__LeadClient<runtime.Types.Result.GetResult<Prisma.$LeadPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   messages<T extends Prisma.Conversation$messagesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Conversation$messagesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MessagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  contactReveals<T extends Prisma.Conversation$contactRevealsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Conversation$contactRevealsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ContactRevealPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -986,6 +1201,9 @@ export interface Prisma__ConversationClient<T, Null = never, ExtArgs extends run
 export interface ConversationFieldRefs {
   readonly id: Prisma.FieldRef<"Conversation", 'String'>
   readonly leadId: Prisma.FieldRef<"Conversation", 'String'>
+  readonly contactRequestStatus: Prisma.FieldRef<"Conversation", 'ContactRequestStatus'>
+  readonly contactRequestedAt: Prisma.FieldRef<"Conversation", 'DateTime'>
+  readonly contactRevealedAt: Prisma.FieldRef<"Conversation", 'DateTime'>
   readonly lastMessageAt: Prisma.FieldRef<"Conversation", 'DateTime'>
   readonly createdAt: Prisma.FieldRef<"Conversation", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Conversation", 'DateTime'>
@@ -1411,6 +1629,30 @@ export type Conversation$messagesArgs<ExtArgs extends runtime.Types.Extensions.I
   take?: number
   skip?: number
   distinct?: Prisma.MessageScalarFieldEnum | Prisma.MessageScalarFieldEnum[]
+}
+
+/**
+ * Conversation.contactReveals
+ */
+export type Conversation$contactRevealsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ContactReveal
+   */
+  select?: Prisma.ContactRevealSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ContactReveal
+   */
+  omit?: Prisma.ContactRevealOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ContactRevealInclude<ExtArgs> | null
+  where?: Prisma.ContactRevealWhereInput
+  orderBy?: Prisma.ContactRevealOrderByWithRelationInput | Prisma.ContactRevealOrderByWithRelationInput[]
+  cursor?: Prisma.ContactRevealWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ContactRevealScalarFieldEnum | Prisma.ContactRevealScalarFieldEnum[]
 }
 
 /**
