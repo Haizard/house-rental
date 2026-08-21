@@ -117,26 +117,27 @@ export function EditListingForm({ listing }: { listing: ListingData }) {
     setSuccess("");
 
     const form = new FormData(event.currentTarget);
+    const v = (name: string) => form.get(name) ?? undefined;
     const body = {
-      title: form.get("title"),
-      description: form.get("description") || undefined,
-      rentAmount: form.get("rentAmount"),
-      propertyType: form.get("propertyType"),
-      availabilityDate: form.get("availabilityDate") || null,
+      title: v("title") ?? listing.title,
+      description: v("description"),
+      rentAmount: v("rentAmount") ?? listing.rentAmount,
+      propertyType: v("propertyType") ?? listing.propertyType,
+      availabilityDate: v("availabilityDate") || null,
       // Room details
-      roomSize: form.get("roomSize") || undefined,
-      numberOfRooms: form.get("numberOfRooms") || undefined,
+      roomSize: v("roomSize"),
+      numberOfRooms: v("numberOfRooms"),
       furnished: form.get("furnished") === "on",
-      floorLevel: form.get("floorLevel") || undefined,
+      floorLevel: v("floorLevel"),
       // Rules
-      genderPreference: form.get("genderPreference") || "ANY",
+      genderPreference: v("genderPreference") || "ANY",
       petsAllowed: form.get("petsAllowed") === "on",
       smokingAllowed: form.get("smokingAllowed") === "on",
-      maxTenants: form.get("maxTenants") || undefined,
+      maxTenants: v("maxTenants"),
       // Pricing
-      depositAmount: form.get("depositAmount") || undefined,
+      depositAmount: v("depositAmount"),
       utilitiesIncluded: form.get("utilitiesIncluded") === "on",
-      leaseDuration: form.get("leaseDuration") || undefined,
+      leaseDuration: v("leaseDuration"),
       // Amenities
       amenities: selectedAmenities,
     };

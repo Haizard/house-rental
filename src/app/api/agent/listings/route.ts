@@ -87,7 +87,12 @@ export async function POST(request: Request) {
   if (!agent)
     return NextResponse.json({ error: "Agent profile not found." }, { status: 404 });
 
-  const parsed = createListingSchema.safeParse(await request.json().catch(() => null));
+  const raw = await request.json().catch(() => null);
+  // Strip null values — Zod optional() rejects null but accepts undefined
+  const cleaned = raw && typeof raw === "object"
+    ? Object.fromEntries(Object.entries(raw).filter(([, v]) => v !== null))
+    : raw;
+  const parsed = createListingSchema.safeParse(cleaned);
   if (!parsed.success) {
     const issues = parsed.error.issues.map((i) => i.message).join("; ");
     return NextResponse.json({ error: issues }, { status: 400 });
