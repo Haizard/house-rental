@@ -1,12 +1,10 @@
 export const dynamic = "force-dynamic";
 
-import { ArrowRight, Building2, LogIn, LogOut, MapPin, Search, User } from "lucide-react";
-import Link from "next/link";
-import { auth, signOut } from "@/lib/auth/config";
+import { ArrowRight, MapPin, Search } from "lucide-react";
 import { ListingCard } from "@/components/listings/listing-card";
 import { AISearchBar } from "@/components/listings/ai-search";
 import { StatusSection } from "@/components/statuses/status-section";
-import { TopBar } from "@/components/layout/top-bar";
+import { SiteNav } from "@/components/layout/site-nav";
 import { getPublicListings } from "@/server/listings/get-public-listings";
 
 const areas = ["Njiro", "Olorien", "Sakina", "Usa River"];
@@ -16,83 +14,15 @@ const universities = [
   { name: "KM-Arusha", slug: "km-arusha" },
 ];
 
-function getDashboardLink(role: string) {
-  switch (role) {
-    case "AGENT": return "/agent/dashboard";
-    case "ADMIN": return "/admin/dashboard";
-    default: return "/student/dashboard";
-  }
-}
-
 export default async function Home() {
-  const session = await auth();
   const { listings } = await getPublicListings();
-  const isLoggedIn = Boolean(session?.user);
-  const userRole = session?.user?.role as string | undefined;
 
   return (
-    <main className="min-h-screen overflow-hidden pb-20 pt-3 sm:px-6 md:px-8 lg:px-12">
-      <TopBar />
-
-      {/* Nav */}
-      <nav className="glass-nav mx-auto flex max-w-7xl items-center justify-between px-3 py-2.5 sm:px-5">
-        <a className="flex shrink-0 items-center gap-2 font-semibold text-[var(--text-primary)]" href="#top">
-          <span className="flex size-8 shrink-0 items-center justify-center rounded-[10px] bg-[var(--accent)] text-white sm:size-9 sm:rounded-[12px]">
-            <Building2 size={18} aria-hidden="true" />
-          </span>
-          <span className="truncate text-[15px] sm:text-base">Nyumba Nearby</span>
-        </a>
-
-        <div className="flex items-center gap-2 sm:gap-4">
-          {/* Desktop nav links */}
-          <div className="hidden items-center gap-4 text-sm text-[var(--text-secondary)] sm:flex">
-            <a className="transition hover:text-[var(--accent)]" href="#listings">Find a home</a>
-          </div>
-
-          {/* Auth buttons */}
-          {isLoggedIn ? (
-            <div className="flex items-center gap-2">
-              <Link
-                className="button button-glass hidden h-9 px-3 text-[13px] sm:inline-flex"
-                href={getDashboardLink(userRole ?? "STUDENT")}
-              >
-                <User size={15} /> Dashboard
-              </Link>
-              <form
-                action={async () => {
-                  "use server";
-                  await signOut({ redirectTo: "/" });
-                }}
-              >
-                <button
-                  className="button button-glass h-9 px-3 text-[13px]"
-                  type="submit"
-                >
-                  <LogOut size={15} /> <span className="hidden sm:inline">Sign out</span>
-                </button>
-              </form>
-            </div>
-          ) : (
-            <div className="flex items-center gap-2">
-              <Link
-                className="button button-primary h-9 px-3 text-[13px] sm:px-4"
-                href="/auth/sign-in"
-              >
-                <LogIn size={15} /> Log in
-              </Link>
-              <Link
-                className="button button-glass hidden h-9 px-3 text-[13px] sm:inline-flex"
-                href="/auth/register"
-              >
-                Sign up
-              </Link>
-            </div>
-          )}
-        </div>
-      </nav>
+    <main className="min-h-screen overflow-hidden px-4 pb-20 pt-3 sm:px-6 md:px-8 lg:px-12">
+      <SiteNav />
 
       {/* Hero — compact */}
-      <section id="top" className="mx-auto max-w-7xl px-1 sm:px-0">
+      <section id="top" className="mx-auto max-w-7xl">
         <div className="pt-8 sm:pt-10 lg:grid lg:max-w-3xl lg:items-start lg:gap-8 lg:pt-16">
           <div>
             <p className="eyebrow text-[11px] sm:text-xs">Student housing in Arusha</p>

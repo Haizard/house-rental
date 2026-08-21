@@ -96,11 +96,11 @@ export function InstallButton() {
   return (
     <button
       onClick={handleInstall}
-      className="flex items-center gap-2 rounded-full bg-gradient-to-r from-[var(--accent)] to-emerald-500 px-4 py-2 text-xs font-bold text-white shadow-lg shadow-[var(--accent)]/25 transition-all hover:shadow-xl hover:shadow-[var(--accent)]/30 hover:scale-105 active:scale-95"
+      className="flex size-9 shrink-0 items-center justify-center rounded-full bg-gradient-to-r from-[var(--accent)] to-emerald-500 text-white shadow-lg shadow-[var(--accent)]/25 transition-all hover:shadow-xl hover:shadow-[var(--accent)]/30 hover:scale-105 active:scale-95 sm:h-9 sm:w-auto sm:rounded-full sm:px-3 sm:gap-1.5"
       aria-label="Install app"
     >
-      <Download size={15} strokeWidth={2.5} />
-      <span>Install App</span>
+      <Download size={16} strokeWidth={2.5} />
+      <span className="hidden sm:inline text-xs font-bold">Install App</span>
     </button>
   );
 }

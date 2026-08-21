@@ -1,9 +1,10 @@
-import { Bookmark, CalendarDays, ChevronRight, ClipboardList, MessageCircle } from "lucide-react";
+import { Bookmark, CalendarDays, ChevronRight, ClipboardList, LogOut, MessageCircle } from "lucide-react";
 import Link from "next/link";
 import { prisma } from "@/lib/db/prisma";
 import { requireRole } from "@/lib/auth/guards";
+import { signOut } from "@/lib/auth/config";
 import { StatusPill } from "@/components/ui/status-pill";
-import { TopBar } from "@/components/layout/top-bar";
+import { SiteNav } from "@/components/layout/site-nav";
 
 export default async function StudentDashboard() {
   const session = await requireRole("STUDENT");
@@ -16,7 +17,10 @@ export default async function StudentDashboard() {
         take: 3,
       },
       leads: {
-        include: { listing: true, conversation: { select: { id: true } } },
+        include: {
+          listing: true,
+          conversation: { select: { id: true } },
+        },
         orderBy: { createdAt: "desc" },
         take: 5,
       },
@@ -24,17 +28,52 @@ export default async function StudentDashboard() {
   });
 
   return (
-    <div className="mx-auto max-w-5xl">
-      <TopBar />
-      <header className="pb-8 pt-10">
-        <p className="eyebrow">Student dashboard</p>
-        <h1 className="mt-2 text-3xl font-bold sm:text-4xl">
-          Welcome back, {session.user.name?.split(" ")[0] ?? "student"}.
-        </h1>
-        <p className="mt-2 text-[var(--text-secondary)]">
-          Keep track of homes you like and conversations you start.
-        </p>
+    <div className="mx-auto max-w-5xl px-4 sm:px-6">
+      <SiteNav />
+
+      <header className="flex items-end justify-between gap-4 pb-8 pt-6">
+        <div>
+          <p className="eyebrow">Student dashboard</p>
+          <h1 className="mt-2 text-3xl font-bold sm:text-4xl">
+            Welcome back, {session.user.name?.split(" ")[0] ?? "student"}.
+          </h1>
+          <p className="mt-2 text-[var(--text-secondary)]">
+            Keep track of homes you like and conversations you start.
+          </p>
+        </div>
+        <div className="hidden sm:block">
+          <form
+            action={async () => {
+              "use server";
+              await signOut({ redirectTo: "/" });
+            }}
+          >
+            <button
+              className="button button-glass h-9 px-3 text-[13px]"
+              type="submit"
+            >
+              <LogOut size={15} /> Sign out
+            </button>
+          </form>
+        </div>
       </header>
+
+      {/* Mobile sign out */}
+      <div className="mb-4 flex justify-end sm:hidden">
+        <form
+          action={async () => {
+            "use server";
+            await signOut({ redirectTo: "/" });
+          }}
+        >
+          <button
+            className="button button-glass h-9 px-3 text-[13px]"
+            type="submit"
+          >
+            <LogOut size={15} /> Sign out
+          </button>
+        </form>
+      </div>
 
       {/* Quick stats */}
       <section className="grid gap-3 sm:grid-cols-3">
@@ -116,7 +155,7 @@ export default async function StudentDashboard() {
       </section>
 
       {/* Saved homes preview */}
-      <section className="mt-10">
+      <section className="mt-10 pb-10">
         <div className="flex items-center justify-between gap-3">
           <h2 className="flex items-center gap-2 text-xl font-bold">
             <Bookmark size={19} aria-hidden="true" /> Saved homes
