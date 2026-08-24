@@ -1,249 +1,161 @@
-import Link from "next/link";
-import { ArrowLeft, Check, Crown, Zap } from "lucide-react";
-import { prisma } from "@/lib/db/prisma";
-import { requireRole } from "@/lib/auth/guards";
-import { SubscriptionActions } from "@/components/agent/subscription-actions";
+"use client";
 
-export default async function AgentSubscriptionPage() {
-  const session = await requireRole("AGENT");
+import { Check, CreditCard, Loader2, ExternalLink, Star } from "lucide-react";
+import { useState, useEffect } from "react";
 
-  const agent = await prisma.agentProfile.findUnique({
-    where: { userId: session.user.id },
-    select: { id: true, businessName: true },
-  });
-  if (!agent) return null;
+export default function AgentSubscriptionPage() {
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [status, setStatus] = useState<"idle" | "success" | "canceled">("idle");
 
-  // Get current subscription
-  const subscription = await prisma.subscription.findFirst({
-    where: { agentId: agent.id, status: { in: ["ACTIVE", "PAST_DUE"] } },
-    orderBy: { createdAt: "desc" },
-  });
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get("success") === "true") setStatus("success");
+    if (params.get("canceled") === "true") setStatus("canceled");
+  }, []);
 
-  // Get recent subscription history
-  const history = await prisma.subscription.findMany({
-    where: { agentId: agent.id },
-    orderBy: { createdAt: "desc" },
-    take: 5,
-  });
-
-  // Get current month usage
-  const now = new Date();
-  const monthStart = new Date(now.getFullYear(), now.getMonth(), 1);
-  const [activeListings, monthlyLeads, monthlyStatuses] = await Promise.all([
-    prisma.listing.count({ where: { agentId: agent.id, status: "ACTIVE" } }),
-    prisma.lead.count({
-      where: { agentId: agent.id, createdAt: { gte: monthStart } },
-    }),
-    prisma.agentStatus
-      .count({ where: { agentId: agent.id, createdAt: { gte: monthStart } } })
-      .catch(() => 0),
-  ]);
-
-  const isActive = subscription?.status === "ACTIVE";
-  const isPastDue = subscription?.status === "PAST_DUE";
-  const isFree = !subscription || !isActive;
+  async function handleCheckout() {
+    setLoading(true);
+    setError("");
+    try {
+      const res = await fetch("/api/payments/checkout", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ planName: "PRO" }),
+      });
+      const data = await res.json();
+      if (res.ok && data.data?.url) {
+        window.location.href = data.data.url;
+      } else {
+        setError(data.error || "Failed to start checkout");
+      }
+    } catch {
+      setError("Network error");
+    }
+    setLoading(false);
+  }
 
   return (
-    <main className="min-h-screen px-4 pb-12 pt-4 sm:px-8 lg:px-12">
-      <div className="mx-auto max-w-3xl">
-        <Link
-          className="button button-glass mb-8 px-4"
-          href="/agent/dashboard"
-        >
-          <ArrowLeft size={18} aria-hidden="true" /> Dashboard
-        </Link>
+    <div className="mx-auto max-w-2xl pb-20 pt-10">
+      <header className="mb-8">
+        <p className="eyebrow">Agent workspace</p>
+        <h1 className="mt-2 text-3xl font-bold sm:text-4xl">Subscription</h1>
+        <p className="mt-2 text-[var(--text-secondary)]">
+          Upgrade to Pro for unlimited leads and no ads.
+        </p>
+      </header>
 
-        <header className="pb-8 pt-4">
-          <p className="eyebrow">Agent workspace</p>
-          <h1 className="mt-2 text-3xl font-bold sm:text-4xl">
-            Subscription
-          </h1>
-          <p className="mt-2 text-[var(--text-secondary)]">
-            Manage your plan, view usage, and upgrade when ready.
+      {/* Success/Cancel messages */}
+      {status === "success" && (
+        <div className="glass-surface mb-6 border-emerald-200 bg-emerald-50 p-4 text-center animate-slide-up">
+          <p className="text-sm font-semibold text-emerald-700">
+            🎉 Payment successful! Your Pro subscription is now active.
           </p>
-        </header>
+        </div>
+      )}
+      {status === "canceled" && (
+        <div className="glass-surface mb-6 border-amber-200 bg-amber-50 p-4 text-center animate-slide-up">
+          <p className="text-sm font-medium text-amber-700">
+            Payment canceled. You can try again anytime.
+          </p>
+        </div>
+      )}
 
-        {/* Current plan card */}
-        <div
-          className={`glass-surface p-6 ${
-            isActive ? "ring-2 ring-emerald-500/30" : isPastDue ? "ring-2 ring-amber-500/30" : ""
-          }`}
-        >
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              {isActive ? (
-                <span className="flex size-10 items-center justify-center rounded-full bg-emerald-100 text-emerald-600">
-                  <Crown size={20} />
-                </span>
-              ) : (
-                <span className="flex size-10 items-center justify-center rounded-full bg-[var(--accent-soft)] text-[var(--accent)]">
-                  <Zap size={20} />
-                </span>
-              )}
-              <div>
-                <h2 className="text-lg font-bold">
-                  {isActive ? "Pro Agent" : "Free Agent"}
-                </h2>
-                <p className="text-sm text-[var(--text-secondary)]">
-                  {isActive
-                    ? `TZS 20,000/month — renews ${subscription?.expiresAt ? new Date(subscription.expiresAt).toLocaleDateString() : "N/A"}`
-                    : isPastDue
-                      ? "Payment overdue — upgrade to restore Pro features"
-                      : "Limited features — upgrade for unlimited access"}
-                </p>
-              </div>
-            </div>
-            {isFree && (
-              <Link
-                className="button button-primary px-4"
-                href="/agent/upgrade"
-              >
-                Upgrade
-              </Link>
-            )}
-          </div>
-
-          {isPastDue && (
-            <div className="mt-4 rounded-xl border border-amber-300/50 bg-amber-50 p-3 text-sm text-amber-700">
-              Your subscription payment is overdue. Please renew to keep Pro features active.
-            </div>
-          )}
-
-          {/* Usage stats */}
-          <div className="mt-5 grid grid-cols-3 gap-4 border-t border-[var(--glass-border)] pt-5">
-            <div className="text-center">
-              <p className="text-2xl font-bold">{activeListings}</p>
-              <p className="text-xs text-[var(--text-secondary)]">
-                Active listings
-              </p>
-              <p className="text-[10px] text-[var(--text-tertiary)]">
-                {isActive ? "Unlimited" : "Limit: 5"}
-              </p>
-            </div>
-            <div className="text-center">
-              <p className="text-2xl font-bold">{monthlyLeads}</p>
-              <p className="text-xs text-[var(--text-secondary)]">
-                Leads this month
-              </p>
-              <p className="text-[10px] text-[var(--text-tertiary)]">
-                {isActive ? "Unlimited" : "Limit: 10"}
-              </p>
-            </div>
-            <div className="text-center">
-              <p className="text-2xl font-bold">{monthlyStatuses}</p>
-              <p className="text-xs text-[var(--text-secondary)]">
-                Statuses this month
-              </p>
-              <p className="text-[10px] text-[var(--text-tertiary)]">
-                {isActive ? "Unlimited" : "Limit: 3/day"}
-              </p>
-            </div>
+      {/* Plans */}
+      <div className="grid gap-4 sm:grid-cols-2">
+        {/* Free Plan */}
+        <div className="glass-surface p-6">
+          <h2 className="text-lg font-bold text-[var(--text-primary)]">Free</h2>
+          <p className="mt-1 text-3xl font-bold text-[var(--text-primary)]">
+            TZS 0<span className="text-sm font-normal text-[var(--text-tertiary)]">/mo</span>
+          </p>
+          <ul className="mt-4 space-y-2.5">
+            <Feature text="5 active listings" />
+            <Feature text="10 leads per month" />
+            <Feature text="3 statuses per day" />
+            <Feature text="Platform ads displayed" />
+          </ul>
+          <div className="mt-6">
+            <span className="button button-glass w-full">Current plan</span>
           </div>
         </div>
 
-        {/* Subscription history */}
-        <section className="mt-8">
-          <h2 className="text-xl font-bold">Subscription history</h2>
-          {history.length === 0 ? (
-            <div className="glass-surface mt-4 p-6 text-sm text-[var(--text-secondary)]">
-              No subscription history yet.
-            </div>
-          ) : (
-            <div className="mt-4 space-y-3">
-              {history.map((sub) => (
-                <div key={sub.id} className="glass-surface flex items-center justify-between p-4">
-                  <div>
-                    <p className="font-medium">{sub.planName} plan</p>
-                    <p className="text-xs text-[var(--text-tertiary)]">
-                      Started {new Date(sub.startedAt).toLocaleDateString()}
-                    </p>
-                  </div>
-                  <span
-                    className={`status-pill ${
-                      sub.status === "ACTIVE"
-                        ? "status-active"
-                        : sub.status === "CANCELLED"
-                          ? "status-paused"
-                          : sub.status === "PAST_DUE"
-                            ? "status-draft"
-                            : ""
-                    }`}
-                  >
-                    {sub.status}
-                  </span>
-                </div>
-              ))}
-            </div>
+        {/* Pro Plan */}
+        <div className="glass-surface relative overflow-hidden border-[var(--accent)]/30 p-6">
+          <div className="absolute right-3 top-3">
+            <span className="flex items-center gap-1 rounded-full bg-gradient-to-r from-[var(--accent)] to-purple-500 px-2.5 py-0.5 text-[10px] font-bold text-white">
+              <Star size={10} fill="currentColor" /> PRO
+            </span>
+          </div>
+          <h2 className="text-lg font-bold text-[var(--text-primary)]">Pro</h2>
+          <p className="mt-1 text-3xl font-bold text-[var(--accent)]">
+            TZS 20,000<span className="text-sm font-normal text-[var(--text-tertiary)]">/mo</span>
+          </p>
+          <ul className="mt-4 space-y-2.5">
+            <Feature text="Unlimited listings" highlighted />
+            <Feature text="Unlimited leads" highlighted />
+            <Feature text="Unlimited statuses" highlighted />
+            <Feature text="No platform ads" highlighted />
+            <Feature text="Room request access" highlighted />
+            <Feature text="Priority support" highlighted />
+          </ul>
+          <div className="mt-6">
+            <button
+              className="button button-primary w-full"
+              disabled={loading}
+              onClick={handleCheckout}
+            >
+              {loading ? (
+                <Loader2 size={16} className="animate-spin" />
+              ) : (
+                <>
+                  <CreditCard size={16} aria-hidden="true" />
+                  Upgrade to Pro
+                </>
+              )}
+            </button>
+          </div>
+          {error && (
+            <p className="mt-2 text-center text-xs text-red-500">{error}</p>
           )}
-        </section>
-
-        {/* Plan comparison */}
-        <section className="mt-8 grid gap-4 sm:grid-cols-2">
-          {/* Free tier */}
-          <div
-            className={`glass-surface p-5 ${!isActive ? "ring-2 ring-[var(--accent)]" : ""}`}
-          >
-            <div className="flex items-center gap-2">
-              <span className="text-lg">🆓</span>
-              <h3 className="font-bold">Free Agent</h3>
-            </div>
-            <p className="mt-1 text-sm text-[var(--text-secondary)]">
-              TZS 0 / month
-            </p>
-            <ul className="mt-3 space-y-1.5 text-sm">
-              <li className="flex items-center gap-2">
-                <Check size={14} className="text-[var(--success)]" /> 5 active listings
-              </li>
-              <li className="flex items-center gap-2">
-                <Check size={14} className="text-[var(--success)]" /> 10 leads / month
-              </li>
-              <li className="flex items-center gap-2">
-                <Check size={14} className="text-[var(--success)]" /> 3 statuses / day
-              </li>
-              <li className="flex items-center gap-2 text-[var(--text-tertiary)]">
-                Ads in dashboard
-              </li>
-            </ul>
-          </div>
-
-          {/* Pro tier */}
-          <div
-            className={`glass-surface p-5 ${isActive ? "ring-2 ring-emerald-500/30" : ""}`}
-          >
-            <div className="flex items-center gap-2">
-              <span className="text-lg">💼</span>
-              <h3 className="font-bold">Pro Agent</h3>
-            </div>
-            <p className="mt-1 text-sm text-[var(--text-secondary)]">
-              TZS 20,000 / month
-            </p>
-            <ul className="mt-3 space-y-1.5 text-sm">
-              <li className="flex items-center gap-2">
-                <Check size={14} className="text-[var(--success)]" /> 50+ active listings
-              </li>
-              <li className="flex items-center gap-2">
-                <Check size={14} className="text-[var(--success)]" /> Unlimited leads
-              </li>
-              <li className="flex items-center gap-2">
-                <Check size={14} className="text-[var(--success)]" /> Unlimited statuses
-              </li>
-              <li className="flex items-center gap-2">
-                <Check size={14} className="text-[var(--success)]" /> No ads
-              </li>
-              <li className="flex items-center gap-2">
-                <Check size={14} className="text-[var(--success)]" /> Advanced analytics
-              </li>
-            </ul>
-          </div>
-        </section>
-
-        {/* Cancel action */}
-        {isActive && (
-          <div className="mt-8">
-            <SubscriptionActions />
-          </div>
-        )}
+        </div>
       </div>
-    </main>
+
+      {/* FAQ */}
+      <div className="glass-surface mt-8 p-6">
+        <h3 className="mb-4 text-sm font-semibold text-[var(--text-primary)]">
+          Frequently Asked Questions
+        </h3>
+        <div className="space-y-4 text-sm text-[var(--text-secondary)]">
+          <div>
+            <p className="font-medium text-[var(--text-primary)]">Can I cancel anytime?</p>
+            <p className="mt-1">Yes. Your subscription remains active until the end of the billing period.</p>
+          </div>
+          <div>
+            <p className="font-medium text-[var(--text-primary)]">What happens when I downgrade?</p>
+            <p className="mt-1">You keep Pro features until your subscription expires, then revert to Free plan limits.</p>
+          </div>
+          <div>
+            <p className="font-medium text-[var(--text-primary)]">Do you accept mobile money?</p>
+            <p className="mt-1">Currently we accept card payments via Stripe. Mobile money support coming soon.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function Feature({ text, highlighted = false }: { text: string; highlighted?: boolean }) {
+  return (
+    <li className="flex items-start gap-2">
+      <Check
+        size={16}
+        className={`mt-0.5 shrink-0 ${highlighted ? "text-[var(--accent)]" : "text-[var(--text-tertiary)]"}`}
+        aria-hidden="true"
+      />
+      <span className={highlighted ? "font-medium text-[var(--text-primary)]" : ""}>
+        {text}
+      </span>
+    </li>
   );
 }

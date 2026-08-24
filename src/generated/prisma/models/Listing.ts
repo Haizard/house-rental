@@ -28,10 +28,20 @@ export type AggregateListing = {
 
 export type ListingAvgAggregateOutputType = {
   rentAmount: number | null
+  roomSize: number | null
+  numberOfRooms: number | null
+  floorLevel: number | null
+  maxTenants: number | null
+  depositAmount: number | null
 }
 
 export type ListingSumAggregateOutputType = {
   rentAmount: number | null
+  roomSize: number | null
+  numberOfRooms: number | null
+  floorLevel: number | null
+  maxTenants: number | null
+  depositAmount: number | null
 }
 
 export type ListingMinAggregateOutputType = {
@@ -48,6 +58,21 @@ export type ListingMinAggregateOutputType = {
   verificationStatus: $Enums.VerificationStatus | null
   publishedAt: Date | null
   expiresAt: Date | null
+  roomSize: number | null
+  numberOfRooms: number | null
+  furnished: boolean | null
+  floorLevel: number | null
+  genderPreference: string | null
+  petsAllowed: boolean | null
+  smokingAllowed: boolean | null
+  maxTenants: number | null
+  depositAmount: number | null
+  utilitiesIncluded: boolean | null
+  leaseDuration: string | null
+  isFeatured: boolean | null
+  featuredUntil: Date | null
+  isFlagged: boolean | null
+  flagReason: string | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -66,6 +91,21 @@ export type ListingMaxAggregateOutputType = {
   verificationStatus: $Enums.VerificationStatus | null
   publishedAt: Date | null
   expiresAt: Date | null
+  roomSize: number | null
+  numberOfRooms: number | null
+  furnished: boolean | null
+  floorLevel: number | null
+  genderPreference: string | null
+  petsAllowed: boolean | null
+  smokingAllowed: boolean | null
+  maxTenants: number | null
+  depositAmount: number | null
+  utilitiesIncluded: boolean | null
+  leaseDuration: string | null
+  isFeatured: boolean | null
+  featuredUntil: Date | null
+  isFlagged: boolean | null
+  flagReason: string | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -84,6 +124,21 @@ export type ListingCountAggregateOutputType = {
   verificationStatus: number
   publishedAt: number
   expiresAt: number
+  roomSize: number
+  numberOfRooms: number
+  furnished: number
+  floorLevel: number
+  genderPreference: number
+  petsAllowed: number
+  smokingAllowed: number
+  maxTenants: number
+  depositAmount: number
+  utilitiesIncluded: number
+  leaseDuration: number
+  isFeatured: number
+  featuredUntil: number
+  isFlagged: number
+  flagReason: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -92,10 +147,20 @@ export type ListingCountAggregateOutputType = {
 
 export type ListingAvgAggregateInputType = {
   rentAmount?: true
+  roomSize?: true
+  numberOfRooms?: true
+  floorLevel?: true
+  maxTenants?: true
+  depositAmount?: true
 }
 
 export type ListingSumAggregateInputType = {
   rentAmount?: true
+  roomSize?: true
+  numberOfRooms?: true
+  floorLevel?: true
+  maxTenants?: true
+  depositAmount?: true
 }
 
 export type ListingMinAggregateInputType = {
@@ -112,6 +177,21 @@ export type ListingMinAggregateInputType = {
   verificationStatus?: true
   publishedAt?: true
   expiresAt?: true
+  roomSize?: true
+  numberOfRooms?: true
+  furnished?: true
+  floorLevel?: true
+  genderPreference?: true
+  petsAllowed?: true
+  smokingAllowed?: true
+  maxTenants?: true
+  depositAmount?: true
+  utilitiesIncluded?: true
+  leaseDuration?: true
+  isFeatured?: true
+  featuredUntil?: true
+  isFlagged?: true
+  flagReason?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -130,6 +210,21 @@ export type ListingMaxAggregateInputType = {
   verificationStatus?: true
   publishedAt?: true
   expiresAt?: true
+  roomSize?: true
+  numberOfRooms?: true
+  furnished?: true
+  floorLevel?: true
+  genderPreference?: true
+  petsAllowed?: true
+  smokingAllowed?: true
+  maxTenants?: true
+  depositAmount?: true
+  utilitiesIncluded?: true
+  leaseDuration?: true
+  isFeatured?: true
+  featuredUntil?: true
+  isFlagged?: true
+  flagReason?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -148,6 +243,21 @@ export type ListingCountAggregateInputType = {
   verificationStatus?: true
   publishedAt?: true
   expiresAt?: true
+  roomSize?: true
+  numberOfRooms?: true
+  furnished?: true
+  floorLevel?: true
+  genderPreference?: true
+  petsAllowed?: true
+  smokingAllowed?: true
+  maxTenants?: true
+  depositAmount?: true
+  utilitiesIncluded?: true
+  leaseDuration?: true
+  isFeatured?: true
+  featuredUntil?: true
+  isFlagged?: true
+  flagReason?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -253,6 +363,21 @@ export type ListingGroupByOutputType = {
   verificationStatus: $Enums.VerificationStatus
   publishedAt: Date | null
   expiresAt: Date | null
+  roomSize: number | null
+  numberOfRooms: number | null
+  furnished: boolean
+  floorLevel: number | null
+  genderPreference: string
+  petsAllowed: boolean
+  smokingAllowed: boolean
+  maxTenants: number | null
+  depositAmount: number | null
+  utilitiesIncluded: boolean
+  leaseDuration: string | null
+  isFeatured: boolean
+  featuredUntil: Date | null
+  isFlagged: boolean
+  flagReason: string | null
   createdAt: Date
   updatedAt: Date
   _count: ListingCountAggregateOutputType | null
@@ -294,6 +419,21 @@ export type ListingWhereInput = {
   verificationStatus?: Prisma.EnumVerificationStatusFilter<"Listing"> | $Enums.VerificationStatus
   publishedAt?: Prisma.DateTimeNullableFilter<"Listing"> | Date | string | null
   expiresAt?: Prisma.DateTimeNullableFilter<"Listing"> | Date | string | null
+  roomSize?: Prisma.IntNullableFilter<"Listing"> | number | null
+  numberOfRooms?: Prisma.IntNullableFilter<"Listing"> | number | null
+  furnished?: Prisma.BoolFilter<"Listing"> | boolean
+  floorLevel?: Prisma.IntNullableFilter<"Listing"> | number | null
+  genderPreference?: Prisma.StringFilter<"Listing"> | string
+  petsAllowed?: Prisma.BoolFilter<"Listing"> | boolean
+  smokingAllowed?: Prisma.BoolFilter<"Listing"> | boolean
+  maxTenants?: Prisma.IntNullableFilter<"Listing"> | number | null
+  depositAmount?: Prisma.IntNullableFilter<"Listing"> | number | null
+  utilitiesIncluded?: Prisma.BoolFilter<"Listing"> | boolean
+  leaseDuration?: Prisma.StringNullableFilter<"Listing"> | string | null
+  isFeatured?: Prisma.BoolFilter<"Listing"> | boolean
+  featuredUntil?: Prisma.DateTimeNullableFilter<"Listing"> | Date | string | null
+  isFlagged?: Prisma.BoolFilter<"Listing"> | boolean
+  flagReason?: Prisma.StringNullableFilter<"Listing"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Listing"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Listing"> | Date | string
   property?: Prisma.XOR<Prisma.PropertyScalarRelationFilter, Prisma.PropertyWhereInput>
@@ -320,6 +460,21 @@ export type ListingOrderByWithRelationInput = {
   verificationStatus?: Prisma.SortOrder
   publishedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   expiresAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  roomSize?: Prisma.SortOrderInput | Prisma.SortOrder
+  numberOfRooms?: Prisma.SortOrderInput | Prisma.SortOrder
+  furnished?: Prisma.SortOrder
+  floorLevel?: Prisma.SortOrderInput | Prisma.SortOrder
+  genderPreference?: Prisma.SortOrder
+  petsAllowed?: Prisma.SortOrder
+  smokingAllowed?: Prisma.SortOrder
+  maxTenants?: Prisma.SortOrderInput | Prisma.SortOrder
+  depositAmount?: Prisma.SortOrderInput | Prisma.SortOrder
+  utilitiesIncluded?: Prisma.SortOrder
+  leaseDuration?: Prisma.SortOrderInput | Prisma.SortOrder
+  isFeatured?: Prisma.SortOrder
+  featuredUntil?: Prisma.SortOrderInput | Prisma.SortOrder
+  isFlagged?: Prisma.SortOrder
+  flagReason?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   property?: Prisma.PropertyOrderByWithRelationInput
@@ -349,6 +504,21 @@ export type ListingWhereUniqueInput = Prisma.AtLeast<{
   verificationStatus?: Prisma.EnumVerificationStatusFilter<"Listing"> | $Enums.VerificationStatus
   publishedAt?: Prisma.DateTimeNullableFilter<"Listing"> | Date | string | null
   expiresAt?: Prisma.DateTimeNullableFilter<"Listing"> | Date | string | null
+  roomSize?: Prisma.IntNullableFilter<"Listing"> | number | null
+  numberOfRooms?: Prisma.IntNullableFilter<"Listing"> | number | null
+  furnished?: Prisma.BoolFilter<"Listing"> | boolean
+  floorLevel?: Prisma.IntNullableFilter<"Listing"> | number | null
+  genderPreference?: Prisma.StringFilter<"Listing"> | string
+  petsAllowed?: Prisma.BoolFilter<"Listing"> | boolean
+  smokingAllowed?: Prisma.BoolFilter<"Listing"> | boolean
+  maxTenants?: Prisma.IntNullableFilter<"Listing"> | number | null
+  depositAmount?: Prisma.IntNullableFilter<"Listing"> | number | null
+  utilitiesIncluded?: Prisma.BoolFilter<"Listing"> | boolean
+  leaseDuration?: Prisma.StringNullableFilter<"Listing"> | string | null
+  isFeatured?: Prisma.BoolFilter<"Listing"> | boolean
+  featuredUntil?: Prisma.DateTimeNullableFilter<"Listing"> | Date | string | null
+  isFlagged?: Prisma.BoolFilter<"Listing"> | boolean
+  flagReason?: Prisma.StringNullableFilter<"Listing"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Listing"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Listing"> | Date | string
   property?: Prisma.XOR<Prisma.PropertyScalarRelationFilter, Prisma.PropertyWhereInput>
@@ -375,6 +545,21 @@ export type ListingOrderByWithAggregationInput = {
   verificationStatus?: Prisma.SortOrder
   publishedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   expiresAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  roomSize?: Prisma.SortOrderInput | Prisma.SortOrder
+  numberOfRooms?: Prisma.SortOrderInput | Prisma.SortOrder
+  furnished?: Prisma.SortOrder
+  floorLevel?: Prisma.SortOrderInput | Prisma.SortOrder
+  genderPreference?: Prisma.SortOrder
+  petsAllowed?: Prisma.SortOrder
+  smokingAllowed?: Prisma.SortOrder
+  maxTenants?: Prisma.SortOrderInput | Prisma.SortOrder
+  depositAmount?: Prisma.SortOrderInput | Prisma.SortOrder
+  utilitiesIncluded?: Prisma.SortOrder
+  leaseDuration?: Prisma.SortOrderInput | Prisma.SortOrder
+  isFeatured?: Prisma.SortOrder
+  featuredUntil?: Prisma.SortOrderInput | Prisma.SortOrder
+  isFlagged?: Prisma.SortOrder
+  flagReason?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.ListingCountOrderByAggregateInput
@@ -401,6 +586,21 @@ export type ListingScalarWhereWithAggregatesInput = {
   verificationStatus?: Prisma.EnumVerificationStatusWithAggregatesFilter<"Listing"> | $Enums.VerificationStatus
   publishedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Listing"> | Date | string | null
   expiresAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Listing"> | Date | string | null
+  roomSize?: Prisma.IntNullableWithAggregatesFilter<"Listing"> | number | null
+  numberOfRooms?: Prisma.IntNullableWithAggregatesFilter<"Listing"> | number | null
+  furnished?: Prisma.BoolWithAggregatesFilter<"Listing"> | boolean
+  floorLevel?: Prisma.IntNullableWithAggregatesFilter<"Listing"> | number | null
+  genderPreference?: Prisma.StringWithAggregatesFilter<"Listing"> | string
+  petsAllowed?: Prisma.BoolWithAggregatesFilter<"Listing"> | boolean
+  smokingAllowed?: Prisma.BoolWithAggregatesFilter<"Listing"> | boolean
+  maxTenants?: Prisma.IntNullableWithAggregatesFilter<"Listing"> | number | null
+  depositAmount?: Prisma.IntNullableWithAggregatesFilter<"Listing"> | number | null
+  utilitiesIncluded?: Prisma.BoolWithAggregatesFilter<"Listing"> | boolean
+  leaseDuration?: Prisma.StringNullableWithAggregatesFilter<"Listing"> | string | null
+  isFeatured?: Prisma.BoolWithAggregatesFilter<"Listing"> | boolean
+  featuredUntil?: Prisma.DateTimeNullableWithAggregatesFilter<"Listing"> | Date | string | null
+  isFlagged?: Prisma.BoolWithAggregatesFilter<"Listing"> | boolean
+  flagReason?: Prisma.StringNullableWithAggregatesFilter<"Listing"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Listing"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Listing"> | Date | string
 }
@@ -417,6 +617,21 @@ export type ListingCreateInput = {
   verificationStatus?: $Enums.VerificationStatus
   publishedAt?: Date | string | null
   expiresAt?: Date | string | null
+  roomSize?: number | null
+  numberOfRooms?: number | null
+  furnished?: boolean
+  floorLevel?: number | null
+  genderPreference?: string
+  petsAllowed?: boolean
+  smokingAllowed?: boolean
+  maxTenants?: number | null
+  depositAmount?: number | null
+  utilitiesIncluded?: boolean
+  leaseDuration?: string | null
+  isFeatured?: boolean
+  featuredUntil?: Date | string | null
+  isFlagged?: boolean
+  flagReason?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   property: Prisma.PropertyCreateNestedOneWithoutListingsInput
@@ -443,6 +658,21 @@ export type ListingUncheckedCreateInput = {
   verificationStatus?: $Enums.VerificationStatus
   publishedAt?: Date | string | null
   expiresAt?: Date | string | null
+  roomSize?: number | null
+  numberOfRooms?: number | null
+  furnished?: boolean
+  floorLevel?: number | null
+  genderPreference?: string
+  petsAllowed?: boolean
+  smokingAllowed?: boolean
+  maxTenants?: number | null
+  depositAmount?: number | null
+  utilitiesIncluded?: boolean
+  leaseDuration?: string | null
+  isFeatured?: boolean
+  featuredUntil?: Date | string | null
+  isFlagged?: boolean
+  flagReason?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   images?: Prisma.ListingImageUncheckedCreateNestedManyWithoutListingInput
@@ -465,6 +695,21 @@ export type ListingUpdateInput = {
   verificationStatus?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
   publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  roomSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numberOfRooms?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  furnished?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  floorLevel?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  genderPreference?: Prisma.StringFieldUpdateOperationsInput | string
+  petsAllowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  smokingAllowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  maxTenants?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  depositAmount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  utilitiesIncluded?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  leaseDuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  featuredUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isFlagged?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  flagReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   property?: Prisma.PropertyUpdateOneRequiredWithoutListingsNestedInput
@@ -491,6 +736,21 @@ export type ListingUncheckedUpdateInput = {
   verificationStatus?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
   publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  roomSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numberOfRooms?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  furnished?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  floorLevel?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  genderPreference?: Prisma.StringFieldUpdateOperationsInput | string
+  petsAllowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  smokingAllowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  maxTenants?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  depositAmount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  utilitiesIncluded?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  leaseDuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  featuredUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isFlagged?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  flagReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   images?: Prisma.ListingImageUncheckedUpdateManyWithoutListingNestedInput
@@ -515,6 +775,21 @@ export type ListingCreateManyInput = {
   verificationStatus?: $Enums.VerificationStatus
   publishedAt?: Date | string | null
   expiresAt?: Date | string | null
+  roomSize?: number | null
+  numberOfRooms?: number | null
+  furnished?: boolean
+  floorLevel?: number | null
+  genderPreference?: string
+  petsAllowed?: boolean
+  smokingAllowed?: boolean
+  maxTenants?: number | null
+  depositAmount?: number | null
+  utilitiesIncluded?: boolean
+  leaseDuration?: string | null
+  isFeatured?: boolean
+  featuredUntil?: Date | string | null
+  isFlagged?: boolean
+  flagReason?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -531,6 +806,21 @@ export type ListingUpdateManyMutationInput = {
   verificationStatus?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
   publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  roomSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numberOfRooms?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  furnished?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  floorLevel?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  genderPreference?: Prisma.StringFieldUpdateOperationsInput | string
+  petsAllowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  smokingAllowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  maxTenants?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  depositAmount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  utilitiesIncluded?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  leaseDuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  featuredUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isFlagged?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  flagReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -549,6 +839,21 @@ export type ListingUncheckedUpdateManyInput = {
   verificationStatus?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
   publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  roomSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numberOfRooms?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  furnished?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  floorLevel?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  genderPreference?: Prisma.StringFieldUpdateOperationsInput | string
+  petsAllowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  smokingAllowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  maxTenants?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  depositAmount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  utilitiesIncluded?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  leaseDuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  featuredUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isFlagged?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  flagReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -577,12 +882,32 @@ export type ListingCountOrderByAggregateInput = {
   verificationStatus?: Prisma.SortOrder
   publishedAt?: Prisma.SortOrder
   expiresAt?: Prisma.SortOrder
+  roomSize?: Prisma.SortOrder
+  numberOfRooms?: Prisma.SortOrder
+  furnished?: Prisma.SortOrder
+  floorLevel?: Prisma.SortOrder
+  genderPreference?: Prisma.SortOrder
+  petsAllowed?: Prisma.SortOrder
+  smokingAllowed?: Prisma.SortOrder
+  maxTenants?: Prisma.SortOrder
+  depositAmount?: Prisma.SortOrder
+  utilitiesIncluded?: Prisma.SortOrder
+  leaseDuration?: Prisma.SortOrder
+  isFeatured?: Prisma.SortOrder
+  featuredUntil?: Prisma.SortOrder
+  isFlagged?: Prisma.SortOrder
+  flagReason?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
 
 export type ListingAvgOrderByAggregateInput = {
   rentAmount?: Prisma.SortOrder
+  roomSize?: Prisma.SortOrder
+  numberOfRooms?: Prisma.SortOrder
+  floorLevel?: Prisma.SortOrder
+  maxTenants?: Prisma.SortOrder
+  depositAmount?: Prisma.SortOrder
 }
 
 export type ListingMaxOrderByAggregateInput = {
@@ -599,6 +924,21 @@ export type ListingMaxOrderByAggregateInput = {
   verificationStatus?: Prisma.SortOrder
   publishedAt?: Prisma.SortOrder
   expiresAt?: Prisma.SortOrder
+  roomSize?: Prisma.SortOrder
+  numberOfRooms?: Prisma.SortOrder
+  furnished?: Prisma.SortOrder
+  floorLevel?: Prisma.SortOrder
+  genderPreference?: Prisma.SortOrder
+  petsAllowed?: Prisma.SortOrder
+  smokingAllowed?: Prisma.SortOrder
+  maxTenants?: Prisma.SortOrder
+  depositAmount?: Prisma.SortOrder
+  utilitiesIncluded?: Prisma.SortOrder
+  leaseDuration?: Prisma.SortOrder
+  isFeatured?: Prisma.SortOrder
+  featuredUntil?: Prisma.SortOrder
+  isFlagged?: Prisma.SortOrder
+  flagReason?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -617,12 +957,32 @@ export type ListingMinOrderByAggregateInput = {
   verificationStatus?: Prisma.SortOrder
   publishedAt?: Prisma.SortOrder
   expiresAt?: Prisma.SortOrder
+  roomSize?: Prisma.SortOrder
+  numberOfRooms?: Prisma.SortOrder
+  furnished?: Prisma.SortOrder
+  floorLevel?: Prisma.SortOrder
+  genderPreference?: Prisma.SortOrder
+  petsAllowed?: Prisma.SortOrder
+  smokingAllowed?: Prisma.SortOrder
+  maxTenants?: Prisma.SortOrder
+  depositAmount?: Prisma.SortOrder
+  utilitiesIncluded?: Prisma.SortOrder
+  leaseDuration?: Prisma.SortOrder
+  isFeatured?: Prisma.SortOrder
+  featuredUntil?: Prisma.SortOrder
+  isFlagged?: Prisma.SortOrder
+  flagReason?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
 
 export type ListingSumOrderByAggregateInput = {
   rentAmount?: Prisma.SortOrder
+  roomSize?: Prisma.SortOrder
+  numberOfRooms?: Prisma.SortOrder
+  floorLevel?: Prisma.SortOrder
+  maxTenants?: Prisma.SortOrder
+  depositAmount?: Prisma.SortOrder
 }
 
 export type ListingScalarRelationFilter = {
@@ -821,6 +1181,21 @@ export type ListingCreateWithoutAgentInput = {
   verificationStatus?: $Enums.VerificationStatus
   publishedAt?: Date | string | null
   expiresAt?: Date | string | null
+  roomSize?: number | null
+  numberOfRooms?: number | null
+  furnished?: boolean
+  floorLevel?: number | null
+  genderPreference?: string
+  petsAllowed?: boolean
+  smokingAllowed?: boolean
+  maxTenants?: number | null
+  depositAmount?: number | null
+  utilitiesIncluded?: boolean
+  leaseDuration?: string | null
+  isFeatured?: boolean
+  featuredUntil?: Date | string | null
+  isFlagged?: boolean
+  flagReason?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   property: Prisma.PropertyCreateNestedOneWithoutListingsInput
@@ -845,6 +1220,21 @@ export type ListingUncheckedCreateWithoutAgentInput = {
   verificationStatus?: $Enums.VerificationStatus
   publishedAt?: Date | string | null
   expiresAt?: Date | string | null
+  roomSize?: number | null
+  numberOfRooms?: number | null
+  furnished?: boolean
+  floorLevel?: number | null
+  genderPreference?: string
+  petsAllowed?: boolean
+  smokingAllowed?: boolean
+  maxTenants?: number | null
+  depositAmount?: number | null
+  utilitiesIncluded?: boolean
+  leaseDuration?: string | null
+  isFeatured?: boolean
+  featuredUntil?: Date | string | null
+  isFlagged?: boolean
+  flagReason?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   images?: Prisma.ListingImageUncheckedCreateNestedManyWithoutListingInput
@@ -898,6 +1288,21 @@ export type ListingScalarWhereInput = {
   verificationStatus?: Prisma.EnumVerificationStatusFilter<"Listing"> | $Enums.VerificationStatus
   publishedAt?: Prisma.DateTimeNullableFilter<"Listing"> | Date | string | null
   expiresAt?: Prisma.DateTimeNullableFilter<"Listing"> | Date | string | null
+  roomSize?: Prisma.IntNullableFilter<"Listing"> | number | null
+  numberOfRooms?: Prisma.IntNullableFilter<"Listing"> | number | null
+  furnished?: Prisma.BoolFilter<"Listing"> | boolean
+  floorLevel?: Prisma.IntNullableFilter<"Listing"> | number | null
+  genderPreference?: Prisma.StringFilter<"Listing"> | string
+  petsAllowed?: Prisma.BoolFilter<"Listing"> | boolean
+  smokingAllowed?: Prisma.BoolFilter<"Listing"> | boolean
+  maxTenants?: Prisma.IntNullableFilter<"Listing"> | number | null
+  depositAmount?: Prisma.IntNullableFilter<"Listing"> | number | null
+  utilitiesIncluded?: Prisma.BoolFilter<"Listing"> | boolean
+  leaseDuration?: Prisma.StringNullableFilter<"Listing"> | string | null
+  isFeatured?: Prisma.BoolFilter<"Listing"> | boolean
+  featuredUntil?: Prisma.DateTimeNullableFilter<"Listing"> | Date | string | null
+  isFlagged?: Prisma.BoolFilter<"Listing"> | boolean
+  flagReason?: Prisma.StringNullableFilter<"Listing"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Listing"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Listing"> | Date | string
 }
@@ -914,6 +1319,21 @@ export type ListingCreateWithoutPropertyInput = {
   verificationStatus?: $Enums.VerificationStatus
   publishedAt?: Date | string | null
   expiresAt?: Date | string | null
+  roomSize?: number | null
+  numberOfRooms?: number | null
+  furnished?: boolean
+  floorLevel?: number | null
+  genderPreference?: string
+  petsAllowed?: boolean
+  smokingAllowed?: boolean
+  maxTenants?: number | null
+  depositAmount?: number | null
+  utilitiesIncluded?: boolean
+  leaseDuration?: string | null
+  isFeatured?: boolean
+  featuredUntil?: Date | string | null
+  isFlagged?: boolean
+  flagReason?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   agent: Prisma.AgentProfileCreateNestedOneWithoutListingsInput
@@ -938,6 +1358,21 @@ export type ListingUncheckedCreateWithoutPropertyInput = {
   verificationStatus?: $Enums.VerificationStatus
   publishedAt?: Date | string | null
   expiresAt?: Date | string | null
+  roomSize?: number | null
+  numberOfRooms?: number | null
+  furnished?: boolean
+  floorLevel?: number | null
+  genderPreference?: string
+  petsAllowed?: boolean
+  smokingAllowed?: boolean
+  maxTenants?: number | null
+  depositAmount?: number | null
+  utilitiesIncluded?: boolean
+  leaseDuration?: string | null
+  isFeatured?: boolean
+  featuredUntil?: Date | string | null
+  isFlagged?: boolean
+  flagReason?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   images?: Prisma.ListingImageUncheckedCreateNestedManyWithoutListingInput
@@ -986,6 +1421,21 @@ export type ListingCreateWithoutAmenitiesInput = {
   verificationStatus?: $Enums.VerificationStatus
   publishedAt?: Date | string | null
   expiresAt?: Date | string | null
+  roomSize?: number | null
+  numberOfRooms?: number | null
+  furnished?: boolean
+  floorLevel?: number | null
+  genderPreference?: string
+  petsAllowed?: boolean
+  smokingAllowed?: boolean
+  maxTenants?: number | null
+  depositAmount?: number | null
+  utilitiesIncluded?: boolean
+  leaseDuration?: string | null
+  isFeatured?: boolean
+  featuredUntil?: Date | string | null
+  isFlagged?: boolean
+  flagReason?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   property: Prisma.PropertyCreateNestedOneWithoutListingsInput
@@ -1011,6 +1461,21 @@ export type ListingUncheckedCreateWithoutAmenitiesInput = {
   verificationStatus?: $Enums.VerificationStatus
   publishedAt?: Date | string | null
   expiresAt?: Date | string | null
+  roomSize?: number | null
+  numberOfRooms?: number | null
+  furnished?: boolean
+  floorLevel?: number | null
+  genderPreference?: string
+  petsAllowed?: boolean
+  smokingAllowed?: boolean
+  maxTenants?: number | null
+  depositAmount?: number | null
+  utilitiesIncluded?: boolean
+  leaseDuration?: string | null
+  isFeatured?: boolean
+  featuredUntil?: Date | string | null
+  isFlagged?: boolean
+  flagReason?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   images?: Prisma.ListingImageUncheckedCreateNestedManyWithoutListingInput
@@ -1048,6 +1513,21 @@ export type ListingUpdateWithoutAmenitiesInput = {
   verificationStatus?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
   publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  roomSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numberOfRooms?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  furnished?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  floorLevel?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  genderPreference?: Prisma.StringFieldUpdateOperationsInput | string
+  petsAllowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  smokingAllowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  maxTenants?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  depositAmount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  utilitiesIncluded?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  leaseDuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  featuredUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isFlagged?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  flagReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   property?: Prisma.PropertyUpdateOneRequiredWithoutListingsNestedInput
@@ -1073,6 +1553,21 @@ export type ListingUncheckedUpdateWithoutAmenitiesInput = {
   verificationStatus?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
   publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  roomSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numberOfRooms?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  furnished?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  floorLevel?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  genderPreference?: Prisma.StringFieldUpdateOperationsInput | string
+  petsAllowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  smokingAllowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  maxTenants?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  depositAmount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  utilitiesIncluded?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  leaseDuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  featuredUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isFlagged?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  flagReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   images?: Prisma.ListingImageUncheckedUpdateManyWithoutListingNestedInput
@@ -1094,6 +1589,21 @@ export type ListingCreateWithoutImagesInput = {
   verificationStatus?: $Enums.VerificationStatus
   publishedAt?: Date | string | null
   expiresAt?: Date | string | null
+  roomSize?: number | null
+  numberOfRooms?: number | null
+  furnished?: boolean
+  floorLevel?: number | null
+  genderPreference?: string
+  petsAllowed?: boolean
+  smokingAllowed?: boolean
+  maxTenants?: number | null
+  depositAmount?: number | null
+  utilitiesIncluded?: boolean
+  leaseDuration?: string | null
+  isFeatured?: boolean
+  featuredUntil?: Date | string | null
+  isFlagged?: boolean
+  flagReason?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   property: Prisma.PropertyCreateNestedOneWithoutListingsInput
@@ -1119,6 +1629,21 @@ export type ListingUncheckedCreateWithoutImagesInput = {
   verificationStatus?: $Enums.VerificationStatus
   publishedAt?: Date | string | null
   expiresAt?: Date | string | null
+  roomSize?: number | null
+  numberOfRooms?: number | null
+  furnished?: boolean
+  floorLevel?: number | null
+  genderPreference?: string
+  petsAllowed?: boolean
+  smokingAllowed?: boolean
+  maxTenants?: number | null
+  depositAmount?: number | null
+  utilitiesIncluded?: boolean
+  leaseDuration?: string | null
+  isFeatured?: boolean
+  featuredUntil?: Date | string | null
+  isFlagged?: boolean
+  flagReason?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   videos?: Prisma.ListingVideoUncheckedCreateNestedManyWithoutListingInput
@@ -1156,6 +1681,21 @@ export type ListingUpdateWithoutImagesInput = {
   verificationStatus?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
   publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  roomSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numberOfRooms?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  furnished?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  floorLevel?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  genderPreference?: Prisma.StringFieldUpdateOperationsInput | string
+  petsAllowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  smokingAllowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  maxTenants?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  depositAmount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  utilitiesIncluded?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  leaseDuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  featuredUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isFlagged?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  flagReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   property?: Prisma.PropertyUpdateOneRequiredWithoutListingsNestedInput
@@ -1181,6 +1721,21 @@ export type ListingUncheckedUpdateWithoutImagesInput = {
   verificationStatus?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
   publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  roomSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numberOfRooms?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  furnished?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  floorLevel?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  genderPreference?: Prisma.StringFieldUpdateOperationsInput | string
+  petsAllowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  smokingAllowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  maxTenants?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  depositAmount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  utilitiesIncluded?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  leaseDuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  featuredUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isFlagged?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  flagReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   videos?: Prisma.ListingVideoUncheckedUpdateManyWithoutListingNestedInput
@@ -1202,6 +1757,21 @@ export type ListingCreateWithoutVideosInput = {
   verificationStatus?: $Enums.VerificationStatus
   publishedAt?: Date | string | null
   expiresAt?: Date | string | null
+  roomSize?: number | null
+  numberOfRooms?: number | null
+  furnished?: boolean
+  floorLevel?: number | null
+  genderPreference?: string
+  petsAllowed?: boolean
+  smokingAllowed?: boolean
+  maxTenants?: number | null
+  depositAmount?: number | null
+  utilitiesIncluded?: boolean
+  leaseDuration?: string | null
+  isFeatured?: boolean
+  featuredUntil?: Date | string | null
+  isFlagged?: boolean
+  flagReason?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   property: Prisma.PropertyCreateNestedOneWithoutListingsInput
@@ -1227,6 +1797,21 @@ export type ListingUncheckedCreateWithoutVideosInput = {
   verificationStatus?: $Enums.VerificationStatus
   publishedAt?: Date | string | null
   expiresAt?: Date | string | null
+  roomSize?: number | null
+  numberOfRooms?: number | null
+  furnished?: boolean
+  floorLevel?: number | null
+  genderPreference?: string
+  petsAllowed?: boolean
+  smokingAllowed?: boolean
+  maxTenants?: number | null
+  depositAmount?: number | null
+  utilitiesIncluded?: boolean
+  leaseDuration?: string | null
+  isFeatured?: boolean
+  featuredUntil?: Date | string | null
+  isFlagged?: boolean
+  flagReason?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   images?: Prisma.ListingImageUncheckedCreateNestedManyWithoutListingInput
@@ -1264,6 +1849,21 @@ export type ListingUpdateWithoutVideosInput = {
   verificationStatus?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
   publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  roomSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numberOfRooms?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  furnished?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  floorLevel?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  genderPreference?: Prisma.StringFieldUpdateOperationsInput | string
+  petsAllowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  smokingAllowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  maxTenants?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  depositAmount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  utilitiesIncluded?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  leaseDuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  featuredUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isFlagged?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  flagReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   property?: Prisma.PropertyUpdateOneRequiredWithoutListingsNestedInput
@@ -1289,6 +1889,21 @@ export type ListingUncheckedUpdateWithoutVideosInput = {
   verificationStatus?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
   publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  roomSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numberOfRooms?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  furnished?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  floorLevel?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  genderPreference?: Prisma.StringFieldUpdateOperationsInput | string
+  petsAllowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  smokingAllowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  maxTenants?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  depositAmount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  utilitiesIncluded?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  leaseDuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  featuredUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isFlagged?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  flagReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   images?: Prisma.ListingImageUncheckedUpdateManyWithoutListingNestedInput
@@ -1310,6 +1925,21 @@ export type ListingCreateWithoutLeadsInput = {
   verificationStatus?: $Enums.VerificationStatus
   publishedAt?: Date | string | null
   expiresAt?: Date | string | null
+  roomSize?: number | null
+  numberOfRooms?: number | null
+  furnished?: boolean
+  floorLevel?: number | null
+  genderPreference?: string
+  petsAllowed?: boolean
+  smokingAllowed?: boolean
+  maxTenants?: number | null
+  depositAmount?: number | null
+  utilitiesIncluded?: boolean
+  leaseDuration?: string | null
+  isFeatured?: boolean
+  featuredUntil?: Date | string | null
+  isFlagged?: boolean
+  flagReason?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   property: Prisma.PropertyCreateNestedOneWithoutListingsInput
@@ -1335,6 +1965,21 @@ export type ListingUncheckedCreateWithoutLeadsInput = {
   verificationStatus?: $Enums.VerificationStatus
   publishedAt?: Date | string | null
   expiresAt?: Date | string | null
+  roomSize?: number | null
+  numberOfRooms?: number | null
+  furnished?: boolean
+  floorLevel?: number | null
+  genderPreference?: string
+  petsAllowed?: boolean
+  smokingAllowed?: boolean
+  maxTenants?: number | null
+  depositAmount?: number | null
+  utilitiesIncluded?: boolean
+  leaseDuration?: string | null
+  isFeatured?: boolean
+  featuredUntil?: Date | string | null
+  isFlagged?: boolean
+  flagReason?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   images?: Prisma.ListingImageUncheckedCreateNestedManyWithoutListingInput
@@ -1372,6 +2017,21 @@ export type ListingUpdateWithoutLeadsInput = {
   verificationStatus?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
   publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  roomSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numberOfRooms?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  furnished?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  floorLevel?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  genderPreference?: Prisma.StringFieldUpdateOperationsInput | string
+  petsAllowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  smokingAllowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  maxTenants?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  depositAmount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  utilitiesIncluded?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  leaseDuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  featuredUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isFlagged?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  flagReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   property?: Prisma.PropertyUpdateOneRequiredWithoutListingsNestedInput
@@ -1397,6 +2057,21 @@ export type ListingUncheckedUpdateWithoutLeadsInput = {
   verificationStatus?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
   publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  roomSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numberOfRooms?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  furnished?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  floorLevel?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  genderPreference?: Prisma.StringFieldUpdateOperationsInput | string
+  petsAllowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  smokingAllowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  maxTenants?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  depositAmount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  utilitiesIncluded?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  leaseDuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  featuredUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isFlagged?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  flagReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   images?: Prisma.ListingImageUncheckedUpdateManyWithoutListingNestedInput
@@ -1418,6 +2093,21 @@ export type ListingCreateWithoutSavedByInput = {
   verificationStatus?: $Enums.VerificationStatus
   publishedAt?: Date | string | null
   expiresAt?: Date | string | null
+  roomSize?: number | null
+  numberOfRooms?: number | null
+  furnished?: boolean
+  floorLevel?: number | null
+  genderPreference?: string
+  petsAllowed?: boolean
+  smokingAllowed?: boolean
+  maxTenants?: number | null
+  depositAmount?: number | null
+  utilitiesIncluded?: boolean
+  leaseDuration?: string | null
+  isFeatured?: boolean
+  featuredUntil?: Date | string | null
+  isFlagged?: boolean
+  flagReason?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   property: Prisma.PropertyCreateNestedOneWithoutListingsInput
@@ -1443,6 +2133,21 @@ export type ListingUncheckedCreateWithoutSavedByInput = {
   verificationStatus?: $Enums.VerificationStatus
   publishedAt?: Date | string | null
   expiresAt?: Date | string | null
+  roomSize?: number | null
+  numberOfRooms?: number | null
+  furnished?: boolean
+  floorLevel?: number | null
+  genderPreference?: string
+  petsAllowed?: boolean
+  smokingAllowed?: boolean
+  maxTenants?: number | null
+  depositAmount?: number | null
+  utilitiesIncluded?: boolean
+  leaseDuration?: string | null
+  isFeatured?: boolean
+  featuredUntil?: Date | string | null
+  isFlagged?: boolean
+  flagReason?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   images?: Prisma.ListingImageUncheckedCreateNestedManyWithoutListingInput
@@ -1480,6 +2185,21 @@ export type ListingUpdateWithoutSavedByInput = {
   verificationStatus?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
   publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  roomSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numberOfRooms?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  furnished?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  floorLevel?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  genderPreference?: Prisma.StringFieldUpdateOperationsInput | string
+  petsAllowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  smokingAllowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  maxTenants?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  depositAmount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  utilitiesIncluded?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  leaseDuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  featuredUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isFlagged?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  flagReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   property?: Prisma.PropertyUpdateOneRequiredWithoutListingsNestedInput
@@ -1505,6 +2225,21 @@ export type ListingUncheckedUpdateWithoutSavedByInput = {
   verificationStatus?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
   publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  roomSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numberOfRooms?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  furnished?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  floorLevel?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  genderPreference?: Prisma.StringFieldUpdateOperationsInput | string
+  petsAllowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  smokingAllowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  maxTenants?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  depositAmount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  utilitiesIncluded?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  leaseDuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  featuredUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isFlagged?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  flagReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   images?: Prisma.ListingImageUncheckedUpdateManyWithoutListingNestedInput
@@ -1526,6 +2261,21 @@ export type ListingCreateWithoutRoomRequestResponsesInput = {
   verificationStatus?: $Enums.VerificationStatus
   publishedAt?: Date | string | null
   expiresAt?: Date | string | null
+  roomSize?: number | null
+  numberOfRooms?: number | null
+  furnished?: boolean
+  floorLevel?: number | null
+  genderPreference?: string
+  petsAllowed?: boolean
+  smokingAllowed?: boolean
+  maxTenants?: number | null
+  depositAmount?: number | null
+  utilitiesIncluded?: boolean
+  leaseDuration?: string | null
+  isFeatured?: boolean
+  featuredUntil?: Date | string | null
+  isFlagged?: boolean
+  flagReason?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   property: Prisma.PropertyCreateNestedOneWithoutListingsInput
@@ -1551,6 +2301,21 @@ export type ListingUncheckedCreateWithoutRoomRequestResponsesInput = {
   verificationStatus?: $Enums.VerificationStatus
   publishedAt?: Date | string | null
   expiresAt?: Date | string | null
+  roomSize?: number | null
+  numberOfRooms?: number | null
+  furnished?: boolean
+  floorLevel?: number | null
+  genderPreference?: string
+  petsAllowed?: boolean
+  smokingAllowed?: boolean
+  maxTenants?: number | null
+  depositAmount?: number | null
+  utilitiesIncluded?: boolean
+  leaseDuration?: string | null
+  isFeatured?: boolean
+  featuredUntil?: Date | string | null
+  isFlagged?: boolean
+  flagReason?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   images?: Prisma.ListingImageUncheckedCreateNestedManyWithoutListingInput
@@ -1588,6 +2353,21 @@ export type ListingUpdateWithoutRoomRequestResponsesInput = {
   verificationStatus?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
   publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  roomSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numberOfRooms?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  furnished?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  floorLevel?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  genderPreference?: Prisma.StringFieldUpdateOperationsInput | string
+  petsAllowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  smokingAllowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  maxTenants?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  depositAmount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  utilitiesIncluded?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  leaseDuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  featuredUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isFlagged?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  flagReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   property?: Prisma.PropertyUpdateOneRequiredWithoutListingsNestedInput
@@ -1613,6 +2393,21 @@ export type ListingUncheckedUpdateWithoutRoomRequestResponsesInput = {
   verificationStatus?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
   publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  roomSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numberOfRooms?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  furnished?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  floorLevel?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  genderPreference?: Prisma.StringFieldUpdateOperationsInput | string
+  petsAllowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  smokingAllowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  maxTenants?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  depositAmount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  utilitiesIncluded?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  leaseDuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  featuredUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isFlagged?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  flagReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   images?: Prisma.ListingImageUncheckedUpdateManyWithoutListingNestedInput
@@ -1635,6 +2430,21 @@ export type ListingCreateManyAgentInput = {
   verificationStatus?: $Enums.VerificationStatus
   publishedAt?: Date | string | null
   expiresAt?: Date | string | null
+  roomSize?: number | null
+  numberOfRooms?: number | null
+  furnished?: boolean
+  floorLevel?: number | null
+  genderPreference?: string
+  petsAllowed?: boolean
+  smokingAllowed?: boolean
+  maxTenants?: number | null
+  depositAmount?: number | null
+  utilitiesIncluded?: boolean
+  leaseDuration?: string | null
+  isFeatured?: boolean
+  featuredUntil?: Date | string | null
+  isFlagged?: boolean
+  flagReason?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -1651,6 +2461,21 @@ export type ListingUpdateWithoutAgentInput = {
   verificationStatus?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
   publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  roomSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numberOfRooms?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  furnished?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  floorLevel?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  genderPreference?: Prisma.StringFieldUpdateOperationsInput | string
+  petsAllowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  smokingAllowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  maxTenants?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  depositAmount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  utilitiesIncluded?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  leaseDuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  featuredUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isFlagged?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  flagReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   property?: Prisma.PropertyUpdateOneRequiredWithoutListingsNestedInput
@@ -1675,6 +2500,21 @@ export type ListingUncheckedUpdateWithoutAgentInput = {
   verificationStatus?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
   publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  roomSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numberOfRooms?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  furnished?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  floorLevel?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  genderPreference?: Prisma.StringFieldUpdateOperationsInput | string
+  petsAllowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  smokingAllowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  maxTenants?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  depositAmount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  utilitiesIncluded?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  leaseDuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  featuredUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isFlagged?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  flagReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   images?: Prisma.ListingImageUncheckedUpdateManyWithoutListingNestedInput
@@ -1698,6 +2538,21 @@ export type ListingUncheckedUpdateManyWithoutAgentInput = {
   verificationStatus?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
   publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  roomSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numberOfRooms?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  furnished?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  floorLevel?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  genderPreference?: Prisma.StringFieldUpdateOperationsInput | string
+  petsAllowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  smokingAllowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  maxTenants?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  depositAmount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  utilitiesIncluded?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  leaseDuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  featuredUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isFlagged?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  flagReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -1715,6 +2570,21 @@ export type ListingCreateManyPropertyInput = {
   verificationStatus?: $Enums.VerificationStatus
   publishedAt?: Date | string | null
   expiresAt?: Date | string | null
+  roomSize?: number | null
+  numberOfRooms?: number | null
+  furnished?: boolean
+  floorLevel?: number | null
+  genderPreference?: string
+  petsAllowed?: boolean
+  smokingAllowed?: boolean
+  maxTenants?: number | null
+  depositAmount?: number | null
+  utilitiesIncluded?: boolean
+  leaseDuration?: string | null
+  isFeatured?: boolean
+  featuredUntil?: Date | string | null
+  isFlagged?: boolean
+  flagReason?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -1731,6 +2601,21 @@ export type ListingUpdateWithoutPropertyInput = {
   verificationStatus?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
   publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  roomSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numberOfRooms?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  furnished?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  floorLevel?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  genderPreference?: Prisma.StringFieldUpdateOperationsInput | string
+  petsAllowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  smokingAllowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  maxTenants?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  depositAmount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  utilitiesIncluded?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  leaseDuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  featuredUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isFlagged?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  flagReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   agent?: Prisma.AgentProfileUpdateOneRequiredWithoutListingsNestedInput
@@ -1755,6 +2640,21 @@ export type ListingUncheckedUpdateWithoutPropertyInput = {
   verificationStatus?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
   publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  roomSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numberOfRooms?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  furnished?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  floorLevel?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  genderPreference?: Prisma.StringFieldUpdateOperationsInput | string
+  petsAllowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  smokingAllowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  maxTenants?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  depositAmount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  utilitiesIncluded?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  leaseDuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  featuredUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isFlagged?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  flagReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   images?: Prisma.ListingImageUncheckedUpdateManyWithoutListingNestedInput
@@ -1778,6 +2678,21 @@ export type ListingUncheckedUpdateManyWithoutPropertyInput = {
   verificationStatus?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
   publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  roomSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numberOfRooms?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  furnished?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  floorLevel?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  genderPreference?: Prisma.StringFieldUpdateOperationsInput | string
+  petsAllowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  smokingAllowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  maxTenants?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  depositAmount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  utilitiesIncluded?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  leaseDuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  featuredUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isFlagged?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  flagReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -1872,6 +2787,21 @@ export type ListingSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   verificationStatus?: boolean
   publishedAt?: boolean
   expiresAt?: boolean
+  roomSize?: boolean
+  numberOfRooms?: boolean
+  furnished?: boolean
+  floorLevel?: boolean
+  genderPreference?: boolean
+  petsAllowed?: boolean
+  smokingAllowed?: boolean
+  maxTenants?: boolean
+  depositAmount?: boolean
+  utilitiesIncluded?: boolean
+  leaseDuration?: boolean
+  isFeatured?: boolean
+  featuredUntil?: boolean
+  isFlagged?: boolean
+  flagReason?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   property?: boolean | Prisma.PropertyDefaultArgs<ExtArgs>
@@ -1899,6 +2829,21 @@ export type ListingSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
   verificationStatus?: boolean
   publishedAt?: boolean
   expiresAt?: boolean
+  roomSize?: boolean
+  numberOfRooms?: boolean
+  furnished?: boolean
+  floorLevel?: boolean
+  genderPreference?: boolean
+  petsAllowed?: boolean
+  smokingAllowed?: boolean
+  maxTenants?: boolean
+  depositAmount?: boolean
+  utilitiesIncluded?: boolean
+  leaseDuration?: boolean
+  isFeatured?: boolean
+  featuredUntil?: boolean
+  isFlagged?: boolean
+  flagReason?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   property?: boolean | Prisma.PropertyDefaultArgs<ExtArgs>
@@ -1919,6 +2864,21 @@ export type ListingSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
   verificationStatus?: boolean
   publishedAt?: boolean
   expiresAt?: boolean
+  roomSize?: boolean
+  numberOfRooms?: boolean
+  furnished?: boolean
+  floorLevel?: boolean
+  genderPreference?: boolean
+  petsAllowed?: boolean
+  smokingAllowed?: boolean
+  maxTenants?: boolean
+  depositAmount?: boolean
+  utilitiesIncluded?: boolean
+  leaseDuration?: boolean
+  isFeatured?: boolean
+  featuredUntil?: boolean
+  isFlagged?: boolean
+  flagReason?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   property?: boolean | Prisma.PropertyDefaultArgs<ExtArgs>
@@ -1939,11 +2899,26 @@ export type ListingSelectScalar = {
   verificationStatus?: boolean
   publishedAt?: boolean
   expiresAt?: boolean
+  roomSize?: boolean
+  numberOfRooms?: boolean
+  furnished?: boolean
+  floorLevel?: boolean
+  genderPreference?: boolean
+  petsAllowed?: boolean
+  smokingAllowed?: boolean
+  maxTenants?: boolean
+  depositAmount?: boolean
+  utilitiesIncluded?: boolean
+  leaseDuration?: boolean
+  isFeatured?: boolean
+  featuredUntil?: boolean
+  isFlagged?: boolean
+  flagReason?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type ListingOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "propertyId" | "agentId" | "title" | "description" | "rentAmount" | "rentPeriod" | "propertyType" | "availabilityDate" | "status" | "verificationStatus" | "publishedAt" | "expiresAt" | "createdAt" | "updatedAt", ExtArgs["result"]["listing"]>
+export type ListingOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "propertyId" | "agentId" | "title" | "description" | "rentAmount" | "rentPeriod" | "propertyType" | "availabilityDate" | "status" | "verificationStatus" | "publishedAt" | "expiresAt" | "roomSize" | "numberOfRooms" | "furnished" | "floorLevel" | "genderPreference" | "petsAllowed" | "smokingAllowed" | "maxTenants" | "depositAmount" | "utilitiesIncluded" | "leaseDuration" | "isFeatured" | "featuredUntil" | "isFlagged" | "flagReason" | "createdAt" | "updatedAt", ExtArgs["result"]["listing"]>
 export type ListingInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   property?: boolean | Prisma.PropertyDefaultArgs<ExtArgs>
   agent?: boolean | Prisma.AgentProfileDefaultArgs<ExtArgs>
@@ -1990,6 +2965,21 @@ export type $ListingPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     verificationStatus: $Enums.VerificationStatus
     publishedAt: Date | null
     expiresAt: Date | null
+    roomSize: number | null
+    numberOfRooms: number | null
+    furnished: boolean
+    floorLevel: number | null
+    genderPreference: string
+    petsAllowed: boolean
+    smokingAllowed: boolean
+    maxTenants: number | null
+    depositAmount: number | null
+    utilitiesIncluded: boolean
+    leaseDuration: string | null
+    isFeatured: boolean
+    featuredUntil: Date | null
+    isFlagged: boolean
+    flagReason: string | null
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["listing"]>
@@ -2436,6 +3426,21 @@ export interface ListingFieldRefs {
   readonly verificationStatus: Prisma.FieldRef<"Listing", 'VerificationStatus'>
   readonly publishedAt: Prisma.FieldRef<"Listing", 'DateTime'>
   readonly expiresAt: Prisma.FieldRef<"Listing", 'DateTime'>
+  readonly roomSize: Prisma.FieldRef<"Listing", 'Int'>
+  readonly numberOfRooms: Prisma.FieldRef<"Listing", 'Int'>
+  readonly furnished: Prisma.FieldRef<"Listing", 'Boolean'>
+  readonly floorLevel: Prisma.FieldRef<"Listing", 'Int'>
+  readonly genderPreference: Prisma.FieldRef<"Listing", 'String'>
+  readonly petsAllowed: Prisma.FieldRef<"Listing", 'Boolean'>
+  readonly smokingAllowed: Prisma.FieldRef<"Listing", 'Boolean'>
+  readonly maxTenants: Prisma.FieldRef<"Listing", 'Int'>
+  readonly depositAmount: Prisma.FieldRef<"Listing", 'Int'>
+  readonly utilitiesIncluded: Prisma.FieldRef<"Listing", 'Boolean'>
+  readonly leaseDuration: Prisma.FieldRef<"Listing", 'String'>
+  readonly isFeatured: Prisma.FieldRef<"Listing", 'Boolean'>
+  readonly featuredUntil: Prisma.FieldRef<"Listing", 'DateTime'>
+  readonly isFlagged: Prisma.FieldRef<"Listing", 'Boolean'>
+  readonly flagReason: Prisma.FieldRef<"Listing", 'String'>
   readonly createdAt: Prisma.FieldRef<"Listing", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Listing", 'DateTime'>
 }

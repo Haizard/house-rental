@@ -415,6 +415,7 @@ export const ModelName = {
   Subscription: 'Subscription',
   LeadCharge: 'LeadCharge',
   SavedListing: 'SavedListing',
+  SavedSearch: 'SavedSearch',
   Notification: 'Notification',
   Report: 'Report',
   VerificationRecord: 'VerificationRecord',
@@ -441,7 +442,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "agentProfile" | "studentProfile" | "university" | "property" | "propertyAgent" | "listing" | "amenity" | "listingAmenity" | "listingImage" | "listingVideo" | "lead" | "conversation" | "message" | "viewingRequest" | "subscription" | "leadCharge" | "savedListing" | "notification" | "report" | "verificationRecord" | "agentStatus" | "statusView" | "review" | "payment" | "roomRequest" | "roomRequestResponse" | "contactReveal" | "aIInteraction"
+    modelProps: "user" | "agentProfile" | "studentProfile" | "university" | "property" | "propertyAgent" | "listing" | "amenity" | "listingAmenity" | "listingImage" | "listingVideo" | "lead" | "conversation" | "message" | "viewingRequest" | "subscription" | "leadCharge" | "savedListing" | "savedSearch" | "notification" | "report" | "verificationRecord" | "agentStatus" | "statusView" | "review" | "payment" | "roomRequest" | "roomRequestResponse" | "contactReveal" | "aIInteraction"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1777,6 +1778,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    SavedSearch: {
+      payload: Prisma.$SavedSearchPayload<ExtArgs>
+      fields: Prisma.SavedSearchFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.SavedSearchFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SavedSearchPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.SavedSearchFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SavedSearchPayload>
+        }
+        findFirst: {
+          args: Prisma.SavedSearchFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SavedSearchPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.SavedSearchFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SavedSearchPayload>
+        }
+        findMany: {
+          args: Prisma.SavedSearchFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SavedSearchPayload>[]
+        }
+        create: {
+          args: Prisma.SavedSearchCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SavedSearchPayload>
+        }
+        createMany: {
+          args: Prisma.SavedSearchCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.SavedSearchCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SavedSearchPayload>[]
+        }
+        delete: {
+          args: Prisma.SavedSearchDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SavedSearchPayload>
+        }
+        update: {
+          args: Prisma.SavedSearchUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SavedSearchPayload>
+        }
+        deleteMany: {
+          args: Prisma.SavedSearchDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.SavedSearchUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.SavedSearchUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SavedSearchPayload>[]
+        }
+        upsert: {
+          args: Prisma.SavedSearchUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SavedSearchPayload>
+        }
+        aggregate: {
+          args: Prisma.SavedSearchAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateSavedSearch>
+        }
+        groupBy: {
+          args: Prisma.SavedSearchGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SavedSearchGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.SavedSearchCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SavedSearchCountAggregateOutputType> | number
+        }
+      }
+    }
     Notification: {
       payload: Prisma.$NotificationPayload<ExtArgs>
       fields: Prisma.NotificationFieldRefs
@@ -2640,6 +2715,7 @@ export const UserScalarFieldEnum = {
   lastName: 'lastName',
   avatarUrl: 'avatarUrl',
   isActive: 'isActive',
+  lastActiveAt: 'lastActiveAt',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -2656,6 +2732,7 @@ export const AgentProfileScalarFieldEnum = {
   verification: 'verification',
   rating: 'rating',
   totalReviews: 'totalReviews',
+  avgResponseMinutes: 'avgResponseMinutes',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -2738,6 +2815,21 @@ export const ListingScalarFieldEnum = {
   verificationStatus: 'verificationStatus',
   publishedAt: 'publishedAt',
   expiresAt: 'expiresAt',
+  roomSize: 'roomSize',
+  numberOfRooms: 'numberOfRooms',
+  furnished: 'furnished',
+  floorLevel: 'floorLevel',
+  genderPreference: 'genderPreference',
+  petsAllowed: 'petsAllowed',
+  smokingAllowed: 'smokingAllowed',
+  maxTenants: 'maxTenants',
+  depositAmount: 'depositAmount',
+  utilitiesIncluded: 'utilitiesIncluded',
+  leaseDuration: 'leaseDuration',
+  isFeatured: 'isFeatured',
+  featuredUntil: 'featuredUntil',
+  isFlagged: 'isFlagged',
+  flagReason: 'flagReason',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -2889,6 +2981,25 @@ export const SavedListingScalarFieldEnum = {
 export type SavedListingScalarFieldEnum = (typeof SavedListingScalarFieldEnum)[keyof typeof SavedListingScalarFieldEnum]
 
 
+export const SavedSearchScalarFieldEnum = {
+  id: 'id',
+  studentId: 'studentId',
+  name: 'name',
+  area: 'area',
+  propertyType: 'propertyType',
+  minPrice: 'minPrice',
+  maxPrice: 'maxPrice',
+  gender: 'gender',
+  furnished: 'furnished',
+  amenities: 'amenities',
+  lastAlertAt: 'lastAlertAt',
+  lastAlertedListingIds: 'lastAlertedListingIds',
+  createdAt: 'createdAt'
+} as const
+
+export type SavedSearchScalarFieldEnum = (typeof SavedSearchScalarFieldEnum)[keyof typeof SavedSearchScalarFieldEnum]
+
+
 export const NotificationScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
@@ -2971,6 +3082,8 @@ export const ReviewScalarFieldEnum = {
   rating: 'rating',
   comment: 'comment',
   status: 'status',
+  flagCount: 'flagCount',
+  isHidden: 'isHidden',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -3623,6 +3736,7 @@ export type GlobalOmitConfig = {
   subscription?: Prisma.SubscriptionOmit
   leadCharge?: Prisma.LeadChargeOmit
   savedListing?: Prisma.SavedListingOmit
+  savedSearch?: Prisma.SavedSearchOmit
   notification?: Prisma.NotificationOmit
   report?: Prisma.ReportOmit
   verificationRecord?: Prisma.VerificationRecordOmit

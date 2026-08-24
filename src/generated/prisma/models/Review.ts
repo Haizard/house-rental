@@ -28,10 +28,12 @@ export type AggregateReview = {
 
 export type ReviewAvgAggregateOutputType = {
   rating: number | null
+  flagCount: number | null
 }
 
 export type ReviewSumAggregateOutputType = {
   rating: number | null
+  flagCount: number | null
 }
 
 export type ReviewMinAggregateOutputType = {
@@ -42,6 +44,8 @@ export type ReviewMinAggregateOutputType = {
   rating: number | null
   comment: string | null
   status: string | null
+  flagCount: number | null
+  isHidden: boolean | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -54,6 +58,8 @@ export type ReviewMaxAggregateOutputType = {
   rating: number | null
   comment: string | null
   status: string | null
+  flagCount: number | null
+  isHidden: boolean | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -66,6 +72,8 @@ export type ReviewCountAggregateOutputType = {
   rating: number
   comment: number
   status: number
+  flagCount: number
+  isHidden: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -74,10 +82,12 @@ export type ReviewCountAggregateOutputType = {
 
 export type ReviewAvgAggregateInputType = {
   rating?: true
+  flagCount?: true
 }
 
 export type ReviewSumAggregateInputType = {
   rating?: true
+  flagCount?: true
 }
 
 export type ReviewMinAggregateInputType = {
@@ -88,6 +98,8 @@ export type ReviewMinAggregateInputType = {
   rating?: true
   comment?: true
   status?: true
+  flagCount?: true
+  isHidden?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -100,6 +112,8 @@ export type ReviewMaxAggregateInputType = {
   rating?: true
   comment?: true
   status?: true
+  flagCount?: true
+  isHidden?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -112,6 +126,8 @@ export type ReviewCountAggregateInputType = {
   rating?: true
   comment?: true
   status?: true
+  flagCount?: true
+  isHidden?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -211,6 +227,8 @@ export type ReviewGroupByOutputType = {
   rating: number
   comment: string | null
   status: string
+  flagCount: number
+  isHidden: boolean
   createdAt: Date
   updatedAt: Date
   _count: ReviewCountAggregateOutputType | null
@@ -246,6 +264,8 @@ export type ReviewWhereInput = {
   rating?: Prisma.IntFilter<"Review"> | number
   comment?: Prisma.StringNullableFilter<"Review"> | string | null
   status?: Prisma.StringFilter<"Review"> | string
+  flagCount?: Prisma.IntFilter<"Review"> | number
+  isHidden?: Prisma.BoolFilter<"Review"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Review"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Review"> | Date | string
   student?: Prisma.XOR<Prisma.StudentProfileScalarRelationFilter, Prisma.StudentProfileWhereInput>
@@ -260,6 +280,8 @@ export type ReviewOrderByWithRelationInput = {
   rating?: Prisma.SortOrder
   comment?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrder
+  flagCount?: Prisma.SortOrder
+  isHidden?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   student?: Prisma.StudentProfileOrderByWithRelationInput
@@ -277,6 +299,8 @@ export type ReviewWhereUniqueInput = Prisma.AtLeast<{
   rating?: Prisma.IntFilter<"Review"> | number
   comment?: Prisma.StringNullableFilter<"Review"> | string | null
   status?: Prisma.StringFilter<"Review"> | string
+  flagCount?: Prisma.IntFilter<"Review"> | number
+  isHidden?: Prisma.BoolFilter<"Review"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Review"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Review"> | Date | string
   student?: Prisma.XOR<Prisma.StudentProfileScalarRelationFilter, Prisma.StudentProfileWhereInput>
@@ -291,6 +315,8 @@ export type ReviewOrderByWithAggregationInput = {
   rating?: Prisma.SortOrder
   comment?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrder
+  flagCount?: Prisma.SortOrder
+  isHidden?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.ReviewCountOrderByAggregateInput
@@ -311,6 +337,8 @@ export type ReviewScalarWhereWithAggregatesInput = {
   rating?: Prisma.IntWithAggregatesFilter<"Review"> | number
   comment?: Prisma.StringNullableWithAggregatesFilter<"Review"> | string | null
   status?: Prisma.StringWithAggregatesFilter<"Review"> | string
+  flagCount?: Prisma.IntWithAggregatesFilter<"Review"> | number
+  isHidden?: Prisma.BoolWithAggregatesFilter<"Review"> | boolean
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Review"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Review"> | Date | string
 }
@@ -321,6 +349,8 @@ export type ReviewCreateInput = {
   rating: number
   comment?: string | null
   status?: string
+  flagCount?: number
+  isHidden?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   student: Prisma.StudentProfileCreateNestedOneWithoutReviewsInput
@@ -335,6 +365,8 @@ export type ReviewUncheckedCreateInput = {
   rating: number
   comment?: string | null
   status?: string
+  flagCount?: number
+  isHidden?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -345,6 +377,8 @@ export type ReviewUpdateInput = {
   rating?: Prisma.IntFieldUpdateOperationsInput | number
   comment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  flagCount?: Prisma.IntFieldUpdateOperationsInput | number
+  isHidden?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   student?: Prisma.StudentProfileUpdateOneRequiredWithoutReviewsNestedInput
@@ -359,6 +393,8 @@ export type ReviewUncheckedUpdateInput = {
   rating?: Prisma.IntFieldUpdateOperationsInput | number
   comment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  flagCount?: Prisma.IntFieldUpdateOperationsInput | number
+  isHidden?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -371,6 +407,8 @@ export type ReviewCreateManyInput = {
   rating: number
   comment?: string | null
   status?: string
+  flagCount?: number
+  isHidden?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -381,6 +419,8 @@ export type ReviewUpdateManyMutationInput = {
   rating?: Prisma.IntFieldUpdateOperationsInput | number
   comment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  flagCount?: Prisma.IntFieldUpdateOperationsInput | number
+  isHidden?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -393,6 +433,8 @@ export type ReviewUncheckedUpdateManyInput = {
   rating?: Prisma.IntFieldUpdateOperationsInput | number
   comment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  flagCount?: Prisma.IntFieldUpdateOperationsInput | number
+  isHidden?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -415,12 +457,15 @@ export type ReviewCountOrderByAggregateInput = {
   rating?: Prisma.SortOrder
   comment?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  flagCount?: Prisma.SortOrder
+  isHidden?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
 
 export type ReviewAvgOrderByAggregateInput = {
   rating?: Prisma.SortOrder
+  flagCount?: Prisma.SortOrder
 }
 
 export type ReviewMaxOrderByAggregateInput = {
@@ -431,6 +476,8 @@ export type ReviewMaxOrderByAggregateInput = {
   rating?: Prisma.SortOrder
   comment?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  flagCount?: Prisma.SortOrder
+  isHidden?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -443,12 +490,15 @@ export type ReviewMinOrderByAggregateInput = {
   rating?: Prisma.SortOrder
   comment?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  flagCount?: Prisma.SortOrder
+  isHidden?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
 
 export type ReviewSumOrderByAggregateInput = {
   rating?: Prisma.SortOrder
+  flagCount?: Prisma.SortOrder
 }
 
 export type ReviewCreateNestedManyWithoutAgentInput = {
@@ -541,6 +591,8 @@ export type ReviewCreateWithoutAgentInput = {
   rating: number
   comment?: string | null
   status?: string
+  flagCount?: number
+  isHidden?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   student: Prisma.StudentProfileCreateNestedOneWithoutReviewsInput
@@ -553,6 +605,8 @@ export type ReviewUncheckedCreateWithoutAgentInput = {
   rating: number
   comment?: string | null
   status?: string
+  flagCount?: number
+  isHidden?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -594,6 +648,8 @@ export type ReviewScalarWhereInput = {
   rating?: Prisma.IntFilter<"Review"> | number
   comment?: Prisma.StringNullableFilter<"Review"> | string | null
   status?: Prisma.StringFilter<"Review"> | string
+  flagCount?: Prisma.IntFilter<"Review"> | number
+  isHidden?: Prisma.BoolFilter<"Review"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Review"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Review"> | Date | string
 }
@@ -604,6 +660,8 @@ export type ReviewCreateWithoutStudentInput = {
   rating: number
   comment?: string | null
   status?: string
+  flagCount?: number
+  isHidden?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   agent: Prisma.AgentProfileCreateNestedOneWithoutReviewsInput
@@ -616,6 +674,8 @@ export type ReviewUncheckedCreateWithoutStudentInput = {
   rating: number
   comment?: string | null
   status?: string
+  flagCount?: number
+  isHidden?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -653,6 +713,8 @@ export type ReviewCreateManyAgentInput = {
   rating: number
   comment?: string | null
   status?: string
+  flagCount?: number
+  isHidden?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -663,6 +725,8 @@ export type ReviewUpdateWithoutAgentInput = {
   rating?: Prisma.IntFieldUpdateOperationsInput | number
   comment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  flagCount?: Prisma.IntFieldUpdateOperationsInput | number
+  isHidden?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   student?: Prisma.StudentProfileUpdateOneRequiredWithoutReviewsNestedInput
@@ -675,6 +739,8 @@ export type ReviewUncheckedUpdateWithoutAgentInput = {
   rating?: Prisma.IntFieldUpdateOperationsInput | number
   comment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  flagCount?: Prisma.IntFieldUpdateOperationsInput | number
+  isHidden?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -686,6 +752,8 @@ export type ReviewUncheckedUpdateManyWithoutAgentInput = {
   rating?: Prisma.IntFieldUpdateOperationsInput | number
   comment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  flagCount?: Prisma.IntFieldUpdateOperationsInput | number
+  isHidden?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -697,6 +765,8 @@ export type ReviewCreateManyStudentInput = {
   rating: number
   comment?: string | null
   status?: string
+  flagCount?: number
+  isHidden?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -707,6 +777,8 @@ export type ReviewUpdateWithoutStudentInput = {
   rating?: Prisma.IntFieldUpdateOperationsInput | number
   comment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  flagCount?: Prisma.IntFieldUpdateOperationsInput | number
+  isHidden?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   agent?: Prisma.AgentProfileUpdateOneRequiredWithoutReviewsNestedInput
@@ -719,6 +791,8 @@ export type ReviewUncheckedUpdateWithoutStudentInput = {
   rating?: Prisma.IntFieldUpdateOperationsInput | number
   comment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  flagCount?: Prisma.IntFieldUpdateOperationsInput | number
+  isHidden?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -730,6 +804,8 @@ export type ReviewUncheckedUpdateManyWithoutStudentInput = {
   rating?: Prisma.IntFieldUpdateOperationsInput | number
   comment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  flagCount?: Prisma.IntFieldUpdateOperationsInput | number
+  isHidden?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -744,6 +820,8 @@ export type ReviewSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   rating?: boolean
   comment?: boolean
   status?: boolean
+  flagCount?: boolean
+  isHidden?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   student?: boolean | Prisma.StudentProfileDefaultArgs<ExtArgs>
@@ -758,6 +836,8 @@ export type ReviewSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extens
   rating?: boolean
   comment?: boolean
   status?: boolean
+  flagCount?: boolean
+  isHidden?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   student?: boolean | Prisma.StudentProfileDefaultArgs<ExtArgs>
@@ -772,6 +852,8 @@ export type ReviewSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extens
   rating?: boolean
   comment?: boolean
   status?: boolean
+  flagCount?: boolean
+  isHidden?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   student?: boolean | Prisma.StudentProfileDefaultArgs<ExtArgs>
@@ -786,11 +868,13 @@ export type ReviewSelectScalar = {
   rating?: boolean
   comment?: boolean
   status?: boolean
+  flagCount?: boolean
+  isHidden?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type ReviewOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "studentId" | "agentId" | "listingId" | "rating" | "comment" | "status" | "createdAt" | "updatedAt", ExtArgs["result"]["review"]>
+export type ReviewOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "studentId" | "agentId" | "listingId" | "rating" | "comment" | "status" | "flagCount" | "isHidden" | "createdAt" | "updatedAt", ExtArgs["result"]["review"]>
 export type ReviewInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   student?: boolean | Prisma.StudentProfileDefaultArgs<ExtArgs>
   agent?: boolean | Prisma.AgentProfileDefaultArgs<ExtArgs>
@@ -818,6 +902,8 @@ export type $ReviewPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
     rating: number
     comment: string | null
     status: string
+    flagCount: number
+    isHidden: boolean
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["review"]>
@@ -1252,6 +1338,8 @@ export interface ReviewFieldRefs {
   readonly rating: Prisma.FieldRef<"Review", 'Int'>
   readonly comment: Prisma.FieldRef<"Review", 'String'>
   readonly status: Prisma.FieldRef<"Review", 'String'>
+  readonly flagCount: Prisma.FieldRef<"Review", 'Int'>
+  readonly isHidden: Prisma.FieldRef<"Review", 'Boolean'>
   readonly createdAt: Prisma.FieldRef<"Review", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Review", 'DateTime'>
 }

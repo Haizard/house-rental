@@ -1,9 +1,11 @@
 import Link from "next/link";
-import { MessageCircle, Users } from "lucide-react";
+import { MessageCircle, Users, GraduationCap, Wallet, MapPin, Calendar } from "lucide-react";
 import { prisma } from "@/lib/db/prisma";
 import { requireRole } from "@/lib/auth/guards";
 import { StatusPill } from "@/components/ui/status-pill";
 import { LeadActions } from "@/components/agent/lead-actions";
+import { UpgradeButton } from "@/components/agent/upgrade-button";
+import { isProAgent } from "@/lib/agents/subscription-check"
 
 const COLUMNS = [
   { status: "NEW", label: "New", color: "var(--warning)" },
@@ -20,12 +22,19 @@ export default async function AgentLeadsPage() {
     select: { id: true },
   });
 
+  const isPro = agent ? await isProAgent(agent.id) : false;
+
   const leads = agent
     ? await prisma.lead.findMany({
         where: { agentId: agent.id },
         include: {
           listing: { select: { title: true, rentAmount: true } },
-          student: { include: { user: { select: { firstName: true, lastName: true } } } },
+          student: {
+            include: {
+              user: { select: { firstName: true, lastName: true } },
+              university: { select: { name: true } },
+            },
+          },
           conversation: { select: { id: true } },
         },
         orderBy: { createdAt: "desc" },
@@ -97,6 +106,43 @@ export default async function AgentLeadsPage() {
                       <p className="text-xs font-medium text-[var(--text-primary)]">
                         TZS {lead.listing.rentAmount.toLocaleString()} / mo
                       </p>
+
+                      {/* Premium Lead Insights */}
+                      {isPro ? (
+                        <div className="space-y-1 border-t border-[var(--glass-border)] pt-2">
+                          {lead.budget && (
+                            <p className="flex items-center gap-1.5 text-[10px] text-[var(--text-secondary)]">
+                              <Wallet size={10} className="text-[var(--accent)]" />
+                              Budget: TZS {lead.budget.toLocaleString()}
+                            </p>
+                          )}
+                          {lead.student.university && (
+                            <p className="flex items-center gap-1.5 text-[10px] text-[var(--text-secondary)]">
+                              <GraduationCap size={10} className="text-[var(--accent)]" />
+                              {lead.student.university.name}
+                            </p>
+                          )}
+                          {lead.student.preferredArea && (
+                            <p className="flex items-center gap-1.5 text-[10px] text-[var(--text-secondary)]">
+                              <MapPin size={10} className="text-[var(--accent)]" />
+                              Prefers: {lead.student.preferredArea}
+                            </p>
+                          )}
+                          {lead.moveInDate && (
+                            <p className="flex items-center gap-1.5 text-[10px] text-[var(--text-secondary)]">
+                              <Calendar size={10} className="text-[var(--accent)]" />
+                              Move-in: {new Intl.DateTimeFormat("en-TZ", { dateStyle: "medium" }).format(lead.moveInDate)}
+                            </p>
+                          )}
+                        </div>
+                      ) : (
+                        <div className="border-t border-[var(--glass-border)] pt-2">
+                          <p className="text-[10px] text-[var(--text-tertiary)]">
+                            🔒 Upgrade to Pro for student details
+                          </p>
+                        </div>
+                      )}
+
                       <p className="text-[10px] text-[var(--text-tertiary)]">
                         {new Intl.DateTimeFormat("en-TZ", {
                           dateStyle: "medium",

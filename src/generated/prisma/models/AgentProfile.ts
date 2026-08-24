@@ -29,11 +29,13 @@ export type AggregateAgentProfile = {
 export type AgentProfileAvgAggregateOutputType = {
   rating: runtime.Decimal | null
   totalReviews: number | null
+  avgResponseMinutes: number | null
 }
 
 export type AgentProfileSumAggregateOutputType = {
   rating: runtime.Decimal | null
   totalReviews: number | null
+  avgResponseMinutes: number | null
 }
 
 export type AgentProfileMinAggregateOutputType = {
@@ -45,6 +47,7 @@ export type AgentProfileMinAggregateOutputType = {
   verification: $Enums.VerificationStatus | null
   rating: runtime.Decimal | null
   totalReviews: number | null
+  avgResponseMinutes: number | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -58,6 +61,7 @@ export type AgentProfileMaxAggregateOutputType = {
   verification: $Enums.VerificationStatus | null
   rating: runtime.Decimal | null
   totalReviews: number | null
+  avgResponseMinutes: number | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -71,6 +75,7 @@ export type AgentProfileCountAggregateOutputType = {
   verification: number
   rating: number
   totalReviews: number
+  avgResponseMinutes: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -80,11 +85,13 @@ export type AgentProfileCountAggregateOutputType = {
 export type AgentProfileAvgAggregateInputType = {
   rating?: true
   totalReviews?: true
+  avgResponseMinutes?: true
 }
 
 export type AgentProfileSumAggregateInputType = {
   rating?: true
   totalReviews?: true
+  avgResponseMinutes?: true
 }
 
 export type AgentProfileMinAggregateInputType = {
@@ -96,6 +103,7 @@ export type AgentProfileMinAggregateInputType = {
   verification?: true
   rating?: true
   totalReviews?: true
+  avgResponseMinutes?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -109,6 +117,7 @@ export type AgentProfileMaxAggregateInputType = {
   verification?: true
   rating?: true
   totalReviews?: true
+  avgResponseMinutes?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -122,6 +131,7 @@ export type AgentProfileCountAggregateInputType = {
   verification?: true
   rating?: true
   totalReviews?: true
+  avgResponseMinutes?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -222,6 +232,7 @@ export type AgentProfileGroupByOutputType = {
   verification: $Enums.VerificationStatus
   rating: runtime.Decimal
   totalReviews: number
+  avgResponseMinutes: number | null
   createdAt: Date
   updatedAt: Date
   _count: AgentProfileCountAggregateOutputType | null
@@ -258,6 +269,7 @@ export type AgentProfileWhereInput = {
   verification?: Prisma.EnumVerificationStatusFilter<"AgentProfile"> | $Enums.VerificationStatus
   rating?: Prisma.DecimalFilter<"AgentProfile"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalReviews?: Prisma.IntFilter<"AgentProfile"> | number
+  avgResponseMinutes?: Prisma.IntNullableFilter<"AgentProfile"> | number | null
   createdAt?: Prisma.DateTimeFilter<"AgentProfile"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"AgentProfile"> | Date | string
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
@@ -280,6 +292,7 @@ export type AgentProfileOrderByWithRelationInput = {
   verification?: Prisma.SortOrder
   rating?: Prisma.SortOrder
   totalReviews?: Prisma.SortOrder
+  avgResponseMinutes?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   user?: Prisma.UserOrderByWithRelationInput
@@ -305,6 +318,7 @@ export type AgentProfileWhereUniqueInput = Prisma.AtLeast<{
   verification?: Prisma.EnumVerificationStatusFilter<"AgentProfile"> | $Enums.VerificationStatus
   rating?: Prisma.DecimalFilter<"AgentProfile"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalReviews?: Prisma.IntFilter<"AgentProfile"> | number
+  avgResponseMinutes?: Prisma.IntNullableFilter<"AgentProfile"> | number | null
   createdAt?: Prisma.DateTimeFilter<"AgentProfile"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"AgentProfile"> | Date | string
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
@@ -327,6 +341,7 @@ export type AgentProfileOrderByWithAggregationInput = {
   verification?: Prisma.SortOrder
   rating?: Prisma.SortOrder
   totalReviews?: Prisma.SortOrder
+  avgResponseMinutes?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.AgentProfileCountOrderByAggregateInput
@@ -348,6 +363,7 @@ export type AgentProfileScalarWhereWithAggregatesInput = {
   verification?: Prisma.EnumVerificationStatusWithAggregatesFilter<"AgentProfile"> | $Enums.VerificationStatus
   rating?: Prisma.DecimalWithAggregatesFilter<"AgentProfile"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalReviews?: Prisma.IntWithAggregatesFilter<"AgentProfile"> | number
+  avgResponseMinutes?: Prisma.IntNullableWithAggregatesFilter<"AgentProfile"> | number | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"AgentProfile"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"AgentProfile"> | Date | string
 }
@@ -360,6 +376,7 @@ export type AgentProfileCreateInput = {
   verification?: $Enums.VerificationStatus
   rating?: runtime.Decimal | runtime.DecimalJsLike | number | string
   totalReviews?: number
+  avgResponseMinutes?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutAgentProfileInput
@@ -382,6 +399,7 @@ export type AgentProfileUncheckedCreateInput = {
   verification?: $Enums.VerificationStatus
   rating?: runtime.Decimal | runtime.DecimalJsLike | number | string
   totalReviews?: number
+  avgResponseMinutes?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   listings?: Prisma.ListingUncheckedCreateNestedManyWithoutAgentInput
@@ -402,6 +420,7 @@ export type AgentProfileUpdateInput = {
   verification?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
   rating?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalReviews?: Prisma.IntFieldUpdateOperationsInput | number
+  avgResponseMinutes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutAgentProfileNestedInput
@@ -424,6 +443,7 @@ export type AgentProfileUncheckedUpdateInput = {
   verification?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
   rating?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalReviews?: Prisma.IntFieldUpdateOperationsInput | number
+  avgResponseMinutes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   listings?: Prisma.ListingUncheckedUpdateManyWithoutAgentNestedInput
@@ -445,6 +465,7 @@ export type AgentProfileCreateManyInput = {
   verification?: $Enums.VerificationStatus
   rating?: runtime.Decimal | runtime.DecimalJsLike | number | string
   totalReviews?: number
+  avgResponseMinutes?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -457,6 +478,7 @@ export type AgentProfileUpdateManyMutationInput = {
   verification?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
   rating?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalReviews?: Prisma.IntFieldUpdateOperationsInput | number
+  avgResponseMinutes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -470,6 +492,7 @@ export type AgentProfileUncheckedUpdateManyInput = {
   verification?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
   rating?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalReviews?: Prisma.IntFieldUpdateOperationsInput | number
+  avgResponseMinutes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -488,6 +511,7 @@ export type AgentProfileCountOrderByAggregateInput = {
   verification?: Prisma.SortOrder
   rating?: Prisma.SortOrder
   totalReviews?: Prisma.SortOrder
+  avgResponseMinutes?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -495,6 +519,7 @@ export type AgentProfileCountOrderByAggregateInput = {
 export type AgentProfileAvgOrderByAggregateInput = {
   rating?: Prisma.SortOrder
   totalReviews?: Prisma.SortOrder
+  avgResponseMinutes?: Prisma.SortOrder
 }
 
 export type AgentProfileMaxOrderByAggregateInput = {
@@ -506,6 +531,7 @@ export type AgentProfileMaxOrderByAggregateInput = {
   verification?: Prisma.SortOrder
   rating?: Prisma.SortOrder
   totalReviews?: Prisma.SortOrder
+  avgResponseMinutes?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -519,6 +545,7 @@ export type AgentProfileMinOrderByAggregateInput = {
   verification?: Prisma.SortOrder
   rating?: Prisma.SortOrder
   totalReviews?: Prisma.SortOrder
+  avgResponseMinutes?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -526,6 +553,7 @@ export type AgentProfileMinOrderByAggregateInput = {
 export type AgentProfileSumOrderByAggregateInput = {
   rating?: Prisma.SortOrder
   totalReviews?: Prisma.SortOrder
+  avgResponseMinutes?: Prisma.SortOrder
 }
 
 export type AgentProfileScalarRelationFilter = {
@@ -579,6 +607,14 @@ export type DecimalFieldUpdateOperationsInput = {
 
 export type IntFieldUpdateOperationsInput = {
   set?: number
+  increment?: number
+  decrement?: number
+  multiply?: number
+  divide?: number
+}
+
+export type NullableIntFieldUpdateOperationsInput = {
+  set?: number | null
   increment?: number
   decrement?: number
   multiply?: number
@@ -705,6 +741,7 @@ export type AgentProfileCreateWithoutUserInput = {
   verification?: $Enums.VerificationStatus
   rating?: runtime.Decimal | runtime.DecimalJsLike | number | string
   totalReviews?: number
+  avgResponseMinutes?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   listings?: Prisma.ListingCreateNestedManyWithoutAgentInput
@@ -725,6 +762,7 @@ export type AgentProfileUncheckedCreateWithoutUserInput = {
   verification?: $Enums.VerificationStatus
   rating?: runtime.Decimal | runtime.DecimalJsLike | number | string
   totalReviews?: number
+  avgResponseMinutes?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   listings?: Prisma.ListingUncheckedCreateNestedManyWithoutAgentInput
@@ -761,6 +799,7 @@ export type AgentProfileUpdateWithoutUserInput = {
   verification?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
   rating?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalReviews?: Prisma.IntFieldUpdateOperationsInput | number
+  avgResponseMinutes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   listings?: Prisma.ListingUpdateManyWithoutAgentNestedInput
@@ -781,6 +820,7 @@ export type AgentProfileUncheckedUpdateWithoutUserInput = {
   verification?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
   rating?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalReviews?: Prisma.IntFieldUpdateOperationsInput | number
+  avgResponseMinutes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   listings?: Prisma.ListingUncheckedUpdateManyWithoutAgentNestedInput
@@ -801,6 +841,7 @@ export type AgentProfileCreateWithoutPropertiesInput = {
   verification?: $Enums.VerificationStatus
   rating?: runtime.Decimal | runtime.DecimalJsLike | number | string
   totalReviews?: number
+  avgResponseMinutes?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutAgentProfileInput
@@ -822,6 +863,7 @@ export type AgentProfileUncheckedCreateWithoutPropertiesInput = {
   verification?: $Enums.VerificationStatus
   rating?: runtime.Decimal | runtime.DecimalJsLike | number | string
   totalReviews?: number
+  avgResponseMinutes?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   listings?: Prisma.ListingUncheckedCreateNestedManyWithoutAgentInput
@@ -857,6 +899,7 @@ export type AgentProfileUpdateWithoutPropertiesInput = {
   verification?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
   rating?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalReviews?: Prisma.IntFieldUpdateOperationsInput | number
+  avgResponseMinutes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutAgentProfileNestedInput
@@ -878,6 +921,7 @@ export type AgentProfileUncheckedUpdateWithoutPropertiesInput = {
   verification?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
   rating?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalReviews?: Prisma.IntFieldUpdateOperationsInput | number
+  avgResponseMinutes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   listings?: Prisma.ListingUncheckedUpdateManyWithoutAgentNestedInput
@@ -897,6 +941,7 @@ export type AgentProfileCreateWithoutListingsInput = {
   verification?: $Enums.VerificationStatus
   rating?: runtime.Decimal | runtime.DecimalJsLike | number | string
   totalReviews?: number
+  avgResponseMinutes?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutAgentProfileInput
@@ -918,6 +963,7 @@ export type AgentProfileUncheckedCreateWithoutListingsInput = {
   verification?: $Enums.VerificationStatus
   rating?: runtime.Decimal | runtime.DecimalJsLike | number | string
   totalReviews?: number
+  avgResponseMinutes?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   properties?: Prisma.PropertyAgentUncheckedCreateNestedManyWithoutAgentInput
@@ -953,6 +999,7 @@ export type AgentProfileUpdateWithoutListingsInput = {
   verification?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
   rating?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalReviews?: Prisma.IntFieldUpdateOperationsInput | number
+  avgResponseMinutes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutAgentProfileNestedInput
@@ -974,6 +1021,7 @@ export type AgentProfileUncheckedUpdateWithoutListingsInput = {
   verification?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
   rating?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalReviews?: Prisma.IntFieldUpdateOperationsInput | number
+  avgResponseMinutes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   properties?: Prisma.PropertyAgentUncheckedUpdateManyWithoutAgentNestedInput
@@ -993,6 +1041,7 @@ export type AgentProfileCreateWithoutLeadsInput = {
   verification?: $Enums.VerificationStatus
   rating?: runtime.Decimal | runtime.DecimalJsLike | number | string
   totalReviews?: number
+  avgResponseMinutes?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutAgentProfileInput
@@ -1014,6 +1063,7 @@ export type AgentProfileUncheckedCreateWithoutLeadsInput = {
   verification?: $Enums.VerificationStatus
   rating?: runtime.Decimal | runtime.DecimalJsLike | number | string
   totalReviews?: number
+  avgResponseMinutes?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   listings?: Prisma.ListingUncheckedCreateNestedManyWithoutAgentInput
@@ -1049,6 +1099,7 @@ export type AgentProfileUpdateWithoutLeadsInput = {
   verification?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
   rating?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalReviews?: Prisma.IntFieldUpdateOperationsInput | number
+  avgResponseMinutes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutAgentProfileNestedInput
@@ -1070,6 +1121,7 @@ export type AgentProfileUncheckedUpdateWithoutLeadsInput = {
   verification?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
   rating?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalReviews?: Prisma.IntFieldUpdateOperationsInput | number
+  avgResponseMinutes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   listings?: Prisma.ListingUncheckedUpdateManyWithoutAgentNestedInput
@@ -1089,6 +1141,7 @@ export type AgentProfileCreateWithoutSubscriptionsInput = {
   verification?: $Enums.VerificationStatus
   rating?: runtime.Decimal | runtime.DecimalJsLike | number | string
   totalReviews?: number
+  avgResponseMinutes?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutAgentProfileInput
@@ -1110,6 +1163,7 @@ export type AgentProfileUncheckedCreateWithoutSubscriptionsInput = {
   verification?: $Enums.VerificationStatus
   rating?: runtime.Decimal | runtime.DecimalJsLike | number | string
   totalReviews?: number
+  avgResponseMinutes?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   listings?: Prisma.ListingUncheckedCreateNestedManyWithoutAgentInput
@@ -1145,6 +1199,7 @@ export type AgentProfileUpdateWithoutSubscriptionsInput = {
   verification?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
   rating?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalReviews?: Prisma.IntFieldUpdateOperationsInput | number
+  avgResponseMinutes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutAgentProfileNestedInput
@@ -1166,6 +1221,7 @@ export type AgentProfileUncheckedUpdateWithoutSubscriptionsInput = {
   verification?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
   rating?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalReviews?: Prisma.IntFieldUpdateOperationsInput | number
+  avgResponseMinutes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   listings?: Prisma.ListingUncheckedUpdateManyWithoutAgentNestedInput
@@ -1185,6 +1241,7 @@ export type AgentProfileCreateWithoutStatusesInput = {
   verification?: $Enums.VerificationStatus
   rating?: runtime.Decimal | runtime.DecimalJsLike | number | string
   totalReviews?: number
+  avgResponseMinutes?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutAgentProfileInput
@@ -1206,6 +1263,7 @@ export type AgentProfileUncheckedCreateWithoutStatusesInput = {
   verification?: $Enums.VerificationStatus
   rating?: runtime.Decimal | runtime.DecimalJsLike | number | string
   totalReviews?: number
+  avgResponseMinutes?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   listings?: Prisma.ListingUncheckedCreateNestedManyWithoutAgentInput
@@ -1241,6 +1299,7 @@ export type AgentProfileUpdateWithoutStatusesInput = {
   verification?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
   rating?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalReviews?: Prisma.IntFieldUpdateOperationsInput | number
+  avgResponseMinutes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutAgentProfileNestedInput
@@ -1262,6 +1321,7 @@ export type AgentProfileUncheckedUpdateWithoutStatusesInput = {
   verification?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
   rating?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalReviews?: Prisma.IntFieldUpdateOperationsInput | number
+  avgResponseMinutes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   listings?: Prisma.ListingUncheckedUpdateManyWithoutAgentNestedInput
@@ -1281,6 +1341,7 @@ export type AgentProfileCreateWithoutReviewsInput = {
   verification?: $Enums.VerificationStatus
   rating?: runtime.Decimal | runtime.DecimalJsLike | number | string
   totalReviews?: number
+  avgResponseMinutes?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutAgentProfileInput
@@ -1302,6 +1363,7 @@ export type AgentProfileUncheckedCreateWithoutReviewsInput = {
   verification?: $Enums.VerificationStatus
   rating?: runtime.Decimal | runtime.DecimalJsLike | number | string
   totalReviews?: number
+  avgResponseMinutes?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   listings?: Prisma.ListingUncheckedCreateNestedManyWithoutAgentInput
@@ -1337,6 +1399,7 @@ export type AgentProfileUpdateWithoutReviewsInput = {
   verification?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
   rating?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalReviews?: Prisma.IntFieldUpdateOperationsInput | number
+  avgResponseMinutes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutAgentProfileNestedInput
@@ -1358,6 +1421,7 @@ export type AgentProfileUncheckedUpdateWithoutReviewsInput = {
   verification?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
   rating?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalReviews?: Prisma.IntFieldUpdateOperationsInput | number
+  avgResponseMinutes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   listings?: Prisma.ListingUncheckedUpdateManyWithoutAgentNestedInput
@@ -1377,6 +1441,7 @@ export type AgentProfileCreateWithoutRoomRequestResponsesInput = {
   verification?: $Enums.VerificationStatus
   rating?: runtime.Decimal | runtime.DecimalJsLike | number | string
   totalReviews?: number
+  avgResponseMinutes?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutAgentProfileInput
@@ -1398,6 +1463,7 @@ export type AgentProfileUncheckedCreateWithoutRoomRequestResponsesInput = {
   verification?: $Enums.VerificationStatus
   rating?: runtime.Decimal | runtime.DecimalJsLike | number | string
   totalReviews?: number
+  avgResponseMinutes?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   listings?: Prisma.ListingUncheckedCreateNestedManyWithoutAgentInput
@@ -1433,6 +1499,7 @@ export type AgentProfileUpdateWithoutRoomRequestResponsesInput = {
   verification?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
   rating?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalReviews?: Prisma.IntFieldUpdateOperationsInput | number
+  avgResponseMinutes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutAgentProfileNestedInput
@@ -1454,6 +1521,7 @@ export type AgentProfileUncheckedUpdateWithoutRoomRequestResponsesInput = {
   verification?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
   rating?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalReviews?: Prisma.IntFieldUpdateOperationsInput | number
+  avgResponseMinutes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   listings?: Prisma.ListingUncheckedUpdateManyWithoutAgentNestedInput
@@ -1473,6 +1541,7 @@ export type AgentProfileCreateWithoutContactRevealsInput = {
   verification?: $Enums.VerificationStatus
   rating?: runtime.Decimal | runtime.DecimalJsLike | number | string
   totalReviews?: number
+  avgResponseMinutes?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutAgentProfileInput
@@ -1494,6 +1563,7 @@ export type AgentProfileUncheckedCreateWithoutContactRevealsInput = {
   verification?: $Enums.VerificationStatus
   rating?: runtime.Decimal | runtime.DecimalJsLike | number | string
   totalReviews?: number
+  avgResponseMinutes?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   listings?: Prisma.ListingUncheckedCreateNestedManyWithoutAgentInput
@@ -1529,6 +1599,7 @@ export type AgentProfileUpdateWithoutContactRevealsInput = {
   verification?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
   rating?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalReviews?: Prisma.IntFieldUpdateOperationsInput | number
+  avgResponseMinutes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutAgentProfileNestedInput
@@ -1550,6 +1621,7 @@ export type AgentProfileUncheckedUpdateWithoutContactRevealsInput = {
   verification?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
   rating?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalReviews?: Prisma.IntFieldUpdateOperationsInput | number
+  avgResponseMinutes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   listings?: Prisma.ListingUncheckedUpdateManyWithoutAgentNestedInput
@@ -1664,6 +1736,7 @@ export type AgentProfileSelect<ExtArgs extends runtime.Types.Extensions.Internal
   verification?: boolean
   rating?: boolean
   totalReviews?: boolean
+  avgResponseMinutes?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -1687,6 +1760,7 @@ export type AgentProfileSelectCreateManyAndReturn<ExtArgs extends runtime.Types.
   verification?: boolean
   rating?: boolean
   totalReviews?: boolean
+  avgResponseMinutes?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -1701,6 +1775,7 @@ export type AgentProfileSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.
   verification?: boolean
   rating?: boolean
   totalReviews?: boolean
+  avgResponseMinutes?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -1715,11 +1790,12 @@ export type AgentProfileSelectScalar = {
   verification?: boolean
   rating?: boolean
   totalReviews?: boolean
+  avgResponseMinutes?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type AgentProfileOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "businessName" | "bio" | "photoUrl" | "verification" | "rating" | "totalReviews" | "createdAt" | "updatedAt", ExtArgs["result"]["agentProfile"]>
+export type AgentProfileOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "businessName" | "bio" | "photoUrl" | "verification" | "rating" | "totalReviews" | "avgResponseMinutes" | "createdAt" | "updatedAt", ExtArgs["result"]["agentProfile"]>
 export type AgentProfileInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   listings?: boolean | Prisma.AgentProfile$listingsArgs<ExtArgs>
@@ -1761,6 +1837,7 @@ export type $AgentProfilePayload<ExtArgs extends runtime.Types.Extensions.Intern
     verification: $Enums.VerificationStatus
     rating: runtime.Decimal
     totalReviews: number
+    avgResponseMinutes: number | null
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["agentProfile"]>
@@ -2203,6 +2280,7 @@ export interface AgentProfileFieldRefs {
   readonly verification: Prisma.FieldRef<"AgentProfile", 'VerificationStatus'>
   readonly rating: Prisma.FieldRef<"AgentProfile", 'Decimal'>
   readonly totalReviews: Prisma.FieldRef<"AgentProfile", 'Int'>
+  readonly avgResponseMinutes: Prisma.FieldRef<"AgentProfile", 'Int'>
   readonly createdAt: Prisma.FieldRef<"AgentProfile", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"AgentProfile", 'DateTime'>
 }

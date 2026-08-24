@@ -6,7 +6,10 @@ import { prisma } from "@/lib/db/prisma";
 const reportSchema = z.object({
   targetType: z.enum(["LISTING", "AGENT", "USER", "MESSAGE"]),
   targetId: z.string().min(1),
-  reason: z.enum(["INACCURATE", "SCAM", "DUPLICATE", "HARASSMENT", "OTHER"]),
+  reason: z.enum([
+    "INACCURATE", "SCAM", "DUPLICATE", "HARASSMENT", "OTHER",
+    "FAKE_LISTING", "WRONG_PRICE", "UNRESPONSIVE", "INAPPROPRIATE",
+  ]),
   description: z.string().trim().max(2000).optional(),
 });
 

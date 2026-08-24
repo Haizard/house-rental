@@ -132,6 +132,11 @@ export type LeadCharge = Prisma.LeadChargeModel
  */
 export type SavedListing = Prisma.SavedListingModel
 /**
+ * Model SavedSearch
+ * 
+ */
+export type SavedSearch = Prisma.SavedSearchModel
+/**
  * Model Notification
  * 
  */

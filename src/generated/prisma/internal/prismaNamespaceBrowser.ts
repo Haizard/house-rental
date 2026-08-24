@@ -69,6 +69,7 @@ export const ModelName = {
   Subscription: 'Subscription',
   LeadCharge: 'LeadCharge',
   SavedListing: 'SavedListing',
+  SavedSearch: 'SavedSearch',
   Notification: 'Notification',
   Report: 'Report',
   VerificationRecord: 'VerificationRecord',
@@ -108,6 +109,7 @@ export const UserScalarFieldEnum = {
   lastName: 'lastName',
   avatarUrl: 'avatarUrl',
   isActive: 'isActive',
+  lastActiveAt: 'lastActiveAt',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -124,6 +126,7 @@ export const AgentProfileScalarFieldEnum = {
   verification: 'verification',
   rating: 'rating',
   totalReviews: 'totalReviews',
+  avgResponseMinutes: 'avgResponseMinutes',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -206,6 +209,21 @@ export const ListingScalarFieldEnum = {
   verificationStatus: 'verificationStatus',
   publishedAt: 'publishedAt',
   expiresAt: 'expiresAt',
+  roomSize: 'roomSize',
+  numberOfRooms: 'numberOfRooms',
+  furnished: 'furnished',
+  floorLevel: 'floorLevel',
+  genderPreference: 'genderPreference',
+  petsAllowed: 'petsAllowed',
+  smokingAllowed: 'smokingAllowed',
+  maxTenants: 'maxTenants',
+  depositAmount: 'depositAmount',
+  utilitiesIncluded: 'utilitiesIncluded',
+  leaseDuration: 'leaseDuration',
+  isFeatured: 'isFeatured',
+  featuredUntil: 'featuredUntil',
+  isFlagged: 'isFlagged',
+  flagReason: 'flagReason',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -357,6 +375,25 @@ export const SavedListingScalarFieldEnum = {
 export type SavedListingScalarFieldEnum = (typeof SavedListingScalarFieldEnum)[keyof typeof SavedListingScalarFieldEnum]
 
 
+export const SavedSearchScalarFieldEnum = {
+  id: 'id',
+  studentId: 'studentId',
+  name: 'name',
+  area: 'area',
+  propertyType: 'propertyType',
+  minPrice: 'minPrice',
+  maxPrice: 'maxPrice',
+  gender: 'gender',
+  furnished: 'furnished',
+  amenities: 'amenities',
+  lastAlertAt: 'lastAlertAt',
+  lastAlertedListingIds: 'lastAlertedListingIds',
+  createdAt: 'createdAt'
+} as const
+
+export type SavedSearchScalarFieldEnum = (typeof SavedSearchScalarFieldEnum)[keyof typeof SavedSearchScalarFieldEnum]
+
+
 export const NotificationScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
@@ -439,6 +476,8 @@ export const ReviewScalarFieldEnum = {
   rating: 'rating',
   comment: 'comment',
   status: 'status',
+  flagCount: 'flagCount',
+  isHidden: 'isHidden',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
