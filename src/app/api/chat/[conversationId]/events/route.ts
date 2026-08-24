@@ -11,14 +11,14 @@ import { prisma } from "@/lib/db/prisma";
  */
 export async function GET(
   request: Request,
-  { params }: { params: Promise<{ id: string }> }
+  { params }: { params: Promise<{ conversationId: string }> }
 ) {
   const session = await auth();
   if (!session?.user) {
     return NextResponse.json({ error: "Sign in required." }, { status: 401 });
   }
 
-  const { id: conversationId } = await params;
+  const { conversationId } = await params;
 
   // Verify user has access to this conversation
   const conversation = await prisma.conversation.findUnique({
