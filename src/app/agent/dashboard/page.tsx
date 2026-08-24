@@ -26,14 +26,14 @@ export default async function AgentDashboard() {
     },
   });
 
-  const pendingVerification = await prisma.verificationRecord.findFirst({
+  const pendingVerification = agent ? await prisma.verificationRecord.findFirst({
     where: {
       targetType: "AGENT",
-      targetId: agent?.id ?? "",
+      targetId: agent.id,
       status: "PENDING",
     },
     select: { id: true },
-  });
+  }) : null;
 
   // Check tier via raw SQL
   let isPro = false;
