@@ -46,5 +46,27 @@ export async function POST(request: Request, { params }: { params: Promise<{ id:
     return createdConversation;
   });
 
+  // Send email notification to agent (non-blocking)
+  try {
+    const agentWithUser = await prisma.agentProfile.findUnique({
+      where: { id: listing.agentId },
+      select: { user: { select: { email: true, firstName: true, lastName: true } } },
+    });
+    const studentUser = await prisma.user.findUnique({
+      where: { id: session.user.id },
+      select: { firstName: true, lastName: true },
+    });
+    if (agentWithUser?.user?.email && studentUser) {
+      const { sendLeadAlert } = await import("@/lib/email/resend");
+      await sendLeadAlert({
+        agentEmail: agentWithUser.user.email,
+        agentName: agentWithUser.user.firstName,
+        studentName: `${studentUser.firstName} ${studentUser.lastName}`,
+        listingTitle: listing.title,
+        listingUrl: `${process.env.NEXT_PUBLIC_APP_URL || ""}/agent/leads`,
+      });
+    }
+  } catch { /* email is best-effort */ }
+
   return NextResponse.json({ conversationId: conversation.id, existing: false }, { status: 201 });
 }

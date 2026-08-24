@@ -63,17 +63,41 @@ export async function POST(
     );
   }
 
-  // Generate storage path: listings/{listingId}/{uuid}.{ext}
-  const ext = file.name.split(".").pop() ?? "jpg";
-  const fileName = `${crypto.randomUUID()}.${ext}`;
-  const storagePath = `listings/${listing.id}/${fileName}`;
-
+  // Optimize image before upload
   const arrayBuffer = await file.arrayBuffer();
+  const inputBuffer = Buffer.from(arrayBuffer);
+
+  let uploadBuffer: Buffer = inputBuffer;
+  let uploadContentType: string = file.type;
+  let storagePath: string;
+
+  try {
+    const { optimizeImage, validateImage } = await import("@/lib/storage/image-optimizer");
+    const validation = validateImage(file.type, file.size);
+    if (!validation.valid) {
+      return NextResponse.json({ error: validation.error }, { status: 400 });
+    }
+
+    const optimized = await optimizeImage(inputBuffer, file.name);
+    // Use the medium size for upload (best balance of quality/size)
+    const mediumSize = optimized.find((o) => o.size === "medium") || optimized[0];
+    uploadBuffer = mediumSize.buffer;
+    uploadContentType = mediumSize.contentType;
+
+    const ext = mediumSize.suffix.split(".").pop() ?? "webp";
+    storagePath = `listings/${listing.id}/${crypto.randomUUID()}.${ext}`;
+  } catch {
+    // Fallback: upload original
+    const ext = file.name.split(".").pop() ?? "jpg";
+    storagePath = `listings/${listing.id}/${crypto.randomUUID()}.${ext}`;
+    uploadContentType = file.type;
+  }
+
   const result = await storageService.upload({
     bucket: "listing-images",
     path: storagePath,
-    contentType: file.type,
-    body: arrayBuffer,
+    contentType: uploadContentType,
+    body: uploadBuffer.buffer.slice(0) as ArrayBuffer,
   });
 
   if (!result.ok) {

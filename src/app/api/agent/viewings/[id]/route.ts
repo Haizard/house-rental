@@ -26,5 +26,30 @@ export async function PATCH(request: Request, { params }: { params: Promise<{ id
     return result;
   });
 
+  // Send email on acceptance (non-blocking)
+  if (parsed.data === "ACCEPTED") {
+    try {
+      const lead = await prisma.lead.findUnique({
+        where: { id: viewing.leadId },
+        select: {
+          student: { select: { user: { select: { email: true, firstName: true } } } },
+          listing: { select: { title: true } },
+        },
+      });
+      if (lead?.student?.user?.email) {
+        const agentUser = await prisma.user.findUnique({ where: { id: session.user.id }, select: { firstName: true } });
+        const { sendViewingConfirmation } = await import("@/lib/email/resend");
+        await sendViewingConfirmation({
+          studentEmail: lead.student.user.email,
+          studentName: lead.student.user.firstName,
+          agentName: agentUser?.firstName || "Your agent",
+          listingTitle: lead.listing.title,
+          scheduledAt: new Intl.DateTimeFormat("en-TZ", { dateStyle: "full", timeStyle: "short" }).format(updated.scheduledAt || new Date()),
+          chatUrl: `${process.env.NEXT_PUBLIC_APP_URL || ""}/student/chats`,
+        });
+      }
+    } catch { /* email is best-effort */ }
+  }
+
   return NextResponse.json({ data: { id: updated.id, status: updated.status } });
 }
