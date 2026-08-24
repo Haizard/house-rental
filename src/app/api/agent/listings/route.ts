@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { z } from "zod";
 import { prisma } from "@/lib/db/prisma";
 import { auth } from "@/lib/auth/config";
+import { detectFraud } from "@/lib/listings/fraud-detection";
 
 const createListingSchema = z.object({
   title: z.string().trim().min(3).max(200),
@@ -170,6 +171,29 @@ export async function POST(request: Request) {
 
     return listing;
   });
+
+  // Run fraud detection
+  try {
+    const fraudResult = await detectFraud(result.id, agent.id, {
+      title: d.title,
+      description: d.description,
+      rentAmount: d.rentAmount,
+      propertyType: d.propertyType,
+    });
+
+    if (fraudResult.isSuspicious) {
+      await prisma.listing.update({
+        where: { id: result.id },
+        data: {
+          isFlagged: true,
+          flagReason: fraudResult.reasons.join("; "),
+        },
+      });
+    }
+  } catch (error) {
+    console.error("Fraud detection failed:", error);
+    // Don't block listing creation if fraud detection fails
+  }
 
   return NextResponse.json({ data: { id: result.id, status: result.status } }, { status: 201 });
 }

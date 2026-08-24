@@ -293,6 +293,9 @@ model Listing {
   // Featured
   isFeatured         Boolean            @default(false) @map("is_featured")
   featuredUntil      DateTime?          @map("featured_until")
+  // Fraud detection
+  isFlagged          Boolean            @default(false) @map("is_flagged")
+  flagReason         String?            @map("flag_reason")
   createdAt          DateTime           @default(now()) @map("created_at")
   updatedAt          DateTime           @updatedAt @map("updated_at")
   property           Property           @relation(fields: [propertyId], references: [id], onDelete: Cascade)
@@ -557,6 +560,8 @@ model Review {
   rating    Int
   comment   String?
   status    String   @default("PUBLISHED")
+  flagCount Int      @default(0) @map("flag_count")
+  isHidden  Boolean  @default(false) @map("is_hidden")
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
   student   StudentProfile @relation(fields: [studentId], references: [id])

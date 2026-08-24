@@ -3,6 +3,7 @@ import Link from "next/link";
 import { MapPin } from "lucide-react";
 import type { Listing } from "@/lib/listings";
 import { SaveListingButton } from "./save-listing-button";
+import { VerifiedBadge } from "@/components/ui/verified-badge";
 
 export function ListingCard({ listing, saved = false }: { listing: Listing; saved?: boolean }) {
   const price = new Intl.NumberFormat("en-TZ").format(listing.price);
@@ -17,7 +18,7 @@ export function ListingCard({ listing, saved = false }: { listing: Listing; save
             fill
             sizes="(max-width: 767px) 50vw, (max-width: 1023px) 33vw, 25vw"
           />
-          {listing.verified && <span className="badge">Verified</span>}
+          {listing.verified && <VerifiedBadge size="sm" className="absolute left-2 top-2" />}
         </Link>
         <SaveListingButton listingId={listing.id} initialSaved={saved} title={listing.title} />
       </div>
