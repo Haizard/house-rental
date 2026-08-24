@@ -148,17 +148,18 @@ enum ContactRequestStatus {
 }
 
 model User {
-  id             String   @id @default(uuid()) @db.Uuid
-  email          String?  @unique
-  phone          String?  @unique
-  passwordHash   String?  @map("password_hash")
-  role           UserRole @default(STUDENT)
-  firstName      String   @map("first_name")
-  lastName       String   @map("last_name")
-  avatarUrl      String?  @map("avatar_url")
-  isActive       Boolean  @default(true) @map("is_active")
-  createdAt      DateTime @default(now()) @map("created_at")
-  updatedAt      DateTime @updatedAt @map("updated_at")
+  id             String    @id @default(uuid()) @db.Uuid
+  email          String?   @unique
+  phone          String?   @unique
+  passwordHash   String?   @map("password_hash")
+  role           UserRole  @default(STUDENT)
+  firstName      String    @map("first_name")
+  lastName       String    @map("last_name")
+  avatarUrl      String?   @map("avatar_url")
+  isActive       Boolean   @default(true) @map("is_active")
+  lastActiveAt   DateTime? @map("last_active_at")
+  createdAt      DateTime  @default(now()) @map("created_at")
+  updatedAt      DateTime  @updatedAt @map("updated_at")
   agentProfile   AgentProfile?
   studentProfile StudentProfile?
   sentMessages   Message[] @relation("SentMessages")
@@ -170,16 +171,17 @@ model User {
 }
 
 model AgentProfile {
-  id            String             @id @default(uuid()) @db.Uuid
-  userId        String             @unique @map("user_id") @db.Uuid
-  businessName  String             @map("business_name")
-  bio           String?
-  photoUrl      String?            @map("profile_photo_url")
-  verification  VerificationStatus @default(UNVERIFIED) @map("verification_status")
-  rating        Decimal            @default(0) @db.Decimal(3, 2)
-  totalReviews  Int                @default(0) @map("total_reviews")
-  createdAt     DateTime           @default(now()) @map("created_at")
-  updatedAt     DateTime           @updatedAt @map("updated_at")
+  id                 String             @id @default(uuid()) @db.Uuid
+  userId             String             @unique @map("user_id") @db.Uuid
+  businessName       String             @map("business_name")
+  bio                String?
+  photoUrl           String?            @map("profile_photo_url")
+  verification       VerificationStatus @default(UNVERIFIED) @map("verification_status")
+  rating             Decimal            @default(0) @db.Decimal(3, 2)
+  totalReviews       Int                @default(0) @map("total_reviews")
+  avgResponseMinutes Int?               @map("avg_response_minutes")
+  createdAt          DateTime           @default(now()) @map("created_at")
+  updatedAt          DateTime           @updatedAt @map("updated_at")
   user          User               @relation(fields: [userId], references: [id], onDelete: Cascade)
   listings      Listing[]
   properties    PropertyAgent[]
@@ -287,6 +289,9 @@ model Listing {
   depositAmount      Int?               @map("deposit_amount")
   utilitiesIncluded  Boolean            @default(false) @map("utilities_included")
   leaseDuration      String?            @map("lease_duration")
+  // Featured
+  isFeatured         Boolean            @default(false) @map("is_featured")
+  featuredUntil      DateTime?          @map("featured_until")
   createdAt          DateTime           @default(now()) @map("created_at")
   updatedAt          DateTime           @updatedAt @map("updated_at")
   property           Property           @relation(fields: [propertyId], references: [id], onDelete: Cascade)
