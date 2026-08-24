@@ -4,6 +4,14 @@
     {
       "path": "/api/cron/cleanup-statuses",
       "schedule": "0 * * * *"
+    },
+    {
+      "path": "/api/cron/alert-saved-searches",
+      "schedule": "0 8 * * *"
+    },
+    {
+      "path": "/api/cron/warn-expiring-listings",
+      "schedule": "0 8 * * *"
     }
   ]
 }

@@ -212,6 +212,7 @@ model StudentProfile {
   reviews       Review[]
   contactReveals ContactReveal[]
   roomRequests    RoomRequest[]
+  savedSearches  SavedSearch[]
   @@map("student_profiles")
 }
 
@@ -453,6 +454,25 @@ model SavedListing {
   listing   Listing        @relation(fields: [listingId], references: [id], onDelete: Cascade)
   @@unique([studentId, listingId])
   @@map("saved_listings")
+}
+
+model SavedSearch {
+  id              String   @id @default(uuid()) @db.Uuid
+  studentId       String   @map("student_id") @db.Uuid
+  name            String?
+  area            String?
+  propertyType    String?  @map("property_type")
+  minPrice        Int?     @map("min_price")
+  maxPrice        Int?     @map("max_price")
+  gender          String?
+  furnished       Boolean?
+  amenities       String[]
+  lastAlertAt     DateTime? @map("last_alert_at")
+  lastAlertedListingIds String[] @default([]) @map("last_alerted_listing_ids")
+  createdAt       DateTime @default(now()) @map("created_at")
+  student         StudentProfile @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  @@index([studentId])
+  @@map("saved_searches")
 }
 
 model Notification {
