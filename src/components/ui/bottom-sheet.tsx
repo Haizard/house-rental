@@ -42,7 +42,7 @@ export function BottomSheet({
       <div className="absolute inset-0 bg-[rgba(242,244,248,0.6)]" />
 
       <div
-        className="glass-surface relative w-full max-w-lg rounded-b-none sm:rounded-[22px]"
+        className="glass-surface relative w-full max-w-lg rounded-b-none animate-scale-in sm:rounded-[22px]"
         onClick={(e) => e.stopPropagation()}
         ref={ref}
         role="dialog"

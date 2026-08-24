@@ -2,6 +2,7 @@
 
 import { Send } from "lucide-react";
 import { FormEvent, useEffect, useRef, useState } from "react";
+import { haptic } from "@/lib/ui/haptics";
 
 export type ChatMessage = {
   id: string;
@@ -75,6 +76,7 @@ export function ChatThread({ conversationId, initialMessages, currentUserId }: P
           : [...current, created],
       );
       setContent("");
+      haptic("success");
     }
     setPending(false);
   }
@@ -90,7 +92,7 @@ export function ChatThread({ conversationId, initialMessages, currentUserId }: P
             key={message.id}
           >
             <p
-              className={`max-w-[82%] rounded-[18px] px-4 py-3 text-sm leading-5 ${
+              className={`max-w-[82%] rounded-[18px] px-4 py-3 text-sm leading-5 animate-message-in ${
                 message.messageType === "SYSTEM"
                   ? "bg-[var(--accent-soft)] text-[var(--text-secondary)]"
                   : message.senderId === currentUserId

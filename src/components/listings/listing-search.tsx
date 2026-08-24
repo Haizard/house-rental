@@ -4,6 +4,7 @@ import { Bed, Home, PawPrint, Search, SlidersHorizontal, X } from "lucide-react"
 import { useMemo, useState } from "react";
 import type { Listing } from "@/lib/listings";
 import { ListingCard } from "./listing-card";
+import { BottomSheet } from "@/components/ui/bottom-sheet"
 
 const types = [
   "All homes",
@@ -99,6 +100,93 @@ export function ListingSearch({
     furnishedOnly ||
     selectedAmenities.length > 0;
 
+  // Content shared between inline (desktop) and bottom sheet (mobile)
+  const filterContent = (
+    <div className="space-y-3">
+      {/* Type filters */}
+      <div
+        className="flex gap-2 overflow-x-auto pb-1 scrollbar-hide"
+        aria-label="Listing type filter"
+      >
+        {types.map((item) => (
+          <button
+            className={`filter-chip shrink-0 ${type === item ? "filter-chip-active" : ""}`}
+            type="button"
+            key={item}
+            onClick={() => setType(item)}
+          >
+            {item}
+          </button>
+        ))}
+      </div>
+
+      {/* Price filters */}
+      <div
+        className="flex gap-2 overflow-x-auto pb-1 scrollbar-hide"
+        aria-label="Listing price filter"
+      >
+        {priceRanges.map((item) => (
+          <button
+            className={`filter-chip shrink-0 ${priceRange === item ? "filter-chip-active" : ""}`}
+            type="button"
+            key={item}
+            onClick={() => setPriceRange(item)}
+          >
+            {item}
+          </button>
+        ))}
+      </div>
+
+      {/* Gender + Furnished row */}
+      <div className="flex flex-wrap items-center gap-2">
+        <span className="text-xs font-semibold text-[var(--text-tertiary)]">
+          Tenant:
+        </span>
+        {genderOptions.map((g) => (
+          <button
+            className={`filter-chip shrink-0 ${gender === g ? "filter-chip-active" : ""}`}
+            type="button"
+            key={g}
+            onClick={() => setGender(g)}
+          >
+            {g}
+          </button>
+        ))}
+        <button
+          className={`filter-chip shrink-0 flex items-center gap-1 ${furnishedOnly ? "filter-chip-active" : ""}`}
+          type="button"
+          onClick={() => setFurnishedOnly(!furnishedOnly)}
+        >
+          <Bed size={13} /> Furnished
+        </button>
+      </div>
+
+      {/* Amenity filters */}
+      <div>
+        <p className="mb-1.5 text-[11px] font-semibold uppercase tracking-wider text-[var(--text-tertiary)]">
+          Amenities
+        </p>
+        <div
+          className="flex gap-2 overflow-x-auto pb-1 scrollbar-hide"
+          aria-label="Amenity filter"
+        >
+          {amenityFilters.map(({ slug, label }) => (
+            <button
+              className={`filter-chip shrink-0 flex items-center gap-1 ${
+                selectedAmenities.includes(slug) ? "filter-chip-active" : ""
+              }`}
+              type="button"
+              key={slug}
+              onClick={() => toggleAmenity(slug)}
+            >
+              {label}
+            </button>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+
   return (
     <>
       {/* Search bar */}
@@ -139,96 +227,27 @@ export function ListingSearch({
         </button>
       </div>
 
-      {/* Filters — collapsible on mobile, always visible on desktop */}
-      <div
-        className={`mt-3 space-y-3 overflow-hidden transition-all duration-300 ${
-          showFilters
-            ? "max-h-[600px] opacity-100"
-            : "max-h-0 opacity-0 lg:max-h-[600px] lg:opacity-100"
-        }`}
-      >
-        {/* Type filters */}
-        <div
-          className="flex gap-2 overflow-x-auto pb-1 scrollbar-hide"
-          aria-label="Listing type filter"
-        >
-          {types.map((item) => (
-            <button
-              className={`filter-chip shrink-0 ${type === item ? "filter-chip-active" : ""}`}
-              type="button"
-              key={item}
-              onClick={() => setType(item)}
-            >
-              {item}
-            </button>
-          ))}
-        </div>
-
-        {/* Price filters */}
-        <div
-          className="flex gap-2 overflow-x-auto pb-1 scrollbar-hide"
-          aria-label="Listing price filter"
-        >
-          {priceRanges.map((item) => (
-            <button
-              className={`filter-chip shrink-0 ${priceRange === item ? "filter-chip-active" : ""}`}
-              type="button"
-              key={item}
-              onClick={() => setPriceRange(item)}
-            >
-              {item}
-            </button>
-          ))}
-        </div>
-
-        {/* Gender + Furnished row */}
-        <div className="flex flex-wrap items-center gap-2">
-          <span className="text-xs font-semibold text-[var(--text-tertiary)]">
-            Tenant:
-          </span>
-          {genderOptions.map((g) => (
-            <button
-              className={`filter-chip shrink-0 ${gender === g ? "filter-chip-active" : ""}`}
-              type="button"
-              key={g}
-              onClick={() => setGender(g)}
-            >
-              {g}
-            </button>
-          ))}
-          <button
-            className={`filter-chip shrink-0 flex items-center gap-1 ${furnishedOnly ? "filter-chip-active" : ""}`}
-            type="button"
-            onClick={() => setFurnishedOnly(!furnishedOnly)}
-          >
-            <Bed size={13} /> Furnished
-          </button>
-        </div>
-
-        {/* Amenity filters */}
-        <div>
-          <p className="mb-1.5 text-[11px] font-semibold uppercase tracking-wider text-[var(--text-tertiary)]">
-            Amenities
-          </p>
-          <div
-            className="flex gap-2 overflow-x-auto pb-1 scrollbar-hide"
-            aria-label="Amenity filter"
-          >
-            {amenityFilters.map(({ slug, label }) => (
-              <button
-                className={`filter-chip shrink-0 flex items-center gap-1 ${
-                  selectedAmenities.includes(slug) ? "filter-chip-active" : ""
-                }`}
-                type="button"
-                key={slug}
-                onClick={() => toggleAmenity(slug)}
-              >
-                {label}
-              </button>
-            ))}
-          </div>
-        </div>
+      {/* Desktop: inline filters */}
+      <div className="mt-3 hidden lg:block">
+        {filterContent}
       </div>
+
+      {/* Mobile: bottom sheet filters */}
+      <BottomSheet
+        open={showFilters}
+        onClose={() => setShowFilters(false)}
+        title="Filters"
+      >
+        {filterContent}
+        {/* Apply button at bottom */}
+        <button
+          className="button button-primary mt-4 w-full"
+          type="button"
+          onClick={() => setShowFilters(false)}
+        >
+          Show {results.length} result{results.length !== 1 ? "s" : ""}
+        </button>
+      </BottomSheet>
 
       {/* Active filters summary on mobile */}
       {hasActiveFilters && !showFilters && (

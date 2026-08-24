@@ -41,7 +41,7 @@ export function Modal({
       <div className="absolute inset-0 bg-[rgba(242,244,248,0.6)]" />
 
       <div
-        className={`glass-surface relative w-full ${maxWidth}`}
+        className={`glass-surface relative w-full animate-scale-in ${maxWidth}`}
         onClick={(e) => e.stopPropagation()}
         role="dialog"
         aria-modal="true"

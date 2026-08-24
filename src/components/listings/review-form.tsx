@@ -2,6 +2,7 @@
 
 import { Star } from "lucide-react";
 import { useState } from "react";
+import { haptic } from "@/lib/ui/haptics";
 
 export function ReviewForm({
   agentId,
@@ -31,6 +32,7 @@ export function ReviewForm({
     const result = await res.json().catch(() => null);
     if (res.ok) {
       setSubmitted(true);
+      haptic("success");
     } else {
       setStatus(result?.error ?? "Unable to submit review.");
     }
