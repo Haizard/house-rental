@@ -33,7 +33,24 @@ self.addEventListener("fetch", (event) => {
   // Skip non-GET
   if (request.method !== "GET") return;
 
-  // Skip API routes — always go to network
+  // For listing API routes: network-first, fallback to cache (offline support)
+  if (url.pathname.startsWith("/api/listings/") && !url.pathname.includes("/lead") && !url.pathname.includes("/viewing")) {
+    event.respondWith(
+      fetch(request)
+        .then((response) => {
+          // Cache successful listing responses
+          if (response.ok) {
+            const clone = response.clone();
+            caches.open(CACHE_NAME).then((cache) => cache.put(request, clone));
+          }
+          return response;
+        })
+        .catch(() => caches.match(request))
+    );
+    return;
+  }
+
+  // Skip other API routes — always go to network
   if (url.pathname.startsWith("/api/")) return;
 
   // Skip auth routes
@@ -48,7 +65,7 @@ self.addEventListener("fetch", (event) => {
           caches.open(CACHE_NAME).then((cache) => cache.put(request, clone));
           return response;
         })
-        .catch(() => caches.match(request).then((cached) => cached || caches.match("/")))
+        .catch(() => caches.match(request).then((cached) => cached || caches.match("/offline")))
     );
     return;
   }

@@ -3,6 +3,7 @@ import "./globals.css";
 import { AdSenseScript } from "@/components/ads/adsense-script";
 import { ThemeProvider } from "@/components/providers/theme-provider";
 import { ServiceWorkerRegister } from "@/components/pwa/service-worker-register";
+import { OfflineIndicator } from "@/components/ui/offline-indicator";
 
 export const metadata: Metadata = {
   title: "Nyumba Nearby | Student housing in Arusha",
@@ -45,6 +46,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <ThemeProvider>
           <AdSenseScript />
           <ServiceWorkerRegister />
+          <OfflineIndicator />
           {children}
         </ThemeProvider>
       </body>
