@@ -113,6 +113,42 @@ export async function PATCH(
     return result;
   });
 
+  // Notify students with matching saved searches when listing goes active (non-blocking)
+  if (d.status === "ACTIVE" && listing.status !== "ACTIVE") {
+    try {
+      const fullListing = await prisma.listing.findUnique({
+        where: { id: listing.id },
+        select: { id: true, title: true, rentAmount: true, propertyType: true, property: { select: { area: true } } },
+      });
+      if (fullListing) {
+        // Find saved searches that match this listing's area/type/price
+        const matchingSearches = await prisma.savedSearch.findMany({
+          where: {
+            OR: [
+              { area: fullListing.property.area },
+              { propertyType: fullListing.propertyType },
+              { minPrice: { lte: fullListing.rentAmount } },
+            ],
+          },
+          select: { studentId: true, student: { select: { userId: true } } },
+          distinct: ["studentId"],
+          take: 50,
+        });
+        if (matchingSearches.length > 0) {
+          const { sendPushToMultipleUsers } = await import("@/lib/push/web-push");
+          const userIds = matchingSearches.map((s) => s.student.userId);
+          sendPushToMultipleUsers(userIds, {
+            title: "🏠 New listing available!",
+            body: `${fullListing.title} — TZS ${fullListing.rentAmount.toLocaleString()}/mo in ${fullListing.property.area}`,
+            url: `/listings/${fullListing.id}`,
+            tag: `listing-${fullListing.id}`,
+            data: { type: "NEW_LISTING", listingId: fullListing.id },
+          }).catch(() => {});
+        }
+      }
+    } catch { /* push is best-effort */ }
+  }
+
   return NextResponse.json({ data: updated });
 }
 

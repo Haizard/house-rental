@@ -101,6 +101,36 @@ export async function POST(
     return created;
   });
 
+  // Send push notification to the other party (non-blocking)
+  try {
+    const lead = await prisma.lead.findUnique({
+      where: { conversation: { id: conversationId } },
+      select: {
+        student: { select: { userId: true, user: { select: { firstName: true } } } },
+        agent: { select: { userId: true, user: { select: { firstName: true } }, businessName: true } },
+        listing: { select: { title: true } },
+      },
+    });
+
+    if (lead) {
+      const recipientUserId = session.user.id === lead.student.userId
+        ? lead.agent.userId
+        : lead.student.userId;
+      const senderName = session.user.id === lead.student.userId
+        ? lead.student.user.firstName
+        : lead.agent.businessName;
+
+      const { sendPushToUser } = await import("@/lib/push/web-push");
+      sendPushToUser(recipientUserId, {
+        title: senderName || "New message",
+        body: parsed.data.content.slice(0, 100),
+        url: `/chat/${conversationId}`,
+        tag: `chat-${conversationId}`,
+        data: { type: "NEW_MESSAGE", conversationId, listingTitle: lead.listing.title },
+      }).catch(() => {}); // fire-and-forget
+    }
+  } catch { /* push is best-effort */ }
+
   return NextResponse.json(
     {
       data: {

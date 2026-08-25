@@ -81,3 +81,123 @@ self.addEventListener("fetch", (event) => {
     fetch(request).catch(() => caches.match(request))
   );
 });
+
+// ============ PUSH NOTIFICATIONS ============
+
+// Handle incoming push events
+self.addEventListener("push", (event) => {
+  if (!event.data) return;
+
+  let payload;
+  try {
+    payload = event.data.json();
+  } catch {
+    // If it's plain text, wrap it
+    payload = {
+      title: "Nyumba Nearby",
+      body: event.data.text(),
+    };
+  }
+
+  const { title, body, icon, badge, url, tag, data } = payload;
+
+  const notificationOptions = {
+    body: body || "",
+    icon: icon || "/icons/icon-192.png",
+    badge: badge || "/icons/icon-192.png",
+    tag: tag || "nyumba-notification",
+    data: { url: url || "/", ...(data || {}) },
+    vibrate: [100, 50, 100],
+    requireInteraction: false,
+    actions: [],
+  };
+
+  // Add contextual actions based on notification type
+  if (data?.type === "NEW_MESSAGE" || data?.type === "CHAT") {
+    notificationOptions.actions = [
+      { action: "open_chat", title: "💬 Reply" },
+      { action: "dismiss", title: "Dismiss" },
+    ];
+  } else if (data?.type === "VIEWING") {
+    notificationOptions.actions = [
+      { action: "open_viewing", title: "📅 View Details" },
+      { action: "dismiss", title: "Dismiss" },
+    ];
+  } else if (data?.type === "NEW_LISTING") {
+    notificationOptions.actions = [
+      { action: "open_listing", title: "🏠 View Listing" },
+      { action: "dismiss", title: "Dismiss" },
+    ];
+  }
+
+  event.waitUntil(
+    self.registration.showNotification(title || "Nyumba Nearby", notificationOptions)
+  );
+});
+
+// Handle notification click
+self.addEventListener("notificationclick", (event) => {
+  event.notification.close();
+
+  const { action } = event;
+  const data = event.notification.data || {};
+
+  // Dismiss action — just close
+  if (action === "dismiss") return;
+
+  // Determine URL to open
+  let targetUrl = "/";
+  if (action === "open_chat" && data.url) {
+    targetUrl = data.url;
+  } else if (action === "open_viewing" && data.url) {
+    targetUrl = data.url;
+  } else if (action === "open_listing" && data.url) {
+    targetUrl = data.url;
+  } else if (data.url) {
+    targetUrl = data.url;
+  }
+
+  // Focus existing window or open new one
+  event.waitUntil(
+    clients.matchAll({ type: "window", includeUncontrolled: true }).then((windowClients) => {
+      // Try to focus an existing window
+      for (const client of windowClients) {
+        if (client.url.includes(self.location.origin) && "focus" in client) {
+          client.navigate(targetUrl);
+          return client.focus();
+        }
+      }
+      // Open new window
+      return clients.openWindow(targetUrl);
+    })
+  );
+});
+
+// Handle notification close (for analytics)
+self.addEventListener("notificationclose", (event) => {
+  // Could send analytics about dismissed notifications
+  const data = event.notification.data || {};
+  if (data.type) {
+    // Track dismissals
+    console.log("Notification dismissed:", data.type);
+  }
+});
+
+// Handle push subscription change (re-subscribe)
+self.addEventListener("pushsubscriptionchange", (event) => {
+  event.waitUntil(
+    // Re-subscribe with the same VAPID key
+    self.registration.pushManager.subscribe(event.oldSubscription.options).then((subscription) => {
+      // Notify the server about the new subscription
+      return fetch("/api/push/subscribe", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          endpoint: subscription.endpoint,
+          p256dh: subscription.toJSON().keys?.p256dh,
+          auth: subscription.toJSON().keys?.auth,
+        }),
+      });
+    })
+  );
+});

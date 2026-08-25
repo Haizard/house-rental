@@ -3,6 +3,7 @@ import Link from "next/link";
 import { auth, signOut } from "@/lib/auth/config";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { InstallButton } from "@/components/ui/install-button";
+import { PushNotificationProvider } from "@/components/push/push-notification-provider";
 
 function getDashboardLink(role: string) {
   switch (role) {
@@ -45,7 +46,8 @@ export async function SiteNav() {
           </a>
         </div>
 
-        {/* Theme + Install (small buttons, inline) */}
+        {/* Theme + Install + Notifications (small buttons, inline) */}
+        <PushNotificationProvider />
         <InstallButton />
         <ThemeToggle />
 

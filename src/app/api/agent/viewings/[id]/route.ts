@@ -51,5 +51,28 @@ export async function PATCH(request: Request, { params }: { params: Promise<{ id
     } catch { /* email is best-effort */ }
   }
 
+  // Send push notification to student (non-blocking)
+  try {
+    const lead = await prisma.lead.findUnique({
+      where: { id: viewing.leadId },
+      select: {
+        student: { select: { userId: true } },
+        agent: { select: { businessName: true } },
+        listing: { select: { title: true } },
+      },
+    });
+    if (lead?.student?.userId) {
+      const statusText = parsed.data === "ACCEPTED" ? "accepted" : parsed.data === "DECLINED" ? "declined" : parsed.data.toLowerCase();
+      const { sendPushToUser } = await import("@/lib/push/web-push");
+      sendPushToUser(lead.student.userId, {
+        title: `Viewing ${statusText}`,
+        body: `${lead.agent.businessName} ${statusText} your viewing request for ${lead.listing.title}.`,
+        url: "/student/dashboard",
+        tag: `viewing-${viewing.id}`,
+        data: { type: "VIEWING", viewingId: viewing.id, status: parsed.data },
+      }).catch(() => {});
+    }
+  } catch { /* push is best-effort */ }
+
   return NextResponse.json({ data: { id: updated.id, status: updated.status } });
 }
