@@ -143,7 +143,7 @@ function toPublicListingDetail(record: PublicListingRecord) {
 
 function withDatabaseTimeout<T>(operation: Promise<T>): Promise<T> {
   return new Promise<T>((resolve, reject) => {
-    const timer = setTimeout(() => reject(new Error("Catalog database connection timed out.")), 5_000);
+    const timer = setTimeout(() => reject(new Error("Catalog database connection timed out.")), 15_000);
     operation.then(
       (result) => {
         clearTimeout(timer);
