@@ -149,6 +149,13 @@ export async function PATCH(
     } catch { /* push is best-effort */ }
   }
 
+  // Sync to Meilisearch index (non-blocking)
+  if (d.status !== undefined || d.title !== undefined || d.rentAmount !== undefined) {
+    import("@/lib/search/sync-listings").then(({ indexListing }) =>
+      indexListing(listing.id).catch(() => {})
+    );
+  }
+
   return NextResponse.json({ data: updated });
 }
 
@@ -178,5 +185,11 @@ export async function DELETE(
     return NextResponse.json({ error: "Listing not found." }, { status: 404 });
 
   await prisma.listing.delete({ where: { id: listing.id } });
+
+  // Remove from Meilisearch index (non-blocking)
+  import("@/lib/search/sync-listings").then(({ removeListingFromIndex }) =>
+    removeListingFromIndex(listing.id).catch(() => {})
+  );
+
   return NextResponse.json({ deleted: true });
 }
