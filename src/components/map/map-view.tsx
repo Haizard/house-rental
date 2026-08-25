@@ -36,12 +36,16 @@ export function MapView({ listings, center = DEFAULT_CENTER, zoom = DEFAULT_ZOOM
   useEffect(() => {
     if (!mapRef.current || mapInstanceRef.current) return;
 
+    // Guard against stale async callbacks after cleanup
+    let cancelled = false;
+
     // Dynamic import of Leaflet (client-only)
     Promise.all([
       import("leaflet"),
       import("leaflet/dist/leaflet.css"),
     ]).then(([L]) => {
-      if (!mapRef.current) return;
+      // Bail if component unmounted or effect was cleaned up during import
+      if (cancelled || !mapRef.current || mapInstanceRef.current) return;
 
       // Fix default marker icon issue
       delete (L.Icon.Default.prototype as Record<string, unknown>)._getIconUrl;
@@ -51,7 +55,7 @@ export function MapView({ listings, center = DEFAULT_CENTER, zoom = DEFAULT_ZOOM
         shadowUrl: "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-shadow.png",
       });
 
-      const map = L.map(mapRef.current, {
+      const map = L.map(mapRef.current!, {
         center,
         zoom,
         zoomControl: true,
@@ -92,21 +96,17 @@ export function MapView({ listings, center = DEFAULT_CENTER, zoom = DEFAULT_ZOOM
       );
 
       if (listingsWithCoords.length === 0) {
-        // If no listings have coordinates, show all listings at default center with clustered markers
         listings.forEach((listing, index) => {
-          // Spread listings around the center to avoid overlap
           const angle = (index / listings.length) * 2 * Math.PI;
-          const radius = 0.005; // ~500m radius
+          const radius = 0.005;
           const lat = center[0] + Math.sin(angle) * radius;
           const lng = center[1] + Math.cos(angle) * radius;
 
           const marker = L.marker([lat, lng], { icon: customIcon }).addTo(map);
-
           marker.on("click", () => {
             setSelectedListing(listing);
             map.flyTo([lat, lng], 15, { duration: 0.5 });
           });
-
           marker.bindPopup(createPopupContent(listing), {
             maxWidth: 280,
             className: "custom-popup",
@@ -118,14 +118,12 @@ export function MapView({ listings, center = DEFAULT_CENTER, zoom = DEFAULT_ZOOM
             [listing.latitude!, listing.longitude!],
             { icon: customIcon }
           ).addTo(map);
-
           marker.on("click", () => {
             setSelectedListing(listing);
             map.flyTo([listing.latitude!, listing.longitude!], 15, {
               duration: 0.5,
             });
           });
-
           marker.bindPopup(createPopupContent(listing), {
             maxWidth: 280,
             className: "custom-popup",
@@ -144,7 +142,6 @@ export function MapView({ listings, center = DEFAULT_CENTER, zoom = DEFAULT_ZOOM
                 center[1] + Math.cos(angle) * 0.005,
               ] as [number, number];
             });
-
         const bounds = L.latLngBounds(allCoords);
         map.fitBounds(bounds, { padding: [50, 50] });
       }
@@ -154,12 +151,14 @@ export function MapView({ listings, center = DEFAULT_CENTER, zoom = DEFAULT_ZOOM
     });
 
     return () => {
+      cancelled = true;
       if (mapInstanceRef.current) {
         (mapInstanceRef.current as { remove: () => void }).remove();
         mapInstanceRef.current = null;
       }
     };
-  }, [listings, center, zoom]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <div className="relative w-full">
