@@ -1,7 +1,7 @@
 export const dynamic = "force-dynamic";
 
 import { ArrowRight, MapPin, Search } from "lucide-react";
-import { ListingCard } from "@/components/listings/listing-card";
+import { ListingsSection } from "@/components/listings/listings-section";
 import { AISearchBar } from "@/components/listings/ai-search";
 import { StatusSection } from "@/components/statuses/status-section";
 import { SiteNav } from "@/components/layout/site-nav";
@@ -100,11 +100,7 @@ export default async function Home() {
             See all <ArrowRight size={14} aria-hidden="true" />
           </a>
         </div>
-        <div className="listing-grid">
-          {listings.map((listing) => (
-            <ListingCard key={listing.id} listing={listing} />
-          ))}
-        </div>
+        <ListingsSection listings={listings} />
       </section>
     </main>
   );

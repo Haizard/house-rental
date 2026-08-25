@@ -56,14 +56,36 @@ export async function GET(request: Request) {
   // Try Meilisearch first
   if (isMeilisearchConfigured()) {
     try {
-      return await searchWithMeilisearch(q, { area, type, minPrice, maxPrice, furnished, page, limit });
+      const response = await searchWithMeilisearch(q, { area, type, minPrice, maxPrice, furnished, page, limit });
+      // Log analytics (non-blocking)
+      const body = await response.clone().json();
+      import("@/lib/search/analytics").then(({ logSearchEvent }) =>
+        logSearchEvent({
+          query: q,
+          filters: { area, type, minPrice, maxPrice, furnished },
+          resultCount: body.data?.length || 0,
+          source: "meilisearch",
+        }).catch(() => {})
+      );
+      return response;
     } catch (err) {
       console.warn("Meilisearch search failed, falling back to Prisma:", err);
     }
   }
 
   // Fallback: Prisma-based search
-  return await searchWithPrisma(q, { area, type, minPrice, maxPrice, furnished, page, limit });
+  const response = await searchWithPrisma(q, { area, type, minPrice, maxPrice, furnished, page, limit });
+  // Log analytics (non-blocking)
+  const body = await response.clone().json();
+  import("@/lib/search/analytics").then(({ logSearchEvent }) =>
+    logSearchEvent({
+      query: q,
+      filters: { area, type, minPrice, maxPrice, furnished },
+      resultCount: body.data?.length || 0,
+      source: "prisma",
+    }).catch(() => {})
+  );
+  return response;
 }
 
 async function searchWithMeilisearch(

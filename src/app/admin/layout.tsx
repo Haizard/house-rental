@@ -7,6 +7,7 @@ import {
   Flag,
   Home,
   LayoutDashboard,
+  Search,
   ShieldCheck,
   Users,
 } from "lucide-react";
@@ -24,6 +25,7 @@ const navItems = [
   { href: "/admin/verification", label: "Verification", icon: ClipboardList },
   { href: "/admin/reports", label: "Reports", icon: Flag },
   { href: "/admin/payments", label: "Payments", icon: CreditCard },
+  { href: "/admin/search-analytics", label: "Search Analytics", icon: Search },
 ];
 
 export default async function AdminLayout({

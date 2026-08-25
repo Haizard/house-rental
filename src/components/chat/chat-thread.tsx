@@ -25,7 +25,10 @@ export function ChatThread({ conversationId, initialMessages, currentUserId }: P
   const [messages, setMessages] = useState<ChatMessage[]>(initialMessages);
   const [content, setContent] = useState("");
   const [pending, setPending] = useState(false);
+  const [isOtherTyping, setIsOtherTyping] = useState(false);
+  const [isOtherOnline, setIsOtherOnline] = useState(false);
   const endRef = useRef<HTMLDivElement>(null);
+  const typingTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   // Poll for new messages every 3 seconds
   useEffect(() => {
@@ -53,6 +56,41 @@ export function ChatThread({ conversationId, initialMessages, currentUserId }: P
   useEffect(() => {
     endRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages.length]);
+
+  // Poll for typing indicator and online status
+  useEffect(() => {
+    const interval = setInterval(async () => {
+      try {
+        const res = await fetch(`/api/chat/${conversationId}/typing`, { cache: "no-store" });
+        if (res.ok) {
+          const data = await res.json();
+          setIsOtherTyping(data.typing);
+          setIsOtherOnline(data.isOnline);
+        }
+      } catch { /* ignore */ }
+    }, 3000);
+    return () => clearInterval(interval);
+  }, [conversationId]);
+
+  // Send typing indicator when user types
+  function handleTyping() {
+    // Notify server we're typing
+    fetch(`/api/chat/${conversationId}/typing`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ isTyping: true }),
+    }).catch(() => {});
+
+    // Auto-clear after 5s of inactivity
+    if (typingTimeoutRef.current) clearTimeout(typingTimeoutRef.current);
+    typingTimeoutRef.current = setTimeout(() => {
+      fetch(`/api/chat/${conversationId}/typing`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ isTyping: false }),
+      }).catch(() => {});
+    }, 5000);
+  }
 
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -104,21 +142,42 @@ export function ChatThread({ conversationId, initialMessages, currentUserId }: P
             </p>
           </div>
         ))}
+        {/* Typing indicator */}
+        {isOtherTyping && (
+          <div className="flex justify-start animate-fade-in">
+            <div className="glass-surface rounded-[18px] px-4 py-3">
+              <div className="flex items-center gap-1">
+                <span className="inline-block size-2 animate-bounce rounded-full bg-[var(--text-tertiary)]" style={{ animationDelay: "0ms" }} />
+                <span className="inline-block size-2 animate-bounce rounded-full bg-[var(--text-tertiary)]" style={{ animationDelay: "150ms" }} />
+                <span className="inline-block size-2 animate-bounce rounded-full bg-[var(--text-tertiary)]" style={{ animationDelay: "300ms" }} />
+              </div>
+            </div>
+          </div>
+        )}
         <div ref={endRef} />
       </section>
 
       <form
-        className="glass-search flex items-center gap-2 p-2"
+        className="glass-search relative flex items-center gap-2 p-2"
         onSubmit={submit}
       >
         <label className="sr-only" htmlFor="message">
           Message
         </label>
+        {/* Online status */}
+        {isOtherOnline && !isOtherTyping && (
+          <span className="absolute -top-6 left-2 text-[11px] text-green-500">
+            ● Online
+          </span>
+        )}
         <input
           className="min-h-10 flex-1 bg-transparent px-2 outline-none"
           id="message"
           value={content}
-          onChange={(event) => setContent(event.target.value)}
+          onChange={(event) => {
+            setContent(event.target.value);
+            handleTyping();
+          }}
           placeholder="Write a message"
           maxLength={2000}
         />
