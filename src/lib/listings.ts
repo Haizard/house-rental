@@ -24,6 +24,10 @@ export type Listing = {
   leaseDuration?: string | null;
   // Amenities
   amenities?: { name: string; slug: string }[];
+  // Coordinates
+  latitude?: number | null;
+  longitude?: number | null;
+  address?: string;
 };
 
 export const listings: Listing[] = [

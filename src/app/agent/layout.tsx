@@ -3,6 +3,7 @@ import Link from "next/link";
 import {
   BarChart3,
   Building2,
+  CalendarDays,
   CreditCard,
   Home,
   LayoutDashboard,
@@ -25,6 +26,7 @@ const navItems = [
   { href: "/agent/listings", label: "Listings", icon: Home },
   { href: "/agent/leads", label: "Leads", icon: Users },
   { href: "/agent/chats", label: "Chats", icon: MessageCircle },
+  { href: "/agent/calendar", label: "Calendar", icon: CalendarDays },
   { href: "/agent/statuses", label: "Status", icon: Zap },
   { href: "/agent/analytics", label: "Analytics", icon: BarChart3 },
   { href: "/agent/billing", label: "Billing", icon: CreditCard },

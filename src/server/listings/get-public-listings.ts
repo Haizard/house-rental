@@ -41,7 +41,7 @@ export async function getPublicListings(filters: PublicListingFilters = {}): Pro
     const records = await withDatabaseTimeout(prisma.listing.findMany({
       where,
       include: {
-        property: { select: { area: true } },
+        property: { select: { area: true, latitude: true, longitude: true, address: true } },
         images: { orderBy: { sortOrder: "asc" }, take: 1 },
       },
       orderBy: { publishedAt: "desc" },
@@ -61,6 +61,9 @@ export async function getPublicListings(filters: PublicListingFilters = {}): Pro
         image: record.images[0]?.url ?? "/listing-placeholder.svg",
         verified: record.verificationStatus === "VERIFIED" || record.verificationStatus === "PROPERTY_VERIFIED" || record.verificationStatus === "OWNER_VERIFIED",
         agentId: record.agentId,
+        latitude: record.property.latitude ? Number(record.property.latitude) : null,
+        longitude: record.property.longitude ? Number(record.property.longitude) : null,
+        address: record.property.address,
       })),
     };
   } catch (error) {
