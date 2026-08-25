@@ -426,7 +426,8 @@ export const ModelName = {
   RoomRequest: 'RoomRequest',
   RoomRequestResponse: 'RoomRequestResponse',
   ContactReveal: 'ContactReveal',
-  AIInteraction: 'AIInteraction'
+  AIInteraction: 'AIInteraction',
+  PushSubscription: 'PushSubscription'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -442,7 +443,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "agentProfile" | "studentProfile" | "university" | "property" | "propertyAgent" | "listing" | "amenity" | "listingAmenity" | "listingImage" | "listingVideo" | "lead" | "conversation" | "message" | "viewingRequest" | "subscription" | "leadCharge" | "savedListing" | "savedSearch" | "notification" | "report" | "verificationRecord" | "agentStatus" | "statusView" | "review" | "payment" | "roomRequest" | "roomRequestResponse" | "contactReveal" | "aIInteraction"
+    modelProps: "user" | "agentProfile" | "studentProfile" | "university" | "property" | "propertyAgent" | "listing" | "amenity" | "listingAmenity" | "listingImage" | "listingVideo" | "lead" | "conversation" | "message" | "viewingRequest" | "subscription" | "leadCharge" | "savedListing" | "savedSearch" | "notification" | "report" | "verificationRecord" | "agentStatus" | "statusView" | "review" | "payment" | "roomRequest" | "roomRequestResponse" | "contactReveal" | "aIInteraction" | "pushSubscription"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -2666,6 +2667,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    PushSubscription: {
+      payload: Prisma.$PushSubscriptionPayload<ExtArgs>
+      fields: Prisma.PushSubscriptionFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.PushSubscriptionFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PushSubscriptionPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.PushSubscriptionFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PushSubscriptionPayload>
+        }
+        findFirst: {
+          args: Prisma.PushSubscriptionFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PushSubscriptionPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.PushSubscriptionFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PushSubscriptionPayload>
+        }
+        findMany: {
+          args: Prisma.PushSubscriptionFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PushSubscriptionPayload>[]
+        }
+        create: {
+          args: Prisma.PushSubscriptionCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PushSubscriptionPayload>
+        }
+        createMany: {
+          args: Prisma.PushSubscriptionCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.PushSubscriptionCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PushSubscriptionPayload>[]
+        }
+        delete: {
+          args: Prisma.PushSubscriptionDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PushSubscriptionPayload>
+        }
+        update: {
+          args: Prisma.PushSubscriptionUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PushSubscriptionPayload>
+        }
+        deleteMany: {
+          args: Prisma.PushSubscriptionDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.PushSubscriptionUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.PushSubscriptionUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PushSubscriptionPayload>[]
+        }
+        upsert: {
+          args: Prisma.PushSubscriptionUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PushSubscriptionPayload>
+        }
+        aggregate: {
+          args: Prisma.PushSubscriptionAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregatePushSubscription>
+        }
+        groupBy: {
+          args: Prisma.PushSubscriptionGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.PushSubscriptionGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.PushSubscriptionCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.PushSubscriptionCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -3176,6 +3251,21 @@ export const AIInteractionScalarFieldEnum = {
 } as const
 
 export type AIInteractionScalarFieldEnum = (typeof AIInteractionScalarFieldEnum)[keyof typeof AIInteractionScalarFieldEnum]
+
+
+export const PushSubscriptionScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  endpoint: 'endpoint',
+  p256dhKey: 'p256dhKey',
+  authKey: 'authKey',
+  userAgent: 'userAgent',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type PushSubscriptionScalarFieldEnum = (typeof PushSubscriptionScalarFieldEnum)[keyof typeof PushSubscriptionScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -3748,6 +3838,7 @@ export type GlobalOmitConfig = {
   roomRequestResponse?: Prisma.RoomRequestResponseOmit
   contactReveal?: Prisma.ContactRevealOmit
   aIInteraction?: Prisma.AIInteractionOmit
+  pushSubscription?: Prisma.PushSubscriptionOmit
 }
 
 /* Types for Logging */

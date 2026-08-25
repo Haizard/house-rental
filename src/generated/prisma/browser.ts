@@ -167,3 +167,8 @@ export type ContactReveal = Prisma.ContactRevealModel
  * 
  */
 export type AIInteraction = Prisma.AIInteractionModel
+/**
+ * Model PushSubscription
+ * 
+ */
+export type PushSubscription = Prisma.PushSubscriptionModel

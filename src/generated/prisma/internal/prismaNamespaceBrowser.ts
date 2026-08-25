@@ -80,7 +80,8 @@ export const ModelName = {
   RoomRequest: 'RoomRequest',
   RoomRequestResponse: 'RoomRequestResponse',
   ContactReveal: 'ContactReveal',
-  AIInteraction: 'AIInteraction'
+  AIInteraction: 'AIInteraction',
+  PushSubscription: 'PushSubscription'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -570,6 +571,21 @@ export const AIInteractionScalarFieldEnum = {
 } as const
 
 export type AIInteractionScalarFieldEnum = (typeof AIInteractionScalarFieldEnum)[keyof typeof AIInteractionScalarFieldEnum]
+
+
+export const PushSubscriptionScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  endpoint: 'endpoint',
+  p256dhKey: 'p256dhKey',
+  authKey: 'authKey',
+  userAgent: 'userAgent',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type PushSubscriptionScalarFieldEnum = (typeof PushSubscriptionScalarFieldEnum)[keyof typeof PushSubscriptionScalarFieldEnum]
 
 
 export const SortOrder = {

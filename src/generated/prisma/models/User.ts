@@ -245,6 +245,7 @@ export type UserWhereInput = {
   reports?: Prisma.ReportListRelationFilter
   statusViews?: Prisma.StatusViewListRelationFilter
   payments?: Prisma.PaymentListRelationFilter
+  pushSubscriptions?: Prisma.PushSubscriptionListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -267,6 +268,7 @@ export type UserOrderByWithRelationInput = {
   reports?: Prisma.ReportOrderByRelationAggregateInput
   statusViews?: Prisma.StatusViewOrderByRelationAggregateInput
   payments?: Prisma.PaymentOrderByRelationAggregateInput
+  pushSubscriptions?: Prisma.PushSubscriptionOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -292,6 +294,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   reports?: Prisma.ReportListRelationFilter
   statusViews?: Prisma.StatusViewListRelationFilter
   payments?: Prisma.PaymentListRelationFilter
+  pushSubscriptions?: Prisma.PushSubscriptionListRelationFilter
 }, "id" | "email" | "phone">
 
 export type UserOrderByWithAggregationInput = {
@@ -350,6 +353,7 @@ export type UserCreateInput = {
   reports?: Prisma.ReportCreateNestedManyWithoutReporterInput
   statusViews?: Prisma.StatusViewCreateNestedManyWithoutViewerInput
   payments?: Prisma.PaymentCreateNestedManyWithoutUserInput
+  pushSubscriptions?: Prisma.PushSubscriptionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -372,6 +376,7 @@ export type UserUncheckedCreateInput = {
   reports?: Prisma.ReportUncheckedCreateNestedManyWithoutReporterInput
   statusViews?: Prisma.StatusViewUncheckedCreateNestedManyWithoutViewerInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutUserInput
+  pushSubscriptions?: Prisma.PushSubscriptionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserUpdateInput = {
@@ -394,6 +399,7 @@ export type UserUpdateInput = {
   reports?: Prisma.ReportUpdateManyWithoutReporterNestedInput
   statusViews?: Prisma.StatusViewUpdateManyWithoutViewerNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutUserNestedInput
+  pushSubscriptions?: Prisma.PushSubscriptionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -416,6 +422,7 @@ export type UserUncheckedUpdateInput = {
   reports?: Prisma.ReportUncheckedUpdateManyWithoutReporterNestedInput
   statusViews?: Prisma.StatusViewUncheckedUpdateManyWithoutViewerNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutUserNestedInput
+  pushSubscriptions?: Prisma.PushSubscriptionUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -635,6 +642,20 @@ export type UserUpdateOneRequiredWithoutPaymentsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutPaymentsInput, Prisma.UserUpdateWithoutPaymentsInput>, Prisma.UserUncheckedUpdateWithoutPaymentsInput>
 }
 
+export type UserCreateNestedOneWithoutPushSubscriptionsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutPushSubscriptionsInput, Prisma.UserUncheckedCreateWithoutPushSubscriptionsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutPushSubscriptionsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutPushSubscriptionsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutPushSubscriptionsInput, Prisma.UserUncheckedCreateWithoutPushSubscriptionsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutPushSubscriptionsInput
+  upsert?: Prisma.UserUpsertWithoutPushSubscriptionsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutPushSubscriptionsInput, Prisma.UserUpdateWithoutPushSubscriptionsInput>, Prisma.UserUncheckedUpdateWithoutPushSubscriptionsInput>
+}
+
 export type UserCreateWithoutAgentProfileInput = {
   id?: string
   email?: string | null
@@ -654,6 +675,7 @@ export type UserCreateWithoutAgentProfileInput = {
   reports?: Prisma.ReportCreateNestedManyWithoutReporterInput
   statusViews?: Prisma.StatusViewCreateNestedManyWithoutViewerInput
   payments?: Prisma.PaymentCreateNestedManyWithoutUserInput
+  pushSubscriptions?: Prisma.PushSubscriptionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutAgentProfileInput = {
@@ -675,6 +697,7 @@ export type UserUncheckedCreateWithoutAgentProfileInput = {
   reports?: Prisma.ReportUncheckedCreateNestedManyWithoutReporterInput
   statusViews?: Prisma.StatusViewUncheckedCreateNestedManyWithoutViewerInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutUserInput
+  pushSubscriptions?: Prisma.PushSubscriptionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutAgentProfileInput = {
@@ -712,6 +735,7 @@ export type UserUpdateWithoutAgentProfileInput = {
   reports?: Prisma.ReportUpdateManyWithoutReporterNestedInput
   statusViews?: Prisma.StatusViewUpdateManyWithoutViewerNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutUserNestedInput
+  pushSubscriptions?: Prisma.PushSubscriptionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAgentProfileInput = {
@@ -733,6 +757,7 @@ export type UserUncheckedUpdateWithoutAgentProfileInput = {
   reports?: Prisma.ReportUncheckedUpdateManyWithoutReporterNestedInput
   statusViews?: Prisma.StatusViewUncheckedUpdateManyWithoutViewerNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutUserNestedInput
+  pushSubscriptions?: Prisma.PushSubscriptionUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutStudentProfileInput = {
@@ -754,6 +779,7 @@ export type UserCreateWithoutStudentProfileInput = {
   reports?: Prisma.ReportCreateNestedManyWithoutReporterInput
   statusViews?: Prisma.StatusViewCreateNestedManyWithoutViewerInput
   payments?: Prisma.PaymentCreateNestedManyWithoutUserInput
+  pushSubscriptions?: Prisma.PushSubscriptionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutStudentProfileInput = {
@@ -775,6 +801,7 @@ export type UserUncheckedCreateWithoutStudentProfileInput = {
   reports?: Prisma.ReportUncheckedCreateNestedManyWithoutReporterInput
   statusViews?: Prisma.StatusViewUncheckedCreateNestedManyWithoutViewerInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutUserInput
+  pushSubscriptions?: Prisma.PushSubscriptionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutStudentProfileInput = {
@@ -812,6 +839,7 @@ export type UserUpdateWithoutStudentProfileInput = {
   reports?: Prisma.ReportUpdateManyWithoutReporterNestedInput
   statusViews?: Prisma.StatusViewUpdateManyWithoutViewerNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutUserNestedInput
+  pushSubscriptions?: Prisma.PushSubscriptionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutStudentProfileInput = {
@@ -833,6 +861,7 @@ export type UserUncheckedUpdateWithoutStudentProfileInput = {
   reports?: Prisma.ReportUncheckedUpdateManyWithoutReporterNestedInput
   statusViews?: Prisma.StatusViewUncheckedUpdateManyWithoutViewerNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutUserNestedInput
+  pushSubscriptions?: Prisma.PushSubscriptionUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutSentMessagesInput = {
@@ -854,6 +883,7 @@ export type UserCreateWithoutSentMessagesInput = {
   reports?: Prisma.ReportCreateNestedManyWithoutReporterInput
   statusViews?: Prisma.StatusViewCreateNestedManyWithoutViewerInput
   payments?: Prisma.PaymentCreateNestedManyWithoutUserInput
+  pushSubscriptions?: Prisma.PushSubscriptionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutSentMessagesInput = {
@@ -875,6 +905,7 @@ export type UserUncheckedCreateWithoutSentMessagesInput = {
   reports?: Prisma.ReportUncheckedCreateNestedManyWithoutReporterInput
   statusViews?: Prisma.StatusViewUncheckedCreateNestedManyWithoutViewerInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutUserInput
+  pushSubscriptions?: Prisma.PushSubscriptionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutSentMessagesInput = {
@@ -912,6 +943,7 @@ export type UserUpdateWithoutSentMessagesInput = {
   reports?: Prisma.ReportUpdateManyWithoutReporterNestedInput
   statusViews?: Prisma.StatusViewUpdateManyWithoutViewerNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutUserNestedInput
+  pushSubscriptions?: Prisma.PushSubscriptionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSentMessagesInput = {
@@ -933,6 +965,7 @@ export type UserUncheckedUpdateWithoutSentMessagesInput = {
   reports?: Prisma.ReportUncheckedUpdateManyWithoutReporterNestedInput
   statusViews?: Prisma.StatusViewUncheckedUpdateManyWithoutViewerNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutUserNestedInput
+  pushSubscriptions?: Prisma.PushSubscriptionUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutNotificationsInput = {
@@ -954,6 +987,7 @@ export type UserCreateWithoutNotificationsInput = {
   reports?: Prisma.ReportCreateNestedManyWithoutReporterInput
   statusViews?: Prisma.StatusViewCreateNestedManyWithoutViewerInput
   payments?: Prisma.PaymentCreateNestedManyWithoutUserInput
+  pushSubscriptions?: Prisma.PushSubscriptionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutNotificationsInput = {
@@ -975,6 +1009,7 @@ export type UserUncheckedCreateWithoutNotificationsInput = {
   reports?: Prisma.ReportUncheckedCreateNestedManyWithoutReporterInput
   statusViews?: Prisma.StatusViewUncheckedCreateNestedManyWithoutViewerInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutUserInput
+  pushSubscriptions?: Prisma.PushSubscriptionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutNotificationsInput = {
@@ -1012,6 +1047,7 @@ export type UserUpdateWithoutNotificationsInput = {
   reports?: Prisma.ReportUpdateManyWithoutReporterNestedInput
   statusViews?: Prisma.StatusViewUpdateManyWithoutViewerNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutUserNestedInput
+  pushSubscriptions?: Prisma.PushSubscriptionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutNotificationsInput = {
@@ -1033,6 +1069,7 @@ export type UserUncheckedUpdateWithoutNotificationsInput = {
   reports?: Prisma.ReportUncheckedUpdateManyWithoutReporterNestedInput
   statusViews?: Prisma.StatusViewUncheckedUpdateManyWithoutViewerNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutUserNestedInput
+  pushSubscriptions?: Prisma.PushSubscriptionUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutReportsInput = {
@@ -1054,6 +1091,7 @@ export type UserCreateWithoutReportsInput = {
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   statusViews?: Prisma.StatusViewCreateNestedManyWithoutViewerInput
   payments?: Prisma.PaymentCreateNestedManyWithoutUserInput
+  pushSubscriptions?: Prisma.PushSubscriptionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutReportsInput = {
@@ -1075,6 +1113,7 @@ export type UserUncheckedCreateWithoutReportsInput = {
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   statusViews?: Prisma.StatusViewUncheckedCreateNestedManyWithoutViewerInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutUserInput
+  pushSubscriptions?: Prisma.PushSubscriptionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutReportsInput = {
@@ -1112,6 +1151,7 @@ export type UserUpdateWithoutReportsInput = {
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   statusViews?: Prisma.StatusViewUpdateManyWithoutViewerNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutUserNestedInput
+  pushSubscriptions?: Prisma.PushSubscriptionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutReportsInput = {
@@ -1133,6 +1173,7 @@ export type UserUncheckedUpdateWithoutReportsInput = {
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   statusViews?: Prisma.StatusViewUncheckedUpdateManyWithoutViewerNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutUserNestedInput
+  pushSubscriptions?: Prisma.PushSubscriptionUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutStatusViewsInput = {
@@ -1154,6 +1195,7 @@ export type UserCreateWithoutStatusViewsInput = {
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   reports?: Prisma.ReportCreateNestedManyWithoutReporterInput
   payments?: Prisma.PaymentCreateNestedManyWithoutUserInput
+  pushSubscriptions?: Prisma.PushSubscriptionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutStatusViewsInput = {
@@ -1175,6 +1217,7 @@ export type UserUncheckedCreateWithoutStatusViewsInput = {
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   reports?: Prisma.ReportUncheckedCreateNestedManyWithoutReporterInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutUserInput
+  pushSubscriptions?: Prisma.PushSubscriptionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutStatusViewsInput = {
@@ -1212,6 +1255,7 @@ export type UserUpdateWithoutStatusViewsInput = {
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   reports?: Prisma.ReportUpdateManyWithoutReporterNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutUserNestedInput
+  pushSubscriptions?: Prisma.PushSubscriptionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutStatusViewsInput = {
@@ -1233,6 +1277,7 @@ export type UserUncheckedUpdateWithoutStatusViewsInput = {
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   reports?: Prisma.ReportUncheckedUpdateManyWithoutReporterNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutUserNestedInput
+  pushSubscriptions?: Prisma.PushSubscriptionUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutPaymentsInput = {
@@ -1254,6 +1299,7 @@ export type UserCreateWithoutPaymentsInput = {
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   reports?: Prisma.ReportCreateNestedManyWithoutReporterInput
   statusViews?: Prisma.StatusViewCreateNestedManyWithoutViewerInput
+  pushSubscriptions?: Prisma.PushSubscriptionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutPaymentsInput = {
@@ -1275,6 +1321,7 @@ export type UserUncheckedCreateWithoutPaymentsInput = {
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   reports?: Prisma.ReportUncheckedCreateNestedManyWithoutReporterInput
   statusViews?: Prisma.StatusViewUncheckedCreateNestedManyWithoutViewerInput
+  pushSubscriptions?: Prisma.PushSubscriptionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutPaymentsInput = {
@@ -1312,6 +1359,7 @@ export type UserUpdateWithoutPaymentsInput = {
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   reports?: Prisma.ReportUpdateManyWithoutReporterNestedInput
   statusViews?: Prisma.StatusViewUpdateManyWithoutViewerNestedInput
+  pushSubscriptions?: Prisma.PushSubscriptionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutPaymentsInput = {
@@ -1333,6 +1381,111 @@ export type UserUncheckedUpdateWithoutPaymentsInput = {
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   reports?: Prisma.ReportUncheckedUpdateManyWithoutReporterNestedInput
   statusViews?: Prisma.StatusViewUncheckedUpdateManyWithoutViewerNestedInput
+  pushSubscriptions?: Prisma.PushSubscriptionUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutPushSubscriptionsInput = {
+  id?: string
+  email?: string | null
+  phone?: string | null
+  passwordHash?: string | null
+  role?: $Enums.UserRole
+  firstName: string
+  lastName: string
+  avatarUrl?: string | null
+  isActive?: boolean
+  lastActiveAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  agentProfile?: Prisma.AgentProfileCreateNestedOneWithoutUserInput
+  studentProfile?: Prisma.StudentProfileCreateNestedOneWithoutUserInput
+  sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  reports?: Prisma.ReportCreateNestedManyWithoutReporterInput
+  statusViews?: Prisma.StatusViewCreateNestedManyWithoutViewerInput
+  payments?: Prisma.PaymentCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutPushSubscriptionsInput = {
+  id?: string
+  email?: string | null
+  phone?: string | null
+  passwordHash?: string | null
+  role?: $Enums.UserRole
+  firstName: string
+  lastName: string
+  avatarUrl?: string | null
+  isActive?: boolean
+  lastActiveAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  agentProfile?: Prisma.AgentProfileUncheckedCreateNestedOneWithoutUserInput
+  studentProfile?: Prisma.StudentProfileUncheckedCreateNestedOneWithoutUserInput
+  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  reports?: Prisma.ReportUncheckedCreateNestedManyWithoutReporterInput
+  statusViews?: Prisma.StatusViewUncheckedCreateNestedManyWithoutViewerInput
+  payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutPushSubscriptionsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutPushSubscriptionsInput, Prisma.UserUncheckedCreateWithoutPushSubscriptionsInput>
+}
+
+export type UserUpsertWithoutPushSubscriptionsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutPushSubscriptionsInput, Prisma.UserUncheckedUpdateWithoutPushSubscriptionsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutPushSubscriptionsInput, Prisma.UserUncheckedCreateWithoutPushSubscriptionsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutPushSubscriptionsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutPushSubscriptionsInput, Prisma.UserUncheckedUpdateWithoutPushSubscriptionsInput>
+}
+
+export type UserUpdateWithoutPushSubscriptionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lastActiveAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  agentProfile?: Prisma.AgentProfileUpdateOneWithoutUserNestedInput
+  studentProfile?: Prisma.StudentProfileUpdateOneWithoutUserNestedInput
+  sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  reports?: Prisma.ReportUpdateManyWithoutReporterNestedInput
+  statusViews?: Prisma.StatusViewUpdateManyWithoutViewerNestedInput
+  payments?: Prisma.PaymentUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutPushSubscriptionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lastActiveAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  agentProfile?: Prisma.AgentProfileUncheckedUpdateOneWithoutUserNestedInput
+  studentProfile?: Prisma.StudentProfileUncheckedUpdateOneWithoutUserNestedInput
+  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  reports?: Prisma.ReportUncheckedUpdateManyWithoutReporterNestedInput
+  statusViews?: Prisma.StatusViewUncheckedUpdateManyWithoutViewerNestedInput
+  payments?: Prisma.PaymentUncheckedUpdateManyWithoutUserNestedInput
 }
 
 
@@ -1346,6 +1499,7 @@ export type UserCountOutputType = {
   reports: number
   statusViews: number
   payments: number
+  pushSubscriptions: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1354,6 +1508,7 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   reports?: boolean | UserCountOutputTypeCountReportsArgs
   statusViews?: boolean | UserCountOutputTypeCountStatusViewsArgs
   payments?: boolean | UserCountOutputTypeCountPaymentsArgs
+  pushSubscriptions?: boolean | UserCountOutputTypeCountPushSubscriptionsArgs
 }
 
 /**
@@ -1401,6 +1556,13 @@ export type UserCountOutputTypeCountPaymentsArgs<ExtArgs extends runtime.Types.E
   where?: Prisma.PaymentWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountPushSubscriptionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.PushSubscriptionWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1422,6 +1584,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   reports?: boolean | Prisma.User$reportsArgs<ExtArgs>
   statusViews?: boolean | Prisma.User$statusViewsArgs<ExtArgs>
   payments?: boolean | Prisma.User$paymentsArgs<ExtArgs>
+  pushSubscriptions?: boolean | Prisma.User$pushSubscriptionsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -1479,6 +1642,7 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   reports?: boolean | Prisma.User$reportsArgs<ExtArgs>
   statusViews?: boolean | Prisma.User$statusViewsArgs<ExtArgs>
   payments?: boolean | Prisma.User$paymentsArgs<ExtArgs>
+  pushSubscriptions?: boolean | Prisma.User$pushSubscriptionsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -1494,6 +1658,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     reports: Prisma.$ReportPayload<ExtArgs>[]
     statusViews: Prisma.$StatusViewPayload<ExtArgs>[]
     payments: Prisma.$PaymentPayload<ExtArgs>[]
+    pushSubscriptions: Prisma.$PushSubscriptionPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1909,6 +2074,7 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   reports<T extends Prisma.User$reportsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$reportsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ReportPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   statusViews<T extends Prisma.User$statusViewsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$statusViewsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$StatusViewPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   payments<T extends Prisma.User$paymentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$paymentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PaymentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  pushSubscriptions<T extends Prisma.User$pushSubscriptionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$pushSubscriptionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PushSubscriptionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2498,6 +2664,30 @@ export type User$paymentsArgs<ExtArgs extends runtime.Types.Extensions.InternalA
   take?: number
   skip?: number
   distinct?: Prisma.PaymentScalarFieldEnum | Prisma.PaymentScalarFieldEnum[]
+}
+
+/**
+ * User.pushSubscriptions
+ */
+export type User$pushSubscriptionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the PushSubscription
+   */
+  select?: Prisma.PushSubscriptionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the PushSubscription
+   */
+  omit?: Prisma.PushSubscriptionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PushSubscriptionInclude<ExtArgs> | null
+  where?: Prisma.PushSubscriptionWhereInput
+  orderBy?: Prisma.PushSubscriptionOrderByWithRelationInput | Prisma.PushSubscriptionOrderByWithRelationInput[]
+  cursor?: Prisma.PushSubscriptionWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.PushSubscriptionScalarFieldEnum | Prisma.PushSubscriptionScalarFieldEnum[]
 }
 
 /**
