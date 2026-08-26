@@ -1,4 +1,5 @@
 import { Bookmark, CalendarDays, ChevronRight, ClipboardList, MessageCircle } from "lucide-react";
+import { IconBadgeInline } from "@/components/ui/icon-badge";
 import Link from "next/link";
 import { prisma } from "@/lib/db/prisma";
 import { requireRole } from "@/lib/auth/guards";
@@ -42,25 +43,25 @@ export default async function StudentDashboard() {
       <section className="grid grid-cols-2 gap-2.5 sm:gap-3 lg:grid-cols-4">
         <DashboardLink
           href="/student/saved"
-          icon={<Bookmark size={20} />}
+          icon={<IconBadgeInline icon={Bookmark} gradient="red" size="size-8" iconSize={16} />}
           label="Saved homes"
           value={profile?.savedListings.length ?? 0}
         />
         <DashboardLink
           href="/student/leads"
-          icon={<MessageCircle size={20} />}
+          icon={<IconBadgeInline icon={MessageCircle} gradient="green" size="size-8" iconSize={16} />}
           label="Active leads"
           value={profile?.leads.length ?? 0}
         />
         <DashboardLink
           href="/student/viewings"
-          icon={<CalendarDays size={20} />}
+          icon={<IconBadgeInline icon={CalendarDays} gradient="orange" size="size-8" iconSize={16} />}
           label="Viewings"
           value="Soon"
         />
         <DashboardLink
           href="/student/requests"
-          icon={<ClipboardList size={20} />}
+          icon={<IconBadgeInline icon={ClipboardList} gradient="purple" size="size-8" iconSize={16} />}
           label="Room Requests"
           value="Post"
         />

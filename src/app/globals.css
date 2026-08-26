@@ -187,7 +187,8 @@ button, input, select, textarea { font: inherit; }
   *, *::before, *::after { scroll-behavior: auto !important; transition-duration: 120ms !important; animation-duration: 120ms !important; }
 }
 
-svg[class*="lucide"] { fill: var(--accent) !important; stroke: none !important; }
+svg[class*="lucide"]:not(.icon-badge svg) { fill: var(--accent) !important; stroke: none !important; }
+svg[class*="lucide"] { stroke-width: 0; }
 nav svg, aside svg { fill: var(--accent) !important; stroke: none !important; }
 .button svg { fill: currentColor !important; stroke: none !important; }
 .button-primary svg { fill: var(--text-on-accent) !important; }
@@ -198,6 +199,10 @@ svg.text-purple-500 { fill: var(--info) !important; stroke: none !important; }
 svg.text-red-500, svg.text-red-600 { fill: var(--danger) !important; stroke: none !important; }
 aside a:hover svg { fill: var(--accent) !important; }
 aside a:hover { color: var(--accent) !important; }
+
+/* Gradient icon badges — white icons inside gradient containers */
+[class*="bg-gradient-to-br"] svg { fill: currentColor !important; stroke: none !important; }
+[class*="bg-gradient-to-br"] { color: white; }
 
 .glass-surface article { border-color: var(--glass-border-hairline); transition: border-color 0.2s ease; }
 .glass-surface article:hover { border-color: var(--glass-border); }

@@ -1,4 +1,6 @@
+import { IconBadgeInline } from "@/components/ui/icon-badge";
 import { prisma } from "@/lib/db/prisma";
+import { IconBadgeInline } from "@/components/ui/icon-badge";
 import {
   AlertTriangle,
   BadgeCheck,
@@ -59,38 +61,38 @@ export default async function AdminDashboardPage() {
       {/* Metric cards — 2-col mobile / 3-col desktop per design system §8 */}
       <section className="grid grid-cols-2 gap-2.5 sm:gap-3 lg:grid-cols-3">
         <MetricCard
-          icon={<Users size={20} />}
+          icon={<IconBadgeInline icon={Users} gradient="blue" size="size-8" iconSize={16} />}
           value={totalUsers}
           label="Total users"
           detail={`${activeUsers} active`}
         />
         <MetricCard
-          icon={<BadgeCheck size={20} />}
+          icon={<IconBadgeInline icon={BadgeCheck} gradient="green" size="size-8" iconSize={16} />}
           value={totalAgents}
           label="Agents"
           detail={`${verifiedAgents} verified`}
         />
         <MetricCard
-          icon={<Home size={20} />}
+          icon={<IconBadgeInline icon={Home} gradient="teal" size="size-8" iconSize={16} />}
           value={totalListings}
           label="Listings"
           detail={`${activeListings} active`}
         />
         <MetricCard
-          icon={<MessageCircle size={20} />}
+          icon={<IconBadgeInline icon={MessageCircle} gradient="green" size="size-8" iconSize={16} />}
           value={totalLeads}
           label="Total leads"
           detail="All time"
         />
         <MetricCard
-          icon={<AlertTriangle size={20} />}
+          icon={<IconBadgeInline icon={AlertTriangle} gradient="orange" size="size-8" iconSize={16} />}
           value={openReports}
           label="Open reports"
           detail="Awaiting review"
           accent={openReports > 0 ? "warning" : undefined}
         />
         <MetricCard
-          icon={<Users size={20} />}
+          icon={<IconBadgeInline icon={Users} gradient="blue" size="size-8" iconSize={16} />}
           value={pendingVerifications}
           label="Pending verifications"
           detail="Awaiting review"
@@ -166,23 +168,7 @@ function MetricCard({
   return (
     <div className="glass-surface overflow-hidden p-3.5 sm:p-4">
       <div className="flex items-center gap-2.5">
-        <span
-          className="flex size-8 shrink-0 items-center justify-center rounded-[var(--radius-sm)] sm:size-9"
-          style={{
-            background: accent === "warning"
-              ? "var(--warning-soft)"
-              : accent === "info"
-                ? "var(--info-soft)"
-                : "var(--accent-soft)",
-            color: accent === "warning"
-              ? "var(--warning)"
-              : accent === "info"
-                ? "var(--info)"
-                : "var(--accent)",
-          }}
-        >
-          {icon}
-        </span>
+        <div className="size-8 shrink-0 sm:size-9">{icon}</div>
         <div className="min-w-0">
           <strong className="block text-lg font-bold tabular-nums text-[var(--text-primary)] sm:text-xl">{value}</strong>
           <span className="block truncate text-xs text-[var(--text-secondary)] sm:text-sm">{label}</span>

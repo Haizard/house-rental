@@ -1,4 +1,5 @@
 import { BadgeCheck, CalendarDays, ClipboardList, Crown, Home, Users } from "lucide-react";
+import { IconBadgeInline } from "@/components/ui/icon-badge";
 import Link from "next/link";
 import { prisma } from "@/lib/db/prisma";
 import { requireRole } from "@/lib/auth/guards";
@@ -71,17 +72,17 @@ export default async function AgentDashboard() {
 
       <section className="grid grid-cols-2 gap-2.5 sm:gap-3 lg:grid-cols-4">
         <Stat
-          icon={<Home size={20} />}
+          icon={<IconBadgeInline icon={Home} gradient="blue" size="size-8" iconSize={16} />}
           value={agent?.listings.length ?? 0}
           label="Active listings"
         />
         <Stat
-          icon={<Users size={20} />}
+          icon={<IconBadgeInline icon={Users} gradient="teal" size="size-8" iconSize={16} />}
           value={agent?.leads.length ?? 0}
           label="Recent leads"
         />
         <Stat
-          icon={<CalendarDays size={20} />}
+          icon={<IconBadgeInline icon={CalendarDays} gradient="orange" size="size-8" iconSize={16} />}
           value={
             agent?.leads.filter(
               (lead) =>
@@ -95,7 +96,7 @@ export default async function AgentDashboard() {
           className="glass-surface overflow-hidden p-3.5 transition hover:-translate-y-0.5 sm:p-4"
         >
           <span className="flex size-10 items-center justify-center rounded-full bg-[var(--accent-soft)] text-[var(--accent)]">
-            <ClipboardList size={20} />
+            <IconBadgeInline icon={ClipboardList} gradient="purple" size="size-8" iconSize={16} />
           </span>
           <span>
             <strong className="block text-xl font-bold">Browse</strong>
@@ -264,9 +265,7 @@ function Stat({
   return (
     <div className="glass-surface overflow-hidden p-3.5 sm:p-4">
       <div className="flex items-center gap-2.5">
-        <span className="flex size-8 shrink-0 items-center justify-center rounded-[var(--radius-sm)] bg-[var(--accent-soft)] text-[var(--accent)] sm:size-9">
-          {icon}
-        </span>
+        <div className="size-8 shrink-0 sm:size-9">{icon}</div>
         <span className="min-w-0">
           <strong className="block text-lg font-bold tabular-nums text-[var(--text-primary)] sm:text-xl">{value}</strong>
           <span className="truncate text-xs text-[var(--text-secondary)] sm:text-sm">{label}</span>

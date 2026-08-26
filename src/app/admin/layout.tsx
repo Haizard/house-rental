@@ -12,6 +12,7 @@ import {
   Users,
 } from "lucide-react";
 import { requireRole } from "@/lib/auth/guards";
+import { IconBadgeInline } from "@/components/ui/icon-badge";
 
 export const metadata: Metadata = {
   title: "Admin Dashboard | Nyumba Nearby",
@@ -70,7 +71,7 @@ export default async function AdminLayout({
         </Link>
         {navItems.map(({ href, label, icon: Icon }) => (
           <Link className="flex min-h-11 items-center gap-3 rounded-[12px] px-3 text-sm text-[var(--text-secondary)] transition hover:bg-[var(--accent-soft)] hover:text-[var(--accent)]" href={href} key={href}>
-            <Icon size={19} aria-hidden="true" />
+            <IconBadgeInline icon={Icon} gradient="purple" size="size-8" iconSize={16} />
             <span>{label}</span>
           </Link>
         ))}

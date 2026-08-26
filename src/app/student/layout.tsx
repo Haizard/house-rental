@@ -10,6 +10,7 @@ import {
   UserCircle,
 } from "lucide-react";
 import { requireRole } from "@/lib/auth/guards";
+import { IconBadgeInline } from "@/components/ui/icon-badge";
 import { prisma } from "@/lib/db/prisma";
 import { NotificationBell } from "@/components/ui/notification-bell";
 
@@ -73,7 +74,7 @@ export default async function StudentLayout({
         <NotificationBell unreadCount={unreadCount} />
         {navItems.map(({ href, label, icon: Icon }) => (
           <Link className="flex min-h-11 items-center gap-3 rounded-[12px] px-3 text-sm text-[var(--text-secondary)] transition hover:bg-[var(--accent-soft)] hover:text-[var(--accent)]" href={href} key={href}>
-            <Icon size={19} aria-hidden="true" />
+            <IconBadgeInline icon={Icon} gradient="blue" size="size-8" iconSize={16} />
             <span>{label}</span>
           </Link>
         ))}
