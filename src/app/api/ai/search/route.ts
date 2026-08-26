@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { z } from "zod";
 import { prisma } from "@/lib/db/prisma";
-import { aiService } from "@/lib/ai/providers/openai";
+import { aiChat } from "@/lib/ai/ai-service";
 import {
   housingSearchSchema,
   housingSearchSystemPrompt,
@@ -27,7 +27,7 @@ export async function POST(request: Request) {
   // Step 1: Extract structured filters from natural language
   let filters: HousingSearchFilters;
   try {
-    const { text } = await aiService.chat({
+    const { text } = await aiChat({
       messages: [
         { role: "system", content: housingSearchSystemPrompt },
         { role: "user", content: buildHousingSearchUserMessage(query) },
@@ -92,7 +92,7 @@ export async function POST(request: Request) {
   try {
     await prisma.$executeRaw`
       INSERT INTO ai_interactions (id, type, input, output, provider, model, tokens_used, metadata, created_at)
-      VALUES (gen_random_uuid(), 'HOUSING_SEARCH', ${query}, ${JSON.stringify(filters)}, 'openai', 'gpt-4o-mini', 0, ${JSON.stringify({ resultCount: listings.length })}::jsonb, NOW())
+      VALUES (gen_random_uuid(), 'HOUSING_SEARCH', ${query}, ${JSON.stringify(filters)}, 'bedrock', 'deepseek.v3.2', 0, ${JSON.stringify({ resultCount: listings.length })}::jsonb, NOW())
     `;
   } catch {
     // Audit log failure is non-critical

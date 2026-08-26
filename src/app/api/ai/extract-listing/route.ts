@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { z } from "zod";
-import { aiService } from "@/lib/ai/providers/openai";
+import { aiChat } from "@/lib/ai/ai-service";
 import {
   listingExtractionSchema,
   listingExtractionSystemPrompt,
@@ -25,7 +25,7 @@ export async function POST(request: Request) {
 
   let extraction: ListingExtraction;
   try {
-    const { text } = await aiService.chat({
+    const { text } = await aiChat({
       messages: [
         { role: "system", content: listingExtractionSystemPrompt },
         { role: "user", content: buildListingExtractionUserMessage(description) },
