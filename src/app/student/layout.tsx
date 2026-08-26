@@ -40,41 +40,40 @@ export default async function StudentLayout({
   return (
     <div className="min-h-screen">
       {/* Desktop sidebar — frosted glass, inset from edges per design system §6 */}
-      <aside className="bottom-tab-bar lg:fixed lg:bottom-auto lg:left-4 lg:top-4 lg:flex lg:h-[calc(100vh-2rem)] lg:w-56 lg:flex-col lg:items-stretch lg:justify-start lg:overflow-visible lg:p-4 lg:glass-nav">
-        <Link
-          className="mb-6 hidden items-center gap-2 font-semibold lg:flex"
-          href="/"
-        >
+            {/* Mobile bottom tab bar — max 5 items per design system */}
+      <nav className="bottom-tab-bar lg:hidden">
+        {[
+          { href: "/student/dashboard", label: "Dashboard", icon: LayoutDashboard },
+          { href: "/student/saved", label: "Saved", icon: Bookmark },
+          { href: "/student/chats", label: "Chats", icon: MessageCircle },
+          { href: "/student/viewings", label: "Viewings", icon: CalendarDays },
+          { href: "/", label: "Home", icon: Building2 },
+        ].map(({ href, label, icon: Icon }) => (
+          <Link href={href} key={href} title={label}>
+            <Icon size={20} aria-hidden="true" />
+            <span>{label}</span>
+          </Link>
+        ))}
+      </nav>
+
+      {/* Desktop sidebar */}
+      <aside className="glass-nav fixed bottom-auto left-4 top-4 z-10 hidden h-[calc(100vh-2rem)] w-56 flex-col items-stretch justify-start overflow-visible p-4 lg:flex">
+        <Link className="mb-6 flex items-center gap-2 font-semibold" href="/">
           <span className="flex size-9 items-center justify-center rounded-[12px] bg-[var(--accent)] text-white">
             <Building2 size={19} aria-hidden="true" />
           </span>
           Nyumba Nearby
         </Link>
-
-        <div className="hidden lg:block">
-          <NotificationBell unreadCount={unreadCount} />
-        </div>
-
+        <NotificationBell unreadCount={unreadCount} />
         {navItems.map(({ href, label, icon: Icon }) => (
-          <Link
-            className="flex size-11 shrink-0 flex-col items-center justify-center overflow-hidden rounded-[12px] text-[11px] text-[var(--text-secondary)] transition hover:bg-[var(--accent-soft)] hover:text-[var(--accent)] lg:h-auto lg:w-full lg:min-h-11 lg:flex-row lg:justify-start lg:gap-3 lg:px-3 lg:text-sm"
-            href={href}
-            key={href}
-            title={label}
-          >
+          <Link className="flex min-h-11 items-center gap-3 rounded-[12px] px-3 text-sm text-[var(--text-secondary)] transition hover:bg-[var(--accent-soft)] hover:text-[var(--accent)]" href={href} key={href}>
             <Icon size={19} aria-hidden="true" />
-            <span className="hidden lg:inline">{label}</span>
+            <span>{label}</span>
           </Link>
         ))}
-
-        {/* Home */}
-        <Link
-          className="flex size-11 shrink-0 items-center justify-center overflow-hidden rounded-[12px] text-[var(--text-secondary)] transition hover:bg-[var(--accent-soft)] hover:text-[var(--accent)] lg:h-auto lg:w-full lg:min-h-11 lg:flex-row lg:justify-start lg:gap-3 lg:px-3 lg:text-sm"
-          href="/"
-          title="Home"
-        >
+        <Link className="flex min-h-11 items-center gap-3 rounded-[12px] px-3 text-sm text-[var(--text-secondary)] transition hover:bg-[var(--accent-soft)] hover:text-[var(--accent)]" href="/">
           <Home size={19} aria-hidden="true" />
-          <span className="hidden lg:inline">Home</span>
+          <span>Home</span>
         </Link>
       </aside>
 

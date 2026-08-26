@@ -22,7 +22,7 @@ export async function SiteNav() {
   const userRole = session?.user?.role as string | undefined;
 
   return (
-    <nav className="glass-nav mx-auto flex max-w-7xl items-center justify-between px-3 py-2.5 sm:px-5">
+    <nav className="glass-nav mx-auto flex max-w-7xl items-center justify-between overflow-hidden px-3 py-2.5 sm:px-5">
       <a
         className="flex shrink-0 items-center gap-2 font-semibold text-[var(--text-primary)]"
         href="/"
@@ -35,7 +35,7 @@ export async function SiteNav() {
         </span>
       </a>
 
-      <div className="flex items-center gap-1.5 sm:gap-2">
+      <div className="flex min-w-0 items-center gap-1 sm:gap-1.5">
         {/* Desktop nav links */}
         <div className="hidden items-center gap-4 text-sm text-[var(--text-secondary)] sm:flex">
           <a
@@ -53,9 +53,9 @@ export async function SiteNav() {
 
         {/* Auth buttons */}
         {isLoggedIn ? (
-          <div className="flex items-center gap-1.5 sm:gap-2">
+          <div className="flex min-w-0 items-center gap-1 sm:gap-1.5">
             <Link
-              className="button button-glass hidden h-9 px-3 text-[13px] sm:inline-flex"
+              className="button button-glass hidden h-9 px-2 text-[13px] sm:inline-flex sm:px-3"
               href={getDashboardLink(userRole ?? "STUDENT")}
             >
               <User size={15} /> Dashboard
@@ -67,15 +67,17 @@ export async function SiteNav() {
               }}
             >
               <button
-                className="button button-glass h-9 px-3 text-[13px]"
+                className="button button-glass h-9 w-9 justify-center px-0 sm:h-auto sm:w-auto sm:px-3"
                 type="submit"
+                title="Sign out"
               >
-                <LogOut size={15} /> Sign out
+                <LogOut size={15} />
+                <span className="hidden sm:inline"> Sign out</span>
               </button>
             </form>
           </div>
         ) : (
-          <div className="flex items-center gap-1.5 sm:gap-2">
+          <div className="flex min-w-0 items-center gap-1 sm:gap-1.5">
             <Link
               className="button button-primary h-9 px-3 text-[13px] sm:px-4"
               href="/auth/sign-in"
@@ -83,7 +85,7 @@ export async function SiteNav() {
               <LogIn size={15} /> Log in
             </Link>
             <Link
-              className="button button-glass hidden h-9 px-3 text-[13px] sm:inline-flex"
+              className="button button-glass hidden h-9 px-2 text-[13px] sm:inline-flex sm:px-3"
               href="/auth/register"
             >
               Sign up
