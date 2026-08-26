@@ -4,7 +4,7 @@ import {
   Building2,
   ClipboardList,
   CreditCard,
-  Flag,
+  Flag, LogOut,
   Home,
   LayoutDashboard,
   Search,
@@ -52,6 +52,12 @@ export default async function AdminLayout({
             <span>{label}</span>
           </Link>
         ))}
+        <form action={async () => { "use server"; const { signOut } = await import("@/lib/auth/config"); await signOut({ redirectTo: "/" }); }}>
+          <button type="submit" title="Sign out" className="flex flex-col items-center justify-center gap-0.5 text-[var(--danger)]">
+            <LogOut size={20} />
+            <span className="text-[10px]">Exit</span>
+          </button>
+        </form>
       </nav>
 
       {/* Desktop sidebar */}
@@ -68,7 +74,15 @@ export default async function AdminLayout({
             <span>{label}</span>
           </Link>
         ))}
-      </aside>
+      
+        <div className="mt-auto pt-4">
+          <form action={async () => { "use server"; const { signOut } = await import("@/lib/auth/config"); await signOut({ redirectTo: "/" }); }}>
+            <button className="flex min-h-11 w-full items-center gap-3 rounded-[12px] px-3 text-sm text-[var(--danger)] transition hover:bg-[var(--danger-soft)]" type="submit">
+              <LogOut size={19} aria-hidden="true" />
+              <span>Sign out</span>
+            </button>
+          </form>
+        </div></aside>
 
       {/* Main content — offset by sidebar width on desktop, tab bar height on mobile */}
       <main className="px-4 pb-24 pt-4 sm:px-8 lg:pl-72 lg:pr-12">

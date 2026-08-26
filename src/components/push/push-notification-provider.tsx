@@ -118,7 +118,7 @@ export function PushNotificationProvider() {
     <button
       onClick={isSubscribed ? unsubscribe : subscribe}
       disabled={loading}
-      className="button button-glass flex items-center gap-2"
+      className="button button-glass h-9 w-9 justify-center px-0 sm:h-auto sm:w-auto sm:px-3 sm:gap-2"
       title={isSubscribed ? "Disable notifications" : "Enable notifications"}
     >
       {loading ? (
@@ -130,7 +130,7 @@ export function PushNotificationProvider() {
       ) : (
         <Bell size={16} />
       )}
-      <span className="text-xs font-medium">
+      <span className="hidden text-xs font-medium sm:inline">
         {loading
           ? "..."
           : permission === "denied"
