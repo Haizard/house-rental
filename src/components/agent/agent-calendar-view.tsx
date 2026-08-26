@@ -44,9 +44,9 @@ const MONTH_NAMES = [
 
 const STATUS_COLORS: Record<string, string> = {
   REQUESTED: "bg-yellow-500/20 text-yellow-400 border-yellow-500/30",
-  ACCEPTED: "bg-green-500/20 text-green-400 border-green-500/30",
+  ACCEPTED: "bg-[#FBC618]/100/20 text-[#ED8023] border-[#FBC618]/30",
   DECLINED: "bg-red-500/20 text-red-400 border-red-500/30",
-  COMPLETED: "bg-green-500/20 text-green-400 border-green-500/30",
+  COMPLETED: "bg-[#FBC618]/100/20 text-[#ED8023] border-[#FBC618]/30",
   CANCELLED: "bg-gray-500/20 text-gray-400 border-gray-500/30",
   NO_SHOW: "bg-orange-500/20 text-orange-400 border-orange-500/30",
 };
@@ -172,7 +172,7 @@ export function AgentCalendarView({
           <p className="text-xs font-medium text-[var(--text-tertiary)]">
             Accepted
           </p>
-          <p className="mt-1 text-2xl font-bold text-green-400">
+          <p className="mt-1 text-2xl font-bold text-[#ED8023]">
             {acceptedCount}
           </p>
         </div>
@@ -180,7 +180,7 @@ export function AgentCalendarView({
           <p className="text-xs font-medium text-[var(--text-tertiary)]">
             Completed
           </p>
-          <p className="mt-1 text-2xl font-bold text-green-400">
+          <p className="mt-1 text-2xl font-bold text-[#ED8023]">
             {completedCount}
           </p>
         </div>
@@ -358,7 +358,7 @@ export function AgentCalendarView({
                             updateViewingStatus(v.id, "ACCEPTED")
                           }
                           disabled={updatingId === v.id}
-                          className="flex-1 rounded-lg bg-green-500/20 px-3 py-1.5 text-[11px] font-bold text-green-400 hover:bg-green-500/30 transition"
+                          className="flex-1 rounded-lg bg-[#FBC618]/100/20 px-3 py-1.5 text-[11px] font-bold text-[#ED8023] hover:bg-[#FBC618]/100/30 transition"
                         >
                           Accept
                         </button>
@@ -380,7 +380,7 @@ export function AgentCalendarView({
                           updateViewingStatus(v.id, "COMPLETED")
                         }
                         disabled={updatingId === v.id}
-                        className="mt-2 w-full rounded-lg bg-green-500/20 px-3 py-1.5 text-[11px] font-bold text-green-400 hover:bg-green-500/30 transition"
+                        className="mt-2 w-full rounded-lg bg-[#FBC618]/100/20 px-3 py-1.5 text-[11px] font-bold text-[#ED8023] hover:bg-[#FBC618]/100/30 transition"
                       >
                         Mark Completed
                       </button>

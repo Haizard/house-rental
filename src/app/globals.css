@@ -1,42 +1,74 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700display=swap");
 @import "tailwindcss";
 
 /* DESIGN SYSTEM - iOS Native Glassmorphism */
 
 
 :root {
-  --bg-base: #F2F4F8;
-  --bg-base-alt: #EAEFF6;
-  --bg-gradient: linear-gradient(180deg, #F6F8FC 0%, #E9EEF7 100%);
-  --glass-fill: rgba(255, 255, 255, 0.55);
-  --glass-fill-strong: rgba(255, 255, 255, 0.72);
-  --glass-fill-subtle: rgba(255, 255, 255, 0.35);
-  --glass-border: rgba(255, 255, 255, 0.6);
-  --glass-border-hairline: rgba(60, 60, 67, 0.12);
+  /* MsosiJumla Brand Palette */
+  --color-primary-gold: #FBC618;
+  --color-footer-gold: #FBC71B;
+  --color-accent-orange: #ED8023;
+  --color-brand-navy: #003366;
+  --color-heading-navy: #0A2F59;
+  --color-verified-blue: #42A5F5;
+
+  /* Neutrals */
+  --color-bg-page: #ECEFF3;
+  --color-bg-card: #FFFFFF;
+  --color-bg-cream: #FFFCF4;
+  --color-text-primary: #151515;
+  --color-text-secondary: #6B6B6C;
+  --color-border-light: #E6E8EC;
+
+  /* Semantic */
+  --color-success: #2E7D32;
+  --color-danger: #D32F2F;
+
+  /* Legacy aliases for gradual migration */
+  --bg-base: #ECEFF3;
+  --bg-base-alt: #E0E4EA;
+  --bg-gradient: linear-gradient(180deg, #F0F2F5 0%, #ECEFF3 100%);
+  --glass-fill: rgba(255, 255, 255, 0.7);
+  --glass-fill-strong: rgba(255, 255, 255, 0.85);
+  --glass-fill-subtle: rgba(255, 255, 255, 0.5);
+  --glass-border: rgba(255, 255, 255, 0.8);
+  --glass-border-hairline: rgba(0, 0, 0, 0.08);
   --glass-blur: 20px;
   --glass-blur-strong: 32px;
-  --glass-shadow: 0 8px 32px rgba(31, 41, 55, 0.08), 0 1px 2px rgba(31, 41, 55, 0.04);
-  --accent: #22C55E;
-  --accent-pressed: #16A34A;
-  --accent-soft: rgba(34, 197, 94, 0.14);
-  --success: #34C759;
-  --success-soft: rgba(52, 199, 89, 0.14);
-  --warning: #FF9F0A;
-  --warning-soft: rgba(255, 159, 10, 0.16);
-  --danger: #FF3B30;
-  --danger-soft: rgba(255, 59, 48, 0.14);
-  --info: #5AC8FA;
-  --info-soft: rgba(90, 200, 250, 0.14);
-  --text-primary: rgba(28, 28, 30, 0.92);
-  --text-secondary: rgba(60, 60, 67, 0.68);
-  --text-tertiary: rgba(60, 60, 67, 0.42);
+  --glass-shadow: 0 2px 8px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
+
+  /* Accent (gold as primary) */
+  --accent: #FBC618;
+  --accent-pressed: #E5B415;
+  --accent-soft: rgba(251, 198, 24, 0.15);
+  --success: #2E7D32;
+  --success-soft: rgba(46, 125, 50, 0.14);
+  --warning: #ED8023;
+  --warning-soft: rgba(237, 128, 35, 0.16);
+  --danger: #D32F2F;
+  --danger-soft: rgba(211, 47, 47, 0.14);
+  --info: #42A5F5;
+  --info-soft: rgba(66, 165, 245, 0.14);
+
+  /* Text */
+  --text-primary: #151515;
+  --text-secondary: #6B6B6C;
+  --text-tertiary: #9E9E9E;
   --text-on-accent: #FFFFFF;
-  --verified: #34C759;
-  --agent-verified: #5AC8FA;
-  --unverified: #8E8E93;
+
+  /* Status */
+  --verified: #2E7D32;
+  --agent-verified: #42A5F5;
+  --unverified: #9E9E9E;
+
+  /* Radii */
   --radius-sm: 10px;
-  --radius-md: 16px;
-  --radius-lg: 22px;
+  --radius-md: 14px;
+  --radius-lg: 16px;
   --radius-pill: 999px;
+
+  /* Spacing */
   --space-1: 4px;
   --space-2: 8px;
   --space-3: 12px;
@@ -45,14 +77,34 @@
   --space-6: 24px;
   --space-8: 32px;
   --space-10: 40px;
-  --purple: #5AC8FA;
-  --purple-soft: rgba(90, 200, 250, 0.14);
-  --cyan: #5AC8FA;
-  --cyan-soft: rgba(90, 200, 250, 0.14);
-  --rose: #FF3B30;
-  --rose-soft: rgba(255, 59, 48, 0.14);
-  --amber: #FF9F0A;
-  --amber-soft: rgba(255, 159, 10, 0.16);
+
+  /* Extra aliases */
+  --purple: #42A5F5;
+  --purple-soft: rgba(66, 165, 245, 0.14);
+  --cyan: #42A5F5;
+  --cyan-soft: rgba(66, 165, 245, 0.14);
+  --rose: #D32F2F;
+  --rose-soft: rgba(211, 47, 47, 0.14);
+  --amber: #ED8023;
+  --amber-soft: rgba(237, 128, 35, 0.16);
+}
+
+".dark {
+  --bg-base: #1A1A2E;
+  --bg-base-alt: #16213E;
+  --bg-gradient: linear-gradient(180deg, #1A1A2E 0%, #16213E 100%);
+  --glass-fill: rgba(26, 26, 46, 0.7);
+  --glass-fill-strong: rgba(30, 30, 50, 0.85);
+  --glass-fill-subtle: rgba(26, 26, 46, 0.5);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --glass-border-hairline: rgba(255, 255, 255, 0.12);
+  --glass-shadow: 0 2px 8px rgba(0, 0, 0, 0.3), 0 1px 2px rgba(0, 0, 0, 0.2);
+  --accent: #FBC618;
+  --accent-pressed: #E5B415;
+  --accent-soft: rgba(251, 198, 24, 0.2);
+  --text-primary: #FFFFFF;
+  --text-secondary: rgba(255, 255, 255, 0.7);
+  --text-tertiary: rgba(255, 255, 255, 0.4);
 }
 .dark {
   --bg-base: #1C1C1E;
@@ -64,7 +116,7 @@
   --glass-border: rgba(255, 255, 255, 0.08);
   --glass-border-hairline: rgba(255, 255, 255, 0.12);
   --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.32), 0 1px 2px rgba(0, 0, 0, 0.16);
-  --accent: #22C55E;
+  --accent: #FBC618;
   --accent-pressed: #16A34A;
   --accent-soft: rgba(34, 197, 94, 0.18);
   --text-primary: rgba(255, 255, 255, 0.92);
@@ -79,7 +131,7 @@ body {
   margin: 0;
   background: var(--bg-gradient);
   color: var(--text-primary);
-  font-family: -apple-system, "SF Pro Display", "SF Pro Text", "Inter", system-ui, sans-serif;
+  font-family: "Poppins", -apple-system, system-ui, sans-serif;
   transition: background 0.3s ease;
   -webkit-font-smoothing: antialiased;
 }
@@ -112,10 +164,10 @@ button, input, select, textarea { font: inherit; }
 .button:focus-visible, .filter-chip:focus-visible, a:focus-visible, input:focus-visible {
   outline: 2px solid var(--accent); outline-offset: 2px;
 }
-.button-primary { background: var(--accent); color: var(--text-on-accent); box-shadow: 0 4px 14px rgba(34, 197, 94, 0.3); }
-.button-primary:hover { background: var(--accent-pressed); box-shadow: 0 6px 20px rgba(34, 197, 94, 0.4); }
+.button-primary { background: var(--accent); color: var(--text-on-accent); box-shadow: 0 4px 14px rgba(251, 198, 24, 0.3); }
+.button-primary:hover { background: var(--accent-pressed); box-shadow: 0 6px 20px rgba(251, 198, 24, 0.4); }
 .button-glass { background: var(--glass-fill-strong); border-color: var(--glass-border); color: var(--text-primary); }
-.button-glass:hover { background: var(--accent-soft); border-color: rgba(34, 197, 94, 0.2); }
+.button-glass:hover { background: var(--accent-soft); border-color: rgba(251, 198, 24, 0.2); }
 
 .eyebrow { margin: 0; color: var(--accent); font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; }
 
@@ -146,8 +198,8 @@ button, input, select, textarea { font: inherit; }
   background: var(--glass-fill); padding: 6px 14px; color: var(--text-secondary); font-size: 13px; font-weight: 500;
   transition: all 200ms cubic-bezier(0.25, 0.1, 0.25, 1); cursor: pointer;
 }
-.filter-chip:hover { background: var(--accent-soft); border-color: rgba(34, 197, 94, 0.25); color: var(--accent); }
-.filter-chip-active { background: var(--accent-soft); border-color: rgba(34, 197, 94, 0.35); color: var(--accent); font-weight: 600; }
+.filter-chip:hover { background: var(--accent-soft); border-color: rgba(251, 198, 24, 0.25); color: var(--accent); }
+.filter-chip-active { background: var(--accent-soft); border-color: rgba(251, 198, 24, 0.35); color: var(--accent); font-weight: 600; }
 
 .stat-tile { display: flex; min-height: 80px; flex-direction: column; justify-content: end; border: 1px solid var(--glass-border-hairline); border-radius: var(--radius-md); background: var(--glass-fill-subtle); padding: var(--space-3); transition: transform 200ms ease; }
 .stat-tile:hover { transform: translateY(-2px); }
@@ -240,7 +292,7 @@ input:focus, select:focus, textarea:focus { box-shadow: 0 0 0 2px var(--accent-s
 
 /* BigTitle — page-level hero headings */
 .font-t-bigtitle {
-  font-family: "SF Pro Display", -apple-system, system-ui, sans-serif;
+  font-family: "Poppins", -apple-system, system-ui, sans-serif;
   font-size: 2.125rem;   /* 34px */
   font-weight: 700;
   letter-spacing: -0.01em;
@@ -249,7 +301,7 @@ input:focus, select:focus, textarea:focus { box-shadow: 0 0 0 2px var(--accent-s
 
 /* Headline — section headings */
 .font-t-headline {
-  font-family: "SF Pro Display", -apple-system, system-ui, sans-serif;
+  font-family: "Poppins", -apple-system, system-ui, sans-serif;
   font-size: 1.0625rem;   /* 17px */
   font-weight: 600;
   letter-spacing: -0.01em;
@@ -258,7 +310,7 @@ input:focus, select:focus, textarea:focus { box-shadow: 0 0 0 2px var(--accent-s
 
 /* Title — card titles, form labels, nav items */
 .font-t-title {
-  font-family: "SF Pro Text", -apple-system, system-ui, sans-serif;
+  font-family: "Poppins", -apple-system, system-ui, sans-serif;
   font-size: 0.9375rem;   /* 15px */
   font-weight: 500;
   letter-spacing: -0.005em;
@@ -267,7 +319,7 @@ input:focus, select:focus, textarea:focus { box-shadow: 0 0 0 2px var(--accent-s
 
 /* Body — main readable text */
 .font-t-body {
-  font-family: "SF Pro Text", -apple-system, system-ui, sans-serif;
+  font-family: "Poppins", -apple-system, system-ui, sans-serif;
   font-size: 0.9375rem;   /* 15px */
   font-weight: 400;
   letter-spacing: -0.005em;
@@ -276,7 +328,7 @@ input:focus, select:focus, textarea:focus { box-shadow: 0 0 0 2px var(--accent-s
 
 /* Subhead — secondary readable text */
 .font-t-subhead {
-  font-family: "SF Pro Text", -apple-system, system-ui, sans-serif;
+  font-family: "Poppins", -apple-system, system-ui, sans-serif;
   font-size: 0.8125rem;   /* 13px */
   font-weight: 400;
   letter-spacing: -0.002em;
@@ -285,7 +337,7 @@ input:focus, select:focus, textarea:focus { box-shadow: 0 0 0 2px var(--accent-s
 
 /* Footnote — secondary labels, timestamps */
 .font-t-footnote {
-  font-family: "SF Pro Text", -apple-system, system-ui, sans-serif;
+  font-family: "Poppins", -apple-system, system-ui, sans-serif;
   font-size: 0.75rem;     /* 12px */
   font-weight: 400;
   letter-spacing: 0;
@@ -294,7 +346,7 @@ input:focus, select:focus, textarea:focus { box-shadow: 0 0 0 2px var(--accent-s
 
 /* Caption — smallest text, tags, badges */
 .font-t-caption {
-  font-family: "SF Pro Text", -apple-system, system-ui, sans-serif;
+  font-family: "Poppins", -apple-system, system-ui, sans-serif;
   font-size: 0.6875rem;   /* 11px */
   font-weight: 400;
   letter-spacing: 0.01em;

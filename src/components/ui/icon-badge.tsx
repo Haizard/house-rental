@@ -6,16 +6,16 @@ import { type LucideIcon } from "lucide-react";
  */
 
 const GRADIENT_PRESETS = {
-  blue: "from-[#22C55E] to-[#16A34A]",
-  green: "from-[#34C759] to-[#30D158]",
-  orange: "from-[#FF9F0A] to-[#FF6723]",
-  red: "from-[#FF3B30] to-[#FF2D55]",
-  purple: "from-[#AF52DE] to-[#BF5AF2]",
-  teal: "from-[#5AC8FA] to-[#64D2FF]",
+  blue: "from-[#FBC618] to-[#ED8023]",
+  green: "from-[#2E7D32] to-[#1B5E20]",
+  orange: "from-[#ED8023] to-[#D32F2F]",
+  red: "from-[#D32F2F] to-[#B71C1C]",
+  purple: "from-[#42A5F5] to-[#1E88E5]",
+  teal: "from-[#42A5F5] to-[#1E88E5]",
   pink: "from-[#FF2D55] to-[#FF375F]",
   indigo: "from-[#5856D6] to-[#AF52DE]",
   gray: "from-[#8E8E93] to-[#636366]",
-  accent: "from-[var(--accent)] to-[#16A34A]",
+  accent: "from-[var(--accent)] to-[#ED8023]",
 } as const;
 
 type GradientKey = keyof typeof GRADIENT_PRESETS;

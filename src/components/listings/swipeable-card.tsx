@@ -85,7 +85,7 @@ export function SwipeableCard({ listing, onSwipe, style }: SwipeableCardProps) {
     >
       {/* Swipe indicators */}
       {showSave && (
-        <div className="absolute -left-2 top-4 z-10 -rotate-12 rounded-lg border-2 border-green-500 bg-green-500/20 px-4 py-2 text-lg font-bold text-green-500 backdrop-blur-sm">
+        <div className="absolute -left-2 top-4 z-10 -rotate-12 rounded-lg border-2 border-[#FBC618] bg-[#FBC618]/20 px-4 py-2 text-lg font-bold text-[#FBC618] backdrop-blur-sm">
           💚 SAVE
         </div>
       )}
@@ -95,7 +95,7 @@ export function SwipeableCard({ listing, onSwipe, style }: SwipeableCardProps) {
         </div>
       )}
       {showDetails && (
-        <div className="absolute left-1/2 top-4 z-10 -translate-x-1/2 rounded-lg border-2 border-green-500 bg-green-500/20 px-4 py-2 text-lg font-bold text-green-500 backdrop-blur-sm">
+        <div className="absolute left-1/2 top-4 z-10 -translate-x-1/2 rounded-lg border-2 border-[#FBC618] bg-[#FBC618]/20 px-4 py-2 text-lg font-bold text-[#FBC618] backdrop-blur-sm">
           🔍 DETAILS
         </div>
       )}
@@ -232,14 +232,14 @@ export function SwipeableListingStack({
         </button>
         <button
           onClick={() => handleSwipe("details", remaining[0].id)}
-          className="flex size-14 items-center justify-center rounded-full border-2 border-green-400 bg-green-500/10 text-green-400 shadow-lg transition hover:bg-green-500/20 hover:scale-110"
+          className="flex size-14 items-center justify-center rounded-full border-2 border-[#ED8023] bg-[#FBC618]/10 text-[#ED8023] shadow-lg transition hover:bg-[#FBC618]/20 hover:scale-110"
           aria-label="View details"
         >
           <ChevronUp size={24} />
         </button>
         <button
           onClick={() => handleSwipe("save", remaining[0].id)}
-          className="flex size-14 items-center justify-center rounded-full border-2 border-green-400 bg-green-500/10 text-green-400 shadow-lg transition hover:bg-green-500/20 hover:scale-110"
+          className="flex size-14 items-center justify-center rounded-full border-2 border-[#ED8023] bg-[#FBC618]/10 text-[#ED8023] shadow-lg transition hover:bg-[#FBC618]/20 hover:scale-110"
           aria-label="Save"
         >
           <Heart size={24} />
