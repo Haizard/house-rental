@@ -12,22 +12,10 @@ import {
   Users,
 } from "lucide-react";
 import { requireRole } from "@/lib/auth/guards";
-import { IconBadgeInline } from "@/components/ui/icon-badge";
 
 export const metadata: Metadata = {
   title: "Admin Dashboard | Nyumba Nearby",
 };
-
-const navItems = [
-  { href: "/admin/dashboard", label: "Overview", icon: LayoutDashboard },
-  { href: "/admin/users", label: "Users", icon: Users },
-  { href: "/admin/agents", label: "Agents", icon: ShieldCheck },
-  { href: "/admin/listings", label: "Listings", icon: Home },
-  { href: "/admin/verification", label: "Verification", icon: ClipboardList },
-  { href: "/admin/reports", label: "Reports", icon: Flag },
-  { href: "/admin/payments", label: "Payments", icon: CreditCard },
-  { href: "/admin/search-analytics", label: "Search Analytics", icon: Search },
-];
 
 export default async function AdminLayout({
   children,
@@ -62,12 +50,14 @@ export default async function AdminLayout({
           </span>
           Nyumba Nearby
         </Link>
-        {navItems.map(({ href, label, icon: Icon }) => (
-          <Link className="flex min-h-11 items-center gap-3 rounded-[12px] px-3 text-sm text-[var(--text-secondary)] transition hover:bg-[var(--accent-soft)] hover:text-[var(--accent)]" href={href} key={href}>
-            <IconBadgeInline icon={Icon} gradient="purple" size="size-8" iconSize={16} />
-            <span>{label}</span>
-          </Link>
-        ))}
+        <Link className="flex min-h-11 items-center gap-3 rounded-[12px] px-3 text-sm text-[var(--text-secondary)] transition hover:bg-[var(--accent-soft)] hover:text-[var(--accent)]" href="/admin/dashboard"><LayoutDashboard size={16} /><span>Overview</span></Link>
+        <Link className="flex min-h-11 items-center gap-3 rounded-[12px] px-3 text-sm text-[var(--text-secondary)] transition hover:bg-[var(--accent-soft)] hover:text-[var(--accent)]" href="/admin/users"><Users size={16} /><span>Users</span></Link>
+        <Link className="flex min-h-11 items-center gap-3 rounded-[12px] px-3 text-sm text-[var(--text-secondary)] transition hover:bg-[var(--accent-soft)] hover:text-[var(--accent)]" href="/admin/agents"><ShieldCheck size={16} /><span>Agents</span></Link>
+        <Link className="flex min-h-11 items-center gap-3 rounded-[12px] px-3 text-sm text-[var(--text-secondary)] transition hover:bg-[var(--accent-soft)] hover:text-[var(--accent)]" href="/admin/listings"><Home size={16} /><span>Listings</span></Link>
+        <Link className="flex min-h-11 items-center gap-3 rounded-[12px] px-3 text-sm text-[var(--text-secondary)] transition hover:bg-[var(--accent-soft)] hover:text-[var(--accent)]" href="/admin/verification"><ClipboardList size={16} /><span>Verification</span></Link>
+        <Link className="flex min-h-11 items-center gap-3 rounded-[12px] px-3 text-sm text-[var(--text-secondary)] transition hover:bg-[var(--accent-soft)] hover:text-[var(--accent)]" href="/admin/reports"><Flag size={16} /><span>Reports</span></Link>
+        <Link className="flex min-h-11 items-center gap-3 rounded-[12px] px-3 text-sm text-[var(--text-secondary)] transition hover:bg-[var(--accent-soft)] hover:text-[var(--accent)]" href="/admin/payments"><CreditCard size={16} /><span>Payments</span></Link>
+        <Link className="flex min-h-11 items-center gap-3 rounded-[12px] px-3 text-sm text-[var(--text-secondary)] transition hover:bg-[var(--accent-soft)] hover:text-[var(--accent)]" href="/admin/search-analytics"><Search size={16} /><span>Search Analytics</span></Link>
       
         <div className="mt-auto pt-4">
           <form action={async () => { "use server"; const { signOut } = await import("@/lib/auth/config"); await signOut({ redirectTo: "/" }); }}>

@@ -14,7 +14,6 @@ import {
   Zap,
 } from "lucide-react";
 import { requireRole } from "@/lib/auth/guards";
-import { IconBadgeInline } from "@/components/ui/icon-badge";
 import { prisma } from "@/lib/db/prisma";
 import { NotificationBell } from "@/components/ui/notification-bell";
 
@@ -22,18 +21,6 @@ export const metadata: Metadata = {
   title: "Agent Workspace | Nyumba Nearby",
 };
 
-const navItems = [
-  { href: "/agent/dashboard", label: "Dashboard", icon: LayoutDashboard },
-  { href: "/agent/listings", label: "Listings", icon: Home },
-  { href: "/agent/leads", label: "Leads", icon: Users },
-  { href: "/agent/chats", label: "Chats", icon: MessageCircle },
-  { href: "/agent/calendar", label: "Calendar", icon: CalendarDays },
-  { href: "/agent/statuses", label: "Status", icon: Zap },
-  { href: "/agent/analytics", label: "Analytics", icon: BarChart3 },
-  { href: "/agent/billing", label: "Billing", icon: CreditCard },
-  { href: "/agent/upgrade", label: "Upgrade", icon: TrendingUp },
-  { href: "/agent/profile", label: "Profile", icon: UserCircle },
-];
 
 export default async function AgentLayout({
   children,
@@ -73,12 +60,16 @@ export default async function AgentLayout({
           Nyumba Nearby
         </Link>
         <NotificationBell unreadCount={unreadCount} />
-        {navItems.map(({ href, label, icon: Icon }) => (
-          <Link className="flex min-h-11 items-center gap-3 rounded-[12px] px-3 text-sm text-[var(--text-secondary)] transition hover:bg-[var(--accent-soft)] hover:text-[var(--accent)]" href={href} key={href}>
-            <IconBadgeInline icon={Icon} gradient="blue" size="size-8" iconSize={16} />
-            <span>{label}</span>
-          </Link>
-        ))}
+        <Link className="flex min-h-11 items-center gap-3 rounded-[12px] px-3 text-sm text-[var(--text-secondary)] transition hover:bg-[var(--accent-soft)] hover:text-[var(--accent)]" href="/agent/dashboard"><LayoutDashboard size={16} /><span>Dashboard</span></Link>
+        <Link className="flex min-h-11 items-center gap-3 rounded-[12px] px-3 text-sm text-[var(--text-secondary)] transition hover:bg-[var(--accent-soft)] hover:text-[var(--accent)]" href="/agent/listings"><Home size={16} /><span>Listings</span></Link>
+        <Link className="flex min-h-11 items-center gap-3 rounded-[12px] px-3 text-sm text-[var(--text-secondary)] transition hover:bg-[var(--accent-soft)] hover:text-[var(--accent)]" href="/agent/leads"><Users size={16} /><span>Leads</span></Link>
+        <Link className="flex min-h-11 items-center gap-3 rounded-[12px] px-3 text-sm text-[var(--text-secondary)] transition hover:bg-[var(--accent-soft)] hover:text-[var(--accent)]" href="/agent/chats"><MessageCircle size={16} /><span>Chats</span></Link>
+        <Link className="flex min-h-11 items-center gap-3 rounded-[12px] px-3 text-sm text-[var(--text-secondary)] transition hover:bg-[var(--accent-soft)] hover:text-[var(--accent)]" href="/agent/calendar"><CalendarDays size={16} /><span>Calendar</span></Link>
+        <Link className="flex min-h-11 items-center gap-3 rounded-[12px] px-3 text-sm text-[var(--text-secondary)] transition hover:bg-[var(--accent-soft)] hover:text-[var(--accent)]" href="/agent/statuses"><Zap size={16} /><span>Status</span></Link>
+        <Link className="flex min-h-11 items-center gap-3 rounded-[12px] px-3 text-sm text-[var(--text-secondary)] transition hover:bg-[var(--accent-soft)] hover:text-[var(--accent)]" href="/agent/analytics"><BarChart3 size={16} /><span>Analytics</span></Link>
+        <Link className="flex min-h-11 items-center gap-3 rounded-[12px] px-3 text-sm text-[var(--text-secondary)] transition hover:bg-[var(--accent-soft)] hover:text-[var(--accent)]" href="/agent/billing"><CreditCard size={16} /><span>Billing</span></Link>
+        <Link className="flex min-h-11 items-center gap-3 rounded-[12px] px-3 text-sm text-[var(--text-secondary)] transition hover:bg-[var(--accent-soft)] hover:text-[var(--accent)]" href="/agent/upgrade"><TrendingUp size={16} /><span>Upgrade</span></Link>
+        <Link className="flex min-h-11 items-center gap-3 rounded-[12px] px-3 text-sm text-[var(--text-secondary)] transition hover:bg-[var(--accent-soft)] hover:text-[var(--accent)]" href="/agent/profile"><UserCircle size={16} /><span>Profile</span></Link>
         <Link className="flex min-h-11 items-center gap-3 rounded-[12px] px-3 text-sm text-[var(--text-secondary)] transition hover:bg-[var(--accent-soft)] hover:text-[var(--accent)]" href="/">
           <Home size={19} aria-hidden="true" />
           <span>Home</span>

@@ -10,7 +10,6 @@ import {
   UserCircle,
 } from "lucide-react";
 import { requireRole } from "@/lib/auth/guards";
-import { IconBadgeInline } from "@/components/ui/icon-badge";
 import { prisma } from "@/lib/db/prisma";
 import { NotificationBell } from "@/components/ui/notification-bell";
 
@@ -18,14 +17,6 @@ export const metadata: Metadata = {
   title: "Student Dashboard | Nyumba Nearby",
 };
 
-const navItems = [
-  { href: "/student/dashboard", label: "Dashboard", icon: LayoutDashboard },
-  { href: "/student/saved", label: "Saved", icon: Bookmark },
-  { href: "/student/leads", label: "Leads", icon: Home },
-  { href: "/student/chats", label: "Chats", icon: MessageCircle },
-  { href: "/student/viewings", label: "Viewings", icon: CalendarDays },
-  { href: "/student/profile", label: "Profile", icon: UserCircle },
-];
 
 export default async function StudentLayout({
   children,
@@ -65,12 +56,12 @@ export default async function StudentLayout({
           Nyumba Nearby
         </Link>
         <NotificationBell unreadCount={unreadCount} />
-        {navItems.map(({ href, label, icon: Icon }) => (
-          <Link className="flex min-h-11 items-center gap-3 rounded-[12px] px-3 text-sm text-[var(--text-secondary)] transition hover:bg-[var(--accent-soft)] hover:text-[var(--accent)]" href={href} key={href}>
-            <IconBadgeInline icon={Icon} gradient="blue" size="size-8" iconSize={16} />
-            <span>{label}</span>
-          </Link>
-        ))}
+        <Link className="flex min-h-11 items-center gap-3 rounded-[12px] px-3 text-sm text-[var(--text-secondary)] transition hover:bg-[var(--accent-soft)] hover:text-[var(--accent)]" href="/student/dashboard"><LayoutDashboard size={16} /><span>Dashboard</span></Link>
+        <Link className="flex min-h-11 items-center gap-3 rounded-[12px] px-3 text-sm text-[var(--text-secondary)] transition hover:bg-[var(--accent-soft)] hover:text-[var(--accent)]" href="/student/saved"><Bookmark size={16} /><span>Saved</span></Link>
+        <Link className="flex min-h-11 items-center gap-3 rounded-[12px] px-3 text-sm text-[var(--text-secondary)] transition hover:bg-[var(--accent-soft)] hover:text-[var(--accent)]" href="/student/leads"><Home size={16} /><span>Leads</span></Link>
+        <Link className="flex min-h-11 items-center gap-3 rounded-[12px] px-3 text-sm text-[var(--text-secondary)] transition hover:bg-[var(--accent-soft)] hover:text-[var(--accent)]" href="/student/chats"><MessageCircle size={16} /><span>Chats</span></Link>
+        <Link className="flex min-h-11 items-center gap-3 rounded-[12px] px-3 text-sm text-[var(--text-secondary)] transition hover:bg-[var(--accent-soft)] hover:text-[var(--accent)]" href="/student/viewings"><CalendarDays size={16} /><span>Viewings</span></Link>
+        <Link className="flex min-h-11 items-center gap-3 rounded-[12px] px-3 text-sm text-[var(--text-secondary)] transition hover:bg-[var(--accent-soft)] hover:text-[var(--accent)]" href="/student/profile"><UserCircle size={16} /><span>Profile</span></Link>
         <Link className="flex min-h-11 items-center gap-3 rounded-[12px] px-3 text-sm text-[var(--text-secondary)] transition hover:bg-[var(--accent-soft)] hover:text-[var(--accent)]" href="/">
           <Home size={19} aria-hidden="true" />
           <span>Home</span>
