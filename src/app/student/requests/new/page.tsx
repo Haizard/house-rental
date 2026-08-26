@@ -64,7 +64,7 @@ export default function NewRoomRequestPage() {
           Describe your ideal room and agents will compete to offer you the best match.
         </p>
 
-        <form className="glass-surface mt-6 space-y-5 p-5 sm:p-7" onSubmit={handleSubmit}>
+        <form className="mt-6 space-y-5" onSubmit={handleSubmit}>
           {/* Title */}
           <div>
             <label className="eyebrow" htmlFor="title">What are you looking for?</label>
@@ -74,7 +74,7 @@ export default function NewRoomRequestPage() {
               required
               minLength={5}
               placeholder="e.g. Self-contained near Arusha Technical College"
-              className="mt-2 w-full rounded-xl border border-black/10 bg-white/60 px-4 py-3 text-[15px] outline-none focus:border-[var(--accent)]"
+              className="mt-2 w-full glass-search w-full px-4 py-3 text-[15px] outline-none"
             />
           </div>
 
@@ -86,7 +86,7 @@ export default function NewRoomRequestPage() {
               name="description"
               rows={3}
               placeholder="Any specific requirements, preferences, or notes for agents..."
-              className="mt-2 w-full rounded-xl border border-black/10 bg-white/60 px-4 py-3 text-[15px] outline-none focus:border-[var(--accent)]"
+              className="mt-2 w-full glass-search w-full px-4 py-3 text-[15px] outline-none"
             />
           </div>
 
@@ -98,7 +98,7 @@ export default function NewRoomRequestPage() {
               name="area"
               required
               placeholder="e.g. Njiro, Tengeru, Kinondoni"
-              className="mt-2 w-full rounded-xl border border-black/10 bg-white/60 px-4 py-3 text-[15px] outline-none focus:border-[var(--accent)]"
+              className="mt-2 w-full glass-search w-full px-4 py-3 text-[15px] outline-none"
             />
           </div>
 
@@ -110,7 +110,7 @@ export default function NewRoomRequestPage() {
                 id="propertyType"
                 name="propertyType"
                 required
-                className="mt-2 w-full rounded-xl border border-black/10 bg-white/60 px-4 py-3 text-[15px] outline-none focus:border-[var(--accent)]"
+                className="mt-2 w-full glass-search w-full px-4 py-3 text-[15px] outline-none"
               >
                 <option value="">Any</option>
                 {PROPERTY_TYPES.map((t) => (
@@ -123,7 +123,7 @@ export default function NewRoomRequestPage() {
               <select
                 id="roomType"
                 name="roomType"
-                className="mt-2 w-full rounded-xl border border-black/10 bg-white/60 px-4 py-3 text-[15px] outline-none focus:border-[var(--accent)]"
+                className="mt-2 w-full glass-search w-full px-4 py-3 text-[15px] outline-none"
               >
                 <option value="">Any</option>
                 {ROOM_TYPES.map((t) => (
@@ -142,14 +142,14 @@ export default function NewRoomRequestPage() {
                 type="number"
                 min={0}
                 placeholder="Min (e.g. 100000)"
-                className="w-full rounded-xl border border-black/10 bg-white/60 px-4 py-3 text-[15px] outline-none focus:border-[var(--accent)]"
+                className="w-full glass-search w-full px-4 py-3 text-[15px] outline-none"
               />
               <input
                 name="rentMax"
                 type="number"
                 min={0}
                 placeholder="Max (e.g. 200000)"
-                className="w-full rounded-xl border border-black/10 bg-white/60 px-4 py-3 text-[15px] outline-none focus:border-[var(--accent)]"
+                className="w-full glass-search w-full px-4 py-3 text-[15px] outline-none"
               />
             </div>
           </div>
@@ -161,7 +161,7 @@ export default function NewRoomRequestPage() {
               id="moveInDate"
               name="moveInDate"
               type="date"
-              className="mt-2 w-full rounded-xl border border-black/10 bg-white/60 px-4 py-3 text-[15px] outline-none focus:border-[var(--accent)]"
+              className="mt-2 w-full glass-search w-full px-4 py-3 text-[15px] outline-none"
             />
           </div>
 

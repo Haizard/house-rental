@@ -672,7 +672,7 @@ export default function NewListingPage() {
 
         {error && (
           <p
-            className="rounded-xl bg-red-50 p-3 text-sm text-red-600 dark:bg-red-500/10"
+            className="rounded-xl bg-[var(--danger-soft)] p-3 text-sm text-[var(--danger)]"
             role="alert"
           >
             {error}

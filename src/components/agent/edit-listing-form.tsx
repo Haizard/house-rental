@@ -489,7 +489,7 @@ export function EditListingForm({ listing }: { listing: ListingData }) {
 
         {error && (
           <p
-            className="rounded-xl bg-red-50 p-3 text-sm text-red-600 dark:bg-red-500/10"
+            className="rounded-xl bg-[var(--danger-soft)] p-3 text-sm text-[var(--danger)]"
             role="alert"
           >
             {error}
@@ -497,7 +497,7 @@ export function EditListingForm({ listing }: { listing: ListingData }) {
         )}
         {success && (
           <p
-            className="rounded-xl bg-emerald-50 p-3 text-sm text-emerald-600 dark:bg-emerald-500/10"
+            className="rounded-xl bg-[var(--success-soft)] p-3 text-sm text-[var(--success)]"
             role="status"
           >
             {success}
