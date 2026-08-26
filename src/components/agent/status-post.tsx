@@ -139,7 +139,7 @@ export function StatusPost({
 
       <form className="space-y-3" onSubmit={handleSubmit}>
         <select
-          className="glass-search w-full px-4 py-3 text-[15px] outline-none"
+          className="glass-search w-full px-4 py-3 font-t-body outline-none"
           value={type}
           onChange={(e) => setType(e.target.value)}
         >
@@ -151,7 +151,7 @@ export function StatusPost({
         </select>
 
         <textarea
-          className="glass-search min-h-24 w-full resize-y px-4 py-3 text-[15px] outline-none placeholder:text-[var(--text-tertiary)]"
+          className="glass-search min-h-24 w-full resize-y px-4 py-3 font-t-body outline-none placeholder:text-[var(--text-tertiary)]"
           value={content}
           onChange={(e) => setContent(e.target.value)}
           placeholder='e.g. "Chumba Njiro 150k self, maji yapo, karibu na chuo"'

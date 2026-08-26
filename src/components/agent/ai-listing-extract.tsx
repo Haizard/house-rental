@@ -66,7 +66,7 @@ export function AIListingExtract({
         in the form for you.
       </p>
       <textarea
-        className="glass-search min-h-28 w-full resize-y px-4 py-3 text-[15px] outline-none placeholder:text-[var(--text-tertiary)]"
+        className="glass-search min-h-28 w-full resize-y px-4 py-3 font-t-body outline-none placeholder:text-[var(--text-tertiary)]"
         value={description}
         onChange={(e) => setDescription(e.target.value)}
         placeholder='e.g. "Nina chumba kimoja Njiro karibu na chuo, 150k, self, maji yapo, available mwezi wa 9"'

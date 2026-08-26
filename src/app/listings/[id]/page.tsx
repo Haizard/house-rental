@@ -56,12 +56,12 @@ export default async function ListingDetailPage({
 
             <div className="p-5 sm:p-7">
               <p className="eyebrow">Available in {listing.area}</p>
-              <h1 className="mt-2 text-3xl font-bold leading-tight text-[var(--text-primary)] sm:text-4xl">
+              <h1 className="mt-2 font-t-headline text-[var(--text-primary)]">
                 {listing.title}
               </h1>
 
               {/* Basic info */}
-              <div className="mt-5 grid gap-3 border-t border-black/[.07] pt-5 text-[15px] text-[var(--text-secondary)] sm:grid-cols-2">
+              <div className="mt-5 grid gap-3 border-t border-black/[.07] pt-5 font-t-body text-[var(--text-secondary)] sm:grid-cols-2">
                 <p className="flex items-center gap-2">
                   <MapPin
                     className="text-[var(--accent)]"
@@ -92,7 +92,7 @@ export default async function ListingDetailPage({
                       className="text-[var(--accent)]"
                       aria-hidden="true"
                     />
-                    <h2 className="text-sm font-semibold text-[var(--text-primary)]">
+                    <h2 className="ios-headline">
                       Room details
                     </h2>
                   </div>
@@ -131,7 +131,7 @@ export default async function ListingDetailPage({
                       className="text-[var(--accent)]"
                       aria-hidden="true"
                     />
-                    <h2 className="text-sm font-semibold text-[var(--text-primary)]">
+                    <h2 className="ios-headline">
                       What&apos;s included
                     </h2>
                   </div>
@@ -157,7 +157,7 @@ export default async function ListingDetailPage({
                       className="text-[var(--accent)]"
                       aria-hidden="true"
                     />
-                    <h2 className="text-sm font-semibold text-[var(--text-primary)]">
+                    <h2 className="ios-headline">
                       Rules & preferences
                     </h2>
                   </div>
@@ -206,7 +206,7 @@ export default async function ListingDetailPage({
                 / month
               </span>
             </p>
-            <p className="mt-2 text-[15px] text-[var(--text-secondary)]">
+            <p className="mt-2 font-t-body text-[var(--text-secondary)]">
               {listing.type} in {listing.area}
             </p>
 

@@ -49,12 +49,12 @@ export default function SignInPage() {
         <Link className="text-sm font-medium text-[var(--accent)]" href="/">
           Nyumba Nearby
         </Link>
-        <h1 className="mt-10 text-3xl font-bold">Welcome back</h1>
-        <p className="mt-2 text-sm text-[var(--text-secondary)]">
+        <h1 className="font-t-headline text-[var(--text-primary)] mt-10 ios-title1">Welcome back</h1>
+        <p className="mt-2 ios-subhead">
           Sign in to your account.
         </p>
         <form className="mt-8 space-y-4" onSubmit={handleSubmit}>
-          <label className="block text-sm font-medium">
+          <label className="block ios-subhead font-medium">
             Email
             <input
               className="glass-search mt-2 w-full px-3 py-3 outline-none"
@@ -64,7 +64,7 @@ export default function SignInPage() {
               required
             />
           </label>
-          <label className="block text-sm font-medium">
+          <label className="block ios-subhead font-medium">
             Password
             <input
               className="glass-search mt-2 w-full px-3 py-3 outline-none"

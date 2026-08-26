@@ -189,7 +189,7 @@ export function StatusViewer({
                   style={{ maxHeight: 300 }}
                 />
               )}
-              <p className="mt-2 whitespace-pre-wrap text-[15px] leading-6">
+              <p className="mt-2 whitespace-pre-wrap font-t-body leading-6">
                 {status.content}
               </p>
               {status.rentAmount && (

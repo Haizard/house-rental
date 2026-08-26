@@ -30,7 +30,7 @@ export async function SiteNav() {
         <span className="flex size-8 shrink-0 items-center justify-center rounded-[10px] bg-[var(--accent)] text-white sm:size-9 sm:rounded-[12px]">
           <Building2 size={18} aria-hidden="true" />
         </span>
-        <span className="truncate text-[15px] sm:text-base">
+        <span className="truncate font-t-body">
           Nyumba Nearby
         </span>
       </a>
@@ -55,7 +55,7 @@ export async function SiteNav() {
         {isLoggedIn ? (
           <div className="flex min-w-0 items-center gap-1 sm:gap-1.5">
             <Link
-              className="button button-glass hidden h-9 px-2 text-[13px] sm:inline-flex sm:px-3"
+              className="button button-glass hidden h-9 px-2 font-t-subhead sm:inline-flex sm:px-3"
               href={getDashboardLink(userRole ?? "STUDENT")}
             >
               <User size={15} /> Dashboard
@@ -79,13 +79,13 @@ export async function SiteNav() {
         ) : (
           <div className="flex min-w-0 items-center gap-1 sm:gap-1.5">
             <Link
-              className="button button-primary h-9 px-3 text-[13px] sm:px-4"
+              className="button button-primary h-9 px-3 font-t-subhead sm:px-4"
               href="/auth/sign-in"
             >
               <LogIn size={15} /> Log in
             </Link>
             <Link
-              className="button button-glass hidden h-9 px-2 text-[13px] sm:inline-flex sm:px-3"
+              className="button button-glass hidden h-9 px-2 font-t-subhead sm:inline-flex sm:px-3"
               href="/auth/register"
             >
               Sign up

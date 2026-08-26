@@ -262,7 +262,7 @@ export default function NewListingPage() {
           <section className="glass-surface divide-y divide-black/[.06] overflow-hidden rounded-[22px]">
             <GroupedRow label="Property title">
               <input
-                className="w-full bg-transparent text-right text-[15px] outline-none placeholder:text-[var(--text-tertiary)]"
+                className="w-full bg-transparent text-right font-t-body outline-none placeholder:text-[var(--text-tertiary)]"
                 name="propertyTitle"
                 placeholder="e.g. Self-contained room near Tengeru"
                 required
@@ -270,7 +270,7 @@ export default function NewListingPage() {
             </GroupedRow>
             <GroupedRow label="Area">
               <input
-                className="w-full bg-transparent text-right text-[15px] outline-none placeholder:text-[var(--text-tertiary)]"
+                className="w-full bg-transparent text-right font-t-body outline-none placeholder:text-[var(--text-tertiary)]"
                 name="propertyArea"
                 placeholder="e.g. Njiro"
                 required
@@ -278,7 +278,7 @@ export default function NewListingPage() {
             </GroupedRow>
             <GroupedRow label="Address">
               <input
-                className="w-full bg-transparent text-right text-[15px] outline-none placeholder:text-[var(--text-tertiary)]"
+                className="w-full bg-transparent text-right font-t-body outline-none placeholder:text-[var(--text-tertiary)]"
                 name="propertyAddress"
                 placeholder="Street or landmark"
                 required
@@ -286,7 +286,7 @@ export default function NewListingPage() {
             </GroupedRow>
             <GroupedRow label="Description">
               <textarea
-                className="min-h-20 w-full resize-y bg-transparent text-right text-[15px] outline-none placeholder:text-[var(--text-tertiary)]"
+                className="min-h-20 w-full resize-y bg-transparent text-right font-t-body outline-none placeholder:text-[var(--text-tertiary)]"
                 name="propertyDescription"
                 placeholder="Describe the property"
                 maxLength={2000}
@@ -300,7 +300,7 @@ export default function NewListingPage() {
           <section className="glass-surface divide-y divide-black/[.06] overflow-hidden rounded-[22px]">
             <GroupedRow label="Listing title">
               <input
-                className="w-full bg-transparent text-right text-[15px] outline-none placeholder:text-[var(--text-tertiary)]"
+                className="w-full bg-transparent text-right font-t-body outline-none placeholder:text-[var(--text-tertiary)]"
                 name="title"
                 placeholder="e.g. Bright studio with Wi-Fi"
                 required
@@ -308,7 +308,7 @@ export default function NewListingPage() {
             </GroupedRow>
             <GroupedRow label="Property type">
               <select
-                className="w-full bg-transparent text-right text-[15px] outline-none"
+                className="w-full bg-transparent text-right font-t-body outline-none"
                 name="propertyType"
                 required
               >
@@ -322,7 +322,7 @@ export default function NewListingPage() {
             </GroupedRow>
             <GroupedRow label="Monthly rent (TZS)">
               <input
-                className="w-full bg-transparent text-right text-[15px] outline-none placeholder:text-[var(--text-tertiary)]"
+                className="w-full bg-transparent text-right font-t-body outline-none placeholder:text-[var(--text-tertiary)]"
                 name="rentAmount"
                 type="number"
                 min="1"
@@ -332,14 +332,14 @@ export default function NewListingPage() {
             </GroupedRow>
             <GroupedRow label="Available from">
               <input
-                className="w-full bg-transparent text-right text-[15px] outline-none"
+                className="w-full bg-transparent text-right font-t-body outline-none"
                 name="availabilityDate"
                 type="date"
               />
             </GroupedRow>
             <GroupedRow label="Description">
               <textarea
-                className="min-h-20 w-full resize-y bg-transparent text-right text-[15px] outline-none placeholder:text-[var(--text-tertiary)]"
+                className="min-h-20 w-full resize-y bg-transparent text-right font-t-body outline-none placeholder:text-[var(--text-tertiary)]"
                 name="description"
                 placeholder="What makes this listing stand out?"
                 maxLength={2000}
@@ -364,7 +364,7 @@ export default function NewListingPage() {
             </div>
             <GroupedRow label="Room size (m²)">
               <input
-                className="w-full bg-transparent text-right text-[15px] outline-none placeholder:text-[var(--text-tertiary)]"
+                className="w-full bg-transparent text-right font-t-body outline-none placeholder:text-[var(--text-tertiary)]"
                 name="roomSize"
                 type="number"
                 min="1"
@@ -373,7 +373,7 @@ export default function NewListingPage() {
             </GroupedRow>
             <GroupedRow label="Number of rooms">
               <input
-                className="w-full bg-transparent text-right text-[15px] outline-none placeholder:text-[var(--text-tertiary)]"
+                className="w-full bg-transparent text-right font-t-body outline-none placeholder:text-[var(--text-tertiary)]"
                 name="numberOfRooms"
                 type="number"
                 min="1"
@@ -383,7 +383,7 @@ export default function NewListingPage() {
             </GroupedRow>
             <GroupedRow label="Floor level">
               <input
-                className="w-full bg-transparent text-right text-[15px] outline-none placeholder:text-[var(--text-tertiary)]"
+                className="w-full bg-transparent text-right font-t-body outline-none placeholder:text-[var(--text-tertiary)]"
                 name="floorLevel"
                 type="number"
                 min="0"
@@ -462,7 +462,7 @@ export default function NewListingPage() {
             </div>
             <GroupedRow label="Preferred tenant">
               <select
-                className="w-full bg-transparent text-right text-[15px] outline-none"
+                className="w-full bg-transparent text-right font-t-body outline-none"
                 name="genderPreference"
               >
                 <option value="ANY">Any</option>
@@ -472,7 +472,7 @@ export default function NewListingPage() {
             </GroupedRow>
             <GroupedRow label="Max tenants">
               <input
-                className="w-full bg-transparent text-right text-[15px] outline-none placeholder:text-[var(--text-tertiary)]"
+                className="w-full bg-transparent text-right font-t-body outline-none placeholder:text-[var(--text-tertiary)]"
                 name="maxTenants"
                 type="number"
                 min="1"
@@ -527,7 +527,7 @@ export default function NewListingPage() {
             </div>
             <GroupedRow label="Deposit (TZS)">
               <input
-                className="w-full bg-transparent text-right text-[15px] outline-none placeholder:text-[var(--text-tertiary)]"
+                className="w-full bg-transparent text-right font-t-body outline-none placeholder:text-[var(--text-tertiary)]"
                 name="depositAmount"
                 type="number"
                 min="0"
@@ -536,7 +536,7 @@ export default function NewListingPage() {
             </GroupedRow>
             <GroupedRow label="Lease duration">
               <select
-                className="w-full bg-transparent text-right text-[15px] outline-none"
+                className="w-full bg-transparent text-right font-t-body outline-none"
                 name="leaseDuration"
               >
                 <option value="">Not specified</option>

@@ -246,7 +246,7 @@ export function EditListingForm({ listing }: { listing: ListingData }) {
           <section className="glass-surface divide-y divide-black/[.06] overflow-hidden rounded-[22px]">
             <GroupedRow label="Title">
               <input
-                className="w-full bg-transparent text-right text-[15px] outline-none placeholder:text-[var(--text-tertiary)]"
+                className="w-full bg-transparent text-right font-t-body outline-none placeholder:text-[var(--text-tertiary)]"
                 name="title"
                 defaultValue={listing.title}
                 required
@@ -254,7 +254,7 @@ export function EditListingForm({ listing }: { listing: ListingData }) {
             </GroupedRow>
             <GroupedRow label="Property type">
               <select
-                className="w-full bg-transparent text-right text-[15px] outline-none"
+                className="w-full bg-transparent text-right font-t-body outline-none"
                 name="propertyType"
                 defaultValue={listing.propertyType}
                 required
@@ -268,7 +268,7 @@ export function EditListingForm({ listing }: { listing: ListingData }) {
             </GroupedRow>
             <GroupedRow label="Monthly rent (TZS)">
               <input
-                className="w-full bg-transparent text-right text-[15px] outline-none"
+                className="w-full bg-transparent text-right font-t-body outline-none"
                 name="rentAmount"
                 type="number"
                 min="1"
@@ -278,7 +278,7 @@ export function EditListingForm({ listing }: { listing: ListingData }) {
             </GroupedRow>
             <GroupedRow label="Available from">
               <input
-                className="w-full bg-transparent text-right text-[15px] outline-none"
+                className="w-full bg-transparent text-right font-t-body outline-none"
                 name="availabilityDate"
                 type="date"
                 defaultValue={listing.availabilityDate ?? ""}
@@ -286,7 +286,7 @@ export function EditListingForm({ listing }: { listing: ListingData }) {
             </GroupedRow>
             <GroupedRow label="Description">
               <textarea
-                className="min-h-24 w-full resize-y bg-transparent text-right text-[15px] outline-none placeholder:text-[var(--text-tertiary)]"
+                className="min-h-24 w-full resize-y bg-transparent text-right font-t-body outline-none placeholder:text-[var(--text-tertiary)]"
                 name="description"
                 defaultValue={listing.description ?? ""}
                 placeholder="What makes this listing stand out?"
@@ -309,7 +309,7 @@ export function EditListingForm({ listing }: { listing: ListingData }) {
             </div>
             <GroupedRow label="Room size (m²)">
               <input
-                className="w-full bg-transparent text-right text-[15px] outline-none placeholder:text-[var(--text-tertiary)]"
+                className="w-full bg-transparent text-right font-t-body outline-none placeholder:text-[var(--text-tertiary)]"
                 name="roomSize"
                 type="number"
                 min="1"
@@ -319,7 +319,7 @@ export function EditListingForm({ listing }: { listing: ListingData }) {
             </GroupedRow>
             <GroupedRow label="Number of rooms">
               <input
-                className="w-full bg-transparent text-right text-[15px] outline-none placeholder:text-[var(--text-tertiary)]"
+                className="w-full bg-transparent text-right font-t-body outline-none placeholder:text-[var(--text-tertiary)]"
                 name="numberOfRooms"
                 type="number"
                 min="1"
@@ -330,7 +330,7 @@ export function EditListingForm({ listing }: { listing: ListingData }) {
             </GroupedRow>
             <GroupedRow label="Floor level">
               <input
-                className="w-full bg-transparent text-right text-[15px] outline-none placeholder:text-[var(--text-tertiary)]"
+                className="w-full bg-transparent text-right font-t-body outline-none placeholder:text-[var(--text-tertiary)]"
                 name="floorLevel"
                 type="number"
                 min="0"
@@ -410,7 +410,7 @@ export function EditListingForm({ listing }: { listing: ListingData }) {
             </div>
             <GroupedRow label="Preferred tenant">
               <select
-                className="w-full bg-transparent text-right text-[15px] outline-none"
+                className="w-full bg-transparent text-right font-t-body outline-none"
                 name="genderPreference"
                 defaultValue={listing.genderPreference ?? "ANY"}
               >
@@ -421,7 +421,7 @@ export function EditListingForm({ listing }: { listing: ListingData }) {
             </GroupedRow>
             <GroupedRow label="Max tenants">
               <input
-                className="w-full bg-transparent text-right text-[15px] outline-none placeholder:text-[var(--text-tertiary)]"
+                className="w-full bg-transparent text-right font-t-body outline-none placeholder:text-[var(--text-tertiary)]"
                 name="maxTenants"
                 type="number"
                 min="1"
@@ -456,7 +456,7 @@ export function EditListingForm({ listing }: { listing: ListingData }) {
             </div>
             <GroupedRow label="Deposit (TZS)">
               <input
-                className="w-full bg-transparent text-right text-[15px] outline-none placeholder:text-[var(--text-tertiary)]"
+                className="w-full bg-transparent text-right font-t-body outline-none placeholder:text-[var(--text-tertiary)]"
                 name="depositAmount"
                 type="number"
                 min="0"
@@ -466,7 +466,7 @@ export function EditListingForm({ listing }: { listing: ListingData }) {
             </GroupedRow>
             <GroupedRow label="Lease duration">
               <select
-                className="w-full bg-transparent text-right text-[15px] outline-none"
+                className="w-full bg-transparent text-right font-t-body outline-none"
                 name="leaseDuration"
                 defaultValue={listing.leaseDuration ?? ""}
               >

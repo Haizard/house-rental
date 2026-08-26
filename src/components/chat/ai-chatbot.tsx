@@ -113,7 +113,7 @@ export function AIChatbot() {
                 key={i}
               >
                 <div
-                  className={`max-w-[85%] rounded-[16px] px-3.5 py-2.5 text-[13px] leading-5 animate-message-in ${
+                  className={`max-w-[85%] rounded-[16px] px-3.5 py-2.5 font-t-subhead leading-5 animate-message-in ${
                     msg.role === "user"
                       ? "bg-[var(--accent)] text-white"
                       : "bg-[var(--glass-fill)] border border-[var(--glass-border)] text-[var(--text-primary)]"
@@ -145,7 +145,7 @@ export function AIChatbot() {
             onSubmit={(e) => { e.preventDefault(); sendMessage(); }}
           >
             <input
-              className="min-h-10 flex-1 bg-transparent text-[13px] outline-none placeholder:text-[var(--text-tertiary)]"
+              className="min-h-10 flex-1 bg-transparent font-t-subhead outline-none placeholder:text-[var(--text-tertiary)]"
               value={input}
               onChange={(e) => setInput(e.target.value)}
               placeholder="Type your question..."

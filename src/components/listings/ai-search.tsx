@@ -53,7 +53,7 @@ export function AISearchBar({ className = "" }: { className?: string }) {
           <Sparkles className="text-[var(--accent)]" size={20} aria-hidden="true" />
           <span className="sr-only">AI search</span>
           <input
-            className="w-full bg-transparent text-[15px] outline-none placeholder:text-[var(--text-tertiary)]"
+            className="w-full bg-transparent font-t-body outline-none placeholder:text-[var(--text-tertiary)]"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder='Try: "Njiro karibu na chuo, 150k, self-contained"'

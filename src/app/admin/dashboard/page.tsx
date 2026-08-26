@@ -52,8 +52,8 @@ export default async function AdminDashboardPage() {
     <div className="mx-auto max-w-6xl">
       <header className="pb-8 pt-10">
         <p className="eyebrow">Platform administration</p>
-        <h1 className="mt-2 text-3xl font-bold sm:text-4xl">Dashboard</h1>
-        <p className="mt-2 text-[var(--text-secondary)]">
+        <h1 className="mt-2 ios-page-title">Dashboard</h1>
+        <p className="mt-2 ios-subhead">
           Platform health and key metrics at a glance.
         </p>
       </header>
@@ -102,7 +102,7 @@ export default async function AdminDashboardPage() {
 
       {/* Recent leads */}
       <section className="mt-10">
-        <h2 className="text-xl font-bold">Recent leads</h2>
+        <h2 className="ios-title2">Recent leads</h2>
         <div className="mt-4 space-y-3">
           {recentLeads.length ? (
             recentLeads.map((lead) => (

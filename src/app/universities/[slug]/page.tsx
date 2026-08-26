@@ -94,7 +94,7 @@ export default async function UniversityPage({ params }: { params: Promise<{ slu
                 </span>
               </div>
               {university.description && (
-                <p className="mt-3 max-w-2xl text-[15px] leading-6 text-[var(--text-secondary)]">
+                <p className="mt-3 max-w-2xl font-t-body leading-6 text-[var(--text-secondary)]">
                   {university.description}
                 </p>
               )}

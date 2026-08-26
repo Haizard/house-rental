@@ -31,10 +31,10 @@ export default async function StudentDashboard() {
             <header className="flex items-end justify-between gap-4 pb-8 pt-6">
         <div>
           <p className="eyebrow">Student dashboard</p>
-          <h1 className="mt-2 text-3xl font-bold sm:text-4xl">
+          <h1 className="mt-2 ios-page-title">
             Welcome back, {session.user.name?.split(" ")[0] ?? "student"}.
           </h1>
-          <p className="mt-2 text-[var(--text-secondary)]">
+          <p className="mt-2 ios-subhead">
             Keep track of homes you like and conversations you start.
           </p>
         </div>      </header>
@@ -70,7 +70,7 @@ export default async function StudentDashboard() {
       {/* Recent leads */}
       <section className="mt-10">
         <div className="flex items-center justify-between gap-3">
-          <h2 className="flex items-center gap-2 text-xl font-bold">
+          <h2 className="flex items-center gap-2 ios-title2">
             <MessageCircle size={19} aria-hidden="true" /> Recent leads
           </h2>
           <Link
@@ -121,7 +121,7 @@ export default async function StudentDashboard() {
       {/* Saved homes preview */}
       <section className="mt-10 pb-10">
         <div className="flex items-center justify-between gap-3">
-          <h2 className="flex items-center gap-2 text-xl font-bold">
+          <h2 className="flex items-center gap-2 ios-title2">
             <Bookmark size={19} aria-hidden="true" /> Saved homes
           </h2>
           <Link
@@ -210,7 +210,7 @@ function EmptyState({
 }) {
   return (
     <div className="glass-surface mt-4 p-6">
-      <p className="text-sm text-[var(--text-secondary)]">{text}</p>
+      <p className="font-t-footnote text-[var(--text-secondary)]">{text}</p>
       <Link className="button button-glass mt-4 px-4" href={href}>
         {action}
       </Link>

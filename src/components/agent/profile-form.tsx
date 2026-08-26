@@ -76,7 +76,7 @@ export function AgentProfileForm({ profile }: { profile: ProfileData }) {
       <section className="glass-surface divide-y divide-black/[.06] overflow-hidden rounded-[22px]">
         <GroupedRow label="Business name">
           <input
-            className="w-full bg-transparent text-right text-[15px] outline-none placeholder:text-[var(--text-tertiary)]"
+            className="w-full bg-transparent text-right font-t-body outline-none placeholder:text-[var(--text-tertiary)]"
             name="businessName"
             defaultValue={profile.businessName}
             placeholder="e.g. Mwanaisha Homes"
@@ -85,7 +85,7 @@ export function AgentProfileForm({ profile }: { profile: ProfileData }) {
         </GroupedRow>
         <GroupedRow label="Bio">
           <textarea
-            className="min-h-24 w-full resize-y bg-transparent text-right text-[15px] outline-none placeholder:text-[var(--text-tertiary)]"
+            className="min-h-24 w-full resize-y bg-transparent text-right font-t-body outline-none placeholder:text-[var(--text-tertiary)]"
             name="bio"
             defaultValue={profile.bio}
             placeholder="Tell students about your areas and specialties"
@@ -97,7 +97,7 @@ export function AgentProfileForm({ profile }: { profile: ProfileData }) {
       <section className="glass-surface divide-y divide-black/[.06] overflow-hidden rounded-[22px]">
         <GroupedRow label="First name">
           <input
-            className="w-full bg-transparent text-right text-[15px] outline-none"
+            className="w-full bg-transparent text-right font-t-body outline-none"
             name="firstName"
             defaultValue={profile.firstName}
             required
@@ -105,7 +105,7 @@ export function AgentProfileForm({ profile }: { profile: ProfileData }) {
         </GroupedRow>
         <GroupedRow label="Last name">
           <input
-            className="w-full bg-transparent text-right text-[15px] outline-none"
+            className="w-full bg-transparent text-right font-t-body outline-none"
             name="lastName"
             defaultValue={profile.lastName}
             required

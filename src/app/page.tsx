@@ -25,11 +25,11 @@ export default async function Home() {
       <section id="top" className="mx-auto max-w-7xl">
         <div className="pt-8 sm:pt-10 lg:grid lg:max-w-3xl lg:items-start lg:gap-8 lg:pt-16">
           <div>
-            <p className="eyebrow text-[11px] sm:text-xs">Student housing in Arusha</p>
-            <h1 className="mt-2 text-[26px] font-bold leading-[1.1] tracking-tight text-[var(--text-primary)] sm:text-[34px] md:text-[40px] lg:text-[48px]">
+            <p className="eyebrow">Student housing in Arusha</p>
+            <h1 className="mt-2 font-t-bigtitle text-[var(--text-primary)]">
               Find your next home.
             </h1>
-            <p className="mt-3 max-w-lg text-[13px] leading-5 text-[var(--text-secondary)] sm:text-[15px] sm:leading-6">
+            <p className="mt-3 max-w-lg font-t-body text-[var(--text-secondary)]">
               Browse rooms around Njiro and talk directly with trusted local agents.
             </p>
 
@@ -39,14 +39,14 @@ export default async function Home() {
                 <MapPin className="shrink-0 text-[var(--accent)]" size={16} aria-hidden="true" />
                 <span className="sr-only">Search area</span>
                 <input
-                  className="w-full bg-transparent text-[13px] outline-none placeholder:text-[var(--text-tertiary)] sm:text-[14px]"
+                  className="w-full bg-transparent font-t-subhead outline-none placeholder:text-[var(--text-tertiary)] sm:text-[14px]"
                   name="area"
                   placeholder="Area or university"
                   defaultValue="Njiro"
                 />
               </label>
-              <button className="button button-primary h-10 shrink-0 px-4 text-[13px] sm:h-11 sm:px-5" type="submit">
-                <Search size={16} aria-hidden="true" /> Search
+              <button className="button button-primary h-10 shrink-0 px-4 font-t-subhead sm:h-11 sm:px-5" type="submit">
+                <Search size={14} aria-hidden="true" />
               </button>
             </form>
 
@@ -88,8 +88,8 @@ export default async function Home() {
       <section id="listings" className="mx-auto mt-6 max-w-7xl sm:mt-10">
         <div className="mb-3 flex items-end justify-between gap-4 sm:mb-5">
           <div>
-            <p className="eyebrow text-[11px] sm:text-xs">Available now</p>
-            <h2 className="mt-1 text-lg font-bold text-[var(--text-primary)] sm:text-xl md:text-2xl">
+            <p className="eyebrow">Available now</p>
+            <h2 className="mt-1 font-t-headline text-[var(--text-primary)]">
               Homes around Njiro
             </h2>
           </div>

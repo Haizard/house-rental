@@ -119,6 +119,28 @@ button, input, select, textarea { font: inherit; }
 
 .eyebrow { margin: 0; color: var(--accent); font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; }
 
+/* iOS Typography Scale — per design system section 4 */
+.ios-large-title { font-size: 34px; font-weight: 700; line-height: 1.15; letter-spacing: -0.02em; color: var(--text-primary); }
+.ios-title1 { font-size: 28px; font-weight: 700; line-height: 1.2; color: var(--text-primary); }
+.ios-title2 { font-size: 22px; font-weight: 600; line-height: 1.25; color: var(--text-primary); }
+.ios-headline { font-size: 17px; font-weight: 600; line-height: 1.3; color: var(--text-primary); }
+.ios-body { font-size: 17px; font-weight: 400; line-height: 1.4; color: var(--text-primary); }
+.ios-subhead { font-size: 15px; font-weight: 400; line-height: 1.35; color: var(--text-secondary); }
+.ios-footnote { font-size: 13px; font-weight: 400; line-height: 1.3; color: var(--text-secondary); }
+.ios-caption { font-size: 12px; font-weight: 400; line-height: 1.25; color: var(--text-tertiary); }
+
+/* Responsive headings — large title on mobile, title1 on sm+ */
+.ios-page-title {
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  color: var(--text-primary);
+}
+@media (min-width: 640px) {
+  .ios-page-title { font-size: 34px; line-height: 1.15; }
+}
+
 .filter-chip {
   min-height: 34px; border: 1.5px solid var(--glass-border-hairline); border-radius: var(--radius-pill);
   background: var(--glass-fill); padding: 6px 14px; color: var(--text-secondary); font-size: 13px; font-weight: 500;
@@ -210,3 +232,79 @@ aside a:hover { color: var(--accent) !important; }
 .glass-surface svg:first-child { opacity: 0.4; }
 aside a[href] { transition: background 200ms ease, color 200ms ease; }
 input:focus, select:focus, textarea:focus { box-shadow: 0 0 0 2px var(--accent-soft); border-radius: var(--radius-sm); }
+
+/* ============================================
+   iOS Type Scale Utilities
+   Based on Apple Human Interface Guidelines
+   ============================================ */
+
+/* BigTitle — page-level hero headings */
+.font-t-bigtitle {
+  font-family: "SF Pro Display", -apple-system, system-ui, sans-serif;
+  font-size: 2.125rem;   /* 34px */
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.18;
+}
+
+/* Headline — section headings */
+.font-t-headline {
+  font-family: "SF Pro Display", -apple-system, system-ui, sans-serif;
+  font-size: 1.0625rem;   /* 17px */
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1.29;
+}
+
+/* Title — card titles, form labels, nav items */
+.font-t-title {
+  font-family: "SF Pro Text", -apple-system, system-ui, sans-serif;
+  font-size: 0.9375rem;   /* 15px */
+  font-weight: 500;
+  letter-spacing: -0.005em;
+  line-height: 1.33;
+}
+
+/* Body — main readable text */
+.font-t-body {
+  font-family: "SF Pro Text", -apple-system, system-ui, sans-serif;
+  font-size: 0.9375rem;   /* 15px */
+  font-weight: 400;
+  letter-spacing: -0.005em;
+  line-height: 1.47;
+}
+
+/* Subhead — secondary readable text */
+.font-t-subhead {
+  font-family: "SF Pro Text", -apple-system, system-ui, sans-serif;
+  font-size: 0.8125rem;   /* 13px */
+  font-weight: 400;
+  letter-spacing: -0.002em;
+  line-height: 1.38;
+}
+
+/* Footnote — secondary labels, timestamps */
+.font-t-footnote {
+  font-family: "SF Pro Text", -apple-system, system-ui, sans-serif;
+  font-size: 0.75rem;     /* 12px */
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 1.33;
+}
+
+/* Caption — smallest text, tags, badges */
+.font-t-caption {
+  font-family: "SF Pro Text", -apple-system, system-ui, sans-serif;
+  font-size: 0.6875rem;   /* 11px */
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  line-height: 1.27;
+}
+
+/* Reduced motion — cut animation duration */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

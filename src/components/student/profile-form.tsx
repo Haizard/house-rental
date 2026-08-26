@@ -79,7 +79,7 @@ export function StudentProfileForm({
       <section className="glass-surface divide-y divide-black/[.06] overflow-hidden rounded-[22px]">
         <GroupedRow label="First name">
           <input
-            className="w-full bg-transparent text-right text-[15px] outline-none"
+            className="w-full bg-transparent text-right font-t-body outline-none"
             name="firstName"
             defaultValue={profile.firstName}
             required
@@ -87,7 +87,7 @@ export function StudentProfileForm({
         </GroupedRow>
         <GroupedRow label="Last name">
           <input
-            className="w-full bg-transparent text-right text-[15px] outline-none"
+            className="w-full bg-transparent text-right font-t-body outline-none"
             name="lastName"
             defaultValue={profile.lastName}
             required
@@ -103,7 +103,7 @@ export function StudentProfileForm({
       <section className="glass-surface divide-y divide-black/[.06] overflow-hidden rounded-[22px]">
         <GroupedRow label="University">
           <select
-            className="w-full bg-transparent text-right text-[15px] outline-none"
+            className="w-full bg-transparent text-right font-t-body outline-none"
             name="universityId"
             defaultValue={profile.universityId ?? ""}
           >
@@ -117,7 +117,7 @@ export function StudentProfileForm({
         </GroupedRow>
         <GroupedRow label="Preferred area">
           <input
-            className="w-full bg-transparent text-right text-[15px] outline-none placeholder:text-[var(--text-tertiary)]"
+            className="w-full bg-transparent text-right font-t-body outline-none placeholder:text-[var(--text-tertiary)]"
             name="preferredArea"
             defaultValue={profile.preferredArea ?? ""}
             placeholder="e.g. Njiro"
@@ -125,7 +125,7 @@ export function StudentProfileForm({
         </GroupedRow>
         <GroupedRow label="Room type">
           <select
-            className="w-full bg-transparent text-right text-[15px] outline-none"
+            className="w-full bg-transparent text-right font-t-body outline-none"
             name="roomType"
             defaultValue={profile.roomType ?? ""}
           >
@@ -139,7 +139,7 @@ export function StudentProfileForm({
         </GroupedRow>
         <GroupedRow label="Move-in date">
           <input
-            className="w-full bg-transparent text-right text-[15px] outline-none"
+            className="w-full bg-transparent text-right font-t-body outline-none"
             name="moveInDate"
             type="date"
             defaultValue={profile.moveInDate ?? ""}
@@ -150,7 +150,7 @@ export function StudentProfileForm({
       <section className="glass-surface divide-y divide-black/[.06] overflow-hidden rounded-[22px]">
         <GroupedRow label="Budget min (TZS)">
           <input
-            className="w-full bg-transparent text-right text-[15px] outline-none placeholder:text-[var(--text-tertiary)]"
+            className="w-full bg-transparent text-right font-t-body outline-none placeholder:text-[var(--text-tertiary)]"
             name="budgetMin"
             type="number"
             min="0"
@@ -160,7 +160,7 @@ export function StudentProfileForm({
         </GroupedRow>
         <GroupedRow label="Budget max (TZS)">
           <input
-            className="w-full bg-transparent text-right text-[15px] outline-none placeholder:text-[var(--text-tertiary)]"
+            className="w-full bg-transparent text-right font-t-body outline-none placeholder:text-[var(--text-tertiary)]"
             name="budgetMax"
             type="number"
             min="0"

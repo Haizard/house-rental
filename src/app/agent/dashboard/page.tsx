@@ -53,10 +53,10 @@ export default async function AgentDashboard() {
             <header className="flex items-end justify-between gap-4 pb-8 pt-6">
         <div>
           <p className="eyebrow">Agent workspace</p>
-          <h1 className="mt-2 text-3xl font-bold sm:text-4xl">
+          <h1 className="mt-2 ios-page-title">
             Good morning, {session.user.name?.split(" ")[0] ?? "agent"}.
           </h1>
-          <p className="mt-2 text-[var(--text-secondary)]">
+          <p className="mt-2 ios-subhead">
             Stay close to every student enquiry.
           </p>
         </div>
@@ -148,7 +148,7 @@ export default async function AgentDashboard() {
       <section className="glass-surface mt-10 p-5">
         <div className="mb-4 flex items-center gap-2">
           <BadgeCheck size={19} className="text-[var(--accent)]" aria-hidden="true" />
-          <h2 className="text-xl font-bold">Verification</h2>
+          <h2 className="ios-title2">Verification</h2>
         </div>
         {agent?.verification === "VERIFIED" ||
         agent?.verification === "AGENT_VERIFIED" ? (
@@ -162,7 +162,7 @@ export default async function AgentDashboard() {
 
       <section id="leads" className="mt-10">
         <div className="flex items-center justify-between">
-          <h2 className="text-xl font-bold">Lead inbox</h2>
+          <h2 className="ios-title2">Lead inbox</h2>
           <span className="text-sm text-[var(--text-secondary)]">
             Newest first
           </span>
@@ -212,7 +212,7 @@ export default async function AgentDashboard() {
       </section>
 
       <section id="viewings" className="mt-10 pb-10">
-        <h2 className="text-xl font-bold">Viewing requests</h2>
+        <h2 className="ios-title2">Viewing requests</h2>
         <div className="mt-4 space-y-3">
           {agent?.leads.flatMap((lead) =>
             lead.viewingRequests.map((viewing) => (

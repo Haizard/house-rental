@@ -53,7 +53,7 @@ export function TranslatedText({ text, className = "" }: TranslatedTextProps) {
 
   return (
     <div className={className}>
-      <p className="whitespace-pre-wrap text-[15px] leading-6 text-[var(--text-primary)]">
+      <p className="whitespace-pre-wrap font-t-body leading-6 text-[var(--text-primary)]">
         {translated ?? text}
       </p>
       <button

@@ -197,7 +197,7 @@ export function ListingSearch({
           aria-hidden="true"
         />
         <input
-          className="min-h-10 flex-1 bg-transparent text-[15px] outline-none placeholder:text-[var(--text-tertiary)]"
+          className="min-h-10 flex-1 bg-transparent font-t-body outline-none placeholder:text-[var(--text-tertiary)]"
           value={query}
           onChange={(event) => setQuery(event.target.value)}
           placeholder="Search by area or home type"

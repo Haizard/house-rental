@@ -23,12 +23,12 @@ export function ListingCard({ listing, saved = false }: { listing: Listing; save
         <SaveListingButton listingId={listing.id} initialSaved={saved} title={listing.title} />
       </div>
       <Link className="block listing-content overflow-hidden" href={`/listings/${listing.id}`}>
-        <p className="listing-title">{listing.title}</p>
-        <p className="listing-meta flex items-center gap-1">
+        <p className="listing-title font-t-title text-[var(--text-primary)] line-clamp-2">{listing.title}</p>
+        <p className="listing-meta font-t-footnote flex items-center gap-1 text-[var(--text-tertiary)]">
           <MapPin size={12} aria-hidden="true" />
           {listing.type} · {listing.area}
         </p>
-        <p className="price">
+        <p className="price font-t-title text-[var(--text-primary)]">
           TZS {price}
           <span className="text-xs font-normal text-[var(--text-secondary)]"> / mo</span>
         </p>

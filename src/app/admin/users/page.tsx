@@ -52,7 +52,7 @@ function UserSearch() {
       <form className="glass-search flex items-center gap-3 p-2" onSubmit={handleSearch}>
         <Search className="ml-2 text-[var(--accent)]" size={20} aria-hidden="true" />
         <input
-          className="min-h-10 flex-1 bg-transparent text-[15px] outline-none placeholder:text-[var(--text-tertiary)]"
+          className="min-h-10 flex-1 bg-transparent font-t-body outline-none placeholder:text-[var(--text-tertiary)]"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           placeholder="Search by name or email"
