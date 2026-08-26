@@ -51,18 +51,11 @@ export default async function AgentLayout({
       {/* Desktop sidebar — frosted glass, inset from edges per §6 of design system */}
             {/* Mobile bottom tab bar — max 5 items per design system */}
       <nav className="bottom-tab-bar lg:hidden">
-        {[
-          { href: "/agent/dashboard", label: "Dashboard", icon: LayoutDashboard },
-          { href: "/agent/listings", label: "Listings", icon: Home },
-          { href: "/agent/chats", label: "Chats", icon: MessageCircle },
-          { href: "/agent/calendar", label: "Calendar", icon: CalendarDays },
-          { href: "/", label: "Home", icon: Building2 },
-        ].map(({ href, label, icon: Icon }) => (
-          <Link href={href} key={href} title={label}>
-            <Icon size={20} aria-hidden="true" />
-            <span>{label}</span>
-          </Link>
-        ))}
+        <Link href="/agent/dashboard" title="Dashboard"><LayoutDashboard size={20} /><span>Dashboard</span></Link>
+        <Link href="/agent/listings" title="Listings"><Home size={20} /><span>Listings</span></Link>
+        <Link href="/agent/chats" title="Chats"><MessageCircle size={20} /><span>Chats</span></Link>
+        <Link href="/agent/calendar" title="Calendar"><CalendarDays size={20} /><span>Calendar</span></Link>
+        <Link href="/" title="Home"><Building2 size={20} /><span>Home</span></Link>
         <form action={async () => { "use server"; const { signOut } = await import("@/lib/auth/config"); await signOut({ redirectTo: "/" }); }}>
           <button type="submit" title="Sign out" className="flex flex-col items-center justify-center gap-0.5 text-[var(--danger)]">
             <LogOut size={20} />

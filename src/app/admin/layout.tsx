@@ -41,18 +41,11 @@ export default async function AdminLayout({
       {/* Desktop sidebar — frosted glass, inset from edges per design system §6 */}
             {/* Mobile bottom tab bar — max 5 items per design system */}
       <nav className="bottom-tab-bar lg:hidden">
-        {[
-          { href: "/admin/dashboard", label: "Overview", icon: LayoutDashboard },
-          { href: "/admin/users", label: "Users", icon: Users },
-          { href: "/admin/listings", label: "Listings", icon: Home },
-          { href: "/admin/verification", label: "Verify", icon: ClipboardList },
-          { href: "/", label: "Home", icon: Building2 },
-        ].map(({ href, label, icon: Icon }) => (
-          <Link href={href} key={href} title={label}>
-            <Icon size={20} aria-hidden="true" />
-            <span>{label}</span>
-          </Link>
-        ))}
+        <Link href="/admin/dashboard" title="Overview"><LayoutDashboard size={20} /><span>Overview</span></Link>
+        <Link href="/admin/users" title="Users"><Users size={20} /><span>Users</span></Link>
+        <Link href="/admin/listings" title="Listings"><Home size={20} /><span>Listings</span></Link>
+        <Link href="/admin/verification" title="Verify"><ClipboardList size={20} /><span>Verify</span></Link>
+        <Link href="/" title="Home"><Building2 size={20} /><span>Home</span></Link>
         <form action={async () => { "use server"; const { signOut } = await import("@/lib/auth/config"); await signOut({ redirectTo: "/" }); }}>
           <button type="submit" title="Sign out" className="flex flex-col items-center justify-center gap-0.5 text-[var(--danger)]">
             <LogOut size={20} />
