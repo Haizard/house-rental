@@ -39,7 +39,7 @@ export default async function StudentDashboard() {
         </div>      </header>
 
       {/* Quick stats */}
-      <section className="grid gap-3 sm:grid-cols-3">
+      <section className="grid grid-cols-2 gap-2.5 sm:gap-3 lg:grid-cols-4">
         <DashboardLink
           href="/student/saved"
           icon={<Bookmark size={20} />}
@@ -177,21 +177,23 @@ function DashboardLink({
 }) {
   return (
     <Link
-      className="glass-surface flex items-center gap-3 p-4 transition hover:-translate-y-0.5"
+      className="glass-surface overflow-hidden p-3.5 transition hover:-translate-y-0.5 sm:p-4"
       href={href}
     >
-      <span className="flex size-10 items-center justify-center rounded-full bg-[var(--accent-soft)] text-[var(--accent)]">
-        {icon}
-      </span>
-      <span>
-        <strong className="block text-xl">{value}</strong>
-        <span className="text-sm text-[var(--text-secondary)]">{label}</span>
-      </span>
-      <ChevronRight
-        className="ml-auto text-[var(--text-tertiary)]"
-        size={18}
-        aria-hidden="true"
-      />
+      <div className="flex items-center gap-2.5">
+        <span className="flex size-8 shrink-0 items-center justify-center rounded-[var(--radius-sm)] bg-[var(--accent-soft)] text-[var(--accent)] sm:size-9">
+          {icon}
+        </span>
+        <span className="min-w-0 flex-1">
+          <strong className="block text-lg font-bold tabular-nums text-[var(--text-primary)] sm:text-xl">{value}</strong>
+          <span className="truncate text-xs text-[var(--text-secondary)] sm:text-sm">{label}</span>
+        </span>
+        <ChevronRight
+          className="shrink-0 text-[var(--text-tertiary)]"
+          size={16}
+          aria-hidden="true"
+        />
+      </div>
     </Link>
   );
 }

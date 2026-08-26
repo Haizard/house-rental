@@ -57,7 +57,7 @@ export default async function AdminDashboardPage() {
       </header>
 
       {/* Metric cards — 2-col mobile / 3-col desktop per design system §8 */}
-      <section className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+      <section className="grid grid-cols-2 gap-2.5 sm:gap-3 lg:grid-cols-3">
         <MetricCard
           icon={<Users size={20} />}
           value={totalUsers}
@@ -164,30 +164,30 @@ function MetricCard({
   accent?: "warning" | "info";
 }) {
   return (
-    <div className="glass-surface flex items-center gap-3 p-4">
-      <span
-        className={`flex size-10 items-center justify-center rounded-full text-[var(--accent)]`}
-        style={{
-          background: accent === "warning"
-            ? "var(--warning-soft)"
-            : accent === "info"
-              ? "rgba(90,200,250,.14)"
-              : "var(--accent-soft)",
-          color: accent === "warning"
-            ? "var(--warning)"
-            : accent === "info"
-              ? "var(--info)"
-              : "var(--accent)",
-        }}
-      >
-        {icon}
-      </span>
-      <div>
-        <strong className="block text-xl">{value}</strong>
-        <span className="text-sm text-[var(--text-secondary)]">{label}</span>
-        <span className="block text-xs text-[var(--text-tertiary)]">
-          {detail}
+    <div className="glass-surface overflow-hidden p-3.5 sm:p-4">
+      <div className="flex items-center gap-2.5">
+        <span
+          className="flex size-8 shrink-0 items-center justify-center rounded-[var(--radius-sm)] sm:size-9"
+          style={{
+            background: accent === "warning"
+              ? "var(--warning-soft)"
+              : accent === "info"
+                ? "var(--info-soft)"
+                : "var(--accent-soft)",
+            color: accent === "warning"
+              ? "var(--warning)"
+              : accent === "info"
+                ? "var(--info)"
+                : "var(--accent)",
+          }}
+        >
+          {icon}
         </span>
+        <div className="min-w-0">
+          <strong className="block text-lg font-bold tabular-nums text-[var(--text-primary)] sm:text-xl">{value}</strong>
+          <span className="block truncate text-xs text-[var(--text-secondary)] sm:text-sm">{label}</span>
+          <span className="block truncate text-[10px] text-[var(--text-tertiary)] sm:text-xs">{detail}</span>
+        </div>
       </div>
     </div>
   );

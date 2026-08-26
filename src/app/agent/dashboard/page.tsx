@@ -69,7 +69,7 @@ export default async function AgentDashboard() {
         </div>
       </header>
 
-      <section className="grid gap-3 sm:grid-cols-4">
+      <section className="grid grid-cols-2 gap-2.5 sm:gap-3 lg:grid-cols-4">
         <Stat
           icon={<Home size={20} />}
           value={agent?.listings.length ?? 0}
@@ -92,7 +92,7 @@ export default async function AgentDashboard() {
         />
         <Link
           href="/agent/requests"
-          className="glass-surface flex items-center gap-3 p-4 transition hover:-translate-y-0.5"
+          className="glass-surface overflow-hidden p-3.5 transition hover:-translate-y-0.5 sm:p-4"
         >
           <span className="flex size-10 items-center justify-center rounded-full bg-[var(--accent-soft)] text-[var(--accent)]">
             <ClipboardList size={20} />
@@ -262,14 +262,16 @@ function Stat({
   label: string;
 }) {
   return (
-    <div className="glass-surface flex items-center gap-3 p-4">
-      <span className="flex size-10 items-center justify-center rounded-full bg-[var(--accent-soft)] text-[var(--accent)]">
-        {icon}
-      </span>
-      <span>
-        <strong className="block text-xl">{value}</strong>
-        <span className="text-sm text-[var(--text-secondary)]">{label}</span>
-      </span>
+    <div className="glass-surface overflow-hidden p-3.5 sm:p-4">
+      <div className="flex items-center gap-2.5">
+        <span className="flex size-8 shrink-0 items-center justify-center rounded-[var(--radius-sm)] bg-[var(--accent-soft)] text-[var(--accent)] sm:size-9">
+          {icon}
+        </span>
+        <span className="min-w-0">
+          <strong className="block text-lg font-bold tabular-nums text-[var(--text-primary)] sm:text-xl">{value}</strong>
+          <span className="truncate text-xs text-[var(--text-secondary)] sm:text-sm">{label}</span>
+        </span>
+      </div>
     </div>
   );
 }
