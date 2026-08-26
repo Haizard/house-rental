@@ -46,7 +46,7 @@ const STATUS_COLORS: Record<string, string> = {
   REQUESTED: "bg-yellow-500/20 text-yellow-400 border-yellow-500/30",
   ACCEPTED: "bg-green-500/20 text-green-400 border-green-500/30",
   DECLINED: "bg-red-500/20 text-red-400 border-red-500/30",
-  COMPLETED: "bg-blue-500/20 text-blue-400 border-blue-500/30",
+  COMPLETED: "bg-green-500/20 text-green-400 border-green-500/30",
   CANCELLED: "bg-gray-500/20 text-gray-400 border-gray-500/30",
   NO_SHOW: "bg-orange-500/20 text-orange-400 border-orange-500/30",
 };
@@ -180,7 +180,7 @@ export function AgentCalendarView({
           <p className="text-xs font-medium text-[var(--text-tertiary)]">
             Completed
           </p>
-          <p className="mt-1 text-2xl font-bold text-blue-400">
+          <p className="mt-1 text-2xl font-bold text-green-400">
             {completedCount}
           </p>
         </div>
@@ -380,7 +380,7 @@ export function AgentCalendarView({
                           updateViewingStatus(v.id, "COMPLETED")
                         }
                         disabled={updatingId === v.id}
-                        className="mt-2 w-full rounded-lg bg-blue-500/20 px-3 py-1.5 text-[11px] font-bold text-blue-400 hover:bg-blue-500/30 transition"
+                        className="mt-2 w-full rounded-lg bg-green-500/20 px-3 py-1.5 text-[11px] font-bold text-green-400 hover:bg-green-500/30 transition"
                       >
                         Mark Completed
                       </button>

@@ -81,7 +81,7 @@ export default async function StudentRequestsPage() {
                         req.status === "OPEN"
                           ? "bg-emerald-100 text-emerald-700"
                           : req.status === "SELECTED"
-                            ? "bg-blue-100 text-blue-700"
+                            ? "bg-green-100 text-green-700"
                             : "bg-[var(--accent-soft)] text-[var(--accent)]"
                       }`}
                     >
@@ -106,8 +106,8 @@ export default async function StudentRequestsPage() {
                     </p>
 
                     {selected && (
-                      <div className="mt-2 rounded-xl bg-blue-50 p-3">
-                        <p className="text-xs font-medium text-blue-700">
+                      <div className="mt-2 rounded-xl bg-green-50 p-3">
+                        <p className="text-xs font-medium text-green-700">
                           ✓ Selected: {selected.agent.businessName}
                           {selected.listing ? ` — ${selected.listing.title}` : ""}
                         </p>

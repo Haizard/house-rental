@@ -15,9 +15,9 @@
   --glass-blur: 20px;
   --glass-blur-strong: 32px;
   --glass-shadow: 0 8px 32px rgba(31, 41, 55, 0.08), 0 1px 2px rgba(31, 41, 55, 0.04);
-  --accent: #0A84FF;
-  --accent-pressed: #0670E0;
-  --accent-soft: rgba(10, 132, 255, 0.14);
+  --accent: #22C55E;
+  --accent-pressed: #16A34A;
+  --accent-soft: rgba(34, 197, 94, 0.14);
   --success: #34C759;
   --success-soft: rgba(52, 199, 89, 0.14);
   --warning: #FF9F0A;
@@ -64,9 +64,9 @@
   --glass-border: rgba(255, 255, 255, 0.08);
   --glass-border-hairline: rgba(255, 255, 255, 0.12);
   --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.32), 0 1px 2px rgba(0, 0, 0, 0.16);
-  --accent: #0A84FF;
-  --accent-pressed: #0670E0;
-  --accent-soft: rgba(10, 132, 255, 0.18);
+  --accent: #22C55E;
+  --accent-pressed: #16A34A;
+  --accent-soft: rgba(34, 197, 94, 0.18);
   --text-primary: rgba(255, 255, 255, 0.92);
   --text-secondary: rgba(255, 255, 255, 0.6);
   --text-tertiary: rgba(255, 255, 255, 0.3);
@@ -112,10 +112,10 @@ button, input, select, textarea { font: inherit; }
 .button:focus-visible, .filter-chip:focus-visible, a:focus-visible, input:focus-visible {
   outline: 2px solid var(--accent); outline-offset: 2px;
 }
-.button-primary { background: var(--accent); color: var(--text-on-accent); box-shadow: 0 4px 14px rgba(10, 132, 255, 0.3); }
-.button-primary:hover { background: var(--accent-pressed); box-shadow: 0 6px 20px rgba(10, 132, 255, 0.4); }
+.button-primary { background: var(--accent); color: var(--text-on-accent); box-shadow: 0 4px 14px rgba(34, 197, 94, 0.3); }
+.button-primary:hover { background: var(--accent-pressed); box-shadow: 0 6px 20px rgba(34, 197, 94, 0.4); }
 .button-glass { background: var(--glass-fill-strong); border-color: var(--glass-border); color: var(--text-primary); }
-.button-glass:hover { background: var(--accent-soft); border-color: rgba(10, 132, 255, 0.2); }
+.button-glass:hover { background: var(--accent-soft); border-color: rgba(34, 197, 94, 0.2); }
 
 .eyebrow { margin: 0; color: var(--accent); font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; }
 
@@ -146,8 +146,8 @@ button, input, select, textarea { font: inherit; }
   background: var(--glass-fill); padding: 6px 14px; color: var(--text-secondary); font-size: 13px; font-weight: 500;
   transition: all 200ms cubic-bezier(0.25, 0.1, 0.25, 1); cursor: pointer;
 }
-.filter-chip:hover { background: var(--accent-soft); border-color: rgba(10, 132, 255, 0.25); color: var(--accent); }
-.filter-chip-active { background: var(--accent-soft); border-color: rgba(10, 132, 255, 0.35); color: var(--accent); font-weight: 600; }
+.filter-chip:hover { background: var(--accent-soft); border-color: rgba(34, 197, 94, 0.25); color: var(--accent); }
+.filter-chip-active { background: var(--accent-soft); border-color: rgba(34, 197, 94, 0.35); color: var(--accent); font-weight: 600; }
 
 .stat-tile { display: flex; min-height: 80px; flex-direction: column; justify-content: end; border: 1px solid var(--glass-border-hairline); border-radius: var(--radius-md); background: var(--glass-fill-subtle); padding: var(--space-3); transition: transform 200ms ease; }
 .stat-tile:hover { transform: translateY(-2px); }
