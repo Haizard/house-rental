@@ -46,7 +46,10 @@ Rules:
 - "self" or "self-contained" means the room has its own bathroom.
 - "chumba" means room. "nyumba" means house. "jumba" means building/apartment.
 
-Return a JSON object matching the schema exactly. No markdown, no extra text.`;
+IMPORTANT: Return ONLY a JSON object with these EXACT camelCase keys. Do NOT use snake_case.
+Return format: {"area": "string", "propertyType": "string", "minPrice": number, "maxPrice": number, "selfContained": boolean, "internet": boolean, "availableMonth": number, "summary": "string"}
+
+No markdown, no extra text, no code blocks. Just the raw JSON object.`;
 
 /**
  * Build the user message for a housing search query.

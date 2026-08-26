@@ -37,6 +37,7 @@ export async function POST(request: Request) {
     });
 
     // Parse and validate AI output — never trust raw AI
+    console.log("AI response text:", text);
     const jsonMatch = text.match(/\{[\s\S]*\}/);
     if (!jsonMatch) {
       return NextResponse.json(
@@ -45,7 +46,25 @@ export async function POST(request: Request) {
       );
     }
 
-    const validated = housingSearchSchema.safeParse(JSON.parse(jsonMatch[0]));
+    // Convert snake_case keys to camelCase (DeepSeek sometimes uses snake_case)
+    let parsed = JSON.parse(jsonMatch[0]);
+    if (parsed.property_type !== undefined) {
+      parsed = {
+        area: parsed.area,
+        propertyType: parsed.property_type,
+        minPrice: parsed.min_price,
+        maxPrice: parsed.max_price,
+        selfContained: parsed.self_contained ?? parsed.furnished,
+        internet: parsed.internet ?? parsed.near_university,
+        availableMonth: parsed.available_month,
+        summary: parsed.summary ?? `Found listings for ${parsed.area || "your search"}`,
+      };
+    }
+    // Ensure summary exists
+    if (!parsed.summary) {
+      parsed.summary = `Found listings for ${parsed.area || "your search"}`;
+    }
+    const validated = housingSearchSchema.safeParse(parsed);
     if (!validated.success) {
       return NextResponse.json(
         { error: "Could not parse search criteria. Try being more specific." },
