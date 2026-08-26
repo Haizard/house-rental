@@ -202,8 +202,8 @@ export function BookingCalendar({
   if (success) {
     return (
       <div className="glass-surface mt-3 p-6 text-center animate-fade-in">
-        <div className="mx-auto mb-3 flex size-14 items-center justify-center rounded-full bg-green-500/10">
-          <Check size={28} className="text-green-500" />
+        <div className="mx-auto mb-3 flex size-14 items-center justify-center rounded-full bg-[#FBC618]/10">
+          <Check size={28} className="text-[#FBC618]" />
         </div>
         <h3 className="text-lg font-bold text-[var(--text-primary)]">
           Viewing Requested!
@@ -390,4 +390,6 @@ export function BookingCalendar({
       )}
     </div>
   );
+}
+
 }

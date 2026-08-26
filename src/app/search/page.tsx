@@ -19,8 +19,8 @@ export default async function SearchPage({ searchParams }: PageProps<"/search">)
           <ArrowLeft size={18} aria-hidden="true" />Home
         </Link>
         <p className="eyebrow">Student housing in Arusha</p>
-        <h1 className="mt-2 text-3xl font-bold text-[var(--text-primary)] sm:text-4xl">Find a home</h1>
-        <p className="mt-2 text-[15px] text-[var(--text-secondary)]">Browse available rooms and homes before choosing an agent.</p>
+        <h1 className="mt-2 ios-page-title">Find a home</h1>
+        <p className="mt-2 ios-subhead">Browse available rooms and homes before choosing an agent.</p>
         <div className="mt-7">
           <SearchMapToggle listings={listings} />
           <ListingSearch listings={listings} initialArea={typeof area === "string" ? area : ""} />

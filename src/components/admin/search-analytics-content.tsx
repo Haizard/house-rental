@@ -106,7 +106,7 @@ export function SearchAnalyticsContent() {
 
         <div className="glass-surface p-5">
           <div className="flex items-center gap-2 text-[var(--text-tertiary)]">
-            <TrendingUp size={16} className="text-green-500" />
+            <TrendingUp size={16} className="text-[#FBC618]" />
             <span className="text-xs font-medium">Unique Searchers</span>
           </div>
           <p className="mt-2 text-3xl font-bold text-[var(--text-primary)]">
@@ -129,7 +129,7 @@ export function SearchAnalyticsContent() {
 
         <div className="glass-surface p-5">
           <div className="flex items-center gap-2 text-[var(--text-tertiary)]">
-            <BarChart3 size={16} className="text-green-500" />
+            <BarChart3 size={16} className="text-[#FBC618]" />
             <span className="text-xs font-medium">Avg / Day</span>
           </div>
           <p className="mt-2 text-3xl font-bold text-[var(--text-primary)]">

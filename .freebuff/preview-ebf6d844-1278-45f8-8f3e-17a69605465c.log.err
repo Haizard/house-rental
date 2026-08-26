@@ -1,0 +1,10 @@
+[browser] Image with src "https://qihloymfetbfjcqafwys.supabase.co/storage/v1/object/public/listing-images/listings/adcf99fe-5bf5-446b-b42d-fff0306ecc76/892f0a9a-b8d1-4ebd-8e0d-31873e1b8541.jpg" has "fill" and parent element with invalid "position". Provided "static" should be one of absolute,fixed,relative.
+[browser] Image with src "https://qihloymfetbfjcqafwys.supabase.co/storage/v1/object/public/listing-images/listings/bf9ebab7-c53d-4355-9ce4-fd9315be5695/bd87b6a8-4ada-45d7-9bd3-4bb7c9238f86.PNG" has "fill" and parent element with invalid "position". Provided "static" should be one of absolute,fixed,relative.
+[browser] Image with src "https://qihloymfetbfjcqafwys.supabase.co/storage/v1/object/public/listing-images/listings/adcf99fe-5bf5-446b-b42d-fff0306ecc76/892f0a9a-b8d1-4ebd-8e0d-31873e1b8541.jpg" has "fill" and parent element with invalid "position". Provided "static" should be one of absolute,fixed,relative.
+[browser] Image with src "https://qihloymfetbfjcqafwys.supabase.co/storage/v1/object/public/listing-images/listings/bf9ebab7-c53d-4355-9ce4-fd9315be5695/bd87b6a8-4ada-45d7-9bd3-4bb7c9238f86.PNG" has "fill" and parent element with invalid "position". Provided "static" should be one of absolute,fixed,relative.
+⨯ Error: The destination stream closed early.
+    at ignore-listed frames {
+  digest: '1002346150'
+}
+[browser] Image with src "https://qihloymfetbfjcqafwys.supabase.co/storage/v1/object/public/listing-images/listings/bf9ebab7-c53d-4355-9ce4-fd9315be5695/bd87b6a8-4ada-45d7-9bd3-4bb7c9238f86.PNG" has "fill" and parent element with invalid "position". Provided "static" should be one of absolute,fixed,relative.
+[browser] Image with src "https://qihloymfetbfjcqafwys.supabase.co/storage/v1/object/public/listing-images/listings/adcf99fe-5bf5-446b-b42d-fff0306ecc76/892f0a9a-b8d1-4ebd-8e0d-31873e1b8541.jpg" has "fill" and parent element with invalid "position". Provided "static" should be one of absolute,fixed,relative.

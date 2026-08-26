@@ -213,7 +213,7 @@ export function ChatThread({ conversationId, initialMessages, currentUserId }: P
 
         {/* Online status indicator */}
         {isOtherOnline && !isOtherTyping && (
-          <span className="absolute -top-6 left-2 text-[11px] font-medium text-green-500 animate-fade-in">
+          <span className="absolute -top-6 left-2 text-[11px] font-medium text-[#FBC618] animate-fade-in">
             ● Online
           </span>
         )}

@@ -1,0 +1,1 @@
+Start-Process -FilePath "cmd.exe" -ArgumentList "/c","cd /d C:\Users\haizard\Desktop\house-rental && npm run dev > C:\Users\haizard\Desktop\house-rental\.freebuff\preview-ebf6d844-1278-45f8-8f3e-17a69605465c.log 2> C:\Users\haizard\Desktop\house-rental\.freebuff\preview-ebf6d844-1278-45f8-8f3e-17a69605465c.log.err" -WindowStyle Hidden -PassThru | Select-Object -ExpandProperty Id

@@ -97,8 +97,8 @@ export default function AgentSignupPage() {
                 <Building2 size={20} aria-hidden="true" />
               </span>
               <div>
-                <h1 className="text-2xl font-bold">Join as an agent</h1>
-                <p className="text-sm text-[var(--text-secondary)]">
+                <h1 className="ios-title2">Join as an agent</h1>
+                <p className="ios-subhead">
                   List properties and connect with students.
                 </p>
               </div>
@@ -106,7 +106,7 @@ export default function AgentSignupPage() {
 
             <form className="mt-8 space-y-4" onSubmit={handleAccountSubmit}>
               <div className="grid gap-4 sm:grid-cols-2">
-                <label className="block text-sm font-medium">
+                <label className="block ios-subhead font-medium">
                   First name
                   <input
                     className="glass-search mt-2 w-full px-3 py-3 outline-none"
@@ -115,7 +115,7 @@ export default function AgentSignupPage() {
                     required
                   />
                 </label>
-                <label className="block text-sm font-medium">
+                <label className="block ios-subhead font-medium">
                   Last name
                   <input
                     className="glass-search mt-2 w-full px-3 py-3 outline-none"
@@ -125,7 +125,7 @@ export default function AgentSignupPage() {
                   />
                 </label>
               </div>
-              <label className="block text-sm font-medium">
+              <label className="block ios-subhead font-medium">
                 Email
                 <input
                   className="glass-search mt-2 w-full px-3 py-3 outline-none"
@@ -135,7 +135,7 @@ export default function AgentSignupPage() {
                   required
                 />
               </label>
-              <label className="block text-sm font-medium">
+              <label className="block ios-subhead font-medium">
                 Password
                 <input
                   className="glass-search mt-2 w-full px-3 py-3 outline-none"
@@ -167,15 +167,15 @@ export default function AgentSignupPage() {
                 <ShieldCheck size={20} aria-hidden="true" />
               </span>
               <div>
-                <h1 className="text-2xl font-bold">Business profile</h1>
-                <p className="text-sm text-[var(--text-secondary)]">
+                <h1 className="ios-title2">Business profile</h1>
+                <p className="ios-subhead">
                   Tell students about your agency.
                 </p>
               </div>
             </div>
 
             <form className="mt-8 space-y-4" onSubmit={handleBusinessSubmit}>
-              <label className="block text-sm font-medium">
+              <label className="block ios-subhead font-medium">
                 Business name
                 <input
                   className="glass-search mt-2 w-full px-3 py-3 outline-none"
@@ -184,7 +184,7 @@ export default function AgentSignupPage() {
                   required
                 />
               </label>
-              <label className="block text-sm font-medium">
+              <label className="block ios-subhead font-medium">
                 Bio (optional)
                 <textarea
                   className="glass-search mt-2 min-h-20 w-full resize-y px-3 py-3 outline-none"

@@ -52,7 +52,7 @@ export function OfflineIndicator() {
     <div
       className={`fixed bottom-24 left-1/2 z-50 -translate-x-1/2 px-4 py-2.5 text-sm font-medium shadow-lg transition-all duration-300 ${
         isOnline
-          ? "translate-y-0 opacity-100 bg-green-500/90 text-white"
+          ? "translate-y-0 opacity-100 bg-[#FBC618]/100/90 text-white"
           : "translate-y-0 opacity-100 bg-orange-500/90 text-white"
       }`}
     >

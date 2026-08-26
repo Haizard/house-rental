@@ -1,0 +1,11 @@
+
+> house-rental@0.1.0 dev
+> next dev
+
+▲ Next.js 16.3.1 (Turbopack)
+- Local:         http://localhost:50244
+- Network:       http://192.168.1.6:50244
+- Environments: .env.local, .env
+✓ Ready in 27.9s
+✓ Running next.config.ts took 3.9s
+[?25h

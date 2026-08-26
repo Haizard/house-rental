@@ -48,7 +48,7 @@ export function SwipeToggle({ listings }: { listings: Listing[] }) {
           <Layers size={14} /> Swipe
         </button>
         {savedIds.size > 0 && (
-          <span className="ml-auto flex items-center gap-1 text-xs text-green-500">
+          <span className="ml-auto flex items-center gap-1 text-xs text-[#FBC618]">
             <Heart size={12} fill="currentColor" /> {savedIds.size}
           </span>
         )}
