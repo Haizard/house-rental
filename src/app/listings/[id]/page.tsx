@@ -45,7 +45,7 @@ export default async function ListingDetailPage({
 
         <div className="grid gap-6 lg:grid-cols-[1.35fr_.65fr]">
           {/* Left: Image + Details */}
-          <section className="overflow-hidden rounded-[22px] border border-white/70 bg-white/45 shadow-[var(--glass-shadow)]">
+          <section className="overflow-hidden rounded-[22px] border glass-surface">
             <ListingGallery
               images={(listing.images ?? []).map((img) => ({
                 id: img.id,
@@ -238,7 +238,7 @@ export default async function ListingDetailPage({
             )}
 
             {listing.verified && (
-              <p className="mt-5 flex items-center gap-2 text-sm font-medium text-emerald-700">
+              <p className="mt-5 flex items-center gap-2 text-sm font-medium text-[var(--success)]">
                 <BadgeCheck size={18} aria-hidden="true" />
                 Verified listing
               </p>

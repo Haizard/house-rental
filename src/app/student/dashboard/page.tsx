@@ -3,7 +3,6 @@ import Link from "next/link";
 import { prisma } from "@/lib/db/prisma";
 import { requireRole } from "@/lib/auth/guards";
 import { StatusPill } from "@/components/ui/status-pill";
-import { SiteNav } from "@/components/layout/site-nav";
 
 export default async function StudentDashboard() {
   const session = await requireRole("STUDENT");
@@ -28,9 +27,7 @@ export default async function StudentDashboard() {
 
   return (
     <div className="mx-auto max-w-5xl">
-      <SiteNav />
-
-      <header className="flex items-end justify-between gap-4 pb-8 pt-6">
+            <header className="flex items-end justify-between gap-4 pb-8 pt-6">
         <div>
           <p className="eyebrow">Student dashboard</p>
           <h1 className="mt-2 text-3xl font-bold sm:text-4xl">

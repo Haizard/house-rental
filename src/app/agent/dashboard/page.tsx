@@ -5,7 +5,6 @@ import { requireRole } from "@/lib/auth/guards";
 import { ViewingStatus } from "@/components/agent/viewing-status";
 import { VerificationForm } from "@/components/agent/verification-form";
 import { AgentAdSlot } from "@/components/ads/agent-ad-slot";
-import { SiteNav } from "@/components/layout/site-nav";
 
 export default async function AgentDashboard() {
   const session = await requireRole("AGENT");
@@ -50,9 +49,7 @@ export default async function AgentDashboard() {
 
   return (
     <div className="mx-auto max-w-6xl">
-      <SiteNav />
-
-      <header className="flex items-end justify-between gap-4 pb-8 pt-6">
+            <header className="flex items-end justify-between gap-4 pb-8 pt-6">
         <div>
           <p className="eyebrow">Agent workspace</p>
           <h1 className="mt-2 text-3xl font-bold sm:text-4xl">

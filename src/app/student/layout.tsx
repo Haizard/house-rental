@@ -40,7 +40,7 @@ export default async function StudentLayout({
   return (
     <div className="min-h-screen">
       {/* Desktop sidebar — frosted glass, inset from edges per design system §6 */}
-      <aside className="glass-nav fixed bottom-3 left-3 right-3 z-10 flex items-center justify-around overflow-hidden p-2 lg:bottom-auto lg:left-4 lg:top-4 lg:flex lg:h-[calc(100vh-2rem)] lg:w-56 lg:flex-col lg:items-stretch lg:justify-start lg:overflow-visible lg:p-4">
+      <aside className="bottom-tab-bar lg:fixed lg:bottom-auto lg:left-4 lg:top-4 lg:flex lg:h-[calc(100vh-2rem)] lg:w-56 lg:flex-col lg:items-stretch lg:justify-start lg:overflow-visible lg:p-4 lg:glass-nav">
         <Link
           className="mb-6 hidden items-center gap-2 font-semibold lg:flex"
           href="/"
