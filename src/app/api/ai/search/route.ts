@@ -64,7 +64,16 @@ export async function POST(request: Request) {
     if (!parsed.summary) {
       parsed.summary = `Found listings for ${parsed.area || "your search"}`;
     }
-    const validated = housingSearchSchema.safeParse(parsed);
+    console.log("Parsed JSON:", JSON.stringify(parsed, null, 2));
+    // Strip null values so optional fields become undefined
+    const cleaned = Object.fromEntries(
+      Object.entries(parsed).filter(([_, v]) => v !== null)
+    );
+    const validated = housingSearchSchema.safeParse(cleaned);
+    console.log("Validation success:", validated.success);
+    if (!validated.success) {
+      console.log("Validation errors:", JSON.stringify(validated.error.issues, null, 2));
+    }
     if (!validated.success) {
       return NextResponse.json(
         { error: "Could not parse search criteria. Try being more specific." },
