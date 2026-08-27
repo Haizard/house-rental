@@ -72,7 +72,7 @@ export async function SiteNav() {
 
           {/* Auth buttons */}
           {isLoggedIn ? (
-            <div className="flex min-w-0 items-center gap-1 sm:gap-1.5">
+            <div className="hidden min-w-0 items-center gap-1 sm:flex sm:gap-1.5">
               <Link
                 className="button button-glass hidden h-9 px-2 font-t-subhead sm:inline-flex sm:px-3"
                 href={getDashboardLink(userRole ?? "STUDENT")}
