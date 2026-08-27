@@ -90,17 +90,17 @@ export default async function AgentLeadsPage() {
                 ) : (
                   col.leads.map((lead) => (
                     <article
-                      className="glass-surface space-y-2 p-3"
+                      className="glass-surface flex flex-col overflow-hidden space-y-2 p-3"
                       key={lead.id}
                     >
                       <div className="flex items-start justify-between gap-2">
-                        <h3 className="text-sm font-semibold">
+                        <h3 className="min-w-0 flex-1 truncate text-sm font-semibold">
                           {lead.student.user.firstName}{" "}
                           {lead.student.user.lastName}
                         </h3>
                         <StatusPill status={lead.status} />
                       </div>
-                      <p className="text-xs text-[var(--text-secondary)]">
+                      <p className="min-w-0 truncate text-xs text-[var(--text-secondary)]">
                         {lead.listing.title}
                       </p>
                       <p className="text-xs font-medium text-[var(--text-primary)]">
@@ -151,7 +151,7 @@ export default async function AgentLeadsPage() {
                       <div className="flex gap-2 pt-1">
                         {lead.conversation && (
                           <Link
-                            className="button button-glass min-h-8 flex-1 px-2 text-[11px]"
+                            className="button button-glass min-h-8 min-w-0 flex-1 px-2 text-[11px]"
                             href={`/agent/chats/${lead.conversation.id}`}
                           >
                             <MessageCircle size={13} aria-hidden="true" /> Chat
