@@ -3,9 +3,15 @@ import { headers } from "next/headers";
 import Stripe from "stripe";
 import { handleWebhookEvent } from "@/lib/payments/stripe";
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || "", {
-  apiVersion: "2026-07-29.dahlia",
-});
+let _stripe: Stripe | null = null;
+function getStripe(): Stripe {
+  if (!_stripe) {
+    const key = process.env.STRIPE_SECRET_KEY;
+    if (!key) throw new Error("STRIPE_SECRET_KEY is not configured");
+    _stripe = new Stripe(key, { apiVersion: "2025-02-24.acacia" });
+  }
+  return _stripe;
+}
 
 /** POST — handle Stripe webhook */
 export async function POST(request: Request) {
@@ -24,7 +30,7 @@ export async function POST(request: Request) {
 
   let event: Stripe.Event;
   try {
-    event = stripe.webhooks.constructEvent(body, sig, webhookSecret);
+    event = getStripe().webhooks.constructEvent(body, sig, webhookSecret);
   } catch (error) {
     console.error("Webhook signature verification failed:", error);
     return NextResponse.json({ error: "Invalid signature." }, { status: 400 });

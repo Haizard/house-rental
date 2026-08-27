@@ -26,25 +26,6 @@ export const housingSearchSchema = z.object({
   availableMonth: z.number().int().min(1).max(12).optional().nullable().transform(v => v ?? undefined).describe("Preferred move-in month (1-12)"),
   /** Natural language summary of what the student is looking for */
   summary: z.string().describe("Brief summary of the search criteria"),
-  /** Free-text area or neighborhood name (e.g. "Njiro", "Olorien") */
-  area: z.string().optional().describe("Area or neighborhood name"),
-  /** Property type filter */
-  propertyType: z
-    .enum(["Self-contained", "Private room", "One bedroom", "Single room", "Studio", "Apartment"])
-    .optional()
-    .describe("Type of property"),
-  /** Minimum monthly rent in TZS */
-  minPrice: z.number().int().positive().optional().describe("Minimum monthly rent in TZS"),
-  /** Maximum monthly rent in TZS */
-  maxPrice: z.number().int().positive().optional().describe("Maximum monthly rent in TZS"),
-  /** Whether the room must be self-contained (own bathroom) */
-  selfContained: z.boolean().optional().describe("Whether the room must be self-contained"),
-  /** Whether Wi-Fi/internet is required */
-  internet: z.boolean().optional().describe("Whether internet/Wi-Fi is required"),
-  /** Preferred move-in month (1-12) */
-  availableMonth: z.number().int().min(1).max(12).optional().describe("Preferred move-in month (1-12)"),
-  /** Natural language summary of what the student is looking for */
-  summary: z.string().describe("Brief summary of the search criteria"),
 });
 
 export type HousingSearchFilters = z.infer<typeof housingSearchSchema>;

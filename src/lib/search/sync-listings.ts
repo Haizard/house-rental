@@ -159,7 +159,7 @@ export async function reindexAllListings(): Promise<{ indexed: number; errors: n
           errors++;
           return null;
         }
-      }).filter(Boolean);
+      }).filter((doc): doc is NonNullable<typeof doc> => doc !== null);
 
       if (docs.length > 0) {
         await ms.index(LISTINGS_INDEX).addDocuments(docs);

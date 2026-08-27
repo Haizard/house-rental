@@ -36,7 +36,7 @@ function getClient(): BedrockRuntimeClient {
 // --- Types ---
 
 export interface ChatMessage {
-  role: "user" | "assistant";
+  role: "system" | "user" | "assistant";
   content: string;
 }
 

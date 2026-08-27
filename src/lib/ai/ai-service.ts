@@ -10,7 +10,12 @@ import {
   type ChatMessage as BedrockChatMessage,
 } from "./providers/bedrock";
 
-export type { ChatMessage } from "./providers/bedrock";
+// Re-export ChatMessage with system role support for internal use
+export type ChatMessage = { role: "system" | "user" | "assistant"; content: string };
+
+export interface AIService {
+  chat(params: { messages: ChatMessage[]; temperature?: number; maxTokens?: number; model?: string }): Promise<{ text: string; tokensUsed: number }>;
+}
 
 export interface AIServiceResponse {
   text: string;
@@ -61,7 +66,7 @@ async function askBedrock(
  * Main AI chat function — tries Bedrock first, falls back gracefully.
  */
 export async function aiChat(params: {
-  messages: BedrockChatMessage[];
+  messages: ChatMessage[];
   temperature?: number;
   maxTokens?: number;
   systemPrompt?: string;
@@ -84,7 +89,7 @@ export async function aiChat(params: {
 
   // Fallback to OpenAI/OpenRouter if configured
   try {
-    const { aiService: openaiService } = await import("./providers/openai");
+    const { aiService: openaiService } = await import("./providers/openai") as { aiService: { chat(params: { messages: { role: string; content: string }[]; temperature?: number; maxTokens?: number }): Promise<{ text: string; tokensUsed: number }> } };
     const { text, tokensUsed } = await openaiService.chat({
       messages: params.messages.map((m) => ({
         role: m.role,

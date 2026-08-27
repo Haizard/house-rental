@@ -1,0 +1,60 @@
+services:
+  - type: web
+    name: nyumba-nearby
+    runtime: node
+    plan: starter
+    buildCommand: bash scripts/render-build.sh
+    startCommand: npx prisma migrate deploy && npm run start
+    healthCheckPath: /
+    autoDeploy: true
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DATABASE_URL
+        sync: false
+      - key: NEXTAUTH_SECRET
+        generateValue: true
+      - key: NEXT_PUBLIC_APP_URL
+        value: https://nyumba-nearby.onrender.com
+      - key: NEXTAUTH_URL
+        value: https://nyumba-nearby.onrender.com
+      # Supabase
+      - key: supabase_project_url
+        sync: false
+      - key: supabase_service_role_secret
+        sync: false
+      - key: supabase_anon_public
+        sync: false
+      - key: NEXT_PUBLIC_SUPABASE_URL
+        sync: false
+      # AI (optional - uncomment when ready)
+      # - key: AWS_ACCESS_KEY_ID
+      #   sync: false
+      # - key: AWS_SECRET_ACCESS_KEY
+      #   sync: false
+      # - key: AWS_BEDROCK_REGION
+      #   value: us-east-1
+      # - key: AWS_BEDROCK_MODEL_ID
+      #   value: deepseek.v3.2
+      # OpenAI/OpenRouter fallback (optional)
+      # - key: OPENAI_API_KEY
+      #   sync: false
+      # - key: OPENROUTER_API_KEY
+      #   sync: false
+      # Payments (optional)
+      # - key: STRIPE_SECRET_KEY
+      #   sync: false
+      # - key: STRIPE_WEBHOOK_SECRET
+      #   sync: false
+      # Email (optional)
+      # - key: RESEND_API_KEY
+      #   sync: false
+      # - key: EMAIL_FROM
+      #   value: noreply@nyumbanearby.com
+      # Push Notifications (optional)
+      - key: NEXT_PUBLIC_VAPID_PUBLIC_KEY
+        sync: false
+      - key: VAPID_PRIVATE_KEY
+        sync: false
+      - key: VAPID_EMAIL
+        sync: false

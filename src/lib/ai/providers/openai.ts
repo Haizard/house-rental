@@ -1,4 +1,5 @@
 import type { AIService } from "../ai-service";
+// Note: AIService is defined in ai-service.ts
 
 export type ChatMessage = {
   role: "system" | "user" | "assistant";

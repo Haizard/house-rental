@@ -1,6 +1,5 @@
 import { IconBadgeInline } from "@/components/ui/icon-badge";
 import { prisma } from "@/lib/db/prisma";
-import { IconBadgeInline } from "@/components/ui/icon-badge";
 import {
   AlertTriangle,
   BadgeCheck,

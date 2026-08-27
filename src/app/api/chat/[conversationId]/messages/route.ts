@@ -103,11 +103,11 @@ export async function POST(
 
   // Send push notification to the other party (non-blocking)
   try {
-    const lead = await prisma.lead.findUnique({
-      where: { conversation: { id: conversationId } },
-      select: {
-        student: { select: { userId: true, user: { select: { firstName: true } } } },
-        agent: { select: { userId: true, user: { select: { firstName: true } }, businessName: true } },
+    const lead = await prisma.lead.findFirst({
+      where: { id: conversationId },
+      include: {
+        student: { include: { user: true } },
+        agent: { include: { user: true } },
         listing: { select: { title: true } },
       },
     });
@@ -118,7 +118,7 @@ export async function POST(
         : lead.student.userId;
       const senderName = session.user.id === lead.student.userId
         ? lead.student.user.firstName
-        : lead.agent.businessName;
+        : (lead.agent as any).businessName || lead.agent.user.firstName;
 
       const { sendPushToUser } = await import("@/lib/push/web-push");
       sendPushToUser(recipientUserId, {
@@ -126,7 +126,7 @@ export async function POST(
         body: parsed.data.content.slice(0, 100),
         url: `/chat/${conversationId}`,
         tag: `chat-${conversationId}`,
-        data: { type: "NEW_MESSAGE", conversationId, listingTitle: lead.listing.title },
+        data: { type: "NEW_MESSAGE", conversationId, listingTitle: lead.listing?.title },
       }).catch(() => {}); // fire-and-forget
     }
   } catch { /* push is best-effort */ }
