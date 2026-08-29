@@ -224,16 +224,17 @@ export function MapView({
   useEffect(() => {
     if (!mapInstanceRef.current) return;
     const visibleIds = new Set(filteredListings.map((l) => l.id));
+    const map = mapInstanceRef.current as { removeLayer: (layer: unknown) => void; addLayer: (layer: unknown) => void; fitBounds: (bounds: unknown, opts?: unknown) => void };
 
     markersRef.current.forEach((marker, id) => {
-      const m = marker as { setIcon: (icon: unknown) => void; _visible: boolean; _listing: MapListing };
+      const m = marker as { _visible: boolean };
       const shouldShow = visibleIds.has(id);
       if (m._visible !== shouldShow) {
         m._visible = shouldShow;
         if (shouldShow) {
-          (m as unknown as { addTo: (map: unknown) => unknown }).addTo(mapInstanceRef.current!);
+          map.addLayer(marker);
         } else {
-          (m as unknown as { remove: () => void }).remove();
+          map.removeLayer(marker);
         }
       }
     });
@@ -246,10 +247,15 @@ export function MapView({
         .map((l) => [l.latitude!, l.longitude!] as [number, number]);
       if (visibleCoords.length > 0) {
         const bounds = L.latLngBounds(visibleCoords);
-        (mapInstanceRef.current as { fitBounds: (bounds: unknown, opts?: unknown) => void }).fitBounds(bounds, { padding: [50, 50], maxZoom: 15 });
+        map.fitBounds(bounds, { padding: [50, 50], maxZoom: 15 });
       }
     }
   }, [filteredListings]);
+
+  // Keep allListings in sync with prop changes
+  useEffect(() => {
+    setAllListings(listings);
+  }, [listings]);
 
   // Sync selected marker highlight from parent
   useEffect(() => {
