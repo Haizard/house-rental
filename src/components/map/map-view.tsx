@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { MapPin, Bed, Bath, DollarSign, ExternalLink } from "lucide-react";
+import { MapPin, ExternalLink } from "lucide-react";
 import Link from "next/link";
 
 type MapListing = {
@@ -21,38 +21,42 @@ type MapViewProps = {
   listings: MapListing[];
   center?: [number, number];
   zoom?: number;
+  selectedId?: string | null;
+  onSelectListing?: (listing: MapListing | null) => void;
 };
 
 // Default center: Arusha, Tanzania
 const DEFAULT_CENTER: [number, number] = [-3.3869, 36.6830];
 const DEFAULT_ZOOM = 12;
 
-export function MapView({ listings, center = DEFAULT_CENTER, zoom = DEFAULT_ZOOM }: MapViewProps) {
+export function MapView({
+  listings,
+  center = DEFAULT_CENTER,
+  zoom = DEFAULT_ZOOM,
+  selectedId,
+  onSelectListing,
+}: MapViewProps) {
   const mapRef = useRef<HTMLDivElement>(null);
   const mapInstanceRef = useRef<unknown>(null);
+  const markersRef = useRef<Map<string, unknown>>(new Map());
   const [selectedListing, setSelectedListing] = useState<MapListing | null>(null);
-  const [mapReady, setMapReady] = useState(false);
 
   useEffect(() => {
     if (!mapRef.current || mapInstanceRef.current) return;
 
-    // Guard against stale async callbacks after cleanup
     let cancelled = false;
 
-    // Dynamic import of Leaflet (client-only)
     Promise.all([
       import("leaflet"),
       import("leaflet/dist/leaflet.css"),
     ]).then(([L]) => {
-      // Bail if component unmounted or effect was cleaned up during import
       if (cancelled || !mapRef.current || mapInstanceRef.current) return;
 
-      // Fix default marker icon issue
       delete (L.Icon.Default.prototype as unknown as Record<string, unknown>)._getIconUrl;
       L.Icon.Default.mergeOptions({
         iconRetinaUrl: "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-icon-2x.png",
         iconUrl: "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-icon.png",
-        shadowUrl: "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-shadow.png",
+        shadowUrl: "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-marker-shadow.png",
       });
 
       const map = L.map(mapRef.current!, {
@@ -62,81 +66,65 @@ export function MapView({ listings, center = DEFAULT_CENTER, zoom = DEFAULT_ZOOM
         scrollWheelZoom: true,
       });
 
-      // Use OpenStreetMap tiles
       L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
         maxZoom: 19,
       }).addTo(map);
 
-      // Custom marker icon
-      const customIcon = L.divIcon({
-        className: "custom-map-marker",
-        html: `<div style="
-          width: 32px; height: 32px; 
-          background: linear-gradient(135deg, #0d9488, #8b5cf6);
-          border-radius: 50% 50% 50% 0;
-          transform: rotate(-45deg);
-          border: 2px solid white;
-          box-shadow: 0 2px 8px rgba(0,0,0,0.3);
-          display: flex; align-items: center; justify-content: center;
-        "><span style="
-          transform: rotate(45deg); 
-          color: white; 
-          font-size: 14px; 
-          font-weight: bold;
-        ">H</span></div>`,
-        iconSize: [32, 32],
-        iconAnchor: [16, 32],
-        popupAnchor: [0, -32],
-      });
+      // Add markers for all listings
+      const listingsWithCoords = listings.filter((l) => l.latitude && l.longitude);
 
-      // Add markers for listings with coordinates
-      const listingsWithCoords = listings.filter(
-        (l) => l.latitude && l.longitude
-      );
+      const addMarker = (listing: MapListing, lat: number, lng: number) => {
+        const priceLabel = listing.price >= 1000
+          ? `${Math.round(listing.price / 1000)}k`
+          : listing.price.toLocaleString();
+
+        const customIcon = L.divIcon({
+          className: "custom-map-marker",
+          html: `<div class="marker-badge">
+            <span class="marker-price">TZS ${priceLabel}</span>
+            <span class="marker-type">${listing.type}</span>
+          </div>`,
+          iconSize: [120, 44],
+          iconAnchor: [60, 44],
+          popupAnchor: [0, -44],
+        });
+
+        const marker = L.marker([lat, lng], { icon: customIcon }).addTo(map);
+        markersRef.current.set(listing.id, marker);
+
+        marker.on("click", () => {
+          setSelectedListing(listing);
+          onSelectListing?.(listing);
+          map.flyTo([lat, lng], 15, { duration: 0.5 });
+        });
+
+        marker.bindPopup(createPopupContent(listing), {
+          maxWidth: 280,
+          className: "custom-popup",
+        });
+      };
 
       if (listingsWithCoords.length === 0) {
         listings.forEach((listing, index) => {
-          const angle = (index / listings.length) * 2 * Math.PI;
+          const angle = (index / Math.max(listings.length, 1)) * 2 * Math.PI;
           const radius = 0.005;
           const lat = center[0] + Math.sin(angle) * radius;
           const lng = center[1] + Math.cos(angle) * radius;
-
-          const marker = L.marker([lat, lng], { icon: customIcon }).addTo(map);
-          marker.on("click", () => {
-            setSelectedListing(listing);
-            map.flyTo([lat, lng], 15, { duration: 0.5 });
-          });
-          marker.bindPopup(createPopupContent(listing), {
-            maxWidth: 280,
-            className: "custom-popup",
-          });
+          addMarker(listing, lat, lng);
         });
       } else {
         listingsWithCoords.forEach((listing) => {
-          const marker = L.marker(
-            [listing.latitude!, listing.longitude!],
-            { icon: customIcon }
-          ).addTo(map);
-          marker.on("click", () => {
-            setSelectedListing(listing);
-            map.flyTo([listing.latitude!, listing.longitude!], 15, {
-              duration: 0.5,
-            });
-          });
-          marker.bindPopup(createPopupContent(listing), {
-            maxWidth: 280,
-            className: "custom-popup",
-          });
+          addMarker(listing, listing.latitude!, listing.longitude!);
         });
       }
 
-      // Fit bounds to show all markers
+      // Fit bounds
       if (listings.length > 0) {
         const allCoords = listingsWithCoords.length > 0
           ? listingsWithCoords.map((l) => [l.latitude!, l.longitude!] as [number, number])
           : listings.map((_, i) => {
-              const angle = (i / listings.length) * 2 * Math.PI;
+              const angle = (i / Math.max(listings.length, 1)) * 2 * Math.PI;
               return [
                 center[0] + Math.sin(angle) * 0.005,
                 center[1] + Math.cos(angle) * 0.005,
@@ -147,7 +135,6 @@ export function MapView({ listings, center = DEFAULT_CENTER, zoom = DEFAULT_ZOOM
       }
 
       mapInstanceRef.current = map;
-      setMapReady(true);
     });
 
     return () => {
@@ -160,12 +147,22 @@ export function MapView({ listings, center = DEFAULT_CENTER, zoom = DEFAULT_ZOOM
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  // Sync selected marker highlight from parent
+  useEffect(() => {
+    if (!selectedId) {
+      setSelectedListing(null);
+      return;
+    }
+    const found = listings.find((l) => l.id === selectedId);
+    if (found) setSelectedListing(found);
+  }, [selectedId, listings]);
+
   return (
-    <div className="relative w-full">
+    <div className="relative h-full w-full">
       {/* Map Container */}
       <div
         ref={mapRef}
-        className="h-[400px] w-full rounded-xl overflow-hidden border border-[var(--glass-border)] sm:h-[500px]"
+        className="h-full w-full"
         style={{ background: "var(--glass-fill)" }}
       />
 
@@ -189,7 +186,7 @@ export function MapView({ listings, center = DEFAULT_CENTER, zoom = DEFAULT_ZOOM
               />
             ) : (
               <div className="flex h-20 w-20 shrink-0 items-center justify-center rounded-lg bg-[var(--glass-fill)]">
-                <span className="text-2xl">H</span>
+                <span className="text-2xl font-bold text-[var(--accent)]">H</span>
               </div>
             )}
             <div className="flex-1 min-w-0">
@@ -211,7 +208,10 @@ export function MapView({ listings, center = DEFAULT_CENTER, zoom = DEFAULT_ZOOM
               </Link>
             </div>
             <button
-              onClick={() => setSelectedListing(null)}
+              onClick={() => {
+                setSelectedListing(null);
+                onSelectListing?.(null);
+              }}
               className="absolute right-2 top-2 text-[var(--text-tertiary)] hover:text-[var(--text-primary)]"
             >
               ✕
@@ -220,11 +220,35 @@ export function MapView({ listings, center = DEFAULT_CENTER, zoom = DEFAULT_ZOOM
         </div>
       )}
 
-      {/* Leaflet marker styles */}
+      {/* Leaflet + marker badge styles */}
       <style jsx global>{`
         .custom-map-marker {
           background: transparent !important;
           border: none !important;
+        }
+        .marker-badge {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          background: linear-gradient(135deg, var(--accent, #0d9488), var(--accent-hover, #0f766e));
+          border-radius: 8px;
+          padding: 4px 10px;
+          box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+          border: 2px solid white;
+          cursor: pointer;
+          white-space: nowrap;
+        }
+        .marker-price {
+          color: white;
+          font-size: 12px;
+          font-weight: 700;
+          line-height: 1.2;
+        }
+        .marker-type {
+          color: rgba(255,255,255,0.85);
+          font-size: 10px;
+          font-weight: 500;
+          line-height: 1.2;
         }
         .custom-popup .leaflet-popup-content-wrapper {
           border-radius: 12px;
@@ -253,20 +277,20 @@ export function MapView({ listings, center = DEFAULT_CENTER, zoom = DEFAULT_ZOOM
 function createPopupContent(listing: MapListing): string {
   const imgHtml = listing.image && listing.image !== "/listing-placeholder.svg"
     ? `<img src="${listing.image}" alt="${listing.title}" style="width:100%;height:120px;object-fit:cover;" />`
-    : `<div style="width:100%;height:80px;display:flex;align-items:center;justify-content:center;background:#f0fdf4;font-size:16px;font-weight:bold;color:#FBC618;">H</div>`;
+    : `<div style="width:100%;height:80px;display:flex;align-items:center;justify-content:center;background:var(--glass-fill);font-size:16px;font-weight:bold;color:var(--accent);">H</div>`;
 
   return `
     <div style="font-family: system-ui, sans-serif;">
       ${imgHtml}
       <div style="padding: 12px;">
-        <div style="font-weight: 700; font-size: 14px; color: #1a1a2e;">${listing.title}</div>
-        <div style="font-size: 12px; color: #6b7280; margin-top: 2px;">${listing.type} · ${listing.area}</div>
-        <div style="font-weight: 700; font-size: 16px; color: #0d9488; margin-top: 6px;">
-          TZS ${listing.price.toLocaleString()}<span style="font-size: 12px; font-weight: 400; color: #9ca3af;"> / mo</span>
+        <div style="font-weight: 700; font-size: 14px; color: var(--text-primary);">${listing.title}</div>
+        <div style="font-size: 12px; color: var(--text-secondary); margin-top: 2px;">${listing.type} · ${listing.area}</div>
+        <div style="font-weight: 700; font-size: 16px; color: var(--accent); margin-top: 6px;">
+          TZS ${listing.price.toLocaleString()}<span style="font-size: 12px; font-weight: 400; color: var(--text-tertiary);"> / mo</span>
         </div>
         <a href="/listings/${listing.id}" style="
           display: inline-block; margin-top: 8px; padding: 6px 12px; 
-          background: #0d9488; color: white; border-radius: 8px; 
+          background: var(--accent); color: white; border-radius: 8px; 
           text-decoration: none; font-size: 12px; font-weight: 600;
         ">View Details →</a>
       </div>

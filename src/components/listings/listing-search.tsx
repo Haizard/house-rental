@@ -1,10 +1,10 @@
 "use client";
 
-import { Bed, Home, PawPrint, Search, SlidersHorizontal, X } from "lucide-react";
-import { useMemo, useState } from "react";
+import { Bed, Home, Search, SlidersHorizontal, X } from "lucide-react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import type { Listing } from "@/lib/listings";
 import { ListingCard } from "./listing-card";
-import { BottomSheet } from "@/components/ui/bottom-sheet"
+import { BottomSheet } from "@/components/ui/bottom-sheet";
 
 const types = [
   "All homes",
@@ -34,9 +34,13 @@ const amenityFilters = [
 export function ListingSearch({
   listings,
   initialArea = "",
+  selectedListingId,
+  onSelectListing,
 }: {
   listings: Listing[];
   initialArea?: string;
+  selectedListingId?: string | null;
+  onSelectListing?: (id: string | null) => void;
 }) {
   const [query, setQuery] = useState(initialArea);
   const [type, setType] = useState("All homes");
@@ -45,6 +49,7 @@ export function ListingSearch({
   const [furnishedOnly, setFurnishedOnly] = useState(false);
   const [selectedAmenities, setSelectedAmenities] = useState<string[]>([]);
   const [showFilters, setShowFilters] = useState(false);
+  const cardRefs = useRef<Map<string, HTMLDivElement>>(new Map());
 
   function toggleAmenity(slug: string) {
     setSelectedAmenities((prev) =>
@@ -65,8 +70,7 @@ export function ListingSearch({
           priceRange === "Any budget" ||
           (priceRange === "Under 150k" && listing.price < 150000) ||
           (priceRange === "150k - 200k" &&
-            listing.price >= 150000 &&
-            listing.price <= 200000) ||
+            listing.price >= 150000 && listing.price <= 200000) ||
           (priceRange === "Over 200k" && listing.price > 200000);
         const matchesGender =
           gender === "Any" ||
@@ -100,6 +104,18 @@ export function ListingSearch({
     furnishedOnly ||
     selectedAmenities.length > 0;
 
+  // Scroll to selected card when map selects a listing
+  useEffect(() => {
+    if (selectedListingId) {
+      const el = cardRefs.current.get(selectedListingId);
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth", block: "center" });
+        el.classList.add("ring-2", "ring-[var(--accent)]");
+        setTimeout(() => el.classList.remove("ring-2", "ring-[var(--accent)]"), 2000);
+      }
+    }
+  }, [selectedListingId]);
+
   // Content shared between inline (desktop) and bottom sheet (mobile)
   const filterContent = (
     <div className="space-y-3">
@@ -110,7 +126,7 @@ export function ListingSearch({
       >
         {types.map((item) => (
           <button
-            className={`filter-chip shrink-0 ${type === item ? "filter-chip-active" : ""}`}
+            className={`filter-chip shrink-0 inline-flex items-center justify-center ${type === item ? "filter-chip-active" : ""}`}
             type="button"
             key={item}
             onClick={() => setType(item)}
@@ -127,7 +143,7 @@ export function ListingSearch({
       >
         {priceRanges.map((item) => (
           <button
-            className={`filter-chip shrink-0 ${priceRange === item ? "filter-chip-active" : ""}`}
+            className={`filter-chip shrink-0 inline-flex items-center justify-center ${priceRange === item ? "filter-chip-active" : ""}`}
             type="button"
             key={item}
             onClick={() => setPriceRange(item)}
@@ -144,7 +160,7 @@ export function ListingSearch({
         </span>
         {genderOptions.map((g) => (
           <button
-            className={`filter-chip shrink-0 ${gender === g ? "filter-chip-active" : ""}`}
+            className={`filter-chip shrink-0 inline-flex items-center justify-center ${gender === g ? "filter-chip-active" : ""}`}
             type="button"
             key={g}
             onClick={() => setGender(g)}
@@ -153,7 +169,7 @@ export function ListingSearch({
           </button>
         ))}
         <button
-          className={`filter-chip shrink-0 flex items-center gap-1 ${furnishedOnly ? "filter-chip-active" : ""}`}
+          className={`filter-chip shrink-0 inline-flex items-center gap-1 ${furnishedOnly ? "filter-chip-active" : ""}`}
           type="button"
           onClick={() => setFurnishedOnly(!furnishedOnly)}
         >
@@ -172,7 +188,7 @@ export function ListingSearch({
         >
           {amenityFilters.map(({ slug, label }) => (
             <button
-              className={`filter-chip shrink-0 flex items-center gap-1 ${
+              className={`filter-chip shrink-0 inline-flex items-center gap-1 ${
                 selectedAmenities.includes(slug) ? "filter-chip-active" : ""
               }`}
               type="button"
@@ -239,7 +255,6 @@ export function ListingSearch({
         title="Filters"
       >
         {filterContent}
-        {/* Apply button at bottom */}
         <button
           className="button button-primary mt-4 w-full"
           type="button"
@@ -299,15 +314,24 @@ export function ListingSearch({
       )}
 
       {/* Results count */}
-      <p className="mt-5 text-sm text-[var(--text-secondary)]">
+      <p className="mt-4 text-sm text-[var(--text-secondary)]">
         {results.length} {results.length === 1 ? "home" : "homes"} available
       </p>
 
       {/* Results grid */}
       {results.length > 0 ? (
-        <div className="listing-grid mt-4">
+        <div className="mt-3 space-y-3">
           {results.map((listing) => (
-            <ListingCard key={listing.id} listing={listing} />
+            <div
+              key={listing.id}
+              ref={(el) => {
+                if (el) cardRefs.current.set(listing.id, el);
+              }}
+              onClick={() => onSelectListing?.(listing.id)}
+              className="cursor-pointer transition-all duration-200"
+            >
+              <ListingCard listing={listing} />
+            </div>
           ))}
         </div>
       ) : (
