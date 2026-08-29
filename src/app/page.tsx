@@ -2,7 +2,6 @@ export const dynamic = "force-dynamic";
 
 import { ArrowRight, MapPin, Search } from "lucide-react";
 import { ListingsSection } from "@/components/listings/listings-section";
-import { AISearchBar } from "@/components/listings/ai-search";
 import { StatusSection } from "@/components/statuses/status-section";
 import { SiteNav } from "@/components/layout/site-nav";
 import { getPublicListings } from "@/server/listings/get-public-listings";
@@ -74,7 +73,6 @@ export default async function Home() {
               ))}
             </div>
 
-            <AISearchBar className="mt-4 sm:mt-5" />
           </div>
         </div>
       </section>
