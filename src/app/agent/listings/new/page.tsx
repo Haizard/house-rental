@@ -213,7 +213,7 @@ export default function NewListingPage() {
         {STEPS.map(({ label, icon: Icon }, i) => (
           <button
             key={label}
-            className={`flex shrink-0 items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-medium transition-colors ${
+            className={`inline-flex shrink-0 items-center justify-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-medium transition-colors ${
               i === step
                 ? "bg-[var(--accent)] text-white"
                 : i < step
@@ -430,7 +430,7 @@ export default function NewListingPage() {
                 {items.map(({ slug, label }) => (
                   <button
                     key={slug}
-                    className={`rounded-full border px-3 py-1.5 text-sm font-medium transition-all ${
+                    className={`inline-flex items-center justify-center rounded-full border px-3 py-1.5 text-sm font-medium transition-all ${
                       selectedAmenities.includes(slug)
                         ? "border-[var(--accent)] bg-[var(--accent-soft)] text-[var(--accent)]"
                         : "border-[var(--glass-border)] bg-white/50 text-[var(--text-secondary)] hover:border-[var(--accent)]"

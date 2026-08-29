@@ -174,7 +174,7 @@ export default function NewRoomRequestPage() {
                   key={a}
                   type="button"
                   onClick={() => toggleAmenity(a)}
-                  className={`rounded-full border px-3 py-1.5 text-xs font-medium transition ${
+                  className={`inline-flex items-center justify-center rounded-full border px-3 py-1.5 text-xs font-medium transition ${
                     amenities.includes(a)
                       ? "border-[var(--accent)] bg-[var(--accent)] text-white"
                       : "border-black/10 bg-white/60 text-[var(--text-secondary)] hover:border-[var(--accent)]"
