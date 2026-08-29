@@ -1,6 +1,6 @@
 export const dynamic = "force-dynamic";
 
-import { ArrowRight, MapPin, Search } from "lucide-react";
+import { ArrowRight, GraduationCap, MapPin, Search } from "lucide-react";
 import { ListingsSection } from "@/components/listings/listings-section";
 import { StatusSection } from "@/components/statuses/status-section";
 import { SiteNav } from "@/components/layout/site-nav";
@@ -68,7 +68,7 @@ export default async function Home() {
                   href={`/universities/${u.slug}`}
                   key={u.slug}
                 >
-                  🎓 {u.name}
+                  <GraduationCap size={12} aria-hidden="true" /> {u.name}
                 </a>
               ))}
             </div>
