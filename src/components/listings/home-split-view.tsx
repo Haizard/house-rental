@@ -34,8 +34,8 @@ export function HomeSplitView({ listings }: { listings: Listing[] }) {
 
   return (
     <div className="flex flex-col gap-4 lg:flex-row lg:gap-6">
-      {/* Left side: scrollable listing cards — one per row */}
-      <div className="flex-1 min-w-0 space-y-3">
+      {/* Left side: scrollable listing cards — 3 per row on desktop */}
+      <div className="flex-1 min-w-0 grid grid-cols-2 md:grid-cols-3 gap-3">
         {listings.map((listing) => (
           <div
             key={listing.id}
