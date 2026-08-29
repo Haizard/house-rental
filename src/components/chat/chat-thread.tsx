@@ -219,7 +219,7 @@ export function ChatThread({ conversationId, initialMessages, currentUserId }: P
         )}
 
         <input
-          className="min-h-10 flex-1 bg-transparent px-2 outline-none"
+          className="h-8 flex-1 bg-transparent px-2 outline-none"
           id="message"
           value={content}
           onChange={(e) => {

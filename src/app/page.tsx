@@ -34,7 +34,7 @@ export default async function Home() {
 
             {/* Search form — compact */}
             <form className="glass-search mt-5 flex gap-1.5 p-1.5 sm:mt-6 sm:gap-2 sm:p-2" action="/search">
-              <label className="flex min-h-[40px] flex-1 items-center gap-2 rounded-[12px] bg-white/50 px-3 sm:min-h-[44px] sm:gap-2.5 sm:rounded-[14px]">
+              <label className="flex h-8 flex-1 items-center gap-2 rounded-lg bg-white/50 px-3 sm:h-9 sm:gap-2.5 sm:rounded-[14px]">
                 <MapPin className="shrink-0 text-[var(--accent)]" size={16} aria-hidden="true" />
                 <span className="sr-only">Search area</span>
                 <input
@@ -44,7 +44,7 @@ export default async function Home() {
                   defaultValue="Njiro"
                 />
               </label>
-              <button className="button button-primary h-10 shrink-0 px-4 font-t-subhead sm:h-11 sm:px-5" type="submit">
+              <button className="button button-primary h-8 shrink-0 px-4 font-t-subhead sm:h-9 sm:px-5" type="submit">
                 <Search size={14} aria-hidden="true" />
               </button>
             </form>

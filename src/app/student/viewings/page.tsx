@@ -104,7 +104,7 @@ export default async function StudentViewingsPage() {
               </div>
               {viewing.lead.conversation && (
                 <Link
-                  className="button button-glass min-h-10 px-3 text-sm"
+                  className="button button-glass h-8 px-3 text-sm"
                   href={`/student/chats/${viewing.lead.conversation.id}`}
                 >
                   Open chat

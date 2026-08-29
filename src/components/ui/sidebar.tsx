@@ -20,7 +20,7 @@ export function Sidebar({
         className="mb-6 hidden items-center gap-2 overflow-hidden font-semibold lg:flex"
         href="/"
       >
-        <span className="flex size-9 shrink-0 items-center justify-center rounded-[12px] bg-[var(--accent)] text-white">
+        <span className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-[var(--accent)] text-white">
           <Building2 size={19} aria-hidden="true" />
         </span>
       </Link>
@@ -29,7 +29,7 @@ export function Sidebar({
 
       {navItems.map(({ href, label, icon: Icon }) => (
         <Link
-          className="flex size-11 shrink-0 items-center justify-center overflow-hidden rounded-[12px] text-[var(--text-secondary)] transition hover:bg-[var(--accent-soft)] hover:text-[var(--accent)] lg:h-auto lg:w-full lg:min-h-11 lg:flex-row lg:justify-start lg:gap-3 lg:px-3 lg:text-sm"
+          className="flex size-11 shrink-0 items-center justify-center overflow-hidden rounded-lg text-[var(--text-secondary)] transition hover:bg-[var(--accent-soft)] hover:text-[var(--accent)] lg:h-auto lg:w-full lg:h-9 lg:flex-row lg:justify-start lg:gap-3 lg:px-3 lg:text-sm"
           href={href}
           key={href}
           title={label}

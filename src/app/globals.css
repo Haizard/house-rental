@@ -129,18 +129,18 @@ button, input, select, textarea { font: inherit; }
   box-shadow: var(--glass-shadow);
   transition: box-shadow 0.3s ease, transform 0.2s ease, border-color 0.3s ease;
 }
-.glass-surface { border-radius: var(--radius-lg); }
+.glass-surface { border-radius: 14px; }
 .glass-surface:hover { border-color: var(--glass-border-hairline); }
-.glass-nav { border-radius: var(--radius-md); background: var(--glass-fill-strong); }
+.glass-nav { border-radius: 10px; background: var(--glass-fill-strong); }
 .dark .glass-nav { background: var(--glass-fill-strong); }
-.glass-search { border-radius: var(--radius-md); background: var(--glass-fill); }
+.glass-search { border-radius: 10px; background: var(--glass-fill); }
 
 .button {
-  display: inline-flex; min-height: 44px; align-items: center; justify-content: center;
-  gap: 6px; border-radius: var(--radius-md); border: 1px solid transparent;
-  font-size: 15px; font-weight: 600;
+  display: inline-flex; min-height: 36px; align-items: center; justify-content: center;
+  gap: 6px; border-radius: 8px; border: 1px solid transparent;
+  font-size: 13px; font-weight: 600; line-height: 1;
   transition: transform 200ms cubic-bezier(0.25, 0.1, 0.25, 1), background 200ms ease;
-  cursor: pointer;
+  cursor: pointer; padding: 0 12px;
 }
 .button:hover { transform: translateY(-1px); }
 .button:active { transform: scale(0.96); }

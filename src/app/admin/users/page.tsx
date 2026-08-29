@@ -52,13 +52,13 @@ function UserSearch() {
       <form className="glass-search flex items-center gap-3 p-2" onSubmit={handleSearch}>
         <Search className="ml-2 text-[var(--accent)]" size={20} aria-hidden="true" />
         <input
-          className="min-h-10 flex-1 bg-transparent font-t-body outline-none placeholder:text-[var(--text-tertiary)]"
+          className="h-8 flex-1 bg-transparent font-t-body outline-none placeholder:text-[var(--text-tertiary)]"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           placeholder="Search by name or email"
           aria-label="Search users"
         />
-        <button className="button button-primary min-h-10 px-4 text-sm" type="submit" disabled={pending}>
+        <button className="button button-primary h-8 px-4 text-sm" type="submit" disabled={pending}>
           Search
         </button>
       </form>
@@ -122,7 +122,7 @@ function UserRow({ user }: { user: User }) {
         </p>
       </div>
       <button
-        className={`button min-h-10 px-3 text-sm ${
+        className={`button h-8 px-3 text-sm ${
           user.isActive ? "button-glass" : "button-primary"
         }`}
         disabled={pending}

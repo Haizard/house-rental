@@ -192,7 +192,7 @@ export default async function AgentDashboard() {
                   </p>
                 </div>
                 <Link
-                  className="button button-glass min-h-10 px-3 text-sm"
+                  className="button button-glass h-8 px-3 text-sm"
                   href={
                     lead.conversation
                       ? `/student/chats/${lead.conversation.id}`

@@ -108,14 +108,14 @@ export function ReportListingButton({ listingId }: ReportListingButtonProps) {
           type="button"
           onClick={submit}
           disabled={busy || !category}
-          className="button button-primary min-h-9 flex-1 px-3 text-xs"
+          className="button button-primary h-8 flex-1 px-3 text-xs"
         >
           {busy ? <Loader2 size={14} className="animate-spin" /> : "Submit report"}
         </button>
         <button
           type="button"
           onClick={() => setOpen(false)}
-          className="button button-glass min-h-9 px-3 text-xs"
+          className="button button-glass h-8 px-3 text-xs"
         >
           Cancel
         </button>

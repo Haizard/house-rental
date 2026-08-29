@@ -49,7 +49,7 @@ export function AISearchBar({ className = "" }: { className?: string }) {
   return (
     <div className={className}>
       <form className="glass-search flex flex-col gap-2 p-2 sm:flex-row" onSubmit={handleSubmit}>
-        <label className="flex min-h-11 flex-1 items-center gap-3 px-3">
+        <label className="flex h-9 flex-1 items-center gap-3 px-3">
           <Sparkles className="text-[var(--accent)]" size={20} aria-hidden="true" />
           <span className="sr-only">AI search</span>
           <input

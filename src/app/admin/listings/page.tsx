@@ -57,7 +57,7 @@ function ListingSearch() {
         <div className="flex flex-1 items-center gap-3 px-2">
           <Search className="text-[var(--accent)]" size={20} aria-hidden="true" />
           <input
-            className="min-h-10 flex-1 bg-transparent font-t-body outline-none placeholder:text-[var(--text-tertiary)]"
+            className="h-8 flex-1 bg-transparent font-t-body outline-none placeholder:text-[var(--text-tertiary)]"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Search by title or area"
@@ -65,7 +65,7 @@ function ListingSearch() {
           />
         </div>
         <select
-          className="min-h-10 rounded-[12px] border border-[var(--glass-border)] bg-[var(--glass-fill)] px-3 text-sm outline-none"
+          className="h-8 rounded-lg border border-[var(--glass-border)] bg-[var(--glass-fill)] px-3 text-sm outline-none"
           value={status}
           onChange={(e) => setStatus(e.target.value)}
         >
@@ -76,7 +76,7 @@ function ListingSearch() {
           <option value="PENDING_REVIEW">Pending review</option>
           <option value="REJECTED">Rejected</option>
         </select>
-        <button className="button button-primary min-h-10 px-4 text-sm" type="submit" disabled={pending}>
+        <button className="button button-primary h-8 px-4 text-sm" type="submit" disabled={pending}>
           Search
         </button>
       </form>
@@ -132,7 +132,7 @@ function ListingRow({ listing }: { listing: Listing }) {
       <div className="flex gap-2">
         {(listing.status === "DRAFT" || listing.status === "PAUSED") && (
           <button
-            className="button button-primary min-h-10 px-3 text-sm"
+            className="button button-primary h-8 px-3 text-sm"
             disabled={pending}
             type="button"
             onClick={() => updateStatus("ACTIVE")}
@@ -143,7 +143,7 @@ function ListingRow({ listing }: { listing: Listing }) {
         {listing.status === "ACTIVE" && (
           <>
             <button
-              className="button button-glass min-h-10 px-3 text-sm"
+              className="button button-glass h-8 px-3 text-sm"
               disabled={pending}
               type="button"
               onClick={() => updateStatus("PAUSED")}
@@ -151,7 +151,7 @@ function ListingRow({ listing }: { listing: Listing }) {
               Pause
             </button>
             <button
-              className="button min-h-10 px-3 text-sm border border-[var(--danger)] bg-[var(--danger-soft)] text-[var(--danger)]"
+              className="button h-8 px-3 text-sm border border-[var(--danger)] bg-[var(--danger-soft)] text-[var(--danger)]"
               disabled={pending}
               type="button"
               onClick={() => updateStatus("REJECTED")}

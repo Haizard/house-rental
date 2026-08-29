@@ -137,7 +137,7 @@ export function VerificationReview({ verificationId, data }: VerificationReviewP
       {/* Action buttons */}
       <div className="flex gap-2">
         <button
-          className="button button-primary min-h-11 flex-1 px-4 text-sm"
+          className="button button-primary h-9 flex-1 px-4 text-sm"
           disabled={busy}
           type="button"
           onClick={() => review("APPROVED")}
@@ -146,7 +146,7 @@ export function VerificationReview({ verificationId, data }: VerificationReviewP
           Approve
         </button>
         <button
-          className="button button-glass min-h-11 flex-1 px-4 text-sm"
+          className="button button-glass h-9 flex-1 px-4 text-sm"
           disabled={busy}
           type="button"
           onClick={() => review("REJECTED")}

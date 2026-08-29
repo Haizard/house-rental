@@ -46,7 +46,7 @@ export async function SiteNav() {
           className="flex shrink-0 items-center gap-2 font-semibold text-[var(--text-primary)]"
           href="/"
         >
-          <span className="flex size-8 shrink-0 items-center justify-center rounded-[10px] bg-[var(--accent)] text-white sm:size-9 sm:rounded-[12px]">
+          <span className="flex size-8 shrink-0 items-center justify-center rounded-[10px] bg-[var(--accent)] text-white sm:size-9 sm:rounded-lg">
             <Building2 size={18} aria-hidden="true" />
           </span>
         </a>

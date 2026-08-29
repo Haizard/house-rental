@@ -145,7 +145,7 @@ export function AIChatbot() {
             onSubmit={(e) => { e.preventDefault(); sendMessage(); }}
           >
             <input
-              className="min-h-10 flex-1 bg-transparent font-t-subhead outline-none placeholder:text-[var(--text-tertiary)]"
+              className="h-8 flex-1 bg-transparent font-t-subhead outline-none placeholder:text-[var(--text-tertiary)]"
               value={input}
               onChange={(e) => setInput(e.target.value)}
               placeholder="Type your question..."
