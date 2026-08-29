@@ -1,6 +1,6 @@
 "use client";
 
-import { Bed, Search, SlidersHorizontal, X } from "lucide-react";
+import { Bed, ChevronDown, ChevronUp, Search, SlidersHorizontal, X } from "lucide-react";
 import { useMemo, useState } from "react";
 import type { Listing } from "@/lib/listings";
 import { ListingCard } from "./listing-card";
@@ -44,7 +44,8 @@ export function ListingSearch({
   const [gender, setGender] = useState("Any");
   const [furnishedOnly, setFurnishedOnly] = useState(false);
   const [selectedAmenities, setSelectedAmenities] = useState<string[]>([]);
-  const [showFilters, setShowFilters] = useState(false);
+  const [showMobileFilters, setShowMobileFilters] = useState(false);
+  const [showDesktopFilters, setShowDesktopFilters] = useState(false);
 
   function toggleAmenity(slug: string) {
     setSelectedAmenities((prev) =>
@@ -98,6 +99,14 @@ export function ListingSearch({
     gender !== "Any" ||
     furnishedOnly ||
     selectedAmenities.length > 0;
+
+  // Count active filter chips
+  const activeFilterCount =
+    (type !== "All homes" ? 1 : 0) +
+    (priceRange !== "Any budget" ? 1 : 0) +
+    (gender !== "Any" ? 1 : 0) +
+    (furnishedOnly ? 1 : 0) +
+    selectedAmenities.length;
 
   // Content shared between inline (desktop) and bottom sheet (mobile)
   const filterContent = (
@@ -214,46 +223,47 @@ export function ListingSearch({
         )}
         <button
           className={`flex size-9 shrink-0 items-center justify-center rounded-full transition ${
-            showFilters || hasActiveFilters
+            showMobileFilters || hasActiveFilters
               ? "bg-[var(--accent)] text-white"
               : "text-[var(--text-secondary)] hover:bg-[var(--accent-soft)]"
           }`}
           type="button"
-          onClick={() => setShowFilters(!showFilters)}
+          onClick={() => setShowMobileFilters(!showMobileFilters)}
           aria-label="Toggle filters"
         >
           <SlidersHorizontal size={17} aria-hidden="true" />
         </button>
       </div>
 
-      {/* Desktop: inline filters */}
+      {/* Desktop: collapsible inline filters */}
       <div className="mt-3 hidden lg:block">
-        {filterContent}
+        <button
+          className="flex items-center gap-1.5 text-xs font-medium text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition"
+          type="button"
+          onClick={() => setShowDesktopFilters(!showDesktopFilters)}
+        >
+          {showDesktopFilters ? <ChevronUp size={14} /> : <ChevronDown size={14} />}
+          {showDesktopFilters ? "Hide filters" : "Show filters"}
+          {activeFilterCount > 0 && (
+            <span className="ml-1 inline-flex size-5 items-center justify-center rounded-full bg-[var(--accent)] text-[10px] font-bold text-white">
+              {activeFilterCount}
+            </span>
+          )}
+        </button>
+        {showDesktopFilters && (
+          <div className="mt-3 animate-slide-down">
+            {filterContent}
+          </div>
+        )}
       </div>
 
-      {/* Mobile: bottom sheet filters */}
-      <BottomSheet
-        open={showFilters}
-        onClose={() => setShowFilters(false)}
-        title="Filters"
-      >
-        {filterContent}
-        <button
-          className="button button-primary mt-4 w-full"
-          type="button"
-          onClick={() => setShowFilters(false)}
-        >
-          Show {results.length} result{results.length !== 1 ? "s" : ""}
-        </button>
-      </BottomSheet>
-
-      {/* Active filters summary on mobile */}
-      {hasActiveFilters && !showFilters && (
-        <div className="mt-2 flex flex-wrap items-center gap-1.5 lg:hidden">
+      {/* Active filter summary chips (desktop, when filters are hidden) */}
+      {hasActiveFilters && !showDesktopFilters && (
+        <div className="mt-2 hidden flex-wrap items-center gap-1.5 lg:flex">
           <span className="text-xs text-[var(--text-secondary)]">Active:</span>
           {type !== "All homes" && (
             <button
-              className="flex items-center gap-1 rounded-full bg-[var(--accent-soft)] px-2.5 py-1 text-[11px] font-medium text-[var(--accent)]"
+              className="inline-flex items-center gap-1 rounded-lg bg-[var(--accent-soft)] px-2 py-0.5 text-[11px] font-medium text-[var(--accent)]"
               onClick={() => setType("All homes")}
             >
               {type} <X size={10} />
@@ -261,7 +271,7 @@ export function ListingSearch({
           )}
           {priceRange !== "Any budget" && (
             <button
-              className="flex items-center gap-1 rounded-full bg-[var(--accent-soft)] px-2.5 py-1 text-[11px] font-medium text-[var(--accent)]"
+              className="inline-flex items-center gap-1 rounded-lg bg-[var(--accent-soft)] px-2 py-0.5 text-[11px] font-medium text-[var(--accent)]"
               onClick={() => setPriceRange("Any budget")}
             >
               {priceRange} <X size={10} />
@@ -269,7 +279,7 @@ export function ListingSearch({
           )}
           {gender !== "Any" && (
             <button
-              className="flex items-center gap-1 rounded-full bg-[var(--accent-soft)] px-2.5 py-1 text-[11px] font-medium text-[var(--accent)]"
+              className="inline-flex items-center gap-1 rounded-lg bg-[var(--accent-soft)] px-2 py-0.5 text-[11px] font-medium text-[var(--accent)]"
               onClick={() => setGender("Any")}
             >
               {gender} <X size={10} />
@@ -277,7 +287,7 @@ export function ListingSearch({
           )}
           {furnishedOnly && (
             <button
-              className="flex items-center gap-1 rounded-full bg-[var(--accent-soft)] px-2.5 py-1 text-[11px] font-medium text-[var(--accent)]"
+              className="inline-flex items-center gap-1 rounded-lg bg-[var(--accent-soft)] px-2 py-0.5 text-[11px] font-medium text-[var(--accent)]"
               onClick={() => setFurnishedOnly(false)}
             >
               Furnished <X size={10} />
@@ -285,7 +295,72 @@ export function ListingSearch({
           )}
           {selectedAmenities.map((slug) => (
             <button
-              className="flex items-center gap-1 rounded-full bg-[var(--accent-soft)] px-2.5 py-1 text-[11px] font-medium text-[var(--accent)]"
+              className="inline-flex items-center gap-1 rounded-lg bg-[var(--accent-soft)] px-2 py-0.5 text-[11px] font-medium text-[var(--accent)]"
+              key={slug}
+              onClick={() => toggleAmenity(slug)}
+            >
+              {amenityFilters.find((a) => a.slug === slug)?.label ?? slug}{" "}
+              <X size={10} />
+            </button>
+          ))}
+        </div>
+      )}
+
+      {/* Mobile: bottom sheet filters */}
+      <BottomSheet
+        open={showMobileFilters}
+        onClose={() => setShowMobileFilters(false)}
+        title="Filters"
+      >
+        {filterContent}
+        <button
+          className="button button-primary mt-4 w-full"
+          type="button"
+          onClick={() => setShowMobileFilters(false)}
+        >
+          Show {results.length} result{results.length !== 1 ? "s" : ""}
+        </button>
+      </BottomSheet>
+
+      {/* Active filters summary on mobile */}
+      {hasActiveFilters && !showMobileFilters && (
+        <div className="mt-2 flex flex-wrap items-center gap-1.5 lg:hidden">
+          <span className="text-xs text-[var(--text-secondary)]">Active:</span>
+          {type !== "All homes" && (
+            <button
+              className="inline-flex items-center gap-1 rounded-lg bg-[var(--accent-soft)] px-2.5 py-1 text-[11px] font-medium text-[var(--accent)]"
+              onClick={() => setType("All homes")}
+            >
+              {type} <X size={10} />
+            </button>
+          )}
+          {priceRange !== "Any budget" && (
+            <button
+              className="inline-flex items-center gap-1 rounded-lg bg-[var(--accent-soft)] px-2.5 py-1 text-[11px] font-medium text-[var(--accent)]"
+              onClick={() => setPriceRange("Any budget")}
+            >
+              {priceRange} <X size={10} />
+            </button>
+          )}
+          {gender !== "Any" && (
+            <button
+              className="inline-flex items-center gap-1 rounded-lg bg-[var(--accent-soft)] px-2.5 py-1 text-[11px] font-medium text-[var(--accent)]"
+              onClick={() => setGender("Any")}
+            >
+              {gender} <X size={10} />
+            </button>
+          )}
+          {furnishedOnly && (
+            <button
+              className="inline-flex items-center gap-1 rounded-lg bg-[var(--accent-soft)] px-2.5 py-1 text-[11px] font-medium text-[var(--accent)]"
+              onClick={() => setFurnishedOnly(false)}
+            >
+              Furnished <X size={10} />
+            </button>
+          )}
+          {selectedAmenities.map((slug) => (
+            <button
+              className="inline-flex items-center gap-1 rounded-lg bg-[var(--accent-soft)] px-2.5 py-1 text-[11px] font-medium text-[var(--accent)]"
               key={slug}
               onClick={() => toggleAmenity(slug)}
             >
