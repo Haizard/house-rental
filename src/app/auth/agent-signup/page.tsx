@@ -86,8 +86,8 @@ export default function AgentSignupPage() {
   return (
     <main className="flex min-h-screen items-center justify-center px-4 py-8">
       <section className="glass-surface w-full max-w-md p-6 sm:p-8">
-        <Link className="text-sm font-medium text-[var(--accent)]" href="/">
-          Nyumba Nearby
+        <Link className="flex size-8 items-center justify-center rounded-[10px] bg-[var(--accent)] text-white" href="/">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
         </Link>
 
         {step === 0 ? (

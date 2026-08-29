@@ -23,7 +23,6 @@ export function Sidebar({
         <span className="flex size-9 shrink-0 items-center justify-center rounded-[12px] bg-[var(--accent)] text-white">
           <Building2 size={19} aria-hidden="true" />
         </span>
-        Nyumba Nearby
       </Link>
 
       {children}

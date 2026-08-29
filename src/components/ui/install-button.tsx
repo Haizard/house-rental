@@ -65,8 +65,14 @@ export function InstallButton() {
     }
   }
 
-  // Don't show if installed
+  // Don't show if installed or if no install prompt available
   if (isInstalled) {
+    return null;
+  }
+
+  // On desktop, only show if the browser supports the install prompt
+  const isIOS = typeof navigator !== "undefined" && /iPad|iPhone|iPod/.test(navigator.userAgent);
+  if (!deferredPrompt && !isIOS) {
     return null;
   }
 
@@ -77,7 +83,7 @@ export function InstallButton() {
         <div className="flex items-center gap-2">
           <Smartphone size={18} className="text-[var(--accent)]" />
           <p className="text-sm font-semibold text-[var(--text-primary)]">
-            Install Nyumba Nearby
+            Install App
           </p>
         </div>
         <p className="mt-3 text-xs leading-5 text-[var(--text-secondary)]">

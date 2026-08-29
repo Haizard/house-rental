@@ -57,7 +57,6 @@ export default async function AgentLayout({
           <span className="flex size-9 items-center justify-center rounded-[12px] bg-[var(--accent)] text-white">
             <Building2 size={19} aria-hidden="true" />
           </span>
-          Nyumba Nearby
         </Link>
         <NotificationBell unreadCount={unreadCount} />
         <Link className="flex min-h-11 items-center gap-3 rounded-[12px] px-3 text-sm text-[var(--text-secondary)] transition hover:bg-[var(--accent-soft)] hover:text-[var(--accent)]" href="/agent/dashboard"><LayoutDashboard size={16} /><span>Dashboard</span></Link>
