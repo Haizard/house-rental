@@ -34,18 +34,7 @@ export function HomeSplitView({ listings }: { listings: Listing[] }) {
 
   return (
     <div className="flex flex-col gap-4 lg:flex-row lg:gap-6">
-      {/* Left side: always-visible map with price badges */}
-      <div className="hidden lg:block lg:w-[45%] lg:shrink-0 lg:sticky lg:top-4 lg:self-start" style={{ height: "calc(100vh - 80px)" }}>
-        <div className="h-full overflow-hidden rounded-xl border border-[var(--glass-border)]">
-          <MapView
-            listings={listings as HomeMapListing[]}
-            selectedId={selectedId}
-            onSelectListing={(listing) => setSelectedId(listing?.id ?? null)}
-          />
-        </div>
-      </div>
-
-      {/* Right side: scrollable listing cards */}
+      {/* Left side: scrollable listing cards — one per row */}
       <div className="flex-1 min-w-0 space-y-3">
         {listings.map((listing) => (
           <div
@@ -58,6 +47,17 @@ export function HomeSplitView({ listings }: { listings: Listing[] }) {
             <ListingCard listing={listing} />
           </div>
         ))}
+      </div>
+
+      {/* Right side: always-visible map with price badges */}
+      <div className="hidden lg:block lg:w-[45%] lg:shrink-0 lg:sticky lg:top-4 lg:self-start" style={{ height: "calc(100vh - 80px)" }}>
+        <div className="h-full overflow-hidden rounded-xl border border-[var(--glass-border)]">
+          <MapView
+            listings={listings as HomeMapListing[]}
+            selectedId={selectedId}
+            onSelectListing={(listing) => setSelectedId(listing?.id ?? null)}
+          />
+        </div>
       </div>
     </div>
   );
