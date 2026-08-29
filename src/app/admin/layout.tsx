@@ -60,7 +60,7 @@ export default async function AdminLayout({
       
         <div className="mt-auto pt-4">
           <form action={async () => { "use server"; const { signOut } = await import("@/lib/auth/config"); await signOut({ redirectTo: "/" }); }}>
-            <button rounded-lg px-3 text-sm text-[var(--danger)] transition hover:bg-[var(--danger-soft)]" type="submit">
+            <button className="flex items-center gap-3 rounded-lg px-3 text-sm text-[var(--danger)] transition hover:bg-[var(--danger-soft)]" type="submit">
               <LogOut size={19} aria-hidden="true" />
               <span>Sign out</span>
             </button>
