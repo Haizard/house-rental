@@ -5,11 +5,11 @@ import { useRouter } from "next/navigation";
 import { FormEvent, useRef, useState } from "react";
 
 const statusTypes = [
-  { value: "AVAILABLE", label: "🟢 Available now" },
-  { value: "NEW_ROOM", label: "🏠 New room" },
-  { value: "PRICE_DROP", label: "📉 Price drop" },
-  { value: "URGENT", label: "🔥 Urgent" },
-  { value: "GENERAL", label: "📢 General update" },
+  { value: "AVAILABLE", label: "Available now" },
+  { value: "NEW_ROOM", label: "New room" },
+  { value: "PRICE_DROP", label: "Price drop" },
+  { value: "URGENT", label: "Urgent" },
+  { value: "GENERAL", label: "General update" },
 ] as const;
 
 export function StatusPost({

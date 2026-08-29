@@ -15,30 +15,30 @@ import { FormEvent, useEffect, useState } from "react";
 
 const AMENITY_CATEGORIES = {
   Utilities: [
-    { slug: "wifi", label: "📶 Wi-Fi" },
-    { slug: "water", label: "💧 Water" },
-    { slug: "electricity", label: "⚡ Electricity" },
-    { slug: "hot-water", label: "🚿 Hot Water" },
+    { slug: "wifi", label: "Wi-Fi" },
+    { slug: "water", label: "Water" },
+    { slug: "electricity", label: "Electricity" },
+    { slug: "hot-water", label: "Hot Water" },
   ],
   Features: [
-    { slug: "kitchen", label: "🍳 Kitchen" },
-    { slug: "parking", label: "🅿️ Parking" },
-    { slug: "balcony", label: "🌅 Balcony" },
-    { slug: "compound", label: "🏡 Compound" },
+    { slug: "kitchen", label: "Kitchen" },
+    { slug: "parking", label: "Parking" },
+    { slug: "balcony", label: "Balcony" },
+    { slug: "compound", label: "Compound" },
   ],
   Security: [
-    { slug: "cctv", label: "📹 CCTV" },
-    { slug: "security-guard", label: "👮 Guard" },
-    { slug: "gate", label: "🚪 Gate" },
+    { slug: "cctv", label: "CCTV" },
+    { slug: "security-guard", label: "Guard" },
+    { slug: "gate", label: "Gate" },
   ],
   Convenience: [
-    { slug: "laundry", label: "👕 Laundry" },
-    { slug: "shops-nearby", label: "🛍️ Shops" },
-    { slug: "public-transport", label: "🚌 Transport" },
+    { slug: "laundry", label: "Laundry" },
+    { slug: "shops-nearby", label: "Shops nearby" },
+    { slug: "public-transport", label: "Transport" },
   ],
   Location: [
-    { slug: "near-university", label: "🎓 University" },
-    { slug: "quiet-area", label: "🤫 Quiet" },
+    { slug: "near-university", label: "Near university" },
+    { slug: "quiet-area", label: "Quiet area" },
   ],
 };
 

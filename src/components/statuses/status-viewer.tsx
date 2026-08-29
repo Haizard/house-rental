@@ -32,12 +32,12 @@ type AgentStatusGroup = {
   statuses: Status[];
 };
 
-const typeEmoji: Record<string, string> = {
-  AVAILABLE: "🟢",
-  NEW_ROOM: "🏠",
-  PRICE_DROP: "📉",
-  URGENT: "🔥",
-  GENERAL: "📢",
+const typeLabel: Record<string, string> = {
+  AVAILABLE: "Available",
+  NEW_ROOM: "New room",
+  PRICE_DROP: "Price drop",
+  URGENT: "Urgent",
+  GENERAL: "Update",
 };
 
 export function StatusViewer({
@@ -90,7 +90,7 @@ export function StatusViewer({
       {/* Agent bubbles */}
       <section>
         <h2 className="mb-3 text-sm font-semibold text-[var(--text-secondary)]">
-          🟢 Agent Status
+          Agent Status
         </h2>
         <div className="flex gap-4 overflow-x-auto pb-2">
           {agents.map((group) => {
@@ -177,7 +177,7 @@ export function StatusViewer({
 
             {/* Status content */}
             <div className="flex-1 overflow-y-auto px-5 py-4">
-              <p className="text-lg">{typeEmoji[status.type] ?? "📢"}</p>
+              <p className="text-sm font-medium uppercase tracking-wide text-[var(--text-secondary)]">{typeLabel[status.type] ?? "Update"}</p>
               {status.title && (
                 <h3 className="mt-2 text-lg font-bold">{status.title}</h3>
               )}
@@ -199,7 +199,7 @@ export function StatusViewer({
               )}
               {status.area && (
                 <p className="mt-1 text-xs text-[var(--text-secondary)]">
-                  📍 {status.area}
+                  {status.area}
                 </p>
               )}
               <p className="mt-3 text-[10px] text-[var(--text-tertiary)]">

@@ -2,7 +2,7 @@
 
 import { useCallback, useRef, useState } from "react";
 import Link from "next/link";
-import { MapPin, Heart, X, ChevronUp } from "lucide-react";
+import { Home, MapPin, Heart, X, ChevronUp } from "lucide-react";
 import Image from "next/image";
 import type { Listing } from "@/lib/listings";
 import { VerifiedBadge } from "@/components/ui/verified-badge";
@@ -96,7 +96,7 @@ export function SwipeableCard({ listing, onSwipe, style }: SwipeableCardProps) {
       )}
       {showDetails && (
         <div className="absolute left-1/2 top-4 z-10 -translate-x-1/2 rounded-lg border-2 border-[#FBC618] bg-[#FBC618]/20 px-4 py-2 text-lg font-bold text-[#FBC618] backdrop-blur-sm">
-          🔍 DETAILS
+          Details
         </div>
       )}
 
@@ -167,7 +167,7 @@ export function SwipeableListingStack({
   if (remaining.length === 0) {
     return (
       <div className="flex flex-col items-center justify-center py-20 text-center">
-        <div className="mb-4 text-5xl">🏠</div>
+        <Home size={48} className="text-[var(--text-tertiary)]" />
         <h3 className="text-lg font-bold text-[var(--text-primary)]">
           No more listings
         </h3>

@@ -104,18 +104,18 @@ export default async function ListingDetailPage({
                     )}
                     {listing.numberOfRooms && (
                       <span className="rounded-full bg-[var(--bg-base-alt)] px-3 py-1 text-xs font-medium text-[var(--text-secondary)]">
-                        🛏️ {listing.numberOfRooms} room
+                        {listing.numberOfRooms} room
                         {listing.numberOfRooms > 1 ? "s" : ""}
                       </span>
                     )}
                     {listing.floorLevel != null && (
                       <span className="rounded-full bg-[var(--bg-base-alt)] px-3 py-1 text-xs font-medium text-[var(--text-secondary)]">
-                        🏢 Floor {listing.floorLevel}
+                        Floor {listing.floorLevel}
                       </span>
                     )}
                     {listing.furnished && (
                       <span className="rounded-full bg-[var(--accent-soft)] px-3 py-1 text-xs font-semibold text-[var(--accent)]">
-                        ✅ Furnished
+                        Furnished
                       </span>
                     )}
                   </div>
@@ -226,12 +226,12 @@ export default async function ListingDetailPage({
                 )}
                 {listing.leaseDuration && (
                   <p className="text-sm text-[var(--text-secondary)]">
-                    📋 Lease: {listing.leaseDuration}
+                    Lease: {listing.leaseDuration}
                   </p>
                 )}
                 {listing.utilitiesIncluded && (
                   <p className="text-sm font-medium text-[var(--success)]">
-                    ✅ Utilities included in rent
+                    Utilities included in rent
                   </p>
                 )}
               </div>

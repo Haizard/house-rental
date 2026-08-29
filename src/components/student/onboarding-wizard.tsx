@@ -152,7 +152,7 @@ export function OnboardingWizard({ onComplete }: { onComplete?: () => void }) {
                       : "border-[var(--glass-border)] hover:border-[var(--accent)]/30"
                   }`}
                 >
-                  🎓 {uni}
+                  {uni}
                 </button>
               ))}
             </div>
@@ -227,7 +227,7 @@ export function OnboardingWizard({ onComplete }: { onComplete?: () => void }) {
                       : "border-[var(--glass-border)] hover:border-[var(--accent)]/30"
                   }`}
                 >
-                  📍 {area}
+                  {area}
                 </button>
               ))}
             </div>

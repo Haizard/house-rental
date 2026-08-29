@@ -13,7 +13,7 @@ export function AIChatbot() {
   const [messages, setMessages] = useState<Message[]>([
     {
       role: "assistant",
-      content: "👋 Habari! I'm your housing assistant. Tell me what you're looking for — area, budget, room type — and I'll help you find the perfect room in Arusha.\n\nTry: \"Njiro, self-contained, under 150k\"",
+      content: "Habari! I'm your housing assistant. Tell me what you're looking for — area, budget, room type — and I'll help you find the perfect room in Arusha.\n\nTry: \"Njiro, self-contained, under 150k\"",
     },
   ]);
   const [input, setInput] = useState("");

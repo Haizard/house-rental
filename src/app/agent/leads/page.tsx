@@ -138,7 +138,7 @@ export default async function AgentLeadsPage() {
                       ) : (
                         <div className="border-t border-[var(--glass-border)] pt-2">
                           <p className="text-[10px] text-[var(--text-tertiary)]">
-                            🔒 Upgrade to Pro for student details
+                            Upgrade to Pro for student details
                           </p>
                         </div>
                       )}

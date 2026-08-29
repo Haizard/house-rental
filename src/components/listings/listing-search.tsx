@@ -23,12 +23,12 @@ const priceRanges = [
 ];
 const genderOptions = ["Any", "Male", "Female"];
 const amenityFilters = [
-  { slug: "wifi", label: "📶 Wi-Fi" },
-  { slug: "parking", label: "🅿️ Parking" },
-  { slug: "furnished", label: "🪑 Furnished" },
-  { slug: "near-university", label: "🎓 Near uni" },
-  { slug: "water", label: "💧 Water" },
-  { slug: "electricity", label: "⚡ Power" },
+  { slug: "wifi", label: "Wi-Fi" },
+  { slug: "parking", label: "Parking" },
+  { slug: "furnished", label: "Furnished" },
+  { slug: "near-university", label: "Near university" },
+  { slug: "water", label: "Water" },
+  { slug: "electricity", label: "Electricity" },
 ];
 
 export function ListingSearch({

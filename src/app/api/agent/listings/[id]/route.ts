@@ -138,7 +138,7 @@ export async function PATCH(
           const { sendPushToMultipleUsers } = await import("@/lib/push/web-push");
           const userIds = matchingSearches.map((s) => s.student.userId);
           sendPushToMultipleUsers(userIds, {
-            title: "🏠 New listing available!",
+            title: "New listing available!",
             body: `${fullListing.title} — TZS ${fullListing.rentAmount.toLocaleString()}/mo in ${fullListing.property.area}`,
             url: `/listings/${fullListing.id}`,
             tag: `listing-${fullListing.id}`,

@@ -32,7 +32,7 @@ export async function sendLeadAlert(params: {
     const { data, error } = await resend.emails.send({
       from: FROM,
       to: params.agentEmail,
-      subject: `🏠 New lead: ${params.studentName} is interested in ${params.listingTitle}`,
+      subject: `New lead: ${params.studentName} is interested in ${params.listingTitle}`,
       html: `
         <div style="font-family: system-ui, -apple-system, sans-serif; max-width: 560px; margin: 0 auto; padding: 24px;">
           <h2 style="color: #0d9488;">New Lead Received</h2>
@@ -106,7 +106,7 @@ export async function sendSubscriptionReceipt(params: {
     const { data, error } = await resend.emails.send({
       from: FROM,
       to: params.agentEmail,
-      subject: `✅ ${params.planName} Subscription Activated`,
+      subject: `${params.planName} Subscription Activated`,
       html: `
         <div style="font-family: system-ui, -apple-system, sans-serif; max-width: 560px; margin: 0 auto; padding: 24px;">
           <h2 style="color: #0d9488;">Welcome to ${params.planName}!</h2>
@@ -141,7 +141,7 @@ export async function sendVerificationUpdate(params: {
   if (!resend) return { ok: false, error: "Email not configured" };
 
   const isApproved = params.status === "APPROVED";
-  const title = isApproved ? "✅ Verification Approved" : "❌ Verification Update";
+  const title = isApproved ? "Verification Approved" : "Verification Update";
 
   try {
     const { data, error } = await resend.emails.send({

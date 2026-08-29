@@ -84,7 +84,7 @@ export function MapView({ listings, center = DEFAULT_CENTER, zoom = DEFAULT_ZOOM
           color: white; 
           font-size: 14px; 
           font-weight: bold;
-        ">🏠</span></div>`,
+        ">H</span></div>`,
         iconSize: [32, 32],
         iconAnchor: [16, 32],
         popupAnchor: [0, -32],
@@ -189,7 +189,7 @@ export function MapView({ listings, center = DEFAULT_CENTER, zoom = DEFAULT_ZOOM
               />
             ) : (
               <div className="flex h-20 w-20 shrink-0 items-center justify-center rounded-lg bg-[var(--glass-fill)]">
-                <span className="text-2xl">🏠</span>
+                <span className="text-2xl">H</span>
               </div>
             )}
             <div className="flex-1 min-w-0">
@@ -253,7 +253,7 @@ export function MapView({ listings, center = DEFAULT_CENTER, zoom = DEFAULT_ZOOM
 function createPopupContent(listing: MapListing): string {
   const imgHtml = listing.image && listing.image !== "/listing-placeholder.svg"
     ? `<img src="${listing.image}" alt="${listing.title}" style="width:100%;height:120px;object-fit:cover;" />`
-    : `<div style="width:100%;height:80px;display:flex;align-items:center;justify-content:center;background:#f0fdf4;font-size:32px;">🏠</div>`;
+    : `<div style="width:100%;height:80px;display:flex;align-items:center;justify-content:center;background:#f0fdf4;font-size:16px;font-weight:bold;color:#FBC618;">H</div>`;
 
   return `
     <div style="font-family: system-ui, sans-serif;">

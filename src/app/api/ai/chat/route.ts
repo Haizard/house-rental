@@ -32,9 +32,9 @@ Rules:
 - Keep responses concise (2-4 sentences max)
 
 When suggesting listings, format them as:
-🏠 **[Title]**
-📍 [Area] · [Type]
-💰 TZS [Price]/mo
+**[Title]**
+[Area] · [Type]
+TZS [Price]/mo
 [Link: /listings/[id]]`;
 
 /** POST — chat with AI assistant */
@@ -236,18 +236,18 @@ function generateTemplateResponse(query: string, listings: Array<{ id: string; t
 
   // Greeting
   if (lower.match(/^(hi|hello|hey|habari|jambo|mambo)/)) {
-    return "👋 Habari! I'm your housing assistant. Tell me what you're looking for — area, budget, room type — and I'll help you find the perfect room in Arusha.\n\nFor example: \"Njiro, self-contained, under 150k\"";
+    return "Habari! I'm your housing assistant. Tell me what you're looking for — area, budget, room type — and I'll help you find the perfect room in Arusha.\n\nFor example: \"Njiro, self-contained, under 150k\"";
   }
 
   // Help
   if (lower.includes("help") || lower.includes("msaada")) {
-    return "I can help you find housing in Arusha! Try telling me:\n\n🏠 **Area**: Njiro, Olorien, Sakina, etc.\n💰 **Budget**: \"under 150k\" or \"100k-200k\"\n🛏️ **Type**: self-contained, private room, studio, etc.\n\nExample: \"Njiro, self-contained, 150k\"";
+    return "I can help you find housing in Arusha! Try telling me:\n\n**Area**: Njiro, Olorien, Sakina, etc.\n**Budget**: \"under 150k\" or \"100k-200k\"\n**Type**: self-contained, private room, studio, etc.\n\nExample: \"Njiro, self-contained, 150k\"";
   }
 
   // Listings found
   if (listings.length > 0) {
     const listingText = listings.map((l) =>
-      `🏠 **${l.title}**\n📍 ${l.area} · ${l.propertyType}\n💰 TZS ${l.rentAmount.toLocaleString()}/mo\n🔗 /listings/${l.id}`
+      `**${l.title}**\n${l.area} · ${l.propertyType}\nTZS ${l.rentAmount.toLocaleString()}/mo\n/listings/${l.id}`
     ).join("\n\n");
 
     return `Here are some options I found:\n\n${listingText}\n\nWould you like to know more about any of these? Or tell me other criteria and I'll search again.`;

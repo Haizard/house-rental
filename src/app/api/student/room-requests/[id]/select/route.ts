@@ -90,7 +90,7 @@ export async function POST(
         conversationId: conversation.id,
         senderId: session.user.id,
         messageType: "SYSTEM",
-        content: `🎉 Connection established! ${session.user.name ?? "Student"} selected a room from this agent based on their room request.`,
+        content: `Connection established! ${session.user.name ?? "Student"} selected a room from this agent based on their room request.`,
       },
     });
 

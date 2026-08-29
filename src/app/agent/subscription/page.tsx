@@ -49,7 +49,7 @@ export default function AgentSubscriptionPage() {
       {status === "success" && (
         <div className="glass-surface mb-6 border-emerald-200 bg-emerald-50 p-4 text-center animate-slide-up">
           <p className="text-sm font-semibold text-emerald-700">
-            🎉 Payment successful! Your Pro subscription is now active.
+            Payment successful! Your Pro subscription is now active.
           </p>
         </div>
       )}
