@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import { MapPin, ExternalLink } from "lucide-react";
+import { useEffect, useRef, useState, useMemo } from "react";
+import { MapPin, ExternalLink, Search, X } from "lucide-react";
 import Link from "next/link";
 
 type MapListing = {
@@ -52,6 +52,21 @@ export function MapView({
   const markersRef = useRef<Map<string, unknown>>(new Map());
   const [selectedListing, setSelectedListing] = useState<MapListing | null>(null);
   const [currentZoom, setCurrentZoom] = useState(zoom);
+  const [mapQuery, setMapQuery] = useState("");
+  const [allListings, setAllListings] = useState<MapListing[]>([]);
+
+  // Filter listings for map display based on map search
+  const filteredListings = useMemo(() => {
+    if (!mapQuery.trim()) return allListings;
+    const q = mapQuery.toLowerCase().trim();
+    return allListings.filter(
+      (l) =>
+        l.area?.toLowerCase().includes(q) ||
+        l.title?.toLowerCase().includes(q) ||
+        l.address?.toLowerCase().includes(q) ||
+        l.type?.toLowerCase().includes(q),
+    );
+  }, [allListings, mapQuery]);
 
   useEffect(() => {
     if (!mapRef.current || mapInstanceRef.current) return;
@@ -88,9 +103,9 @@ export function MapView({
         const z = map.getZoom();
         setCurrentZoom(z);
         const scale = getBadgeScale(z);
-        // Update all marker icon sizes dynamically
         markersRef.current.forEach((marker) => {
-          const m = marker as { setIcon: (icon: unknown) => void; _listing: MapListing };
+          const m = marker as { setIcon: (icon: unknown) => void; _listing: MapListing; _visible: boolean };
+          if (!m._visible) return;
           const priceLabel = m._listing.price >= 1000
             ? `${Math.round(m._listing.price / 1000)}k`
             : m._listing.price.toLocaleString();
@@ -114,9 +129,10 @@ export function MapView({
         });
       });
 
-      // Add markers for all listings
-      const listingsWithCoords = listings.filter((l) => l.latitude && l.longitude);
+      // Store all listings for filtering
+      setAllListings(listings);
 
+      // Add markers for all listings
       const addMarker = (listing: MapListing, lat: number, lng: number) => {
         const scale = getBadgeScale(zoom);
         const priceLabel = listing.price >= 1000
@@ -142,7 +158,10 @@ export function MapView({
         });
 
         const marker = L.marker([lat, lng], { icon: customIcon }).addTo(map);
-        (marker as unknown as { _listing: MapListing })._listing = listing;
+        const m = marker as unknown as { _listing: MapListing; _visible: boolean; _marker: unknown };
+        m._listing = listing;
+        m._visible = true;
+        m._marker = marker;
         markersRef.current.set(listing.id, marker);
 
         marker.on("click", () => {
@@ -156,6 +175,8 @@ export function MapView({
           className: "custom-popup",
         });
       };
+
+      const listingsWithCoords = listings.filter((l) => l.latitude && l.longitude);
 
       if (listingsWithCoords.length === 0) {
         listings.forEach((listing, index) => {
@@ -199,6 +220,37 @@ export function MapView({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  // Filter markers when mapQuery changes
+  useEffect(() => {
+    if (!mapInstanceRef.current) return;
+    const visibleIds = new Set(filteredListings.map((l) => l.id));
+
+    markersRef.current.forEach((marker, id) => {
+      const m = marker as { setIcon: (icon: unknown) => void; _visible: boolean; _listing: MapListing };
+      const shouldShow = visibleIds.has(id);
+      if (m._visible !== shouldShow) {
+        m._visible = shouldShow;
+        if (shouldShow) {
+          (m as unknown as { addTo: (map: unknown) => unknown }).addTo(mapInstanceRef.current!);
+        } else {
+          (m as unknown as { remove: () => void }).remove();
+        }
+      }
+    });
+
+    // Refit bounds to visible markers
+    if (filteredListings.length > 0) {
+      const L = require("leaflet");
+      const visibleCoords = filteredListings
+        .filter((l) => l.latitude && l.longitude)
+        .map((l) => [l.latitude!, l.longitude!] as [number, number]);
+      if (visibleCoords.length > 0) {
+        const bounds = L.latLngBounds(visibleCoords);
+        (mapInstanceRef.current as { fitBounds: (bounds: unknown, opts?: unknown) => void }).fitBounds(bounds, { padding: [50, 50], maxZoom: 15 });
+      }
+    }
+  }, [filteredListings]);
+
   // Sync selected marker highlight from parent
   useEffect(() => {
     if (!selectedId) {
@@ -218,11 +270,36 @@ export function MapView({
         style={{ background: "var(--glass-fill)" }}
       />
 
+      {/* Map search bar — filters markers only */}
+      <div className="absolute left-3 top-3 z-[1000] w-[calc(100%-24px)] max-w-[280px]">
+        <div className="glass-search flex items-center gap-2 p-1.5">
+          <Search className="ml-1 shrink-0 text-[var(--accent)]" size={14} aria-hidden="true" />
+          <input
+            className="h-7 flex-1 bg-transparent text-xs outline-none placeholder:text-[var(--text-tertiary)]"
+            value={mapQuery}
+            onChange={(e) => setMapQuery(e.target.value)}
+            placeholder="Filter by area or type..."
+            aria-label="Filter map by area"
+          />
+          {mapQuery && (
+            <button
+              className="flex size-6 shrink-0 items-center justify-center rounded-full text-[var(--text-secondary)]"
+              type="button"
+              onClick={() => setMapQuery("")}
+              aria-label="Clear map filter"
+            >
+              <X size={12} aria-hidden="true" />
+            </button>
+          )}
+        </div>
+      </div>
+
       {/* Listing count badge */}
-      <div className="absolute left-3 top-3 z-[1000]">
-        <span className="glass-surface flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold shadow-lg">
-          <MapPin size={14} className="text-[var(--accent)]" />
-          {listings.length} {listings.length === 1 ? "listing" : "listings"}
+      <div className="absolute left-3 top-16 z-[1000]">
+        <span className="glass-surface flex items-center gap-1.5 px-2.5 py-1 text-[11px] font-semibold shadow-lg">
+          <MapPin size={12} className="text-[var(--accent)]" />
+          {filteredListings.length} {filteredListings.length === 1 ? "listing" : "listings"}
+          {mapQuery && ` found`}
         </span>
       </div>
 
