@@ -78,7 +78,7 @@ export function AIListingExtract({
         </p>
       )}
       <button
-        className="button button-primary w-full px-5"
+        className="button button-primary w-full"
         disabled={loading || !description.trim()}
         type="button"
         onClick={handleExtract}

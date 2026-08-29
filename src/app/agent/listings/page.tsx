@@ -42,7 +42,7 @@ export default async function AgentListingsPage() {
           </p>
         </div>
         <Link
-          className="button button-primary hidden px-5 sm:inline-flex"
+          className="button button-primary hidden px-4 sm:inline-flex"
           href="/agent/listings/new"
         >
           <Plus size={18} aria-hidden="true" /> New listing
@@ -68,7 +68,7 @@ export default async function AgentListingsPage() {
             Create your first listing to start receiving student enquiries.
           </p>
           <Link
-            className="button button-primary mt-6 px-5"
+            className="button button-primary mt-6"
             href="/agent/listings/new"
           >
             <Plus size={18} aria-hidden="true" /> Create listing

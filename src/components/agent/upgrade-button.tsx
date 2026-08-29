@@ -29,7 +29,7 @@ export function UpgradeButton() {
 
   return (
     <button
-      className="button button-primary w-full px-5"
+      className="button button-primary w-full"
       disabled={pending}
       type="button"
       onClick={handleUpgrade}

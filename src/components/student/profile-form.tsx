@@ -182,7 +182,7 @@ export function StudentProfileForm({
       )}
 
       <button
-        className="button button-primary w-full px-5"
+        className="button button-primary w-full"
         disabled={pending}
         type="submit"
       >

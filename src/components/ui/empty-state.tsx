@@ -90,7 +90,7 @@ export function EmptyState({
 
       {action && (
         <button
-          className="button button-primary mt-5 px-5 text-sm"
+          className="button button-primary mt-5 text-sm"
           type="button"
           onClick={action.onClick}
         >

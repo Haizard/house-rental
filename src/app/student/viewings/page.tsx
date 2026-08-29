@@ -49,7 +49,7 @@ export default async function StudentViewingsPage() {
             Request a viewing from any listing detail page to schedule a visit.
           </p>
           <Link
-            className="button button-primary mt-6 px-5"
+            className="button button-primary mt-6"
             href="/search"
           >
             Browse listings
@@ -104,7 +104,7 @@ export default async function StudentViewingsPage() {
               </div>
               {viewing.lead.conversation && (
                 <Link
-                  className="button button-glass h-8 px-3 text-sm"
+                  className="button button-glass px-3 text-sm"
                   href={`/student/chats/${viewing.lead.conversation.id}`}
                 >
                   Open chat

@@ -97,10 +97,10 @@ export default function AgentRequestsPage() {
             <p className="mt-2 text-sm text-[var(--text-secondary)] max-w-md mx-auto">
               Room requests are available exclusively to Pro subscribers. Upgrade to access student room requests and win more deals.
             </p>
-            <Link className="button button-primary mt-5 px-6" href="/agent/upgrade">
+            <Link className="button button-primary mt-5 px-4" href="/agent/upgrade">
               <Crown size={16} className="mr-1.5" /> Upgrade to Pro
             </Link>
-            <Link className="button button-glass mt-3 px-6" href="/agent/dashboard">
+            <Link className="button button-glass mt-3 px-4" href="/agent/dashboard">
               Back to Dashboard
             </Link>
           </div>
@@ -187,7 +187,7 @@ export default function AgentRequestsPage() {
                           onChange={(e) => setFormData((prev) => ({ ...prev, proposedRent: e.target.value }))}
                         />
                         <button
-                          className="button button-primary flex items-center gap-2 px-4 py-2.5"
+                          className="button button-primary px-4"
                           onClick={() => handleRespond(req.id)}
                           disabled={responding === req.id || !formData.message.trim()}
                         >

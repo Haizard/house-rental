@@ -151,7 +151,7 @@ export default async function AgentLeadsPage() {
                       <div className="flex gap-2 pt-1">
                         {lead.conversation && (
                           <Link
-                            className="button button-glass min-h-8 min-w-0 flex-1 px-2 text-[11px]"
+                            className="button button-glass min-w-0 flex-1 px-2 text-[11px]"
                             href={`/agent/chats/${lead.conversation.id}`}
                           >
                             <MessageCircle size={13} aria-hidden="true" /> Chat

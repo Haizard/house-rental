@@ -58,7 +58,7 @@ function UserSearch() {
           placeholder="Search by name or email"
           aria-label="Search users"
         />
-        <button className="button button-primary h-8 px-4 text-sm" type="submit" disabled={pending}>
+        <button className="button button-primary px-4 text-sm" type="submit" disabled={pending}>
           Search
         </button>
       </form>
@@ -122,7 +122,7 @@ function UserRow({ user }: { user: User }) {
         </p>
       </div>
       <button
-        className={`button h-8 px-3 text-sm ${
+        className={`button px-3 text-sm ${
           user.isActive ? "button-glass" : "button-primary"
         }`}
         disabled={pending}

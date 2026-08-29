@@ -10,7 +10,7 @@ export default function NotFound() {
         <p className="mt-2 text-[var(--text-secondary)]">
           The page you&apos;re looking for doesn&apos;t exist or has been moved.
         </p>
-        <Link className="button button-primary mt-6 px-5" href="/">
+        <Link className="button button-primary mt-6" href="/">
           <Home size={18} aria-hidden="true" /> Go home
         </Link>
       </div>

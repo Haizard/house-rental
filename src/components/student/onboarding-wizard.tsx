@@ -283,7 +283,7 @@ export function OnboardingWizard({ onComplete }: { onComplete?: () => void }) {
           <button
             onClick={handleComplete}
             disabled={saving}
-            className="button button-primary flex items-center gap-2 px-6"
+            className="button button-primary px-4"
           >
             {saving ? (
               "Saving..."
@@ -296,7 +296,7 @@ export function OnboardingWizard({ onComplete }: { onComplete?: () => void }) {
         ) : (
           <button
             onClick={() => setStep(step + 1)}
-            className="button button-primary flex items-center gap-2 px-6"
+            className="button button-primary px-4"
           >
             Next <ArrowRight size={16} />
           </button>

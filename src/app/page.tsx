@@ -44,7 +44,7 @@ export default async function Home() {
                   defaultValue="Njiro"
                 />
               </label>
-              <button className="button button-primary h-8 shrink-0 px-4 font-t-subhead sm:h-9 sm:px-5" type="submit">
+              <button className="button button-primary shrink-0 px-4 text-sm sm:px-5" type="submit">
                 <Search size={14} aria-hidden="true" />
               </button>
             </form>

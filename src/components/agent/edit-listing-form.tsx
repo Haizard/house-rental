@@ -505,7 +505,7 @@ export function EditListingForm({ listing }: { listing: ListingData }) {
         )}
 
         <button
-          className="button button-primary w-full px-5"
+          className="button button-primary w-full"
           disabled={pending}
           type="submit"
         >
@@ -517,7 +517,7 @@ export function EditListingForm({ listing }: { listing: ListingData }) {
       <div className="mt-8 space-y-3 pb-8">
         {(isDraft || isPaused) && (
           <button
-            className="button button-primary w-full px-5"
+            className="button button-primary w-full"
             disabled={pending}
             type="button"
             onClick={() => handleStatusChange("ACTIVE")}
@@ -527,7 +527,7 @@ export function EditListingForm({ listing }: { listing: ListingData }) {
         )}
         {isActive && (
           <button
-            className="button button-glass w-full px-5"
+            className="button button-glass w-full"
             disabled={pending}
             type="button"
             onClick={() => handleStatusChange("PAUSED")}
@@ -536,7 +536,7 @@ export function EditListingForm({ listing }: { listing: ListingData }) {
           </button>
         )}
         <button
-          className="button w-full border border-[var(--danger)] bg-[var(--danger-soft)] px-5 text-[var(--danger)] hover:bg-[var(--danger)] hover:text-white"
+          className="button w-full border border-[var(--danger)] bg-[var(--danger-soft)] text-[var(--danger)] hover:bg-[var(--danger)] hover:text-white"
           disabled={pending}
           type="button"
           onClick={handleDelete}

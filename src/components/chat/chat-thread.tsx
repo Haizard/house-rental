@@ -230,7 +230,7 @@ export function ChatThread({ conversationId, initialMessages, currentUserId }: P
           maxLength={2000}
         />
         <button
-          className="button button-primary size-11 shrink-0 rounded-full"
+          className="button button-primary size-9 shrink-0 rounded-full"
           disabled={pending || !content.trim()}
           type="submit"
           aria-label="Send message"

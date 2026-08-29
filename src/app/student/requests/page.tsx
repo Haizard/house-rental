@@ -57,7 +57,7 @@ export default async function StudentRequestsPage() {
             <p className="mt-1 text-sm text-[var(--text-secondary)]">
               Post your first request and let agents find the perfect room for you.
             </p>
-            <Link className="button button-primary mt-5 px-5" href="/student/requests/new">
+            <Link className="button button-primary mt-5" href="/student/requests/new">
               Post a Request
             </Link>
           </div>

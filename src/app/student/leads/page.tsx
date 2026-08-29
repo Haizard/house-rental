@@ -43,7 +43,7 @@ export default async function StudentLeadsPage() {
             Tap &quot;Chat with agent&quot; on any listing to create your first lead.
           </p>
           <Link
-            className="button button-primary mt-6 px-5"
+            className="button button-primary mt-6"
             href="/search"
           >
             Browse listings

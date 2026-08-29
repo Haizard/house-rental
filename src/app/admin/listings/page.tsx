@@ -76,7 +76,7 @@ function ListingSearch() {
           <option value="PENDING_REVIEW">Pending review</option>
           <option value="REJECTED">Rejected</option>
         </select>
-        <button className="button button-primary h-8 px-4 text-sm" type="submit" disabled={pending}>
+        <button className="button button-primary px-4 text-sm" type="submit" disabled={pending}>
           Search
         </button>
       </form>
@@ -132,7 +132,7 @@ function ListingRow({ listing }: { listing: Listing }) {
       <div className="flex gap-2">
         {(listing.status === "DRAFT" || listing.status === "PAUSED") && (
           <button
-            className="button button-primary h-8 px-3 text-sm"
+            className="button button-primary px-3 text-sm"
             disabled={pending}
             type="button"
             onClick={() => updateStatus("ACTIVE")}
@@ -143,7 +143,7 @@ function ListingRow({ listing }: { listing: Listing }) {
         {listing.status === "ACTIVE" && (
           <>
             <button
-              className="button button-glass h-8 px-3 text-sm"
+              className="button button-glass px-3 text-sm"
               disabled={pending}
               type="button"
               onClick={() => updateStatus("PAUSED")}
@@ -151,7 +151,7 @@ function ListingRow({ listing }: { listing: Listing }) {
               Pause
             </button>
             <button
-              className="button h-8 px-3 text-sm border border-[var(--danger)] bg-[var(--danger-soft)] text-[var(--danger)]"
+              className="button px-3 text-sm border border-[var(--danger)] bg-[var(--danger-soft)] text-[var(--danger)]"
               disabled={pending}
               type="button"
               onClick={() => updateStatus("REJECTED")}

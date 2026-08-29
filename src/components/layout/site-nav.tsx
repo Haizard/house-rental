@@ -70,14 +70,14 @@ export async function SiteNav() {
           {/* Auth buttons */}
           {isLoggedIn ? (
             <Link
-              className="button button-glass h-9 px-3 font-t-subhead"
+              className="button button-glass px-3 text-sm"
               href={getDashboardLink(userRole ?? "STUDENT")}
             >
               <User size={15} /> Dashboard
             </Link>
           ) : (
             <Link
-              className="button button-primary h-9 px-3 font-t-subhead sm:px-4"
+              className="button button-primary px-3 text-sm sm:px-4"
               href="/auth/sign-in"
             >
               <LogIn size={15} /> Log in

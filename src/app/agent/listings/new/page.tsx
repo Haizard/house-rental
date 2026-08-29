@@ -682,7 +682,7 @@ export default function NewListingPage() {
         <div className="flex gap-3 pb-8">
           {step > 0 && (
             <button
-              className="button button-glass flex-1 px-5"
+              className="button button-glass flex-1 px-4"
               type="button"
               onClick={() => setStep(step - 1)}
             >
@@ -690,7 +690,7 @@ export default function NewListingPage() {
             </button>
           )}
           <button
-            className="button button-primary flex-1 px-5"
+            className="button button-primary flex-1 px-4"
             disabled={pending}
             type="submit"
           >

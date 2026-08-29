@@ -28,7 +28,7 @@ export function AgentActions({
 
   return (
     <button
-      className={`button h-8 px-3 text-sm ${isActive ? "button-glass" : "button-primary"}`}
+      className={`button px-3 text-sm ${isActive ? "button-glass" : "button-primary"}`}
       disabled={pending}
       type="button"
       onClick={toggleActive}

@@ -55,7 +55,7 @@ export function CompareBar({ items, onRemove, onClear }: CompareBarProps) {
           {items.length >= 2 && (
             <Link
               href={compareUrl}
-              className="button button-primary min-h-8 px-3 text-[11px]"
+              className="button button-primary px-3 text-[11px]"
             >
               Compare ({items.length}) <ArrowRight size={12} aria-hidden="true" />
             </Link>

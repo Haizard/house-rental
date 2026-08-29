@@ -30,7 +30,7 @@ export function SubscriptionActions() {
 
       {!showConfirm ? (
         <button
-          className="button mt-4 border border-red-300 px-4 py-2 text-sm text-red-600 hover:bg-red-50"
+          className="button mt-4 border border-red-300 px-4 text-sm text-red-600 hover:bg-red-50"
           onClick={() => setShowConfirm(true)}
         >
           Cancel subscription
@@ -38,14 +38,14 @@ export function SubscriptionActions() {
       ) : (
         <div className="mt-4 flex items-center gap-3">
           <button
-            className="button border border-red-300 px-4 py-2 text-sm text-red-600 hover:bg-red-50"
+            className="button border border-red-300 px-4 text-sm text-red-600 hover:bg-red-50"
             disabled={loading}
             onClick={handleCancel}
           >
             {loading ? "Cancelling…" : "Yes, cancel"}
           </button>
           <button
-            className="button button-glass px-4 py-2 text-sm"
+            className="button button-glass px-4 text-sm"
             onClick={() => setShowConfirm(false)}
           >
             Keep subscription

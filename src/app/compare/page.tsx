@@ -19,7 +19,7 @@ export default async function ComparePage({
     <div className="mx-auto max-w-5xl px-4 pb-20 pt-10">
       <header className="mb-8 flex items-center gap-4">
         <Link
-          className="button button-glass h-8 px-3"
+          className="button button-glass px-3"
           href="/search"
         >
           <ArrowLeft size={16} aria-hidden="true" />

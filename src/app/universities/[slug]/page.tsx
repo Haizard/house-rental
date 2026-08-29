@@ -125,7 +125,7 @@ export default async function UniversityPage({ params }: { params: Promise<{ slu
                 No listings found near {university.name} yet.
               </p>
               <a
-                className="button button-primary mt-4 inline-flex px-5"
+                className="button button-primary mt-4 inline-flex"
                 href="/search"
               >
                 Browse all listings
@@ -151,7 +151,7 @@ export default async function UniversityPage({ params }: { params: Promise<{ slu
               Students at {university.name} are looking for rooms. List your properties to reach them.
             </p>
           </div>
-          <a className="button button-glass px-5" href="/auth/agent-signup">
+          <a className="button button-glass" href="/auth/agent-signup">
             Join as an agent
           </a>
         </section>

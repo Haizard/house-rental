@@ -62,7 +62,7 @@ export default async function AgentDashboard() {
         </div>
         <div className="hidden items-center gap-2 sm:flex">
           <Link
-            className="button button-glass h-9 px-3 text-[13px]"
+            className="button button-glass px-3 text-[13px]"
             href="/"
           >
             View marketplace
@@ -128,13 +128,13 @@ export default async function AgentDashboard() {
               </p>
               <div className="mt-3 flex gap-2">
                 <Link
-                  className="button button-primary px-4 py-2 text-sm"
+                  className="button button-primary px-4 text-sm"
                   href="/agent/upgrade"
                 >
                   <Crown size={14} className="mr-1" /> View plans
                 </Link>
                 <Link
-                  className="button button-glass px-4 py-2 text-sm"
+                  className="button button-glass px-4 text-sm"
                   href="/agent/subscription"
                 >
                   Manage subscription
@@ -192,7 +192,7 @@ export default async function AgentDashboard() {
                   </p>
                 </div>
                 <Link
-                  className="button button-glass h-8 px-3 text-sm"
+                  className="button button-glass px-3 text-sm"
                   href={
                     lead.conversation
                       ? `/student/chats/${lead.conversation.id}`

@@ -53,7 +53,7 @@ export default async function SavedListingsPage() {
             Tap the heart icon on any listing to save it here.
           </p>
           <Link
-            className="button button-primary mt-6 px-5"
+            className="button button-primary mt-6"
             href="/search"
           >
             <Search size={18} aria-hidden="true" /> Browse listings

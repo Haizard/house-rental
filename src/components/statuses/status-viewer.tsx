@@ -210,7 +210,7 @@ export function StatusViewer({
             {/* Action buttons */}
             <div className="flex gap-2 border-t border-black/[.06] px-4 py-3">
               <Link
-                className="button button-primary h-8 flex-1 px-3 text-sm"
+                className="button button-primary flex-1 px-3 text-sm"
                 href={`/search?area=${encodeURIComponent(status.area ?? "")}`}
                 onClick={close}
               >
@@ -218,7 +218,7 @@ export function StatusViewer({
               </Link>
               {status.linkedListingId && (
                 <Link
-                  className="button button-glass h-8 flex-1 px-3 text-sm"
+                  className="button button-glass flex-1 px-3 text-sm"
                   href={`/listings/${status.linkedListingId}`}
                   onClick={close}
                 >

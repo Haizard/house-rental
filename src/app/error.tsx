@@ -23,7 +23,7 @@ export default function Error({
           </p>
         )}
         <button
-          className="button button-primary mt-6 px-5"
+          className="button button-primary mt-6"
           onClick={reset}
           type="button"
         >

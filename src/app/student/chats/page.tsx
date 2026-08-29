@@ -50,7 +50,7 @@ export default async function StudentChatsPage() {
             listing.
           </p>
           <Link
-            className="button button-primary mt-6 px-5"
+            className="button button-primary mt-6"
             href="/search"
           >
             Browse listings

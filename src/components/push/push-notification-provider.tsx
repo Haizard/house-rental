@@ -118,7 +118,7 @@ export function PushNotificationProvider() {
     <button
       onClick={isSubscribed ? unsubscribe : subscribe}
       disabled={loading}
-      className="button button-glass h-9 w-9 justify-center px-0 sm:h-auto sm:w-auto sm:px-3 sm:gap-2"
+      className="button button-glass w-9 justify-center px-0 sm:w-auto sm:px-3 sm:gap-2"
       title={isSubscribed ? "Disable notifications" : "Enable notifications"}
     >
       {loading ? (

@@ -61,7 +61,7 @@ export function AISearchBar({ className = "" }: { className?: string }) {
           />
         </label>
         <button
-          className="button button-primary px-5"
+          className="button button-primary"
           type="submit"
           disabled={loading || !query.trim()}
         >

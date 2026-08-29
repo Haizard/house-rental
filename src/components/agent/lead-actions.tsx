@@ -44,7 +44,7 @@ export function LeadActions({
 
   return (
     <button
-      className="button button-primary min-h-8 flex-1 px-2 text-[11px]"
+      className="button button-primary flex-1 px-2 text-[11px]"
       disabled={pending}
       type="button"
       onClick={advance}
