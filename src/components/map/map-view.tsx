@@ -89,9 +89,12 @@ export function MapView({
       const map = L.map(mapRef.current!, {
         center,
         zoom,
-        zoomControl: true,
+        zoomControl: false,
         scrollWheelZoom: true,
       });
+
+      // Move zoom controls to top-right to avoid overlapping the search bar
+      L.control.zoom({ position: "topright" }).addTo(map);
 
       L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
@@ -277,7 +280,7 @@ export function MapView({
       />
 
       {/* Map search bar — filters markers only */}
-      <div className="absolute left-3 top-3 z-[1000] w-[calc(100%-24px)] max-w-[280px]">
+      <div className="absolute left-3 top-3 z-[1000] w-[calc(100%-80px)] max-w-[240px]">
         <div className="glass-search flex items-center gap-2 p-1.5">
           <Search className="ml-1 shrink-0 text-[var(--accent)]" size={14} aria-hidden="true" />
           <input

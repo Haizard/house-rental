@@ -34,8 +34,10 @@ export function HomeSplitView({ listings }: { listings: Listing[] }) {
 
   return (
     <ListingSearchProvider listings={listings}>
-      {/* Search bar + filters — full width above the split */}
-      <ListingSearchBar />
+      {/* Search bar + filters — constrained to left panel width */}
+      <div className="lg:max-w-[55%]">
+        <ListingSearchBar />
+      </div>
 
       {/* Split view: listing cards left, map right — same top */}
       <div className="mt-4 flex flex-col gap-4 lg:flex-row lg:gap-6">
