@@ -1,7 +1,7 @@
 "use client";
 
-import { Bed, Home, Search, SlidersHorizontal, X } from "lucide-react";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { Bed, Search, SlidersHorizontal, X } from "lucide-react";
+import { useMemo, useState } from "react";
 import type { Listing } from "@/lib/listings";
 import { ListingCard } from "./listing-card";
 import { BottomSheet } from "@/components/ui/bottom-sheet";
@@ -34,13 +34,9 @@ const amenityFilters = [
 export function ListingSearch({
   listings,
   initialArea = "",
-  selectedListingId,
-  onSelectListing,
 }: {
   listings: Listing[];
   initialArea?: string;
-  selectedListingId?: string | null;
-  onSelectListing?: (id: string | null) => void;
 }) {
   const [query, setQuery] = useState(initialArea);
   const [type, setType] = useState("All homes");
@@ -49,7 +45,6 @@ export function ListingSearch({
   const [furnishedOnly, setFurnishedOnly] = useState(false);
   const [selectedAmenities, setSelectedAmenities] = useState<string[]>([]);
   const [showFilters, setShowFilters] = useState(false);
-  const cardRefs = useRef<Map<string, HTMLDivElement>>(new Map());
 
   function toggleAmenity(slug: string) {
     setSelectedAmenities((prev) =>
@@ -103,18 +98,6 @@ export function ListingSearch({
     gender !== "Any" ||
     furnishedOnly ||
     selectedAmenities.length > 0;
-
-  // Scroll to selected card when map selects a listing
-  useEffect(() => {
-    if (selectedListingId) {
-      const el = cardRefs.current.get(selectedListingId);
-      if (el) {
-        el.scrollIntoView({ behavior: "smooth", block: "center" });
-        el.classList.add("ring-2", "ring-[var(--accent)]");
-        setTimeout(() => el.classList.remove("ring-2", "ring-[var(--accent)]"), 2000);
-      }
-    }
-  }, [selectedListingId]);
 
   // Content shared between inline (desktop) and bottom sheet (mobile)
   const filterContent = (
@@ -314,24 +297,15 @@ export function ListingSearch({
       )}
 
       {/* Results count */}
-      <p className="mt-4 text-sm text-[var(--text-secondary)]">
+      <p className="mt-5 text-sm text-[var(--text-secondary)]">
         {results.length} {results.length === 1 ? "home" : "homes"} available
       </p>
 
       {/* Results grid */}
       {results.length > 0 ? (
-        <div className="mt-3 space-y-3">
+        <div className="listing-grid mt-4">
           {results.map((listing) => (
-            <div
-              key={listing.id}
-              ref={(el) => {
-                if (el) cardRefs.current.set(listing.id, el);
-              }}
-              onClick={() => onSelectListing?.(listing.id)}
-              className="cursor-pointer transition-all duration-200"
-            >
-              <ListingCard listing={listing} />
-            </div>
+            <ListingCard key={listing.id} listing={listing} />
           ))}
         </div>
       ) : (

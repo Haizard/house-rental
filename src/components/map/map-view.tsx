@@ -29,6 +29,17 @@ type MapViewProps = {
 const DEFAULT_CENTER: [number, number] = [-3.3869, 36.6830];
 const DEFAULT_ZOOM = 12;
 
+// Badge scale factor based on zoom level
+function getBadgeScale(zoom: number): number {
+  if (zoom >= 16) return 1.0;
+  if (zoom >= 15) return 0.9;
+  if (zoom >= 14) return 0.8;
+  if (zoom >= 13) return 0.7;
+  if (zoom >= 12) return 0.6;
+  if (zoom >= 11) return 0.5;
+  return 0.4;
+}
+
 export function MapView({
   listings,
   center = DEFAULT_CENTER,
@@ -40,6 +51,7 @@ export function MapView({
   const mapInstanceRef = useRef<unknown>(null);
   const markersRef = useRef<Map<string, unknown>>(new Map());
   const [selectedListing, setSelectedListing] = useState<MapListing | null>(null);
+  const [currentZoom, setCurrentZoom] = useState(zoom);
 
   useEffect(() => {
     if (!mapRef.current || mapInstanceRef.current) return;
@@ -56,7 +68,7 @@ export function MapView({
       L.Icon.Default.mergeOptions({
         iconRetinaUrl: "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-icon-2x.png",
         iconUrl: "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-icon.png",
-        shadowUrl: "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-marker-shadow.png",
+        shadowUrl: "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-icon-shadow.png",
       });
 
       const map = L.map(mapRef.current!, {
@@ -71,26 +83,66 @@ export function MapView({
         maxZoom: 19,
       }).addTo(map);
 
+      // Track zoom changes to resize badges dynamically
+      map.on("zoomend", () => {
+        const z = map.getZoom();
+        setCurrentZoom(z);
+        const scale = getBadgeScale(z);
+        // Update all marker icon sizes dynamically
+        markersRef.current.forEach((marker) => {
+          const m = marker as { setIcon: (icon: unknown) => void; _listing: MapListing };
+          const priceLabel = m._listing.price >= 1000
+            ? `${Math.round(m._listing.price / 1000)}k`
+            : m._listing.price.toLocaleString();
+          const w = Math.round(120 * scale);
+          const h = Math.round(44 * scale);
+          const fontSize = Math.round(12 * scale);
+          const typeFontSize = Math.round(10 * scale);
+          const padding = Math.round(4 * scale);
+          const borderR = Math.round(8 * scale);
+          const newIcon = L.divIcon({
+            className: "custom-map-marker",
+            html: `<div class="marker-badge" style="padding:${padding}px ${Math.round(10 * scale)}px;border-radius:${borderR}px;">
+              <span class="marker-price" style="font-size:${fontSize}px;">TZS ${priceLabel}</span>
+              <span class="marker-type" style="font-size:${typeFontSize}px;">${m._listing.type}</span>
+            </div>`,
+            iconSize: [w, h],
+            iconAnchor: [w / 2, h],
+            popupAnchor: [0, -h],
+          });
+          m.setIcon(newIcon);
+        });
+      });
+
       // Add markers for all listings
       const listingsWithCoords = listings.filter((l) => l.latitude && l.longitude);
 
       const addMarker = (listing: MapListing, lat: number, lng: number) => {
+        const scale = getBadgeScale(zoom);
         const priceLabel = listing.price >= 1000
           ? `${Math.round(listing.price / 1000)}k`
           : listing.price.toLocaleString();
 
+        const w = Math.round(120 * scale);
+        const h = Math.round(44 * scale);
+        const fontSize = Math.round(12 * scale);
+        const typeFontSize = Math.round(10 * scale);
+        const padding = Math.round(4 * scale);
+        const borderR = Math.round(8 * scale);
+
         const customIcon = L.divIcon({
           className: "custom-map-marker",
-          html: `<div class="marker-badge">
-            <span class="marker-price">TZS ${priceLabel}</span>
-            <span class="marker-type">${listing.type}</span>
+          html: `<div class="marker-badge" style="padding:${padding}px ${Math.round(10 * scale)}px;border-radius:${borderR}px;">
+            <span class="marker-price" style="font-size:${fontSize}px;">TZS ${priceLabel}</span>
+            <span class="marker-type" style="font-size:${typeFontSize}px;">${listing.type}</span>
           </div>`,
-          iconSize: [120, 44],
-          iconAnchor: [60, 44],
-          popupAnchor: [0, -44],
+          iconSize: [w, h],
+          iconAnchor: [w / 2, h],
+          popupAnchor: [0, -h],
         });
 
         const marker = L.marker([lat, lng], { icon: customIcon }).addTo(map);
+        (marker as unknown as { _listing: MapListing })._listing = listing;
         markersRef.current.set(listing.id, marker);
 
         marker.on("click", () => {
@@ -237,6 +289,11 @@ export function MapView({
           border: 2px solid white;
           cursor: pointer;
           white-space: nowrap;
+          transition: all 0.2s ease;
+        }
+        .marker-badge:hover {
+          transform: scale(1.1);
+          box-shadow: 0 4px 12px rgba(0,0,0,0.35);
         }
         .marker-price {
           color: white;

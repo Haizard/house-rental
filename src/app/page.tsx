@@ -1,12 +1,10 @@
 export const dynamic = "force-dynamic";
 
 import { ArrowRight, MapPin, Search } from "lucide-react";
-import { ListingsSection } from "@/components/listings/listings-section";
+import { HomeSplitView } from "@/components/listings/home-split-view";
 import { StatusSection } from "@/components/statuses/status-section";
 import { SiteNav } from "@/components/layout/site-nav";
 import { getPublicListings } from "@/server/listings/get-public-listings";
-
-const areas = ["Njiro", "Olorien", "Sakina", "Usa River"];
 
 
 export default async function Home() {
@@ -55,7 +53,7 @@ export default async function Home() {
         <StatusSection />
       </section>
 
-      {/* Listings */}
+      {/* Map + Listings split view */}
       <section id="listings" className="mx-auto mt-6 max-w-7xl sm:mt-10">
         <div className="mb-3 flex items-end justify-between gap-4 sm:mb-5">
           <div>
@@ -71,7 +69,7 @@ export default async function Home() {
             See all <ArrowRight size={14} aria-hidden="true" />
           </a>
         </div>
-        <ListingsSection listings={listings} />
+        <HomeSplitView listings={listings} />
       </section>
     </main>
   );
