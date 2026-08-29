@@ -1,6 +1,6 @@
 export const dynamic = "force-dynamic";
 
-import { ArrowRight, MapPin, Search } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { HomeSplitView } from "@/components/listings/home-split-view";
 import { StatusSection } from "@/components/statuses/status-section";
 import { SiteNav } from "@/components/layout/site-nav";
@@ -16,35 +16,14 @@ export default async function Home() {
 
       {/* Hero — compact */}
       <section id="top" className="mx-auto max-w-7xl">
-        <div className="pt-8 sm:pt-10 lg:grid lg:max-w-3xl lg:items-start lg:gap-8 lg:pt-16">
-          <div>
-            <p className="eyebrow">Student housing in Arusha</p>
-            <h1 className="mt-2 font-t-bigtitle text-[var(--text-primary)]">
-              Find your next home.
-            </h1>
-            <p className="mt-3 max-w-lg font-t-body text-[var(--text-secondary)]">
-              Browse rooms around Njiro and talk directly with trusted local agents.
-            </p>
-
-            {/* Search form — compact */}
-            <form className="glass-search mt-5 flex gap-1.5 p-1.5 sm:mt-6 sm:gap-2 sm:p-2" action="/search">
-              <label className="flex h-8 flex-1 items-center gap-2 rounded-lg bg-white/50 px-3 sm:h-9 sm:gap-2.5 sm:rounded-[14px]">
-                <MapPin className="shrink-0 text-[var(--accent)]" size={16} aria-hidden="true" />
-                <span className="sr-only">Search area</span>
-                <input
-                  className="w-full bg-transparent font-t-subhead outline-none placeholder:text-[var(--text-tertiary)] sm:text-[14px]"
-                  name="area"
-                  placeholder="Area or university"
-                  defaultValue="Njiro"
-                />
-              </label>
-              <button className="button button-primary shrink-0 px-4 text-sm sm:px-5" type="submit">
-                <Search size={14} aria-hidden="true" />
-              </button>
-            </form>
-
-
-          </div>
+        <div className="pt-8 sm:pt-10 lg:pt-16">
+          <p className="eyebrow">Student housing in Arusha</p>
+          <h1 className="mt-2 font-t-bigtitle text-[var(--text-primary)]">
+            Find your next home.
+          </h1>
+          <p className="mt-3 max-w-lg font-t-body text-[var(--text-secondary)]">
+            Browse rooms around Njiro and talk directly with trusted local agents.
+          </p>
         </div>
       </section>
 
