@@ -43,7 +43,7 @@ export function FeatureListingButton({
         type="button"
         onClick={toggle}
         disabled={pending}
-        className={`flex items-center gap-1.5 rounded-full px-3 py-1.5 text-[11px] font-semibold transition-all ${
+        className={`flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-[11px] font-semibold transition-all ${
           featured
             ? "bg-amber-100 text-amber-700 hover:bg-amber-200"
             : "bg-[var(--accent-soft)] text-[var(--accent)] hover:bg-[var(--accent)]/20"

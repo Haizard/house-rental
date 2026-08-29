@@ -29,7 +29,7 @@ export function SwipeToggle({ listings }: { listings: Listing[] }) {
       <div className="mb-4 flex items-center gap-2 sm:hidden">
         <button
           onClick={() => setMode("grid")}
-          className={`inline-flex items-center justify-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-medium transition ${
+          className={`inline-flex items-center justify-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-medium transition ${
             mode === "grid"
               ? "bg-[var(--accent)] text-white"
               : "bg-[var(--glass-fill)] text-[var(--text-secondary)]"
@@ -39,7 +39,7 @@ export function SwipeToggle({ listings }: { listings: Listing[] }) {
         </button>
         <button
           onClick={() => setMode("swipe")}
-          className={`inline-flex items-center justify-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-medium transition ${
+          className={`inline-flex items-center justify-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-medium transition ${
             mode === "swipe"
               ? "bg-[var(--accent)] text-white"
               : "bg-[var(--glass-fill)] text-[var(--text-secondary)]"

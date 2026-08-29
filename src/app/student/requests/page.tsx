@@ -77,7 +77,7 @@ export default async function StudentRequestsPage() {
                       </p>
                     </div>
                     <span
-                      className={`rounded-full px-3 py-1 text-xs font-medium ${
+                      className={`rounded-lg px-3 py-1 text-xs font-medium ${
                         req.status === "OPEN"
                           ? "bg-emerald-100 text-emerald-700"
                           : req.status === "SELECTED"

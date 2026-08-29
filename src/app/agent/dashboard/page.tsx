@@ -180,7 +180,7 @@ export default async function AgentDashboard() {
                       {lead.student.user.firstName}{" "}
                       {lead.student.user.lastName}
                     </h3>
-                    <span className="filter-chip-active rounded-full px-2 py-1 text-xs">
+                    <span className="filter-chip-active rounded-lg px-2 py-1 text-xs">
                       {lead.status.replaceAll("_", " ").toLowerCase()}
                     </span>
                   </div>

@@ -98,23 +98,23 @@ export default async function ListingDetailPage({
                   </div>
                   <div className="mt-3 flex flex-wrap gap-2">
                     {listing.roomSize && (
-                      <span className="rounded-full bg-[var(--bg-base-alt)] px-3 py-1 text-xs font-medium text-[var(--text-secondary)]">
+                      <span className="rounded-lg bg-[var(--bg-base-alt)] px-3 py-1 text-xs font-medium text-[var(--text-secondary)]">
                         📐 {listing.roomSize} m²
                       </span>
                     )}
                     {listing.numberOfRooms && (
-                      <span className="rounded-full bg-[var(--bg-base-alt)] px-3 py-1 text-xs font-medium text-[var(--text-secondary)]">
+                      <span className="rounded-lg bg-[var(--bg-base-alt)] px-3 py-1 text-xs font-medium text-[var(--text-secondary)]">
                         {listing.numberOfRooms} room
                         {listing.numberOfRooms > 1 ? "s" : ""}
                       </span>
                     )}
                     {listing.floorLevel != null && (
-                      <span className="rounded-full bg-[var(--bg-base-alt)] px-3 py-1 text-xs font-medium text-[var(--text-secondary)]">
+                      <span className="rounded-lg bg-[var(--bg-base-alt)] px-3 py-1 text-xs font-medium text-[var(--text-secondary)]">
                         Floor {listing.floorLevel}
                       </span>
                     )}
                     {listing.furnished && (
-                      <span className="rounded-full bg-[var(--accent-soft)] px-3 py-1 text-xs font-semibold text-[var(--accent)]">
+                      <span className="rounded-lg bg-[var(--accent-soft)] px-3 py-1 text-xs font-semibold text-[var(--accent)]">
                         Furnished
                       </span>
                     )}
@@ -138,7 +138,7 @@ export default async function ListingDetailPage({
                   <div className="mt-3 flex flex-wrap gap-2">
                     {listing.amenities.map((a) => (
                       <span
-                        className="rounded-full border border-[var(--accent)]/15 bg-[var(--accent)]/8 px-3 py-1 text-xs font-medium text-[var(--accent)]"
+                        className="rounded-lg border border-[var(--accent)]/15 bg-[var(--accent)]/8 px-3 py-1 text-xs font-medium text-[var(--accent)]"
                         key={a.slug}
                       >
                         {a.name}
@@ -164,7 +164,7 @@ export default async function ListingDetailPage({
                   <div className="mt-3 flex flex-wrap gap-2">
                     {listing.genderPreference &&
                       listing.genderPreference !== "ANY" && (
-                        <span className="flex items-center gap-1 rounded-full bg-[var(--bg-base-alt)] px-3 py-1 text-xs font-medium text-[var(--text-secondary)]">
+                        <span className="flex items-center gap-1 rounded-lg bg-[var(--bg-base-alt)] px-3 py-1 text-xs font-medium text-[var(--text-secondary)]">
                           <Users size={12} />{" "}
                           {listing.genderPreference === "MALE"
                             ? "Male tenants"
@@ -172,22 +172,22 @@ export default async function ListingDetailPage({
                         </span>
                       )}
                     {listing.genderPreference === "ANY" && (
-                      <span className="flex items-center gap-1 rounded-full bg-[var(--bg-base-alt)] px-3 py-1 text-xs font-medium text-[var(--text-secondary)]">
+                      <span className="flex items-center gap-1 rounded-lg bg-[var(--bg-base-alt)] px-3 py-1 text-xs font-medium text-[var(--text-secondary)]">
                         <Users size={12} /> Any tenant
                       </span>
                     )}
                     {listing.maxTenants && (
-                      <span className="rounded-full bg-[var(--bg-base-alt)] px-3 py-1 text-xs font-medium text-[var(--text-secondary)]">
+                      <span className="rounded-lg bg-[var(--bg-base-alt)] px-3 py-1 text-xs font-medium text-[var(--text-secondary)]">
                         👥 Max {listing.maxTenants}
                       </span>
                     )}
                     {listing.petsAllowed && (
-                      <span className="flex items-center gap-1 rounded-full bg-[var(--accent-soft)] px-3 py-1 text-xs font-semibold text-[var(--accent)]">
+                      <span className="flex items-center gap-1 rounded-lg bg-[var(--accent-soft)] px-3 py-1 text-xs font-semibold text-[var(--accent)]">
                         <PawPrint size={12} /> Pets OK
                       </span>
                     )}
                     {listing.smokingAllowed && (
-                      <span className="flex items-center gap-1 rounded-full bg-[var(--accent-soft)] px-3 py-1 text-xs font-semibold text-[var(--accent)]">
+                      <span className="flex items-center gap-1 rounded-lg bg-[var(--accent-soft)] px-3 py-1 text-xs font-semibold text-[var(--accent)]">
                         <Cigarette size={12} /> Smoking OK
                       </span>
                     )}

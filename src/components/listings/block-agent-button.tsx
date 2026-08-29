@@ -44,7 +44,7 @@ export function BlockAgentButton({ agentId, isBlocked: initialBlocked, onToggle 
       type="button"
       onClick={toggle}
       disabled={busy}
-      className={`flex items-center gap-1.5 rounded-full px-3 py-1.5 text-[11px] font-medium transition-all ${
+      className={`flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-[11px] font-medium transition-all ${
         blocked
           ? "bg-red-50 text-red-600 hover:bg-red-100"
           : "bg-[var(--accent-soft)] text-[var(--accent)] hover:bg-[var(--accent)]/20"

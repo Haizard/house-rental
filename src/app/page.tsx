@@ -53,7 +53,7 @@ export default async function Home() {
             <div className="mt-3 flex flex-wrap gap-1.5 sm:mt-4 sm:gap-2" aria-label="Popular areas">
               {areas.map((area) => (
                 <a
-                  className="rounded-full border border-black/[.06] bg-white/50 px-2.5 py-1 text-[11px] font-medium text-[var(--text-secondary)] transition hover:border-[var(--accent)] hover:text-[var(--accent)] sm:px-3 sm:py-1.5 sm:text-[12px]"
+                  className="rounded-lg border border-black/[.06] bg-white/50 px-2.5 py-1 text-[11px] font-medium text-[var(--text-secondary)] transition hover:border-[var(--accent)] hover:text-[var(--accent)] sm:px-3 sm:py-1.5 sm:text-[12px]"
                   href={`/search?area=${encodeURIComponent(area)}`}
                   key={area}
                 >
@@ -64,7 +64,7 @@ export default async function Home() {
             <div className="mt-1.5 flex flex-wrap gap-1.5 sm:mt-2 sm:gap-2" aria-label="Universities">
               {universities.map((u) => (
                 <a
-                  className="rounded-full border border-[var(--accent)]/15 bg-[var(--accent)]/8 px-2.5 py-1 text-[11px] font-medium text-[var(--accent)] transition hover:bg-[var(--accent)]/15 sm:px-3 sm:py-1.5 sm:text-[12px]"
+                  className="rounded-lg border border-[var(--accent)]/15 bg-[var(--accent)]/8 px-2.5 py-1 text-[11px] font-medium text-[var(--accent)] transition hover:bg-[var(--accent)]/15 sm:px-3 sm:py-1.5 sm:text-[12px]"
                   href={`/universities/${u.slug}`}
                   key={u.slug}
                 >

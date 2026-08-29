@@ -81,7 +81,7 @@ export function SearchAnalyticsContent() {
           <button
             key={d}
             onClick={() => setDays(d)}
-            className={`inline-flex items-center justify-center rounded-full px-3 py-1.5 text-xs font-medium transition ${
+            className={`inline-flex items-center justify-center rounded-lg px-3 py-1.5 text-xs font-medium transition ${
               days === d
                 ? "bg-[var(--accent)] text-white"
                 : "bg-[var(--glass-fill)] text-[var(--text-secondary)] hover:bg-[var(--accent)]/10"
