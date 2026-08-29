@@ -1,17 +1,13 @@
 export const dynamic = "force-dynamic";
 
-import { ArrowRight, GraduationCap, MapPin, Search } from "lucide-react";
+import { ArrowRight, MapPin, Search } from "lucide-react";
 import { ListingsSection } from "@/components/listings/listings-section";
 import { StatusSection } from "@/components/statuses/status-section";
 import { SiteNav } from "@/components/layout/site-nav";
 import { getPublicListings } from "@/server/listings/get-public-listings";
 
 const areas = ["Njiro", "Olorien", "Sakina", "Usa River"];
-const universities = [
-  { name: "AruSHA University", slug: "arusha-university" },
-  { name: "IST-Arusha", slug: "ist-arusha" },
-  { name: "KM-Arusha", slug: "km-arusha" },
-];
+
 
 export default async function Home() {
   const { listings } = await getPublicListings();
@@ -49,29 +45,6 @@ export default async function Home() {
               </button>
             </form>
 
-            {/* Chips — compact */}
-            <div className="mt-3 flex flex-wrap gap-1.5 sm:mt-4 sm:gap-2" aria-label="Popular areas">
-              {areas.map((area) => (
-                <a
-                  className="rounded-lg border border-black/[.06] bg-white/50 px-2.5 py-1 text-[11px] font-medium text-[var(--text-secondary)] transition hover:border-[var(--accent)] hover:text-[var(--accent)] sm:px-3 sm:py-1.5 sm:text-[12px]"
-                  href={`/search?area=${encodeURIComponent(area)}`}
-                  key={area}
-                >
-                  {area}
-                </a>
-              ))}
-            </div>
-            <div className="mt-1.5 flex flex-wrap gap-1.5 sm:mt-2 sm:gap-2" aria-label="Universities">
-              {universities.map((u) => (
-                <a
-                  className="rounded-lg border border-[var(--accent)]/15 bg-[var(--accent)]/8 px-2.5 py-1 text-[11px] font-medium text-[var(--accent)] transition hover:bg-[var(--accent)]/15 sm:px-3 sm:py-1.5 sm:text-[12px]"
-                  href={`/universities/${u.slug}`}
-                  key={u.slug}
-                >
-                  <GraduationCap size={12} aria-hidden="true" /> {u.name}
-                </a>
-              ))}
-            </div>
 
           </div>
         </div>
